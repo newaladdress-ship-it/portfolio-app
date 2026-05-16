@@ -1,0 +1,209 @@
+import { Switch, Route, Router as WouterRouter, useLocation, Link } from "wouter";
+import { lazy, Suspense, useEffect } from "react";
+import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
+import Sidebar from "@/components/layout/Sidebar";
+import { initTheme } from "@/lib/theme";
+import { useProtectionStore } from "@/stores/protection";
+import ChatWidget from "@/components/chat/ChatWidget";
+import FloatingActions from "@/components/FloatingActions";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import { useT } from "@/lib/i18n";
+
+const HomePage         = lazy(() => import("@/pages/HomePage"));
+const AboutPage        = lazy(() => import("@/pages/AboutPage"));
+const AchievementsPage = lazy(() => import("@/pages/AchievementsPage"));
+const ProjectsPage     = lazy(() => import("@/pages/ProjectsPage"));
+const ProjectDetailPage = lazy(() => import("@/pages/ProjectDetailPage"));
+const DashboardPage    = lazy(() => import("@/pages/DashboardPage"));
+const ChatRoomPage     = lazy(() => import("@/pages/ChatRoomPage"));
+const ContactPage      = lazy(() => import("@/pages/ContactPage"));
+const SmartTalkPage    = lazy(() => import("@/pages/SmartTalkPage"));
+const FeedbackPage     = lazy(() => import("@/pages/FeedbackPage"));
+const ServicesIndexPage = lazy(() => import("@/pages/ServicesIndexPage"));
+const ServicePage      = lazy(() => import("@/pages/ServicePage"));
+const AdminPage        = lazy(() => import("@/pages/AdminPage"));
+
+function PageLoader() {
+  return (
+    <div className="flex items-center justify-center py-24" aria-label="Loading page">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-neutral-200 border-t-neutral-600 dark:border-neutral-800 dark:border-t-neutral-400" />
+    </div>
+  );
+}
+
+function NotFound() {
+  const t = useT();
+  return (
+    <div className="flex flex-col items-center justify-center py-20 text-neutral-500 dark:text-neutral-400">
+      <h1 className="text-6xl font-bold text-neutral-300 dark:text-neutral-700">404</h1>
+      <p className="mt-4 text-lg">{t.common.pageNotFound}</p>
+    </div>
+  );
+}
+
+function usePageOrder() {
+  const t = useT();
+  return [
+    { path: "/",            label: t.nav.home },
+    { path: "/about",       label: t.nav.about },
+    { path: "/achievements",label: t.nav.achievements },
+    { path: "/projects",    label: t.nav.projects },
+    { path: "/services",    label: t.nav.services },
+    { path: "/dashboard",   label: t.nav.dashboard },
+    { path: "/chat",        label: t.nav.chat },
+    { path: "/contact",     label: t.nav.contact },
+    { path: "/feedback",    label: t.nav.feedback },
+    { path: "/smarttalk",   label: t.nav.smarttalk },
+  ];
+}
+
+function NextPageButton() {
+  const [location] = useLocation();
+  const t = useT();
+  const PAGE_ORDER = usePageOrder();
+
+  const idx = PAGE_ORDER.findIndex((p) => p.path === location);
+  if (idx === -1) return null;
+
+  const prev = idx > 0 ? PAGE_ORDER[idx - 1] : null;
+  const next = idx < PAGE_ORDER.length - 1
+    ? PAGE_ORDER[idx + 1]
+    : PAGE_ORDER[0];
+
+  const isLast = idx === PAGE_ORDER.length - 1;
+
+  return (
+    <div className={`mt-12 flex items-center ${prev ? "justify-between" : "justify-end"}`}>
+      {prev && (
+        <Link
+          href={prev.path}
+          className="group flex items-center gap-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-4 py-2.5 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:border-neutral-400 dark:hover:border-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-100 transition-all duration-200 shadow-sm hover:shadow-md"
+        >
+          <HiArrowLeft size={16} className="transition-transform duration-200 group-hover:-translate-x-0.5" />
+          <span className="hidden sm:inline text-xs text-neutral-400 dark:text-neutral-600 mr-1">{t.pagination.back}</span>
+          {prev.label}
+        </Link>
+      )}
+      <Link
+        href={next.path}
+        className="group flex items-center gap-2 rounded-xl bg-neutral-900 dark:bg-neutral-100 px-5 py-2.5 text-sm font-semibold text-white dark:text-neutral-900 hover:bg-neutral-700 dark:hover:bg-neutral-300 transition-all duration-200 shadow-md hover:shadow-lg"
+      >
+        {isLast ? (
+          <>
+            <span>{t.pagination.backToHome}</span>
+            <HiArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+          </>
+        ) : (
+          <>
+            <span>{t.pagination.next} {next.label}</span>
+            <HiArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+          </>
+        )}
+      </Link>
+    </div>
+  );
+}
+
+
+function AppLayout() {
+  return (
+    <div className="min-h-screen bg-white dark:bg-black transition-colors duration-200 overflow-x-hidden">
+      <div className="mx-auto max-w-6xl overflow-x-hidden">
+        <div className="flex min-h-screen flex-col lg:flex-row lg:gap-8 lg:py-8 lg:px-4">
+          <Sidebar />
+          <main className="flex flex-1 flex-col py-8 pt-24 lg:pt-0 px-5 lg:px-0">
+            <Suspense fallback={<PageLoader />}>
+              <Switch>
+                <Route path="/" component={HomePage} />
+                <Route path="/about" component={AboutPage} />
+                <Route path="/achievements" component={AchievementsPage} />
+                <Route path="/projects" component={ProjectsPage} />
+                <Route path="/projects/:slug" component={ProjectDetailPage} />
+                <Route path="/dashboard" component={DashboardPage} />
+                <Route path="/chat" component={ChatRoomPage} />
+                <Route path="/contact" component={ContactPage} />
+                <Route path="/feedback" component={FeedbackPage} />
+                <Route path="/smarttalk" component={SmartTalkPage} />
+                <Route path="/services" component={ServicesIndexPage} />
+                <Route path="/services/:slug" component={ServicePage} />
+                <Route component={NotFound} />
+              </Switch>
+            </Suspense>
+            <NextPageButton />
+          </main>
+        </div>
+      </div>
+      <ChatWidget />
+      <FloatingActions />
+      <PWAInstallPrompt />
+    </div>
+  );
+}
+
+function RootRouter() {
+  const [location] = useLocation();
+  const isAdmin = location === "/admin" || location.startsWith("/admin/");
+
+  if (isAdmin) {
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <AdminPage />
+      </Suspense>
+    );
+  }
+  return <AppLayout />;
+}
+
+function CodeProtection() {
+  const { isProtected } = useProtectionStore();
+
+  useEffect(() => {
+    if (!isProtected) return;
+
+    const blockKey = (e: KeyboardEvent) => {
+      const ctrl = e.ctrlKey || e.metaKey;
+      const shift = e.shiftKey;
+      const key = e.key.toLowerCase();
+
+      // Ctrl+U — view source
+      if (ctrl && key === "u") { e.preventDefault(); return; }
+      // Ctrl+S — save page
+      if (ctrl && key === "s") { e.preventDefault(); return; }
+      // Ctrl+Shift+I — devtools inspect
+      if (ctrl && shift && key === "i") { e.preventDefault(); return; }
+      // Ctrl+Shift+J — console
+      if (ctrl && shift && key === "j") { e.preventDefault(); return; }
+      // Ctrl+Shift+C — element picker
+      if (ctrl && shift && key === "c") { e.preventDefault(); return; }
+      // F12 — devtools
+      if (e.key === "F12") { e.preventDefault(); return; }
+    };
+
+    const blockContext = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    document.addEventListener("keydown", blockKey);
+    document.addEventListener("contextmenu", blockContext);
+
+    return () => {
+      document.removeEventListener("keydown", blockKey);
+      document.removeEventListener("contextmenu", blockContext);
+    };
+  }, [isProtected]);
+
+  return null;
+}
+
+export default function App() {
+  useEffect(() => {
+    initTheme();
+  }, []);
+
+  return (
+    <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+      <CodeProtection />
+      <RootRouter />
+    </WouterRouter>
+  );
+}

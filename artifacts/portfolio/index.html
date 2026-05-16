@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+
+    <!-- Primary Meta -->
+    <title>Muhammad Imran - Web App Developer | React, Node.js, MERN Stack</title>
+    <meta name="description" content="Muhammad Imran is a professional Web App Developer specializing in React, Next.js, Node.js, and MERN Stack. View my portfolio, projects, and achievements." />
+    <meta name="keywords" content="Muhammad Imran, Web Developer, React Developer, Next.js, Node.js, MERN Stack, Full Stack Developer, Pakistan, Portfolio, JavaScript, TypeScript" />
+    <meta name="author" content="Muhammad Imran" />
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="ChP2qUqR3pdTx8UDXPYR3Yw0A9vFQcZHCkTU9uaMuSA" />
+    <meta name="theme-color" content="#fbe400" />
+    <!-- Canonical and OG tags are set dynamically per-page via react-helmet-async -->
+
+    <!-- Open Graph base (page-specific values injected by SEOHead component) -->
+    <meta property="og:site_name" content="Muhammad Imran Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@muhammadimran" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MI Portfolio" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://firestore.googleapis.com" />
+    <link rel="preconnect" href="https://api.github.com" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://avatars.githubusercontent.com" />
+
+    <!-- Google Fonts — loaded async to avoid render blocking -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" /></noscript>
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="/logo.png" fetchpriority="high" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Muhammad Imran",
+      "jobTitle": "Web App Developer",
+      "description": "Professional Web App Developer specializing in React, Next.js, Node.js, and MERN Stack.",
+      "url": "https://imrandigitals.online",
+      "email": "mi6062610@gmail.com",
+      "telephone": "+923345636230",
+      "sameAs": [
+        "https://github.com/muhammadimran9",
+        "https://www.linkedin.com/in/muhammad-imran-972364373/"
+      ],
+      "knowsAbout": ["React", "Next.js", "Node.js", "JavaScript", "TypeScript", "MongoDB", "PostgreSQL", "Tailwind CSS", "MERN Stack"],
+      "image": "https://imrandigitals.online/opengraph.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "PK"
+      }
+    }
+    </script>
+
+    <!-- Umami Analytics -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="534e623f-ed6e-4fb8-b2c7-3011f7271ae5"></script>
+
+    <!-- Privacy Protection -->
+    <script>
+      (function () {
+        function showPrivacyMsg() {
+          var existing = document.getElementById('__privacy_toast__');
+          if (existing) return;
+          var toast = document.createElement('div');
+          toast.id = '__privacy_toast__';
+          toast.style.cssText = [
+            'position:fixed','top:24px','left:50%','transform:translateX(-50%)',
+            'z-index:2147483647','background:#18181b','color:#fff',
+            'padding:14px 24px','border-radius:12px',
+            'border:1px solid #3f3f46','box-shadow:0 8px 32px rgba(0,0,0,0.6)',
+            'font-family:system-ui,sans-serif','font-size:14px','font-weight:500',
+            'display:flex','align-items:center','gap:10px',
+            'max-width:90vw','pointer-events:none','opacity:0',
+            'transition:opacity 0.25s ease'
+          ].join(';');
+          toast.innerHTML =
+            '<span style="font-size:18px">🔒</span>' +
+            '<div>' +
+              '<div style="font-weight:700;color:#f4f4f5;letter-spacing:.01em">Privacy Protected</div>' +
+              '<div style="font-size:12px;color:#a1a1aa;margin-top:2px">This site is protected. Inspection is disabled.</div>' +
+            '</div>';
+          document.body.appendChild(toast);
+          requestAnimationFrame(function () { toast.style.opacity = '1'; });
+          setTimeout(function () {
+            toast.style.opacity = '0';
+            setTimeout(function () { toast && toast.parentNode && toast.parentNode.removeChild(toast); }, 300);
+          }, 3000);
+        }
+
+        document.addEventListener('keydown', function (e) {
+          var key = e.key ? e.key.toLowerCase() : '';
+          var ctrl = e.ctrlKey || e.metaKey;
+          // Ctrl+U (view-source), Ctrl+I (inspect), Ctrl+Shift+I/J/C, F12
+          if (
+            (ctrl && key === 'u') ||
+            (ctrl && key === 'i') ||
+            (ctrl && e.shiftKey && (key === 'i' || key === 'j' || key === 'c')) ||
+            e.key === 'F12'
+          ) {
+            e.preventDefault();
+            e.stopPropagation();
+            showPrivacyMsg();
+            return false;
+          }
+        }, true);
+
+        document.addEventListener('contextmenu', function (e) {
+          e.preventDefault();
+          showPrivacyMsg();
+          return false;
+        });
+      })();
+    </script>
+
+    <!-- Theme init — prevents dark/light flash, defaults to dark -->
+    <script>
+      (function() {
+        var stored = localStorage.getItem('theme');
+        if (stored === 'light') {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
+  </body>
+</html>

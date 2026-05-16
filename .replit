@@ -1,0 +1,76 @@
+modules = ["nodejs-24", "python-3.11"]
+
+[[artifacts]]
+id = "artifacts/api-server"
+
+[[artifacts]]
+id = "artifacts/mockup-sandbox"
+
+[deployment]
+router = "application"
+deploymentTarget = "autoscale"
+
+[deployment.postBuild]
+args = ["pnpm", "store", "prune"]
+env = { "CI" = "true" }
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "PORT=5173 BASE_PATH=/ pnpm --filter @workspace/portfolio run dev"
+waitForPort = 5173
+
+[agent]
+stack = "PNPM_WORKSPACE"
+expertMode = true
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 20000
+
+[nix]
+packages = ["vlang"]
+
+[userenv]
+
+[userenv.shared]
+WAKATIME_API_KEY = "waka_96ef8548-e438-4eca-ada6-07efdd3741c8"
+UMAMI_WEBSITE_ID = "534e623f-ed6e-4fb8-b2c7-3011f7271ae5"
+UMAMI_API_KEY = "api_IC1imrdbmtl1iDWpA1fjIkFI1h5xlgeg"
+VAPID_PUBLIC_KEY = "BABZtFwB7zR88ZUQ_zAl50EvoLQdCNbrE5e5HrXYr4Vrdx1ALQOn-stE4V4-j6gVCzM9Sv9ZuoU663CNuunMnp0"
+VAPID_PRIVATE_KEY = "K5qubgvLs0P4uR9RtZUt9CdKYlod9Z1lWIvUTUfXzQA"
+VAPID_EMAIL = "mailto:mi6062610@gmail.com"
+
+[[ports]]
+localPort = 5173
+externalPort = 5173
+
+[[ports]]
+localPort = 8080
+externalPort = 8080
+
+[[ports]]
+localPort = 8081
+externalPort = 80
+
+[[ports]]
+localPort = 21113
+externalPort = 3000

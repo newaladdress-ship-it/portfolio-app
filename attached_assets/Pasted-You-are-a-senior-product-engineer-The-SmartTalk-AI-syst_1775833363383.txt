@@ -1,0 +1,141 @@
+You are a senior product engineer. The SmartTalk AI system is already fully functional with consultation flow and Firebase integration.
+
+Your task is NOT to rebuild anything. Your task is to ADD FINAL PROFESSIONAL POLISH to make this production-grade and client-ready.
+
+========================================
+GOALS
+=====
+
+1. Improve UX to feel premium (like SaaS product)
+2. Improve conversion rate (turn visitors into clients)
+3. Improve data quality of leads
+4. Add small but powerful features
+
+========================================
+
+1. SMART GREETING (CONVERSION BOOST)
+   ========================================
+
+When chatbot opens first time:
+
+Show dynamic message:
+
+"Hi! 👋 I can help you explore my work or plan your project.
+Tell me what you need — a website, app, or software."
+
+Add 3 quick buttons:
+
+* "View My Projects"
+* "I need a Website"
+* "I need an App"
+
+Clicking buttons should trigger messages automatically.
+
+========================================
+2. BETTER QUESTION EXPERIENCE
+=============================
+
+During consultation mode:
+
+* Add typing delay (simulate human thinking)
+* Show "AI is typing..." indicator
+* Smooth transition between steps
+
+Before each next question:
+Show acknowledgment:
+"Got it, that helps 👍"
+
+Make conversation feel natural, not robotic.
+
+========================================
+3. LEAD QUALITY IMPROVEMENT
+===========================
+
+After Step 6 (timeline):
+
+Add ONE extra smart question:
+
+"Do you have content ready (text, images), or should I handle that too?"
+
+Store this in Firebase.
+
+This improves project estimation quality.
+
+========================================
+4. PROFESSIONAL PROJECT SUMMARY (VERY IMPORTANT)
+================================================
+
+Improve AI summary prompt:
+
+* Format output like a real proposal
+* Use sections:
+
+Project Type:
+Purpose:
+Key Features:
+Timeline:
+Additional Notes:
+
+End with:
+"This looks great. Let’s discuss this further to finalize details."
+
+========================================
+5. STRONG CTA (CONVERSION)
+==========================
+
+After summary:
+
+Show:
+
+* "Contact on WhatsApp" button
+* "Send Email" button
+
+Make buttons visually strong (primary color)
+
+========================================
+6. MINI ANALYTICS (IMPORTANT)
+=============================
+
+Track in Firebase:
+
+* When chatbot opened
+* When consultation started
+* When consultation completed
+
+Collection:
+"chat_analytics"
+
+========================================
+7. FALLBACK SAFETY
+==================
+
+If AI fails or API error:
+
+Show message:
+
+"Something went wrong. You can contact me directly via WhatsApp."
+
+========================================
+8. PERFORMANCE OPTIMIZATION
+===========================
+
+* Debounce user input
+* Prevent duplicate API calls
+* Ensure fast response time
+
+========================================
+FINAL RESULT
+============
+
+The chatbot should now feel like:
+
+* A real human assistant
+* A professional agency tool
+* A lead generation system
+
+DO NOT modify existing working logic.
+ONLY enhance UX, conversion, and quality.
+
+========================================
+
+Write clean, modular, production-ready code.
