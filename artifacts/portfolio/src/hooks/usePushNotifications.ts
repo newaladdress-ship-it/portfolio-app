@@ -1,6 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 
-const VAPID_PUBLIC_KEY = "BABZtFwB7zR88ZUQ_zAl50EvoLQdCNbrE5e5HrXYr4Vrdx1ALQOn-stE4V4-j6gVCzM9Sv9ZuoU663CNuunMnp0";
+// VAPID public key is fetched from the server to avoid hardcoding
+let cachedVapidKey: string | null = null;
+
+async function getVapidPublicKey(): Promise<string | null> {
+  if (cachedVapidKey) return cachedVapidKey;
+  try {
+    const res = await fetch("/api/push/vapid-key");
+    if (!res.ok) return null;
+    const data = await res.json();
+    cachedVapidKey = data.publicKey || null;
+    return cachedVapidKey;
+  } catch {
+    return null;
+  }
+}
 
 function urlBase64ToUint8Array(base64String: string): Uint8Array {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -52,6 +66,12 @@ export function usePushNotifications(role: "admin" | "visitor" = "visitor") {
       return;
     }
     try {
+      const vapidKey = await getVapidPublicKey();
+      if (!vapidKey) {
+        console.warn("[push] VAPID public key not available");
+        return;
+      }
+
       const perm = await Notification.requestPermission();
       setPermission(perm);
       if (perm !== "granted") return;
@@ -61,7 +81,7 @@ export function usePushNotifications(role: "admin" | "visitor" = "visitor") {
       if (!sub) {
         sub = await reg.pushManager.subscribe({
           userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+          applicationServerKey: urlBase64ToUint8Array(vapidKey),
         });
       }
 
