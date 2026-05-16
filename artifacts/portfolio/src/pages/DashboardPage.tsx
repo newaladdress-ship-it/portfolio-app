@@ -422,7 +422,7 @@ function GitHubActivity() {
             </span>
           )}
           <button
-            onClick={fetchEvents}
+            onClick={() => fetchEvents()}
             disabled={loading}
             className="flex items-center gap-1 rounded-lg border border-neutral-200 dark:border-neutral-700 px-2 py-1 text-[11px] text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50"
           >

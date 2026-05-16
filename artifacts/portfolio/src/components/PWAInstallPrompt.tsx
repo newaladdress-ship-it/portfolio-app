@@ -15,6 +15,7 @@ export default function PWAInstallPrompt() {
       const t = setTimeout(() => setShowNotifBanner(true), 5000);
       return () => clearTimeout(t);
     }
+    return undefined;
   }, [permission]);
 
   const handleEnableNotifs = async () => {
