@@ -49,15 +49,16 @@ timeoutMs = 20000
 [nix]
 packages = ["vlang"]
 
-[userenv]
-
-[userenv.shared]
-WAKATIME_API_KEY = "waka_96ef8548-e438-4eca-ada6-07efdd3741c8"
-UMAMI_WEBSITE_ID = "534e623f-ed6e-4fb8-b2c7-3011f7271ae5"
-UMAMI_API_KEY = "api_IC1imrdbmtl1iDWpA1fjIkFI1h5xlgeg"
-VAPID_PUBLIC_KEY = "BABZtFwB7zR88ZUQ_zAl50EvoLQdCNbrE5e5HrXYr4Vrdx1ALQOn-stE4V4-j6gVCzM9Sv9ZuoU663CNuunMnp0"
-VAPID_PRIVATE_KEY = "K5qubgvLs0P4uR9RtZUt9CdKYlod9Z1lWIvUTUfXzQA"
-VAPID_EMAIL = "mailto:mi6062610@gmail.com"
+# Environment variables should be set via the v0 Environment Variables dashboard
+# or via .env.local file (never committed to git)
+# 
+# Required environment variables:
+# - WAKATIME_API_KEY: Your WakaTime API key (get from https://wakatime.com/settings/api-key)
+# - UMAMI_WEBSITE_ID: Your Umami website ID
+# - UMAMI_API_KEY: Your Umami API key
+# - VAPID_PUBLIC_KEY: Web Push VAPID public key
+# - VAPID_PRIVATE_KEY: Web Push VAPID private key
+# - VAPID_EMAIL: Contact email for VAPID (e.g., mailto:your@email.com)
 
 [[ports]]
 localPort = 5173
