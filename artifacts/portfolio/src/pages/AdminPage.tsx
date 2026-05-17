@@ -299,22 +299,50 @@ export default function AdminPage() {
           originalMessage: msg.message,
         }),
       });
-      const { error, message } = await res.json();
-      if (!res.ok) throw new Error(error || "Failed to send");
-      addToast({ title: "Reply sent", body: message || `Email sent to ${msg.email}`, type: "contact" });
+      
+      // Check if response is ok first
+      if (!res.ok) {
+        let errorMsg = `HTTP ${res.status}`;
+        try {
+          const errorData = await res.json();
+          errorMsg = errorData.error || errorMsg;
+        } catch {
+          errorMsg = "Server error - invalid response";
+        }
+        throw new Error(errorMsg);
+      }
+      
+      // Try to parse response
+      let data;
+      try {
+        const text = await res.text();
+        if (!text) throw new Error("Empty response from server");
+        data = JSON.parse(text);
+      } catch (parseErr) {
+        console.error("[v0] JSON parse error:", parseErr);
+        throw new Error("Invalid response format from server");
+      }
+      
+      addToast({ title: "Reply sent", body: data.message || `Email sent to ${msg.email}`, type: "contact" });
       setEmailReplySent(msg.id);
       setEmailReplyId(null);
       setEmailReplyText("");
       
       // Fetch email logs after successful send
-      const logsRes = await fetch("/api/admin/email-logs");
-      if (logsRes.ok) {
-        const { emails } = await logsRes.json();
-        setEmailLogs(emails);
+      try {
+        const logsRes = await fetch("/api/admin/email-logs");
+        if (logsRes.ok) {
+          const logsData = await logsRes.json();
+          setEmailLogs(logsData.emails || []);
+        }
+      } catch {
+        console.log("[v0] Failed to fetch email logs");
       }
     } catch (err) {
       const message = err instanceof Error ? err.message : "Unknown error";
+      console.error("[v0] Email reply error:", message);
       setEmailReplyError(message);
+      addToast({ title: "Error", body: message, type: "error" });
     } finally {
       setEmailReplying(false);
     }

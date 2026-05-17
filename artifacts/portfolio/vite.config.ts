@@ -391,13 +391,20 @@ function apiRoutesPlugin(): Plugin {
           let body = "";
           req.on("data", (chunk) => { body += chunk; });
           req.on("end", async () => {
+            res.setHeader("Content-Type", "application/json");
             try {
+              if (!body) {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ error: "Empty request body" }));
+                return;
+              }
+              
               const data = JSON.parse(body);
               const { userEmail, userName, replyMessage, originalMessage } = data;
               
               if (!userEmail || !replyMessage) {
                 res.statusCode = 400;
-                res.end(JSON.stringify({ error: "Missing required fields" }));
+                res.end(JSON.stringify({ error: "Missing required fields: userEmail and replyMessage" }));
                 return;
               }
 
@@ -428,12 +435,20 @@ function apiRoutesPlugin(): Plugin {
               }
               
               console.log("[v0] Admin reply logged:", emailLog.id, "Status:", emailLog.status);
-              res.setHeader("Content-Type", "application/json");
-              res.end(JSON.stringify({ success: true, message: "Reply email sent successfully", emailLog }));
+              res.statusCode = 200;
+              res.end(JSON.stringify({ 
+                success: true, 
+                message: "Reply email sent successfully", 
+                emailLog,
+                id: emailLog.id 
+              }));
             } catch (err) {
               console.error("[v0] Admin reply error:", err);
               res.statusCode = 500;
-              res.end(JSON.stringify({ error: "Failed to send reply" }));
+              res.end(JSON.stringify({ 
+                error: err instanceof Error ? err.message : "Failed to send reply",
+                success: false 
+              }));
             }
           });
           return;
