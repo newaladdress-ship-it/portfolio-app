@@ -288,7 +288,10 @@ export default function AdminPage() {
     if (!emailReplyText.trim() || emailReplying) return;
     setEmailReplying(true);
     setEmailReplyError("");
+    
     try {
+      console.log("[v0] Sending email reply to:", msg.email);
+      
       const res = await fetch("/api/admin/reply-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -299,50 +302,64 @@ export default function AdminPage() {
           originalMessage: msg.message,
         }),
       });
+
+      console.log("[v0] Response status:", res.status);
       
-      // Check if response is ok first
+      // Handle non-200 status codes
       if (!res.ok) {
-        let errorMsg = `HTTP ${res.status}`;
+        let errorMsg = `Server error (${res.status})`;
         try {
           const errorData = await res.json();
           errorMsg = errorData.error || errorMsg;
-        } catch {
-          errorMsg = "Server error - invalid response";
+        } catch (e) {
+          console.log("[v0] Could not parse error response");
         }
         throw new Error(errorMsg);
       }
-      
-      // Try to parse response
+
+      // Parse successful response
       let data;
       try {
-        const text = await res.text();
-        if (!text) throw new Error("Empty response from server");
-        data = JSON.parse(text);
+        data = await res.json();
+        console.log("[v0] Response data:", data);
       } catch (parseErr) {
-        console.error("[v0] JSON parse error:", parseErr);
-        throw new Error("Invalid response format from server");
+        console.error("[v0] Failed to parse JSON:", parseErr);
+        throw new Error("Invalid server response - could not parse JSON");
       }
-      
-      addToast({ title: "Reply sent", body: data.message || `Email sent to ${msg.email}`, type: "contact" });
+
+      if (!data.success) {
+        throw new Error(data.error || "Server returned unsuccessful response");
+      }
+
+      // Success
+      addToast({ 
+        title: "Reply sent successfully", 
+        body: `Email sent to ${msg.email}`, 
+        type: "contact" 
+      });
       setEmailReplySent(msg.id);
       setEmailReplyId(null);
       setEmailReplyText("");
       
-      // Fetch email logs after successful send
+      // Fetch updated email logs
       try {
         const logsRes = await fetch("/api/admin/email-logs");
         if (logsRes.ok) {
           const logsData = await logsRes.json();
-          setEmailLogs(logsData.emails || []);
+          setEmailLogs(Array.isArray(logsData.emails) ? logsData.emails : []);
         }
-      } catch {
-        console.log("[v0] Failed to fetch email logs");
+      } catch (logErr) {
+        console.log("[v0] Could not fetch email logs:", logErr);
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Unknown error";
-      console.error("[v0] Email reply error:", message);
+      const message = err instanceof Error ? err.message : "Unknown error occurred";
+      console.error("[v0] Send reply failed:", message, err);
       setEmailReplyError(message);
-      addToast({ title: "Error", body: message, type: "error" });
+      addToast({ 
+        title: "Failed to send reply", 
+        body: message, 
+        type: "error" 
+      });
     } finally {
       setEmailReplying(false);
     }
