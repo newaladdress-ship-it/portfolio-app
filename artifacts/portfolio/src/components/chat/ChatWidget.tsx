@@ -28,7 +28,7 @@ const WA_TEXT = encodeURIComponent(
 const EMAIL_HREF =
   "mailto:mi6062610@gmail.com?subject=Project%20Enquiry%20via%20SmartTalk&body=Hi%20Muhammad%2C%0A%0AI%20completed%20the%20SmartTalk%20consultation%20on%20your%20portfolio%20and%20I%27m%20interested%20in%20discussing%20my%20project.";
 const FALLBACK_ERROR =
-  "Something went wrong. You can contact me directly via WhatsApp (+92 334 5636230) or email mi6062610@gmail.com.";
+  "We apologize for the inconvenience. Our AI assistant is temporarily unavailable. Please try again in a moment, or feel free to reach out directly via WhatsApp (+92 334 5636230) or email mi6062610@gmail.com.";
 
 async function streamChat(
   messages: Message[],
