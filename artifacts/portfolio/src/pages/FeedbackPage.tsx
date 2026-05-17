@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SEOHead from "@/components/SEOHead";
+import { notifyAdmin } from "@/hooks/usePushNotifications";
 import { motion, AnimatePresence } from "framer-motion";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -209,6 +210,13 @@ function ReviewForm({ user, onDone }: { user: FeedbackUser; onDone: () => void }
         review: review.trim(),
         createdAt: serverTimestamp(),
       });
+      // Notify admin about new review
+      notifyAdmin(
+        `New ${rating}-star Review from ${user.name}`,
+        review.trim().slice(0, 100),
+        "/admin",
+        "feedback-review"
+      );
       if (user.provider === "google") {
         await signOut(auth).catch(() => {});
       }
