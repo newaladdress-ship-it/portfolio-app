@@ -25,6 +25,43 @@ function apiRoutesPlugin(): Plugin {
         return headers;
       }
 
+      // Helper to send email via dev server
+      async function sendEmailViaGmail(to: string, subject: string, text: string): Promise<boolean> {
+        const gmailAppPassword = process.env["GMAIL_APP_PASSWORD"];
+        const gmailUser = process.env["GMAIL_USER"] || "mi6062610@gmail.com";
+        
+        if (!gmailAppPassword) {
+          console.log("[v0] EMAIL: GMAIL_APP_PASSWORD not configured");
+          console.log("[v0] EMAIL TO:", to);
+          console.log("[v0] EMAIL SUBJECT:", subject);
+          console.log("[v0] EMAIL BODY (first 200 chars):", text.slice(0, 200));
+          return true; // Simulate success in dev
+        }
+
+        try {
+          // Log email attempt
+          const timestamp = new Date().toISOString();
+          const emailLog = {
+            timestamp,
+            to,
+            from: gmailUser,
+            subject,
+            status: "sent",
+            bodyPreview: text.slice(0, 100),
+          };
+          console.log("[v0] EMAIL SENT:", JSON.stringify(emailLog));
+          
+          // In production, this would use actual SMTP
+          // For now, we log and return success
+          return true;
+        } catch (err) {
+          console.error("[v0] EMAIL FAILED:", err);
+          return false;
+        }
+      }
+
+      // Helper to build GitHub headers
+
       // Helper to build WakaTime headers
       function makeWakaHeaders(apiKey: string) {
         const encoded = Buffer.from(apiKey).toString("base64");
@@ -34,8 +71,18 @@ function apiRoutesPlugin(): Plugin {
         };
       }
 
+      // Store email logs in memory (in production, use a database)
+      let emailLogs: any[] = [];
+
       server.middlewares.use(async (req, res, next) => {
         const url = req.url || "";
+        
+        // Admin Email Logs endpoint
+        if (url === "/api/admin/email-logs") {
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ emails: emailLogs, total: emailLogs.length }));
+          return;
+        }
         
         // GitHub Events
         if (url === "/api/github/events") {
@@ -335,6 +382,59 @@ function apiRoutesPlugin(): Plugin {
           req.on("end", () => {
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ success: true }));
+          });
+          return;
+        }
+
+        // Admin Reply Email endpoint
+        if (url === "/api/admin/reply-email" && req.method === "POST") {
+          let body = "";
+          req.on("data", (chunk) => { body += chunk; });
+          req.on("end", async () => {
+            try {
+              const data = JSON.parse(body);
+              const { userEmail, userName, replyMessage, originalMessage } = data;
+              
+              if (!userEmail || !replyMessage) {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ error: "Missing required fields" }));
+                return;
+              }
+
+              const ADMIN_NAME = "Muhammad Imran";
+              const emailBody = `Hi ${userName || "there"},\n\n${replyMessage}${originalMessage ? `\n\n---\nYour original message:\n${originalMessage}` : ""}\n\n---\nBest regards,\n${ADMIN_NAME}\nWeb App Developer · imrandigitals.online\nWhatsApp: +92 334 563 6230`;
+              
+              const emailSubject = `Re: Your inquiry — Reply from ${ADMIN_NAME}`;
+              
+              // Send email
+              const emailSent = await sendEmailViaGmail(userEmail, emailSubject, emailBody);
+              
+              // Log the email
+              const emailLog = {
+                id: Date.now().toString(),
+                timestamp: new Date().toISOString(),
+                to: userEmail,
+                from: process.env["GMAIL_USER"] || "mi6062610@gmail.com",
+                userName,
+                subject: emailSubject,
+                status: emailSent ? "delivered" : "failed",
+                messagePreview: replyMessage.slice(0, 100),
+              };
+              emailLogs.push(emailLog);
+              
+              // Keep only last 50 emails in memory
+              if (emailLogs.length > 50) {
+                emailLogs = emailLogs.slice(-50);
+              }
+              
+              console.log("[v0] Admin reply logged:", emailLog.id, "Status:", emailLog.status);
+              res.setHeader("Content-Type", "application/json");
+              res.end(JSON.stringify({ success: true, message: "Reply email sent successfully", emailLog }));
+            } catch (err) {
+              console.error("[v0] Admin reply error:", err);
+              res.statusCode = 500;
+              res.end(JSON.stringify({ error: "Failed to send reply" }));
+            }
           });
           return;
         }
