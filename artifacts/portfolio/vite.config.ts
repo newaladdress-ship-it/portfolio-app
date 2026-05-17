@@ -339,6 +339,28 @@ function apiRoutesPlugin(): Plugin {
           return;
         }
 
+        // Admin Reply Email endpoint
+        if (url === "/api/admin/reply-email" && req.method === "POST") {
+          let body = "";
+          req.on("data", (chunk) => { body += chunk; });
+          req.on("end", () => {
+            try {
+              const data = JSON.parse(body);
+              console.log("[v0] Admin reply email endpoint called:", {
+                to: data.userEmail,
+                userName: data.userName,
+                messageLength: (data.replyMessage || "").length,
+              });
+              res.setHeader("Content-Type", "application/json");
+              res.end(JSON.stringify({ success: true, message: "Reply email queued (dev mode - not actually sent)" }));
+            } catch (err) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: "Invalid request" }));
+            }
+          });
+          return;
+        }
+
         next();
       });
     },
