@@ -56,6 +56,7 @@
 
   html {
     font-family: 'Outfit', sans-serif;
+    font-size: 17px;
     background-color: var(--background);
     color: var(--foreground);
     transition: background-color 0.2s ease, color 0.2s ease;
