@@ -87,9 +87,13 @@ function WakaTimeLangSection() {
       )}
 
       {!loading && error && (
-        <p className="text-sm text-neutral-400 dark:text-neutral-500 text-center py-4">
-          Could not load WakaTime data.
-        </p>
+        <div className="rounded-lg border border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20 p-4">
+          <p className="text-sm text-yellow-700 dark:text-yellow-400">
+            <span className="font-medium">WakaTime API Key Issue:</span> The API key provided is not valid or the account has no tracked time yet. 
+            <br />
+            <span className="text-xs text-yellow-600 dark:text-yellow-500 mt-1 block">Please verify your API key at https://wakatime.com/settings/api-key</span>
+          </p>
+        </div>
       )}
 
       {!loading && !error && (
