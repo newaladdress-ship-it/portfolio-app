@@ -192,9 +192,14 @@ function ContactForm() {
 
           {/* Status feedback */}
           {status === "success" && (
-            <div className="flex items-center gap-2 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 px-4 py-3 text-sm text-green-700 dark:text-green-400">
-              <HiCheckCircle size={16} className="shrink-0" />
-              {t.contact.successMsg}
+            <div className="flex flex-col gap-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 px-4 py-3">
+              <div className="flex items-center gap-2 text-sm text-green-700 dark:text-green-400">
+                <HiCheckCircle size={16} className="shrink-0" />
+                <span className="font-medium">{t.contact.successMsg}</span>
+              </div>
+              <p className="text-xs text-green-600 dark:text-green-500 leading-relaxed">
+                Thank you for reaching out! Your message has been received and saved. I will review your inquiry and get back to you within 24 to 48 hours with a professional response. Please check your email (including spam folder) for updates.
+              </p>
             </div>
           )}
           {status === "error" && (
