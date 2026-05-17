@@ -87,11 +87,13 @@ function WakaTimeLangSection() {
       )}
 
       {!loading && error && (
-        <div className="rounded-lg border border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20 p-4">
-          <p className="text-sm text-yellow-700 dark:text-yellow-400">
-            <span className="font-medium">WakaTime API Key Issue:</span> The API key provided is not valid or the account has no tracked time yet. 
+        <div className="rounded-lg border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/20 p-4">
+          <p className="text-sm text-orange-800 dark:text-orange-300">
+            <span className="font-medium">WakaTime Configuration Issue:</span> The API key is not valid or has been revoked.
             <br />
-            <span className="text-xs text-yellow-600 dark:text-yellow-500 mt-1 block">Please verify your API key at https://wakatime.com/settings/api-key</span>
+            <span className="text-xs text-orange-700 dark:text-orange-400 mt-1 block">
+              To enable: Go to <a href="https://wakatime.com/settings/api-key" className="underline hover:text-orange-900 dark:hover:text-orange-200" target="_blank" rel="noopener noreferrer">WakaTime API Settings</a>, copy your API key, and update your environment variables.
+            </span>
           </p>
         </div>
       )}

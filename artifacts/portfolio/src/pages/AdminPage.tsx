@@ -194,6 +194,22 @@ export default function AdminPage() {
     }
   }, [authed]);
 
+  // Fetch email logs on component mount
+  useEffect(() => {
+    const fetchEmailLogs = async () => {
+      try {
+        const res = await fetch("/api/admin/email-logs");
+        if (res.ok) {
+          const data = await res.json();
+          setEmailLogs(Array.isArray(data.emails) ? data.emails : []);
+        }
+      } catch (err) {
+        console.error("[v0] Failed to fetch email logs:", err);
+      }
+    };
+    fetchEmailLogs();
+  }, []);
+
   useEffect(() => {
     if (!authed) return;
 
