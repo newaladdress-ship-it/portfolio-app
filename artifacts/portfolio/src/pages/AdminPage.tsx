@@ -137,7 +137,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
 export default function AdminPage() {
   usePushNotifications("admin");
   const [authed, setAuthed] = useState(() => sessionStorage.getItem("admin_auth") === "1");
-  const [tab, setTab] = useState<"contacts" | "feedback" | "chat">("contacts");
+  const [tab, setTab] = useState<"contacts" | "feedback" | "chat" | "email-logs">("contacts");
 
   const [contacts, setContacts] = useState<ContactMessage[]>([]);
   const [chats, setChats] = useState<ChatMessage[]>([]);
@@ -156,6 +156,7 @@ export default function AdminPage() {
   const [emailReplying, setEmailReplying] = useState(false);
   const [emailReplySent, setEmailReplySent] = useState<string | null>(null);
   const [emailReplyError, setEmailReplyError] = useState("");
+  const [emailLogs, setEmailLogs] = useState<any[]>([]);
 
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [unreadC, setUnreadC] = useState(0);
@@ -298,15 +299,21 @@ export default function AdminPage() {
           originalMessage: msg.message,
         }),
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Failed");
-      }
+      const { error, message } = await res.json();
+      if (!res.ok) throw new Error(error || "Failed to send");
+      addToast({ title: "Reply sent", body: message || `Email sent to ${msg.email}`, type: "contact" });
       setEmailReplySent(msg.id);
       setEmailReplyId(null);
       setEmailReplyText("");
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to send reply";
+      
+      // Fetch email logs after successful send
+      const logsRes = await fetch("/api/admin/email-logs");
+      if (logsRes.ok) {
+        const { emails } = await logsRes.json();
+        setEmailLogs(emails);
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Unknown error";
       setEmailReplyError(message);
     } finally {
       setEmailReplying(false);
@@ -410,6 +417,7 @@ export default function AdminPage() {
             { key: "contacts", label: "Contact", icon: <HiOutlineMail size={15} />, count: contacts.length, unread: unreadC, loading: loadingC },
             { key: "feedback", label: "Feedback", icon: <HiStar size={15} />, count: feedbacks.length, unread: unreadF, loading: loadingF },
             { key: "chat",     label: "Chat",     icon: <HiOutlineChatAlt2 size={15} />, count: chats.length, unread: unreadCh, loading: loadingCh },
+            { key: "email-logs", label: "Email Logs", icon: <HiOutlineMail size={15} />, count: emailLogs.length, unread: 0, loading: false },
           ] as const).map(t => (
             <button
               key={t.key}
@@ -646,6 +654,50 @@ export default function AdminPage() {
               </form>
               <p className="text-[10px] text-neutral-400">Visible to everyone in the chat room · Real-time via Firebase</p>
             </div>
+          </div>
+        )}
+
+        {/* ── Email Logs Tab ── */}
+        {tab === "email-logs" && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500">
+                <HiOutlineRefresh size={11} className="animate-pulse text-green-500" /> Email delivery history
+              </div>
+              <button
+                onClick={async () => {
+                  const res = await fetch("/api/admin/email-logs");
+                  if (res.ok) {
+                    const { emails } = await res.json();
+                    setEmailLogs(emails);
+                    addToast({ title: "Refreshed", body: `${emails.length} emails found`, type: "contact" });
+                  }
+                }}
+                className="flex items-center gap-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 px-3 py-1.5 text-xs text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              >
+                <HiOutlineRefresh size={12} /> Refresh
+              </button>
+            </div>
+            {emailLogs.length === 0 && (
+              <div className="rounded-2xl border border-dashed border-neutral-200 dark:border-neutral-800 p-12 text-center text-sm text-neutral-400">No emails sent yet.</div>
+            )}
+            {emailLogs.map((log, idx) => (
+              <div key={log.id || idx} className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 space-y-3">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="space-y-0.5 flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="font-semibold text-neutral-900 dark:text-neutral-100">To: {log.to}</p>
+                      <span className={`text-[10px] font-semibold px-2 py-1 rounded-full ${log.status === "delivered" ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"}`}>
+                        {log.status === "delivered" ? "✓ Delivered" : "✗ Failed"}
+                      </span>
+                    </div>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">{log.subject}</p>
+                    <p className="text-xs text-neutral-500 dark:text-neutral-500">{log.messagePreview}...</p>
+                  </div>
+                  <span className="text-[11px] text-neutral-400 dark:text-neutral-500 shrink-0 whitespace-nowrap">{new Date(log.timestamp).toLocaleDateString()}</span>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </main>

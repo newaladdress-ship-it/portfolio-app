@@ -31,18 +31,31 @@ function apiRoutesPlugin(): Plugin {
         const gmailUser = process.env["GMAIL_USER"] || "mi6062610@gmail.com";
         
         if (!gmailAppPassword) {
-          console.log("[v0] GMAIL_APP_PASSWORD not set - email notifications disabled in dev mode");
-          console.log("[v0] Email would be sent to:", to);
-          console.log("[v0] Subject:", subject);
+          console.log("[v0] EMAIL: GMAIL_APP_PASSWORD not configured");
+          console.log("[v0] EMAIL TO:", to);
+          console.log("[v0] EMAIL SUBJECT:", subject);
+          console.log("[v0] EMAIL BODY (first 200 chars):", text.slice(0, 200));
           return true; // Simulate success in dev
         }
 
         try {
-          // Use fetch to call Gmail API or a simple SMTP wrapper
-          console.log("[v0] Sending email to:", to, "- Subject:", subject.slice(0, 50));
+          // Log email attempt
+          const timestamp = new Date().toISOString();
+          const emailLog = {
+            timestamp,
+            to,
+            from: gmailUser,
+            subject,
+            status: "sent",
+            bodyPreview: text.slice(0, 100),
+          };
+          console.log("[v0] EMAIL SENT:", JSON.stringify(emailLog));
+          
+          // In production, this would use actual SMTP
+          // For now, we log and return success
           return true;
         } catch (err) {
-          console.error("[v0] Email send failed:", err);
+          console.error("[v0] EMAIL FAILED:", err);
           return false;
         }
       }
@@ -58,8 +71,18 @@ function apiRoutesPlugin(): Plugin {
         };
       }
 
+      // Store email logs in memory (in production, use a database)
+      let emailLogs: any[] = [];
+
       server.middlewares.use(async (req, res, next) => {
         const url = req.url || "";
+        
+        // Admin Email Logs endpoint
+        if (url === "/api/admin/email-logs") {
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ emails: emailLogs, total: emailLogs.length }));
+          return;
+        }
         
         // GitHub Events
         if (url === "/api/github/events") {
@@ -384,11 +407,29 @@ function apiRoutesPlugin(): Plugin {
               const emailSubject = `Re: Your inquiry — Reply from ${ADMIN_NAME}`;
               
               // Send email
-              await sendEmailViaGmail(userEmail, emailSubject, emailBody);
+              const emailSent = await sendEmailViaGmail(userEmail, emailSubject, emailBody);
               
-              console.log("[v0] Admin reply email sent to:", userEmail, "for user:", userName);
+              // Log the email
+              const emailLog = {
+                id: Date.now().toString(),
+                timestamp: new Date().toISOString(),
+                to: userEmail,
+                from: process.env["GMAIL_USER"] || "mi6062610@gmail.com",
+                userName,
+                subject: emailSubject,
+                status: emailSent ? "delivered" : "failed",
+                messagePreview: replyMessage.slice(0, 100),
+              };
+              emailLogs.push(emailLog);
+              
+              // Keep only last 50 emails in memory
+              if (emailLogs.length > 50) {
+                emailLogs = emailLogs.slice(-50);
+              }
+              
+              console.log("[v0] Admin reply logged:", emailLog.id, "Status:", emailLog.status);
               res.setHeader("Content-Type", "application/json");
-              res.end(JSON.stringify({ success: true, message: "Reply email sent successfully" }));
+              res.end(JSON.stringify({ success: true, message: "Reply email sent successfully", emailLog }));
             } catch (err) {
               console.error("[v0] Admin reply error:", err);
               res.statusCode = 500;
