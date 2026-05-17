@@ -296,7 +296,7 @@ function GitHubStatsCard() {
               </div>
             ))}
           </div>
-          {stats.topLanguages.length > 0 && (
+          {stats.topLanguages && stats.topLanguages.length > 0 && (
             <div className="flex flex-wrap gap-2">
               <span className="text-xs text-neutral-500 dark:text-neutral-400 self-center">Top languages:</span>
               {stats.topLanguages.map((lang) => (
