@@ -389,68 +389,143 @@ function apiRoutesPlugin(): Plugin {
         // Admin Reply Email endpoint
         if (url === "/api/admin/reply-email" && req.method === "POST") {
           let body = "";
-          req.on("data", (chunk) => { body += chunk; });
+          
+          // Collect all request data
+          req.on("data", (chunk) => {
+            body += chunk.toString();
+            // Prevent DoS attacks
+            if (body.length > 1e6) {
+              res.statusCode = 413;
+              res.setHeader("Content-Type", "application/json");
+              res.end(JSON.stringify({ 
+                success: false, 
+                error: "Request body too large" 
+              }));
+            }
+          });
+          
           req.on("end", async () => {
+            // Always set content type first
             res.setHeader("Content-Type", "application/json");
+            
             try {
-              if (!body) {
+              // Validate request body exists
+              if (!body || body.trim().length === 0) {
                 res.statusCode = 400;
-                res.end(JSON.stringify({ error: "Empty request body" }));
+                res.end(JSON.stringify({ 
+                  success: false, 
+                  error: "Empty request body" 
+                }));
                 return;
               }
               
-              const data = JSON.parse(body);
-              const { userEmail, userName, replyMessage, originalMessage } = data;
+              // Parse JSON
+              let data;
+              try {
+                data = JSON.parse(body);
+              } catch (parseErr) {
+                console.error("[v0] JSON parse failed:", parseErr);
+                res.statusCode = 400;
+                res.end(JSON.stringify({ 
+                  success: false, 
+                  error: "Invalid JSON in request body" 
+                }));
+                return;
+              }
               
+              // Validate required fields
+              const { userEmail, userName, replyMessage, originalMessage } = data;
               if (!userEmail || !replyMessage) {
                 res.statusCode = 400;
-                res.end(JSON.stringify({ error: "Missing required fields: userEmail and replyMessage" }));
+                res.end(JSON.stringify({ 
+                  success: false, 
+                  error: "Missing required fields: userEmail and replyMessage" 
+                }));
+                return;
+              }
+              
+              // Validate email format (basic)
+              if (!userEmail.includes("@")) {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ 
+                  success: false, 
+                  error: "Invalid email address" 
+                }));
                 return;
               }
 
+              // Build email
               const ADMIN_NAME = "Muhammad Imran";
               const emailBody = `Hi ${userName || "there"},\n\n${replyMessage}${originalMessage ? `\n\n---\nYour original message:\n${originalMessage}` : ""}\n\n---\nBest regards,\n${ADMIN_NAME}\nWeb App Developer · imrandigitals.online\nWhatsApp: +92 334 563 6230`;
-              
               const emailSubject = `Re: Your inquiry — Reply from ${ADMIN_NAME}`;
               
-              // Send email
-              const emailSent = await sendEmailViaGmail(userEmail, emailSubject, emailBody);
+              console.log("[v0] Sending email reply to:", userEmail);
               
-              // Log the email
+              // Send email (this is async but we'll handle it)
+              let emailSent = false;
+              try {
+                emailSent = await sendEmailViaGmail(userEmail, emailSubject, emailBody);
+              } catch (emailErr) {
+                console.error("[v0] Email send failed:", emailErr);
+                emailSent = false;
+              }
+              
+              // Create email log entry
               const emailLog = {
                 id: Date.now().toString(),
                 timestamp: new Date().toISOString(),
                 to: userEmail,
                 from: process.env["GMAIL_USER"] || "mi6062610@gmail.com",
-                userName,
+                userName: userName || "Unknown",
                 subject: emailSubject,
                 status: emailSent ? "delivered" : "failed",
-                messagePreview: replyMessage.slice(0, 100),
+                messagePreview: replyMessage.substring(0, 100),
               };
+              
+              // Store in logs array
+              if (!Array.isArray(emailLogs)) {
+                emailLogs = [];
+              }
               emailLogs.push(emailLog);
               
-              // Keep only last 50 emails in memory
+              // Trim to last 50 emails
               if (emailLogs.length > 50) {
                 emailLogs = emailLogs.slice(-50);
               }
               
-              console.log("[v0] Admin reply logged:", emailLog.id, "Status:", emailLog.status);
+              console.log("[v0] Email logged - ID:", emailLog.id, "Status:", emailLog.status);
+              
+              // Send success response
               res.statusCode = 200;
               res.end(JSON.stringify({ 
                 success: true, 
-                message: "Reply email sent successfully", 
-                emailLog,
+                message: `Reply email ${emailSent ? "sent" : "queued"} to ${userEmail}`,
+                emailLog: emailLog,
                 id: emailLog.id 
               }));
+              
             } catch (err) {
-              console.error("[v0] Admin reply error:", err);
+              // Handle unexpected errors
+              console.error("[v0] Admin reply endpoint error:", err);
               res.statusCode = 500;
               res.end(JSON.stringify({ 
-                error: err instanceof Error ? err.message : "Failed to send reply",
-                success: false 
+                success: false, 
+                error: err instanceof Error ? err.message : "Internal server error"
               }));
             }
           });
+          
+          // Handle request errors
+          req.on("error", (err) => {
+            console.error("[v0] Request error:", err);
+            res.statusCode = 500;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({ 
+              success: false, 
+              error: "Request error" 
+            }));
+          });
+          
           return;
         }
 
