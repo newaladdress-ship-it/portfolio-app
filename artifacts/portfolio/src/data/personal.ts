@@ -1,11 +1,11 @@
 export const PERSONAL = {
   name: "Muhammad Imran",
-  role: "Web App Developer",
-  location: "Pakistan",
+  role: "Web Developer | Expert Web Development Services",
+  location: "Multan, Pakistan",
   locationType: "Open to Remote",
   bio: [
-    "I'm a passionate Web App Developer with expertise in building scalable, high-performance web applications. I specialize in modern JavaScript frameworks and love crafting clean, intuitive user experiences.",
-    "With a strong foundation in both frontend and backend development, I bring ideas to life through code. I'm always exploring new technologies and best practices to deliver exceptional digital products.",
+    "I'm a professional web developer based in Multan, Pakistan, specializing in expert web development services and custom software development. With expertise in React, Next.js, Node.js, and the MERN Stack, I build scalable, high-performance web applications for startups and enterprises.",
+    "As an experienced software developer and web development expert, I combine strong foundation in both frontend and backend development to deliver production-grade solutions. I'm passionate about clean code, modern best practices, and creating exceptional digital products that drive business growth.",
   ],
   github: "https://github.com/muhammadimran9",
   linkedin: "https://www.linkedin.com/in/muhammad-imran-972364373/",

@@ -141,8 +141,8 @@ export default function HomePage() {
   return (
     <>
       <SEOHead
-        title="Muhammad Imran — Web App Developer | React & Node.js"
-        description="Web App Developer from Pakistan building modern apps with React, Next.js, Node.js & MERN stack. View projects, skills & live coding stats."
+        title="Muhammad Imran - Web Developer in Multan | React, Next.js & MERN Stack Expert"
+        description="Web developer in Multan, Pakistan specializing in React, Next.js, and MERN Stack development. Expert software developer offering web development services. View portfolio, projects, and live stats."
         path="/"
       />
       {/* Introduction */}
