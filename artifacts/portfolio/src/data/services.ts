@@ -30,13 +30,13 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     slug: "web-application-development",
-    keyword: "web application development service provider",
-    metaTitle: "Web Application Development Service Provider — Muhammad Imran",
+    keyword: "web development, software development, expert web development services",
+    metaTitle: "Web Application Development & Expert Web Development Services | Muhammad Imran",
     metaDescription:
-      "Hire a senior web application development service provider building React, Next.js, Node.js & MERN apps for startups, SaaS & enterprise teams worldwide.",
-    h1: "Web Application Development Service Provider",
+      "Expert web development services and web application development in Multan & Pakistan. Specializing in React, Next.js, Node.js & MERN Stack for startups and enterprises. Professional software developer providing custom web development solutions.",
+    h1: "Expert Web Application Development & Software Development Services",
     intro:
-      "I am Muhammad Imran, an independent web application development service provider building production-grade React, Next.js, and Node.js applications for startups, SaaS founders, and growing enterprise teams. From idea to launch, I deliver fast, scalable, and maintainable web apps that ship on time and stay healthy long after release.",
+      "I am Muhammad Imran, a professional web developer based in Multan, Pakistan offering expert web development services and custom web application development. Building production-grade React, Next.js, and Node.js applications for startups, SaaS founders, and enterprise teams. As a dedicated software developer, I deliver full-stack solutions from architecture to deployment, ensuring your web development project ships on time with scalable, maintainable code.",
     highlights: [
       { label: "Stack", value: "React · Next.js · Node.js · TypeScript" },
       { label: "Engagement", value: "Project · Retainer · Hourly" },
@@ -511,12 +511,12 @@ export const SERVICES: Service[] = [
 ];
 
 export const SERVICES_INDEX_META = {
-  metaTitle: "Services — Web Development, Dashboards & SEO by Muhammad Imran",
+  metaTitle: "Expert Web Development Services in Multan & Pakistan | Muhammad Imran",
   metaDescription:
-    "Senior web development services by Muhammad Imran — custom web apps, consulting, dashboard design, executive KPI dashboards & technical SEO from Pakistan.",
-  h1: "Web Development Services",
+    "Expert web development services by Muhammad Imran — MERN Stack, React, Next.js development. Leading software development company in Multan, Pakistan offering custom web app development, consulting, and technical expertise.",
+  h1: "Expert Web Development Services in Multan & Pakistan",
   intro:
-    "A focused list of services I offer as an independent senior web engineer. Every engagement is delivered by me personally — no agency layer, no junior hand-offs. Pick a service below to read the full scope, process, stack, and FAQs.",
+    "I deliver expert web development services as an independent senior engineer. Specializing in MERN Stack, React, Next.js, and Node.js — providing custom web applications and software development solutions to startups, agencies, and enterprises across Pakistan and globally. Every engagement is delivered by me personally with no middlemen or junior hand-offs.",
 };
 
 export function getServiceBySlug(slug: string): Service | undefined {
