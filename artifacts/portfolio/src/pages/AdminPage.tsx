@@ -8,7 +8,7 @@ import { db } from "@/lib/firebase";
 import {
   HiOutlineLockClosed, HiOutlineMail, HiOutlineChatAlt2,
   HiOutlineTrash, HiOutlineLogout, HiOutlineRefresh,
-  HiPaperAirplane, HiStar, HiOutlineBell, HiX, HiReply
+  HiPaperAirplane, HiStar, HiOutlineBell, HiX, HiReply, HiOutlineCog
 } from "react-icons/hi";
 import { SiGoogle, SiGithub } from "react-icons/si";
 
@@ -157,6 +157,11 @@ export default function AdminPage() {
   const [emailReplySent, setEmailReplySent] = useState<string | null>(null);
   const [emailReplyError, setEmailReplyError] = useState("");
   const [emailLogs, setEmailLogs] = useState<any[]>([]);
+
+  // Gmail Settings
+  const [gmailAppPassword, setGmailAppPassword] = useState("");
+  const [gmailSaved, setGmailSaved] = useState(false);
+  const [gmailError, setGmailError] = useState("");
 
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [unreadC, setUnreadC] = useState(0);
@@ -479,6 +484,7 @@ export default function AdminPage() {
             { key: "feedback", label: "Feedback", icon: <HiStar size={15} />, count: feedbacks.length, unread: unreadF, loading: loadingF },
             { key: "chat",     label: "Chat",     icon: <HiOutlineChatAlt2 size={15} />, count: chats.length, unread: unreadCh, loading: loadingCh },
             { key: "email-logs", label: "Email Logs", icon: <HiOutlineMail size={15} />, count: emailLogs.length, unread: 0, loading: false },
+            { key: "settings",  label: "Settings",    icon: <HiOutlineCog size={15} />, count: 0, unread: 0, loading: false },
           ] as const).map(t => (
             <button
               key={t.key}
@@ -761,7 +767,83 @@ export default function AdminPage() {
             ))}
           </div>
         )}
+
+        {/* ── Settings Tab ── */}
+        {tab === "settings" && (
+          <div className="space-y-6">
+            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6">
+              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4">Gmail Configuration</h3>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-6">Configure your Gmail account to send emails directly from the admin panel.</p>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">Gmail App Password</label>
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-3">
+                    Generate at: <a href="https://myaccount.google.com/security" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">myaccount.google.com/security</a>
+                  </p>
+                  <input
+                    type="password"
+                    value={gmailAppPassword}
+                    onChange={e => {
+                      setGmailAppPassword(e.target.value);
+                      setGmailError("");
+                    }}
+                    placeholder="Enter your 16-character Gmail App Password (spaces will be removed)"
+                    className="w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-4 py-3 text-sm text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  />
+                  {gmailError && <p className="text-xs text-red-500 mt-2">{gmailError}</p>}
+                  {gmailSaved && <p className="text-xs text-green-600 dark:text-green-400 mt-2">✓ Gmail configuration saved successfully</p>}
+                </div>
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => {
+                      const pwd = gmailAppPassword.replace(/\s/g, "");
+                      if (!pwd || pwd.length < 16) {
+                        setGmailError("Password must be at least 16 characters (including spaces)");
+                        return;
+                      }
+                      localStorage.setItem("gmail_app_password", pwd);
+                      setGmailSaved(true);
+                      setGmailError("");
+                      setTimeout(() => setGmailSaved(false), 3000);
+                      addToast({ title: "Settings Saved", body: "Gmail configuration updated successfully", type: "contact" });
+                    }}
+                    className="flex items-center gap-1.5 rounded-lg bg-yellow-400 hover:bg-yellow-500 px-4 py-2 text-sm font-semibold text-neutral-900 transition-colors cursor-pointer"
+                  >
+                    Save Configuration
+                  </button>
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("gmail_app_password");
+                      setGmailAppPassword("");
+                      setGmailError("Gmail configuration cleared");
+                      setTimeout(() => setGmailError(""), 3000);
+                    }}
+                    className="rounded-lg border border-neutral-200 dark:border-neutral-700 px-4 py-2 text-sm text-neutral-500 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                  >
+                    Clear Configuration
+                  </button>
+                </div>
+
+                <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                  <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-3">How to get your Gmail App Password:</h4>
+                  <ol className="text-xs text-neutral-600 dark:text-neutral-400 space-y-2 list-decimal list-inside">
+                    <li>Go to <a href="https://myaccount.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">myaccount.google.com</a></li>
+                    <li>Click on "Security" in the left menu</li>
+                    <li>Enable "2-Step Verification" if not already enabled</li>
+                    <li>Scroll down to "App passwords"</li>
+                    <li>Select "Mail" and "Windows Computer"</li>
+                    <li>Copy the 16-character password shown</li>
+                    <li>Paste it above and click "Save Configuration"</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
 }
+

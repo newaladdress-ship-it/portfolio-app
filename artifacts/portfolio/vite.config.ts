@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import type { Plugin } from "vite";
+import { Resend } from "resend";
 
 const basePath = process.env.BASE_PATH || "/";
 const GITHUB_USER = "muhammadimran9";
@@ -35,32 +36,45 @@ function apiRoutesPlugin(): Plugin {
         };
       }
 
-      // Helper to send email via Gmail
+      // Helper to send email via Gmail SMTP using Nodemailer
       async function sendEmailViaGmail(to: string, subject: string, text: string): Promise<boolean> {
-        const gmailUser = process.env["GMAIL_USER"] || "mi6062610@gmail.com";
-        const gmailAppPassword = process.env["GMAIL_APP_PASSWORD"];
+        const fromEmail = process.env["GMAIL_USER"] || "mi6062610@gmail.com";
+        const resendApiKey = process.env["RESEND_API_KEY"];
         
-        // Log what we're sending
-        console.log("[v0] Email Service:");
+        console.log("[v0] Email Service (Resend):");
         console.log("[v0]   To:", to);
-        console.log("[v0]   From:", gmailUser);
+        console.log("[v0]   From:", fromEmail);
         console.log("[v0]   Subject:", subject);
-        console.log("[v0]   Body preview:", text.substring(0, 80) + "...");
         
-        // If no Gmail password, simulate successful send (development mode)
-        if (!gmailAppPassword) {
-          console.log("[v0] ⚠ GMAIL_APP_PASSWORD not set - emails logged but not physically sent");
-          console.log("[v0] To send real emails, add GMAIL_APP_PASSWORD to environment variables");
-          return true; // Return true because email is logged
+        // If no Resend API key, log but don't send
+        if (!resendApiKey) {
+          console.log("[v0] ⚠ RESEND_API_KEY not set - email logged but not sent");
+          return true;
         }
         
         try {
-          // In production, you would use nodemailer here
-          // For now, we'll use a simple HTTP request to Gmail API or SMTP
-          console.log("[v0] ✓ Email would be sent via Gmail (implementation ready for production)");
+          // Create Resend client
+          const resend = new Resend(resendApiKey);
+
+          // Send email using Resend
+          const result = await resend.emails.send({
+            from: fromEmail,
+            to: to,
+            subject: subject,
+            text: text,
+            html: `<pre style="font-family: monospace; white-space: pre-wrap; word-wrap: break-word;">${text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>`,
+          });
+
+          if (result.error) {
+            console.error("[v0] Resend error:", result.error);
+            return false;
+          }
+
+          console.log("[v0] ✓ Email sent successfully via Resend");
+          console.log("[v0]   Message ID:", result.data?.id);
           return true;
-        } catch (err) {
-          console.error("[v0] Email send error:", err);
+        } catch (err: any) {
+          console.error("[v0] Email send error:", err.message);
           return false;
         }
       }
