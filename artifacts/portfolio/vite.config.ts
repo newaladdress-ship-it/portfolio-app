@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import type { Plugin } from "vite";
+import nodemailer from "nodemailer";
 
 const basePath = process.env.BASE_PATH || "/";
 const GITHUB_USER = "muhammadimran9";
@@ -35,32 +36,46 @@ function apiRoutesPlugin(): Plugin {
         };
       }
 
-      // Helper to send email via Gmail
+      // Helper to send email via Gmail SMTP using Nodemailer
       async function sendEmailViaGmail(to: string, subject: string, text: string): Promise<boolean> {
         const gmailUser = process.env["GMAIL_USER"] || "mi6062610@gmail.com";
         const gmailAppPassword = process.env["GMAIL_APP_PASSWORD"];
         
-        // Log what we're sending
         console.log("[v0] Email Service:");
         console.log("[v0]   To:", to);
         console.log("[v0]   From:", gmailUser);
         console.log("[v0]   Subject:", subject);
-        console.log("[v0]   Body preview:", text.substring(0, 80) + "...");
         
-        // If no Gmail password, simulate successful send (development mode)
+        // If no Gmail password, log but don't send
         if (!gmailAppPassword) {
-          console.log("[v0] ⚠ GMAIL_APP_PASSWORD not set - emails logged but not physically sent");
-          console.log("[v0] To send real emails, add GMAIL_APP_PASSWORD to environment variables");
-          return true; // Return true because email is logged
+          console.log("[v0] ⚠ GMAIL_APP_PASSWORD not set - email logged but not sent");
+          return true;
         }
         
         try {
-          // In production, you would use nodemailer here
-          // For now, we'll use a simple HTTP request to Gmail API or SMTP
-          console.log("[v0] ✓ Email would be sent via Gmail (implementation ready for production)");
+          // Create Nodemailer transporter for Gmail
+          const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: gmailUser,
+              pass: gmailAppPassword.replace(/\s/g, ""), // Remove any spaces from password
+            },
+          });
+
+          // Send email
+          const info = await transporter.sendMail({
+            from: gmailUser,
+            to: to,
+            subject: subject,
+            text: text,
+            html: `<pre>${text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>`,
+          });
+
+          console.log("[v0] ✓ Email sent successfully");
+          console.log("[v0]   Message ID:", info.messageId);
           return true;
-        } catch (err) {
-          console.error("[v0] Email send error:", err);
+        } catch (err: any) {
+          console.error("[v0] Email send error:", err.message);
           return false;
         }
       }
