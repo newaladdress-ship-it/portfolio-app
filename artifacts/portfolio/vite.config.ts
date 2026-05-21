@@ -82,6 +82,22 @@ function apiRoutesPlugin(): Plugin {
       server.middlewares.use(async (req, res, next) => {
         const url = req.url || "";
         const urlPath = url.split("?")[0];
+        
+        // Debug logging
+        console.log("[v0] DEBUG: Request received -", req.method, urlPath);
+        
+        // Enable CORS for all requests
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        
+        // Handle OPTIONS preflight requests
+        if (req.method === "OPTIONS") {
+          console.log("[v0] DEBUG: OPTIONS preflight request");
+          res.statusCode = 200;
+          res.end();
+          return;
+        }
 
         // Admin Email Logs endpoint
         if (urlPath === "/api/admin/email-logs") {
@@ -343,20 +359,34 @@ function apiRoutesPlugin(): Plugin {
 
         // Admin Reply Email endpoint
         if (urlPath === "/api/admin/reply-email") {
+          console.log("[v0] DEBUG: /api/admin/reply-email request received");
+          console.log("[v0] DEBUG: Method =", req.method);
+          console.log("[v0] DEBUG: Headers =", req.headers);
+          
           if (req.method !== "POST") {
+            console.log("[v0] DEBUG: Method is not POST, returning 405");
             res.statusCode = 405;
             res.setHeader("Content-Type", "application/json");
             res.setHeader("Allow", "POST");
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
             res.end(JSON.stringify({ success: false, error: `Method ${req.method} not allowed. Use POST.` }));
             return;
           }
 
           let body = "";
-          req.on("data", (chunk) => { body += chunk.toString(); });
+          req.on("data", (chunk) => { 
+            body += chunk.toString();
+            console.log("[v0] DEBUG: Received data chunk, total length now:", body.length);
+          });
           req.on("end", async () => {
+            console.log("[v0] DEBUG: Request body complete, length:", body.length);
             res.setHeader("Content-Type", "application/json");
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
             try {
               if (!body || body.trim().length === 0) {
+                console.log("[v0] DEBUG: Empty request body");
                 res.statusCode = 400;
                 res.end(JSON.stringify({ success: false, error: "Empty request body" }));
                 return;
@@ -364,15 +394,21 @@ function apiRoutesPlugin(): Plugin {
 
               let data;
               try {
+                console.log("[v0] DEBUG: Parsing JSON body");
                 data = JSON.parse(body);
-              } catch {
+                console.log("[v0] DEBUG: JSON parsed successfully, data keys:", Object.keys(data));
+              } catch (parseErr) {
+                console.log("[v0] DEBUG: JSON parse error:", parseErr);
                 res.statusCode = 400;
                 res.end(JSON.stringify({ success: false, error: "Invalid JSON in request body" }));
                 return;
               }
 
               const { userEmail, userName, replyMessage, originalMessage } = data;
+              console.log("[v0] DEBUG: Extracted fields - email:", userEmail, "name:", userName);
+              
               if (!userEmail || !replyMessage) {
+                console.log("[v0] DEBUG: Missing required fields");
                 res.statusCode = 400;
                 res.end(JSON.stringify({ success: false, error: "Missing required fields" }));
                 return;
@@ -383,6 +419,7 @@ function apiRoutesPlugin(): Plugin {
               const ADMIN_WEBSITE = "imrandigitals.online";
               const ADMIN_EMAIL = "mi6062610@gmail.com";
               
+              console.log("[v0] DEBUG: Preparing email body");
               // Format the email body with proper structure
               const emailBody = `Dear ${userName || "User"},
 
@@ -396,8 +433,10 @@ Email: ${ADMIN_EMAIL}
 ${originalMessage ? `\n---\nOriginal Message:\n${originalMessage}` : ""}`;
               
               const emailSubject = `Re: Your inquiry — Reply from ${ADMIN_NAME}`;
-
+              
+              console.log("[v0] DEBUG: Sending email via Resend");
               await sendEmailViaGmail(userEmail, emailSubject, emailBody);
+              console.log("[v0] DEBUG: Email sent successfully");
 
               const emailLog = {
                 id: Date.now().toString(),
