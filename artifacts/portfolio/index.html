@@ -76,6 +76,178 @@
     <!-- Umami Analytics -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="534e623f-ed6e-4fb8-b2c7-3011f7271ae5"></script>
 
+    <!-- Comprehensive Privacy Protection -->
+    <script>
+      (function() {
+        // Disable developer tools and prevent code inspection
+        
+        // 1. Detect DevTools opening
+        let devToolsOpen = false;
+        const threshold = 160;
+        
+        setInterval(function() {
+          if (window.outerHeight - window.innerHeight > threshold || 
+              window.outerWidth - window.innerWidth > threshold) {
+            devToolsOpen = true;
+            preventInspection();
+          }
+        }, 500);
+        
+        // 2. Block keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+          const key = e.key?.toLowerCase();
+          const ctrl = e.ctrlKey || e.metaKey;
+          const shift = e.shiftKey;
+          
+          // F12, Ctrl+I, Ctrl+J, Ctrl+C, Ctrl+U, Ctrl+S
+          if (e.key === 'F12' || 
+              (ctrl && key === 'i') || 
+              (ctrl && key === 'j') || 
+              (ctrl && shift && key === 'c') ||
+              (ctrl && key === 'u') ||
+              (ctrl && key === 's')) {
+            e.preventDefault();
+            e.stopPropagation();
+            preventInspection();
+            return false;
+          }
+        }, true);
+        
+        // 3. Block right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          preventInspection();
+          return false;
+        }, true);
+        
+        // 4. Block drag selection to prevent copying
+        document.addEventListener('selectstart', function(e) {
+          e.preventDefault();
+          return false;
+        }, true);
+        
+        // 5. Block copy, cut, paste
+        ['copy', 'cut', 'paste'].forEach(event => {
+          document.addEventListener(event, function(e) {
+            e.preventDefault();
+            preventInspection();
+            return false;
+          }, true);
+        });
+        
+        // 6. Disable text selection with CSS
+        document.body.style.userSelect = 'none';
+        document.body.style.webkitUserSelect = 'none';
+        document.body.style.msUserSelect = 'none';
+        document.body.style.mozUserSelect = 'none';
+        
+        // 7. Block mouse right-click
+        document.addEventListener('mousedown', function(e) {
+          if (e.button === 2) {
+            e.preventDefault();
+            preventInspection();
+            return false;
+          }
+        }, true);
+        
+        // 8. Prevent iframe access
+        window.blockIframe = true;
+        if (window.self !== window.top) {
+          window.top.location = window.self.location;
+        }
+        
+        // 9. Disable console methods
+        window.console = {
+          log: function() {},
+          warn: function() {},
+          error: function() {},
+          info: function() {},
+          debug: function() {},
+          trace: function() {},
+          clear: function() {},
+          group: function() {},
+          groupEnd: function() {},
+          time: function() {},
+          timeEnd: function() {},
+          table: function() {}
+        };
+        
+        // 10. Override debugger statement
+        window.eval = function() {
+          preventInspection();
+        };
+        
+        // Function to show privacy message
+        function preventInspection() {
+          var existing = document.getElementById('__privacy_toast__');
+          if (existing) return;
+          
+          var toast = document.createElement('div');
+          toast.id = '__privacy_toast__';
+          toast.style.cssText = [
+            'position:fixed', 'top:24px', 'left:50%', 'transform:translateX(-50%)',
+            'z-index:2147483647', 'background:#1a1a1a', 'color:#fff',
+            'padding:16px 28px', 'border-radius:14px',
+            'border:1px solid #333', 'box-shadow:0 10px 40px rgba(0,0,0,0.8)',
+            'font-family:system-ui,sans-serif', 'font-size:15px', 'font-weight:600',
+            'display:flex', 'align-items:center', 'gap:12px',
+            'max-width:90vw', 'pointer-events:none', 'opacity:0',
+            'transition:opacity 0.3s ease', 'backdrop-filter:blur(10px)'
+          ].join(';');
+          
+          toast.innerHTML = 
+            '<span style="font-size:20px">🔐</span>' +
+            '<div>' +
+              '<div style="font-weight:700;color:#fff;letter-spacing:.02em">Protected</div>' +
+              '<div style="font-size:13px;color:#999;margin-top:3px">Source code inspection is disabled</div>' +
+            '</div>';
+          
+          document.body.appendChild(toast);
+          requestAnimationFrame(function() { toast.style.opacity = '1'; });
+          
+          setTimeout(function() {
+            toast.style.opacity = '0';
+            setTimeout(function() { 
+              toast && toast.parentNode && toast.parentNode.removeChild(toast); 
+            }, 300);
+          }, 3500);
+        }
+        
+        // 11. Prevent extensions from accessing code
+        Object.defineProperty(window, 'chrome', {
+          get: function() {
+            preventInspection();
+            return undefined;
+          }
+        });
+      })();
+    </script>
+
+    <!-- Enable selection visually but prevent copying -->
+    <style>
+      * {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        user-select: text;
+      }
+      
+      body, html {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      
+      /* Prevent text highlighting with specific styles */
+      ::selection {
+        background-color: transparent;
+      }
+      
+      ::-moz-selection {
+        background-color: transparent;
+      }
+    </style>
+
     <!-- Theme init — prevents dark/light flash, defaults to dark -->
     <script>
       (function() {
