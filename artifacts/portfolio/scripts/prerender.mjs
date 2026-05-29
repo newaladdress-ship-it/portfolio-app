@@ -10,12 +10,22 @@ const ROUTES = [
   {
     path: "/",
     file: "index.html",
-    title: "Muhammad Imran — Web App Developer | React & Node.js",
+    title: "Muhammad Imran — Web Developer in Multan, Pakistan | React & MERN Stack",
     description:
-      "Web App Developer from Pakistan building modern apps with React, Next.js, Node.js & MERN stack. View projects, skills & live coding stats.",
-    h1: "Muhammad Imran — Web App Developer",
+      "Freelance web developer in Multan, Pakistan. I build fast, modern web apps using React, Next.js, Node.js & MERN Stack. Available for hire. View my work.",
+    h1: "Web App Developer in Multan, Pakistan",
     intro:
-      "Professional Web App Developer from Pakistan specializing in React, Next.js, Node.js, and the MERN Stack. View my featured projects, skills, and achievements.",
+      "I build fast, scalable web applications using React, Next.js, and the MERN Stack. Based in Multan, Pakistan — available for freelance projects and remote positions worldwide.",
+  },
+  {
+    path: "/dev-profile",
+    file: "dev-profile.html",
+    title: "Muhammad Imran — React & MERN Stack Developer | Full Profile",
+    description:
+      "Full developer profile of Muhammad Imran — Web App Developer from Multan, Pakistan. React, Next.js, Node.js & MERN Stack specialist. View projects and skills.",
+    h1: "Muhammad Imran — React & MERN Stack Developer",
+    intro:
+      "Full developer profile of Muhammad Imran — Web App Developer from Multan, Pakistan specializing in React, Next.js, Node.js, and the MERN Stack. View projects, skills, and achievements.",
   },
   {
     path: "/about",

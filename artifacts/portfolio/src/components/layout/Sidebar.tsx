@@ -19,7 +19,7 @@ import {
   HiOutlineSparkles,
   HiOutlineBriefcase,
 } from "react-icons/hi";
-import { HiOutlineChatBubbleLeftRight, HiOutlineShieldCheck, HiOutlineShieldExclamation } from "react-icons/hi2";
+import { HiOutlineChatBubbleLeftRight, HiOutlineShieldCheck, HiOutlineShieldExclamation, HiOutlineRocketLaunch, HiOutlineIdentification } from "react-icons/hi2";
 import { useThemeStore } from "@/stores/theme";
 import { useMenu } from "@/stores/menu";
 import { useLanguageStore } from "@/stores/language";
@@ -179,11 +179,13 @@ export default function Sidebar() {
     { title: t.nav.achievements, href: "/achievements", icon: <PiCertificate size={20} /> },
     { title: t.nav.projects,     href: "/projects",    icon: <BiCollection size={20} /> },
     { title: t.nav.services,     href: "/services",    icon: <HiOutlineBriefcase size={20} /> },
+    { title: "Hire Me",          href: "/hire-me",     icon: <HiOutlineRocketLaunch size={20} /> },
     { title: t.nav.dashboard,    href: "/dashboard",   icon: <BiCategory size={20} /> },
     { title: t.nav.chat,         href: "/chat",        icon: <HiOutlineChatAlt2 size={20} /> },
     { title: t.nav.contact,      href: "/contact",     icon: <BiBook size={20} /> },
     { title: t.nav.feedback,     href: "/feedback",    icon: <HiOutlineChatBubbleLeftRight size={20} /> },
     { title: t.nav.smarttalk,    href: "/smarttalk",   icon: <HiOutlineSparkles size={20} /> },
+    { title: "Dev Profile",      href: "/dev-profile", icon: <HiOutlineIdentification size={20} /> },
   ];
 
   useEffect(() => {
