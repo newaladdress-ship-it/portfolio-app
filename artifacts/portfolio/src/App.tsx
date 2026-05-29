@@ -10,6 +10,7 @@ import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import { useT } from "@/lib/i18n";
 
 const HomePage         = lazy(() => import("@/pages/HomePage"));
+const DevProfilePage   = lazy(() => import("@/pages/DevProfilePage"));
 const AboutPage        = lazy(() => import("@/pages/AboutPage"));
 const AchievementsPage = lazy(() => import("@/pages/AchievementsPage"));
 const ProjectsPage     = lazy(() => import("@/pages/ProjectsPage"));
@@ -115,6 +116,7 @@ function AppLayout() {
             <Suspense fallback={<PageLoader />}>
               <Switch>
                 <Route path="/" component={HomePage} />
+                <Route path="/dev-profile" component={DevProfilePage} />
                 <Route path="/about" component={AboutPage} />
                 <Route path="/achievements" component={AchievementsPage} />
                 <Route path="/projects" component={ProjectsPage} />

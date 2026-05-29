@@ -5,13 +5,16 @@ interface SEOHeadProps {
   description: string;
   path: string;
   type?: string;
+  /** One or more JSON-LD schema objects to inject into the document head. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const BASE_URL = "https://imrandigitals.online";
 const DEFAULT_IMAGE = `${BASE_URL}/opengraph.jpg`;
 
-export default function SEOHead({ title, description, path, type = "website" }: SEOHeadProps) {
+export default function SEOHead({ title, description, path, type = "website", jsonLd }: SEOHeadProps) {
   const canonical = `${BASE_URL}${path}`;
+  const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
   return (
     <Helmet>
@@ -25,9 +28,16 @@ export default function SEOHead({ title, description, path, type = "website" }: 
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={DEFAULT_IMAGE} />
 
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={DEFAULT_IMAGE} />
+
+      {schemas.map((schema, i) => (
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      ))}
     </Helmet>
   );
 }
