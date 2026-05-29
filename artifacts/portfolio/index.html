@@ -136,11 +136,19 @@
           }, true);
         });
         
-        // 6. Disable text selection with CSS
-        document.body.style.userSelect = 'none';
-        document.body.style.webkitUserSelect = 'none';
-        document.body.style.msUserSelect = 'none';
-        document.body.style.mozUserSelect = 'none';
+        // 6. Disable text selection with CSS (wait for body to exist)
+        function applyBodyStyles() {
+          if (!document.body) return;
+          document.body.style.userSelect = 'none';
+          document.body.style.webkitUserSelect = 'none';
+          document.body.style.msUserSelect = 'none';
+          document.body.style.mozUserSelect = 'none';
+        }
+        if (document.body) {
+          applyBodyStyles();
+        } else {
+          document.addEventListener('DOMContentLoaded', applyBodyStyles);
+        }
         
         // 7. Block mouse right-click
         document.addEventListener('mousedown', function(e) {
@@ -180,6 +188,7 @@
         
         // Function to show privacy message
         function preventInspection() {
+          if (!document.body) return;
           var existing = document.getElementById('__privacy_toast__');
           if (existing) return;
           
@@ -215,12 +224,15 @@
         }
         
         // 11. Prevent extensions from accessing code
-        Object.defineProperty(window, 'chrome', {
-          get: function() {
-            preventInspection();
-            return undefined;
-          }
-        });
+        try {
+          Object.defineProperty(window, 'chrome', {
+            configurable: true,
+            get: function() {
+              preventInspection();
+              return undefined;
+            }
+          });
+        } catch (err) {}
       })();
     </script>
 
