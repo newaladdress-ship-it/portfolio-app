@@ -22,6 +22,8 @@ const SmartTalkPage    = lazy(() => import("@/pages/SmartTalkPage"));
 const FeedbackPage     = lazy(() => import("@/pages/FeedbackPage"));
 const ServicesIndexPage = lazy(() => import("@/pages/ServicesIndexPage"));
 const ServicePage      = lazy(() => import("@/pages/ServicePage"));
+const LocationsIndexPage = lazy(() => import("@/pages/LocationsIndexPage"));
+const LocationPage     = lazy(() => import("@/pages/LocationPage"));
 const AdminPage        = lazy(() => import("@/pages/AdminPage"));
 
 function PageLoader() {
@@ -128,6 +130,8 @@ function AppLayout() {
                 <Route path="/smarttalk" component={SmartTalkPage} />
                 <Route path="/services" component={ServicesIndexPage} />
                 <Route path="/services/:slug" component={ServicePage} />
+                <Route path="/locations" component={LocationsIndexPage} />
+                <Route path="/locations/:slug" component={LocationPage} />
                 <Route component={NotFound} />
               </Switch>
             </Suspense>
