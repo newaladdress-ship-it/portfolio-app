@@ -24,6 +24,8 @@ const ServicesIndexPage = lazy(() => import("@/pages/ServicesIndexPage"));
 const ServicePage      = lazy(() => import("@/pages/ServicePage"));
 const LocationsIndexPage = lazy(() => import("@/pages/LocationsIndexPage"));
 const LocationPage     = lazy(() => import("@/pages/LocationPage"));
+const BlogIndexPage    = lazy(() => import("@/pages/BlogIndexPage"));
+const BlogPostPage     = lazy(() => import("@/pages/BlogPostPage"));
 const AdminPage        = lazy(() => import("@/pages/AdminPage"));
 
 function PageLoader() {
@@ -132,6 +134,8 @@ function AppLayout() {
                 <Route path="/services/:slug" component={ServicePage} />
                 <Route path="/locations" component={LocationsIndexPage} />
                 <Route path="/locations/:slug" component={LocationPage} />
+                <Route path="/blog" component={BlogIndexPage} />
+                <Route path="/blog/:slug" component={BlogPostPage} />
                 <Route component={NotFound} />
               </Switch>
             </Suspense>
