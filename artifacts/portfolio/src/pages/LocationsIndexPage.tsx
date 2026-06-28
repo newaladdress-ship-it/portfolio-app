@@ -4,7 +4,8 @@ import SectionHeading from "@/components/layout/SectionHeading";
 import SectionSubHeading from "@/components/layout/SectionSubHeading";
 import SpotlightCard from "@/components/layout/SpotlightCard";
 import Breakline from "@/components/layout/Breakline";
-import { HiOutlineMapPin, HiOutlineArrowRight } from "react-icons/hi";
+import { FaMapPin } from "react-icons/fa6";
+import { MdArrowForward } from "react-icons/md";
 import { LOCATIONS, getLocationsByProvince } from "@/data/locations";
 
 export default function LocationsIndexPage() {
@@ -36,7 +37,7 @@ export default function LocationsIndexPage() {
 
       {/* Hero */}
       <header className="space-y-3">
-        <SectionHeading title="Service Locations" icon={<HiOutlineMapPin />} />
+        <SectionHeading title="Service Locations" icon={<FaMapPin />} />
         <h1 className="text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">
           Web Developer in Pakistan — Local Services in 10+ Cities
         </h1>
@@ -49,7 +50,7 @@ export default function LocationsIndexPage() {
 
       {/* Punjab */}
       <div className="space-y-3">
-        <SectionHeading title="Punjab" icon={<HiOutlineMapPin />} />
+        <SectionHeading title="Punjab" icon={<FaMapPin />} />
         <SectionSubHeading>
           <p>
             Punjab is Pakistan's largest province with the most active tech and business ecosystem. I serve businesses across Punjab including Multan (my base), Lahore, Faisalabad, Gujranwala, Sialkot, and Rawalpindi.
@@ -66,7 +67,7 @@ export default function LocationsIndexPage() {
                   {location.intro.split(".")[0]}.
                 </p>
                 <div className="mt-3 flex items-center gap-1 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                  Learn more <HiOutlineArrowRight size={12} />
+                  Learn more <MdArrowForward size={12} />
                 </div>
               </SpotlightCard>
             </Link>
@@ -80,7 +81,7 @@ export default function LocationsIndexPage() {
       {sindh.length > 0 && (
         <>
           <div className="space-y-3">
-            <SectionHeading title="Sindh" icon={<HiOutlineMapPin />} />
+            <SectionHeading title="Sindh" icon={<FaMapPin />} />
             <SectionSubHeading>
               <p>
                 Sindh is Pakistan's economic powerhouse. Karachi is home to thousands of businesses and startups. I serve Sindh-based businesses with expertise in e-commerce, startups, and enterprise solutions.
@@ -113,7 +114,7 @@ export default function LocationsIndexPage() {
       {kp.length > 0 && (
         <>
           <div className="space-y-3">
-            <SectionHeading title="Khyber Pakhtunkhwa" icon={<HiOutlineMapPin />} />
+            <SectionHeading title="Khyber Pakhtunkhwa" icon={<FaMapPin />} />
             <SectionSubHeading>
               <p>
                 KP is a growing region with emerging tech and business opportunities. I serve Peshawar and KP-based organizations with expertise in business solutions, NGO websites, and digital transformation.
@@ -146,7 +147,7 @@ export default function LocationsIndexPage() {
       {balochistan.length > 0 && (
         <>
           <div className="space-y-3">
-            <SectionHeading title="Balochistan" icon={<HiOutlineMapPin />} />
+            <SectionHeading title="Balochistan" icon={<FaMapPin />} />
             <SectionSubHeading>
               <p>
                 Balochistan is an emerging market with growing businesses and entrepreneurial opportunities. I serve Balochistan businesses with affordable, professional web solutions.
@@ -179,7 +180,7 @@ export default function LocationsIndexPage() {
       {ict.length > 0 && (
         <>
           <div className="space-y-3">
-            <SectionHeading title="Islamic Capital Territory" icon={<HiOutlineMapPin />} />
+            <SectionHeading title="Islamic Capital Territory" icon={<FaMapPin />} />
             <SectionSubHeading>
               <p>
                 Islamabad is Pakistan's capital with significant government, military, and enterprise presence. I serve Islamabad organizations with enterprise-grade, secure web solutions.
@@ -222,7 +223,7 @@ export default function LocationsIndexPage() {
             className="inline-flex items-center gap-1.5 rounded-lg bg-neutral-900 dark:bg-neutral-100 px-5 py-2.5 text-sm font-semibold text-white dark:text-neutral-900 hover:bg-neutral-700 dark:hover:bg-neutral-300 transition-colors"
           >
             Get in touch
-            <HiOutlineArrowRight size={16} />
+            <MdArrowForward size={16} />
           </Link>
         </div>
       </div>

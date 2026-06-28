@@ -4,14 +4,8 @@ import SectionHeading from "@/components/layout/SectionHeading";
 import SectionSubHeading from "@/components/layout/SectionSubHeading";
 import SpotlightCard from "@/components/layout/SpotlightCard";
 import Breakline from "@/components/layout/Breakline";
-import {
-  HiOutlineMapPin,
-  HiOutlineCheckCircle,
-  HiOutlineLightBulb,
-  HiOutlineQuestionMarkCircle,
-  HiOutlineArrowRight,
-  HiOutlineBriefcase,
-} from "react-icons/hi";
+import { FaMapPin } from "react-icons/fa6";
+import { MdLightbulb, MdHelpOutline, MdArrowForward, MdCheckCircle, MdBusinessCenter } from "react-icons/md";
 import { getLocationBySlug } from "@/data/locations";
 
 export default function LocationPage() {
@@ -91,7 +85,7 @@ export default function LocationPage() {
 
       {/* Hero */}
       <header className="space-y-3">
-        <SectionHeading title="Location" icon={<HiOutlineMapPin />} />
+        <SectionHeading title="Location" icon={<FaMapPin />} />
         <h1 className="text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">
           {location.h1}
         </h1>
@@ -118,7 +112,7 @@ export default function LocationPage() {
 
       {/* About */}
       <div className="space-y-3">
-        <SectionHeading title={`About ${location.city}`} icon={<HiOutlineLightBulb />} />
+        <SectionHeading title={`About ${location.city}`} icon={<MdLightbulb />} />
         <SectionSubHeading>
           <p>{location.about}</p>
         </SectionSubHeading>
@@ -128,16 +122,16 @@ export default function LocationPage() {
 
       {/* Services */}
       <div className="space-y-3">
-        <SectionHeading title={`Services in ${location.city}`} icon={<HiOutlineBriefcase />} />
+        <SectionHeading title={`Services in ${location.city}`} icon={<MdBusinessCenter />} />
         <ul className="grid sm:grid-cols-2 gap-2.5 mt-2">
           {location.services.map((service) => (
             <li
               key={service}
               className="flex gap-2 text-sm text-neutral-700 dark:text-neutral-400 leading-relaxed"
             >
-              <HiOutlineCheckCircle
-                className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-500"
-                size={18}
+              <MdCheckCircle
+                size={16}
+                className="flex-shrink-0 text-neutral-700 dark:text-neutral-300"
               />
               <span>{service}</span>
             </li>
@@ -151,7 +145,7 @@ export default function LocationPage() {
       <div className="space-y-3">
         <SectionHeading
           title={`FAQs - Web Development in ${location.city}`}
-          icon={<HiOutlineQuestionMarkCircle />}
+          icon={<MdHelpOutline />}
         />
         <div className="space-y-3 mt-2">
           {location.faqs.map((f) => (
@@ -183,7 +177,7 @@ export default function LocationPage() {
             className="inline-flex items-center gap-1.5 rounded-lg bg-neutral-900 dark:bg-neutral-100 px-4 py-2 text-sm font-semibold text-white dark:text-neutral-900 hover:bg-neutral-700 dark:hover:bg-neutral-300 transition-colors"
           >
             Contact me
-            <HiOutlineArrowRight size={16} />
+            <MdArrowForward size={16} />
           </Link>
           <Link
             href="/projects"

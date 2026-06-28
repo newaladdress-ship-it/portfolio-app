@@ -3,14 +3,8 @@ import SEOHead from "@/components/SEOHead";
 import SectionHeading from "@/components/layout/SectionHeading";
 import SpotlightCard from "@/components/layout/SpotlightCard";
 import Breakline from "@/components/layout/Breakline";
-import {
-  HiOutlineCalendar,
-  HiOutlineUser,
-  HiOutlineClock,
-  HiOutlineTag,
-  HiOutlineArrowRight,
-  HiOutlineArrowLeft,
-} from "react-icons/hi";
+import { MdCalendarToday, MdPerson, MdTimer, MdLocalOffer } from "react-icons/md";
+import { MdArrowForward, MdArrowBack } from "react-icons/md";
 import { getBlogPostBySlug, BLOG_POSTS, BLOG_CATEGORIES } from "@/data/blog";
 
 export default function BlogPostPage() {
@@ -89,15 +83,15 @@ export default function BlogPostPage() {
         </h1>
         <div className="flex flex-wrap gap-4 text-sm text-neutral-600 dark:text-neutral-400">
           <div className="flex items-center gap-2">
-            <HiOutlineCalendar size={16} />
+            <MdCalendarToday size={16} />
             <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time>
           </div>
           <div className="flex items-center gap-2">
-            <HiOutlineUser size={16} />
+            <MdPerson size={16} />
             <span>{post.author}</span>
           </div>
           <div className="flex items-center gap-2">
-            <HiOutlineClock size={16} />
+            <MdTimer size={16} />
             <span>{post.readTime} min read</span>
           </div>
         </div>
@@ -129,7 +123,7 @@ export default function BlogPostPage() {
 
       {/* Keywords */}
       <div className="space-y-3">
-        <SectionHeading title="Keywords" icon={<HiOutlineTag />} />
+        <SectionHeading title="Keywords" icon={<MdLocalOffer />} />
         <div className="flex flex-wrap gap-2">
           {post.keywords.map((keyword) => (
             <span
@@ -150,7 +144,7 @@ export default function BlogPostPage() {
           <Link href={`/blog/${prevPost.slug}`}>
             <SpotlightCard className="p-4 cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors h-full">
               <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-                <HiOutlineArrowLeft size={14} />
+                <MdArrowBack size={14} />
                 Previous
               </div>
               <h3 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 line-clamp-2">
@@ -166,7 +160,7 @@ export default function BlogPostPage() {
             <SpotlightCard className="p-4 cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors h-full text-right">
               <div className="flex items-center justify-end gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                 Next
-                <HiOutlineArrowRight size={14} />
+                <MdArrowForward size={14} />
               </div>
               <h3 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 line-clamp-2">
                 {nextPost.title}
@@ -184,7 +178,7 @@ export default function BlogPostPage() {
           href="/blog"
           className="inline-flex items-center gap-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
         >
-          <HiOutlineArrowLeft size={16} />
+          <MdArrowBack size={16} />
           Back to blog
         </Link>
       </div>

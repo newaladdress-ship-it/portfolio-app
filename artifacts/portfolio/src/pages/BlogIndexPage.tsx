@@ -3,7 +3,7 @@ import SEOHead from "@/components/SEOHead";
 import SectionHeading from "@/components/layout/SectionHeading";
 import SpotlightCard from "@/components/layout/SpotlightCard";
 import Breakline from "@/components/layout/Breakline";
-import { HiOutlineNewspaperStack, HiOutlineArrowRight, HiOutlineCalendar, HiOutlineClock } from "react-icons/hi";
+import { MdArticle, MdArrowForward, MdCalendarToday, MdTimer } from "react-icons/md";
 import { BLOG_POSTS, BLOG_CATEGORIES, getFeaturedBlogPosts } from "@/data/blog";
 
 export default function BlogIndexPage() {
@@ -32,7 +32,7 @@ export default function BlogIndexPage() {
 
       {/* Hero */}
       <header className="space-y-3">
-        <SectionHeading title="Blog" icon={<HiOutlineNewspaperStack />} />
+        <SectionHeading title="Blog" icon={<MdArticle />} />
         <h1 className="text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">
           Web Development Tips, Tutorials & Guides
         </h1>
@@ -63,11 +63,11 @@ export default function BlogIndexPage() {
                 </p>
                 <div className="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-500 pt-2 border-t border-neutral-200 dark:border-neutral-800">
                   <span className="flex items-center gap-1">
-                    <HiOutlineCalendar size={12} />
+                    <MdCalendarToday size={12} />
                     {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
                   </span>
                   <span className="flex items-center gap-1">
-                    <HiOutlineClock size={12} />
+                    <MdTimer size={12} />
                     {post.readTime}m
                   </span>
                 </div>
@@ -125,7 +125,7 @@ export default function BlogIndexPage() {
               </p>
               <Link href={`/blog?category=${key}`}>
                 <button className="text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors flex items-center gap-1">
-                  Explore <HiOutlineArrowRight size={12} />
+                  Explore <MdArrowForward size={12} />
                 </button>
               </Link>
             </SpotlightCard>
