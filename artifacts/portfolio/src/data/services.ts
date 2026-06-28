@@ -511,12 +511,12 @@ export const SERVICES: Service[] = [
 ];
 
 export const SERVICES_INDEX_META = {
-  metaTitle: "Expert Web Development Services in Multan & Pakistan | Muhammad Imran",
+  metaTitle: "Web Development Services in Multan, Pakistan | React, MERN, Next.js Developer",
   metaDescription:
-    "Expert web development services by Muhammad Imran — MERN Stack, React, Next.js development. Leading software development company in Multan, Pakistan offering custom web app development, consulting, and technical expertise.",
-  h1: "Expert Web Development Services in Multan & Pakistan",
+    "Professional web development services in Multan, Pakistan by Muhammad Imran. Expert React developer, MERN Stack specialist, and Next.js expert offering custom web app development, full-stack solutions, consulting, and technical expertise for startups and businesses.",
+  h1: "Web Development Services in Multan, Pakistan — Hire a Web Developer",
   intro:
-    "I deliver expert web development services as an independent senior engineer. Specializing in MERN Stack, React, Next.js, and Node.js — providing custom web applications and software development solutions to startups, agencies, and enterprises across Pakistan and globally. Every engagement is delivered by me personally with no middlemen or junior hand-offs.",
+    "I deliver professional web development services as an independent senior engineer based in Multan, Pakistan. As an expert web developer, React specialist, MERN Stack developer, and Next.js expert — I provide custom web applications and full-stack software development solutions to startups, agencies, and enterprises across Multan, Pakistan, and globally. Every web development project is delivered by me personally with no middlemen or junior hand-offs — just professional quality code.",
 };
 
 export function getServiceBySlug(slug: string): Service | undefined {
