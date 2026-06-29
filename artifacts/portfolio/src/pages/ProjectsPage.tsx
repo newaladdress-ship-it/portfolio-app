@@ -52,7 +52,7 @@ function LivePreviewThumb({ url, fallbackImg, name }: { url: string; fallbackImg
         return;
       }
     } catch {
-      // cross-origin — check if frame window is accessible at all
+      // cross-origin - check if frame window is accessible at all
     }
     try {
       const win = iframeRef.current?.contentWindow;
@@ -61,7 +61,7 @@ function LivePreviewThumb({ url, fallbackImg, name }: { url: string; fallbackImg
         return;
       }
     } catch {
-      // cross-origin but loaded — show as live
+      // cross-origin but loaded - show as live
       setState("live");
       return;
     }
@@ -187,7 +187,7 @@ function ProjectCard({ project }: { project: Project }) {
 
           {/* Links */}
           <div className="space-y-2.5 pt-2 border-t border-neutral-100 dark:border-neutral-800">
-            {/* Read More — always visible */}
+            {/* Read More - always visible */}
             <Link
               href={`/projects/${toSlug(project.name)}`}
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-neutral-900 dark:bg-neutral-100 px-4 py-2 text-xs font-semibold text-white dark:text-neutral-900 hover:opacity-90 transition-opacity"
@@ -254,8 +254,8 @@ export default function ProjectsPage() {
   return (
     <section className="space-y-6">
       <SEOHead
-        title="Web Developer Portfolio — Muhammad Imran | React, MERN & Next.js Projects in Multan"
-        description="View portfolio projects by Muhammad Imran, a web developer in Multan, Pakistan. Modern web applications built with React, Next.js, Node.js, MERN Stack, MongoDB & Tailwind CSS."
+        title="Projects Portfolio - Muhammad Imran React and MERN Apps"
+        description="Explore the project portfolio of Muhammad Imran, featuring modern React, Next.js, Node.js, and full-stack web applications."
         path="/projects"
       />
       <div className="space-y-2">

@@ -12,7 +12,7 @@ export const PERSONAL = {
   email: "mi6062610@gmail.com",
   phone: "+92 301 9316123",
   phoneLink: "tel:+923019316123",
-  address: "Multan, Punjab, Pakistan",
+  address: "Pracha Street, opposite Kalyar Garphics, near Chowk B.C.G., Gulzaib Colony Multan, 60600, Gulzaib Colony, Multan, 60060, Pakistan",
   profileImage: "/logo.png",
 };
 
@@ -395,7 +395,7 @@ export const PROJECTS = [
   {
     id: 11,
     name: "GeoTags Editor",
-    description: "Free online GPS photo editor to remove geotags, add GPS location, and edit EXIF metadata — no login required, works on any device.",
+    description: "Free online GPS photo editor to remove geotags, add GPS location, and edit EXIF metadata - no login required, works on any device.",
     image: "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?w=500&h=300&fit=crop",
     tags: ["JavaScript", "HTML", "CSS", "EXIF.js", "Leaflet", "OpenStreetMap"],
     category: "tools",
@@ -421,7 +421,7 @@ export const PROJECTS = [
   {
     id: 14,
     name: "Flutter Login & Registration App",
-    description: "A mobile app featuring a clean login screen with email & password validation and smooth navigation to the Home Screen — ideal as a starter auth template for any Flutter app.",
+    description: "A mobile app featuring a clean login screen with email & password validation and smooth navigation to the Home Screen - ideal as a starter auth template for any Flutter app.",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=300&fit=crop",
     tags: ["Flutter", "Dart"],
     category: "mobile",
@@ -433,7 +433,7 @@ export const PROJECTS = [
   {
     id: 13,
     name: "Todo List Mobile",
-    description: "A full-featured mobile to-do list app built with Flutter and Dart, featuring real-time sync, task management, and Firebase backend — works on Android and iOS.",
+    description: "A full-featured mobile to-do list app built with Flutter and Dart, featuring real-time sync, task management, and Firebase backend - works on Android and iOS.",
     image: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=500&h=300&fit=crop",
     tags: ["Flutter", "Dart", "Firebase"],
     category: "mobile",
@@ -445,7 +445,7 @@ export const PROJECTS = [
   {
     id: 12,
     name: "Personal Portfolio",
-    description: "A fully responsive personal portfolio website showcasing projects, skills, achievements, and experience — built with modern web technologies.",
+    description: "A fully responsive personal portfolio website showcasing projects, skills, achievements, and experience - built with modern web technologies.",
     image: "https://imrandigitals.online/",
     previewUrl: "https://imrandigitals.online/",
     tags: ["React", "TypeScript", "Tailwind", "Vite", "Node.js"],
@@ -462,5 +462,5 @@ export const CONTACT_LINKS = [
   { platform: "GitHub", value: "github.com/muhammadimran9", href: "https://github.com/muhammadimran9" },
   { platform: "LinkedIn", value: "linkedin.com/in/muhammad-imran-972364373", href: "https://www.linkedin.com/in/muhammad-imran-972364373/" },
   { platform: "Phone", value: "+92 301 9316123", href: "tel:+923019316123" },
-  { platform: "Address", value: "Multan, Punjab, Pakistan", href: "#" },
+  { platform: "Address", value: "Pracha Street, opposite Kalyar Garphics, near Chowk B.C.G., Gulzaib Colony Multan, 60600, Gulzaib Colony, Multan, 60060, Pakistan", href: "#" },
 ];

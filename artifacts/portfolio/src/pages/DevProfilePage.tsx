@@ -141,8 +141,8 @@ export default function DevProfilePage() {
   return (
     <>
       <SEOHead
-        title="Muhammad Imran — React & MERN Stack Developer | Full Profile"
-        description="Full developer profile of Muhammad Imran — Web App Developer from Multan, Pakistan. React, Next.js, Node.js & MERN Stack specialist. View projects and skills."
+        title="Muhammad Imran - React and MERN Stack Developer Profile"
+        description="Full developer profile of Muhammad Imran, a React and MERN stack web developer in Pakistan. Check out my skills and project history."
         path="/dev-profile"
       />
       {/* Introduction */}
@@ -193,7 +193,7 @@ export default function DevProfilePage() {
 
         <div className="grid grid-cols-1 gap-3 md:grid-cols-4">
 
-          {/* Projects Showcase — spans 2 cols */}
+          {/* Projects Showcase - spans 2 cols */}
           <BentoCard className="md:col-span-2 p-6 flex flex-col justify-between gap-4 min-h-[200px] group">
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">
@@ -270,7 +270,7 @@ export default function DevProfilePage() {
             </Link>
           </BentoCard>
 
-          {/* Skills & Tools — scrolling marquee, spans 2 cols */}
+          {/* Skills & Tools - scrolling marquee, spans 2 cols */}
           <BentoCard className="md:col-span-2 px-6 py-5 flex flex-col gap-4 group overflow-hidden">
             <div className="flex items-center gap-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">
               <BiCodeAlt size={18} className="text-purple-500" />

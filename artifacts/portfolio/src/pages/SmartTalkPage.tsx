@@ -342,8 +342,8 @@ export default function SmartTalkPage() {
   return (
     <div className="flex flex-col" style={{ minHeight: "calc(100vh - 4rem)" }}>
       <SEOHead
-        title="SmartTalk — AI Assistant by Muhammad Imran, Developer"
-        description="SmartTalk is an AI-powered assistant by Muhammad Imran. Ask questions about his projects, skills, experience & web development work in real time."
+        title="SmartTalk - AI Assistant by Web Developer Muhammad Imran"
+        description="Ask questions about Muhammad Imran's projects, experience, and web development skills using the SmartTalk AI assistant in real-time."
         path="/smarttalk"
       />
       <div className="bg-gradient-to-br from-purple-600 via-indigo-600 to-violet-700 text-white py-10 px-4">
@@ -355,7 +355,7 @@ export default function SmartTalkPage() {
           <h1 className="text-3xl md:text-4xl font-bold mb-2">SmartTalk AI</h1>
           <p className="text-white/80 text-base max-w-xl mx-auto">
             {consultMode
-              ? "Defining your project requirements — Muhammad Imran will review your brief personally."
+              ? "Defining your project requirements - Muhammad Imran will review your brief personally."
               : "Ask me anything about Muhammad Imran, or tell me what project you need built."}
           </p>
 

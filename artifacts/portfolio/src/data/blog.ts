@@ -8,6 +8,7 @@ export type BlogPost = {
   date: string; // YYYY-MM-DD
   readTime: number; // minutes
   author: string;
+  metaTitle: string;
   metaDescription: string;
   content: string;
   keywords: string[];
@@ -36,8 +37,8 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2024-01-15",
     readTime: 12,
     author: "Muhammad Imran",
-    metaDescription:
-      "Complete guide to React performance optimization. Learn code splitting, memoization, lazy loading, and achieve 90+ Lighthouse scores in your React applications.",
+    metaTitle: "React Performance Optimization Guide - Imran Coding Blog",
+    metaDescription: "Complete guide to React performance optimization. Learn code splitting, memoization, lazy loading, and achieve 90+ Lighthouse scores.",
     keywords: ["react performance", "optimization", "code splitting", "memoization"],
     content: `React performance optimization is critical for user experience. This comprehensive guide covers techniques to boost your React app performance dramatically.
 
@@ -128,8 +129,8 @@ Start with code splitting and memoization for immediate gains.`,
     date: "2024-01-12",
     readTime: 15,
     author: "Muhammad Imran",
-    metaDescription:
-      "Complete Next.js App Router migration guide. Learn how to upgrade from Pages Router to App Router with server components, layouts, and new features.",
+    metaTitle: "NextJS App Router Migration Guide - Imran Coding Blog",
+    metaDescription: "Complete guide on migrating React apps from Pages Router to Next.js App Router. Learn layouts, Server Components, and best practices.",
     keywords: ["nextjs", "app router", "migration", "server components"],
     content: `The Next.js App Router represents a significant evolution with server components, improved layouts, and better data fetching patterns.
 
@@ -215,8 +216,8 @@ Start small with one route, then gradually migrate others.`,
     date: "2024-01-10",
     readTime: 14,
     author: "Muhammad Imran",
-    metaDescription:
-      "Node.js REST API best practices. Learn API versioning, error handling, authentication, rate limiting, and documentation patterns for production APIs.",
+    metaTitle: "NodeJS REST API Design Best Practices - Imran Coding Blog",
+    metaDescription: "Learn Node.js REST API design best practices, architecture patterns, authentication, error handling, and production optimization.",
     keywords: ["nodejs", "rest api", "api design", "best practices"],
     content: `Building a well-designed REST API is foundational for modern web applications.
 
@@ -359,8 +360,8 @@ Professional API design takes time but pays dividends in maintenance and user sa
     date: "2024-01-08",
     readTime: 16,
     author: "Muhammad Imran",
-    metaDescription:
-      "Database optimization guide. Learn indexing, query analysis, n+1 solutions, and caching techniques for dramatically faster database performance.",
+    metaTitle: "Database Query Optimization Guide - Imran Coding Blog",
+    metaDescription: "Master database query optimization techniques. Learn indexing strategies, query tuning, and schema design to speed up your applications.",
     keywords: ["database", "optimization", "indexing", "performance"],
     content: `Database performance directly impacts application speed. Poor queries can slow even the best frontend.
 
@@ -375,7 +376,7 @@ WHERE created_at > NOW() - INTERVAL '7 days'
 ORDER BY created_at DESC;
 \`\`\`
 
-Look for sequential scans instead of index scans—that's your optimization target.
+Look for sequential scans instead of index scans-that's your optimization target.
 
 ## Indexing Strategy
 
@@ -481,7 +482,7 @@ const result = await pool.query('SELECT * FROM users');
 - [ ] Monitor query performance regularly
 - [ ] Archive old data to improve table size
 
-Database optimization is ongoing—monitor and improve continuously.`,
+Database optimization is ongoing-monitor and improve continuously.`,
   },
   {
     slug: "10-web-development-productivity-hacks",
@@ -492,8 +493,8 @@ Database optimization is ongoing—monitor and improve continuously.`,
     date: "2024-01-05",
     readTime: 10,
     author: "Muhammad Imran",
-    metaDescription:
-      "Web development productivity hacks. Learn shortcuts, tools, and automation tricks that save developers hours every week.",
+    metaTitle: "10 Web Development Productivity Hacks - Imran Dev Blog",
+    metaDescription: "Boost your coding speed with 10 web development productivity hacks. Tools, workflows, and shortcuts that save hours every single week.",
     keywords: ["productivity", "development", "shortcuts", "hacks"],
     content: `Small productivity improvements compound into significant time savings.
 
@@ -646,6 +647,7 @@ Implement 2-3 of these this week and notice the time savings.`,
     date: "2024-01-16",
     readTime: 14,
     author: "Muhammad Imran",
+    metaTitle: "Advanced TypeScript Patterns - Imran Developer Coding Blog",
     metaDescription: "Master advanced TypeScript patterns including generics, conditional types, and decorators for enterprise-grade applications.",
     keywords: ["typescript", "generics", "conditional types", "enterprise"],
     content: `TypeScript's advanced features enable building type-safe, scalable applications. Master these patterns to write professional enterprise code.
@@ -761,7 +763,8 @@ These patterns enable you to write type-safe, maintainable code at scale.`,
     date: "2024-01-17",
     readTime: 16,
     author: "Muhammad Imran",
-    metaDescription: "Complete PostgreSQL optimization guide. Learn indexing strategies, query tuning, and execution plan analysis for lightning-fast databases.",
+    metaTitle: "PostgreSQL Optimization Guide - Imran Developer Blog",
+    metaDescription: "Complete PostgreSQL optimization guide. Learn indexing strategies, query tuning, and execution plan analysis for fast databases.",
     keywords: ["postgresql", "optimization", "indexing", "query performance"],
     content: `PostgreSQL powers millions of applications. Optimize it properly and watch your response times plummet.
 
@@ -867,6 +870,7 @@ These optimizations reduce query times by 10-100x.`,
     date: "2024-01-18",
     readTime: 15,
     author: "Muhammad Imran",
+    metaTitle: "Docker for Web Developers Guide - Imran Developer Blog",
     metaDescription: "Complete Docker guide for web developers. Learn containerization, Dockerfile optimization, and production deployment strategies.",
     keywords: ["docker", "containerization", "devops", "deployment"],
     content: `Docker transforms how we develop, test, and deploy applications. Master it and collaborate seamlessly across teams.
@@ -990,6 +994,7 @@ Docker ensures consistency across development, testing, and production environme
     date: "2024-01-19",
     readTime: 17,
     author: "Muhammad Imran",
+    metaTitle: "API Security Best Practices Guide - Imran Coding Blog",
     metaDescription: "API security best practices including JWT, OAuth2, RBAC, rate limiting, and protection against OWASP top 10 vulnerabilities.",
     keywords: ["api security", "authentication", "jwt", "rate limiting"],
     content: `Insecure APIs expose your entire application. Implement these security patterns from day one.
@@ -1142,6 +1147,7 @@ Secure APIs are resilient APIs.`,
     date: "2024-01-20",
     readTime: 15,
     author: "Muhammad Imran",
+    metaTitle: "Testing Strategies Guide Jest Vitest - Imran Dev Blog",
     metaDescription: "Complete testing guide using Jest and Vitest. Learn unit, integration, and E2E testing strategies for production-grade code.",
     keywords: ["testing", "jest", "vitest", "unit testing", "e2e"],
     content: `Tested code is reliable code. Implement a testing pyramid to catch bugs before production.
@@ -1237,6 +1243,7 @@ Test critical paths thoroughly.`,
     date: "2024-01-21",
     readTime: 14,
     author: "Muhammad Imran",
+    metaTitle: "GraphQL API Development Guide - Imran Developer Blog",
     metaDescription: "GraphQL API development guide. Learn schema design, resolvers, caching, and production best practices with Apollo Server.",
     keywords: ["graphql", "apollo", "api development", "schema design"],
     content: `GraphQL provides flexible, efficient data querying. Build APIs your clients will love.
@@ -1328,7 +1335,8 @@ GraphQL enables developers to request exactly what they need, reducing over-fetc
     date: "2024-01-22",
     readTime: 13,
     author: "Muhammad Imran",
-    metaDescription: "Monorepo management with Turborepo. Learn scaling multiple packages, CI/CD optimization, and code sharing strategies.",
+    metaTitle: "Monorepo Turborepo Management - Imran Developer Blog",
+    metaDescription: "Monorepo management with Turborepo. Learn scaling multiple packages, CI/CD optimization, and code sharing strategies for projects.",
     keywords: ["monorepo", "turborepo", "monorepo architecture"],
     content: `Monorepos enable teams to manage multiple packages efficiently. Scale beyond single repositories.
 
@@ -1407,7 +1415,8 @@ Monorepos increase productivity and ensure code consistency.`,
     date: "2024-01-23",
     readTime: 12,
     author: "Muhammad Imran",
-    metaDescription: "GitHub Actions CI/CD automation guide. Learn workflow creation, automated testing, and deployment strategies.",
+    metaTitle: "CI/CD Automation GitHub Actions Guide - Imran Dev Blog",
+    metaDescription: "GitHub Actions CI/CD automation guide. Learn workflow creation, automated testing, and production deployment strategies.",
     keywords: ["ci/cd", "github actions", "automation", "deployment"],
     content: `Automate your entire deployment pipeline with GitHub Actions. Deploy with confidence every time.
 
@@ -1463,9 +1472,10 @@ CI/CD eliminates manual deployment errors and ensures consistent, reliable relea
     date: "2024-01-24",
     readTime: 13,
     author: "Muhammad Imran",
+    metaTitle: "Web Accessibility WCAG Compliance - Imran Coding Blog",
     metaDescription: "Web accessibility guide following WCAG 2.1 standards. Learn semantic HTML, ARIA, keyboard navigation, and inclusive design.",
     keywords: ["accessibility", "wcag", "a11y", "inclusive design"],
-    content: `Accessibility isn't a feature—it's a requirement. Make the web inclusive.
+    content: `Accessibility isn't a feature-it's a requirement. Make the web inclusive.
 
 ## Semantic HTML
 
@@ -1531,7 +1541,8 @@ Accessible sites benefit everyone.`,
     date: "2024-01-25",
     readTime: 16,
     author: "Muhammad Imran",
-    metaDescription: "Web performance optimization guide. Master LCP, INP, and CLS for top Google rankings and user satisfaction.",
+    metaTitle: "Web Performance Core Vitals Guide - Imran Coding Blog",
+    metaDescription: "Web performance optimization guide. Master LCP, INP, and CLS for top Google rankings, web speed, and better user satisfaction.",
     keywords: ["web performance", "core vitals", "lcp", "inp", "cls"],
     content: `Google ranks sites on performance. Optimize your Core Web Vitals and climb search results.
 
@@ -1599,6 +1610,7 @@ Core Web Vitals are ranking factors. Optimize them aggressively.`,
     date: "2024-01-26",
     readTime: 14,
     author: "Muhammad Imran",
+    metaTitle: "Microservices Architecture Guide - Imran Coding Blog",
     metaDescription: "Microservices architecture guide. Learn design patterns, API gateways, service communication, and scalability strategies.",
     keywords: ["microservices", "architecture", "scalability", "distributed systems"],
     content: `Microservices enable teams to scale independently. Design them properly from the start.
@@ -1693,7 +1705,8 @@ Microservices require careful design to succeed.`,
     date: "2024-01-27",
     readTime: 11,
     author: "Muhammad Imran",
-    metaDescription: "Paid advertising strategy for web developers. Google Ads and LinkedIn marketing to attract clients.",
+    metaTitle: "Attracting Paid Traffic Guide - Imran Developer Blog",
+    metaDescription: "Paid advertising strategy for web developers. Learn Google Ads and LinkedIn marketing campaigns to attract clients and grow business.",
     keywords: ["marketing", "google ads", "linkedin", "paid traffic"],
     content: `Organic traffic takes time. Accelerate growth with strategic paid campaigns.
 
@@ -1743,6 +1756,7 @@ Paid traffic converts quickly if optimized properly.`,
     date: "2024-01-28",
     readTime: 10,
     author: "Muhammad Imran",
+    metaTitle: "Freelance Pricing Strategies - Imran Developer Coding Blog",
     metaDescription: "Freelance pricing guide. Learn value-based pricing, hourly rates, project estimation, and client negotiation strategies.",
     keywords: ["pricing", "freelance", "value-based pricing", "negotiation"],
     content: `How you price determines your income. Price strategically.
@@ -1755,7 +1769,7 @@ Stop charging hourly. Charge based on value delivered.
 - Hourly: 200 hours × $50 = $10,000
 - Value-based: Generates $50,000/month revenue → $15,000 fee = 3.6 month payback
 
-Clients prefer value pricing—they know the investment ROI.
+Clients prefer value pricing-they know the investment ROI.
 
 ## Project Estimation
 
@@ -1789,7 +1803,8 @@ Higher prices attract better clients.`,
     date: "2024-01-29",
     readTime: 11,
     author: "Muhammad Imran",
-    metaDescription: "Client management best practices. Communication, contracts, scope control, and project success strategies.",
+    metaTitle: "Client Management Workflow Guide - Imran Coding Blog",
+    metaDescription: "Client management best practices for developers. Learn communication, contracts, scope control, and project success strategies.",
     keywords: ["client management", "contracts", "scope management", "communication"],
     content: `Clear contracts prevent 90% of project problems. Document everything.
 

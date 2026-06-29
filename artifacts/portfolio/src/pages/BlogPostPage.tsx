@@ -42,7 +42,7 @@ export default function BlogPostPage() {
   return (
     <article className="space-y-8 max-w-2xl mx-auto">
       <SEOHead
-        title={`${post.title} | Muhammad Imran Blog`}
+        title={post.metaTitle || `${post.title} | Muhammad Imran Blog`}
         description={post.metaDescription}
         path={`/blog/${post.slug}`}
         type="article"

@@ -10,29 +10,29 @@ const ROUTES = [
   {
     path: "/",
     file: "index.html",
-    title: "Muhammad Imran — Web Developer in Multan, Pakistan | React & MERN Stack",
+    title: "Web Developer in Multan - Muhammad Imran Portfolio App",
     description:
-      "Freelance web developer in Multan, Pakistan. I build fast, modern web apps using React, Next.js, Node.js & MERN Stack. Available for hire. View my work.",
+      "Hire Muhammad Imran, a expert web developer in Multan, Pakistan. Specializing in React, Next.js, and MERN stack development.",
     h1: "Web App Developer in Multan, Pakistan",
     intro:
-      "I build fast, scalable web applications using React, Next.js, and the MERN Stack. Based in Multan, Pakistan — available for freelance projects and remote positions worldwide.",
+      "I build fast, scalable web applications using React, Next.js, and the MERN Stack. Based in Multan, Pakistan - available for freelance projects and remote positions worldwide.",
   },
   {
     path: "/dev-profile",
     file: "dev-profile.html",
-    title: "Muhammad Imran — React & MERN Stack Developer | Full Profile",
+    title: "Muhammad Imran - React and MERN Stack Developer Profile",
     description:
-      "Full developer profile of Muhammad Imran — Web App Developer from Multan, Pakistan. React, Next.js, Node.js & MERN Stack specialist. View projects and skills.",
-    h1: "Muhammad Imran — React & MERN Stack Developer",
+      "Full developer profile of Muhammad Imran, a React and MERN stack web developer in Pakistan. Check out my skills and project history.",
+    h1: "Muhammad Imran - React & MERN Stack Developer",
     intro:
-      "Full developer profile of Muhammad Imran — Web App Developer from Multan, Pakistan specializing in React, Next.js, Node.js, and the MERN Stack. View projects, skills, and achievements.",
+      "Full developer profile of Muhammad Imran - Web App Developer from Multan, Pakistan specializing in React, Next.js, Node.js, and the MERN Stack. View projects, skills, and achievements.",
   },
   {
     path: "/about",
     file: "about.html",
-    title: "About Muhammad Imran — Full-Stack Web Developer Bio",
+    title: "About Muhammad Imran - Web Developer in Multan, Pakistan",
     description:
-      "Background, skills & tech stack of Muhammad Imran — full-stack developer from Pakistan working with React, Next.js, Node.js, TypeScript & MongoDB.",
+      "Professional background, skills, and technical stack of Muhammad Imran, a React, Node.js, and full-stack web developer in Pakistan.",
     h1: "About Muhammad Imran",
     intro:
       "Full-stack web developer from Pakistan with experience in React, Next.js, Node.js, TypeScript, MongoDB, and PostgreSQL. Read about my background, education, and the technologies I work with.",
@@ -40,9 +40,9 @@ const ROUTES = [
   {
     path: "/achievements",
     file: "achievements.html",
-    title: "Achievements & Certifications — Muhammad Imran, Developer",
+    title: "Achievements and Certifications - Muhammad Imran Dev",
     description:
-      "Professional certifications & academic achievements of Muhammad Imran from DigiSkills, freeCodeCamp, Hunarmand Punjab & Emerson University.",
+      "Professional certifications and achievements of Muhammad Imran from DigiSkills, freeCodeCamp, Hunarmand Punjab, and Emerson University.",
     h1: "Achievements & Certifications",
     intro:
       "Professional certifications and academic achievements from DigiSkills, freeCodeCamp, Hunarmand Punjab, BISE Multan, and Emerson University.",
@@ -50,9 +50,9 @@ const ROUTES = [
   {
     path: "/projects",
     file: "projects.html",
-    title: "Projects Portfolio — Muhammad Imran | React & MERN Apps",
+    title: "Projects Portfolio - Muhammad Imran React and MERN Apps",
     description:
-      "Explore Muhammad Imran's project portfolio — modern web apps & full-stack builds using React, Next.js, Node.js, MongoDB, PostgreSQL & Tailwind.",
+      "Explore the project portfolio of Muhammad Imran, featuring modern React, Next.js, Node.js, and full-stack web applications.",
     h1: "Projects Portfolio",
     intro:
       "A collection of modern web applications and full-stack projects built with React, Next.js, Node.js, MongoDB, PostgreSQL, and Tailwind CSS.",
@@ -60,9 +60,9 @@ const ROUTES = [
   {
     path: "/dashboard",
     file: "dashboard.html",
-    title: "Live Dev Dashboard — GitHub & WakaTime Coding Stats",
+    title: "Live Developer Dashboard - Muhammad Imran Code Stats",
     description:
-      "Real-time developer dashboard with live GitHub activity, contribution graph, WakaTime coding hours, language & editor breakdown, plus analytics.",
+      "Real-time developer dashboard showing live GitHub activity, coding hours, language breakdown, and portfolio analytics for Muhammad Imran.",
     h1: "Live Developer Dashboard",
     intro:
       "Real-time GitHub activity, contribution graph, WakaTime coding stats with language and editor breakdown, plus site analytics from Umami.",
@@ -70,19 +70,19 @@ const ROUTES = [
   {
     path: "/contact",
     file: "contact.html",
-    title: "Contact Muhammad Imran — Hire a React & MERN Developer",
+    title: "Contact Muhammad Imran - Hire React and MERN Developer",
     description:
-      "Contact Muhammad Imran for freelance web development — React, Next.js, Node.js & full-stack MERN projects. Email, phone & social links available.",
+      "Contact Muhammad Imran for freelance web development services, React, Next.js, and MERN projects. Email, phone, and social links are open.",
     h1: "Contact Muhammad Imran",
     intro:
-      "Get in touch for freelance web development work — React, Next.js, Node.js, and full-stack MERN applications. Email, phone, and social links below.",
+      "Get in touch for freelance web development work - React, Next.js, Node.js, and full-stack MERN applications. Email, phone, and social links below.",
   },
   {
     path: "/feedback",
     file: "feedback.html",
-    title: "Client Feedback & Reviews — Muhammad Imran, Developer",
+    title: "Client Reviews and Feedback for Muhammad Imran Developer",
     description:
-      "Read genuine client reviews of Muhammad Imran's web development work or share your own feedback after collaborating on a React or MERN project.",
+      "Read genuine client reviews of web developer Muhammad Imran or share your feedback after collaborating on React and MERN projects.",
     h1: "Feedback & Reviews",
     intro:
       "Client feedback and reviews from real collaborators. Share your own review or read what others have said about working with Muhammad Imran.",
@@ -90,19 +90,19 @@ const ROUTES = [
   {
     path: "/smarttalk",
     file: "smarttalk.html",
-    title: "SmartTalk — AI Assistant by Muhammad Imran, Developer",
+    title: "SmartTalk - AI Assistant by Web Developer Muhammad Imran",
     description:
-      "SmartTalk is an AI-powered assistant by Muhammad Imran. Ask questions about his projects, skills, experience & web development work in real time.",
-    h1: "SmartTalk — AI Assistant",
+      "Ask questions about Muhammad Imran's projects, experience, and web development skills using the SmartTalk AI assistant in real-time.",
+    h1: "SmartTalk - AI Assistant",
     intro:
       "An AI-powered assistant that answers your questions about Muhammad Imran's work, projects, skills, and experience.",
   },
   {
     path: "/chat",
     file: "chat.html",
-    title: "Live Chat Room — Muhammad Imran Developer Portfolio",
+    title: "Live Chat Room - Muhammad Imran Web Developer Portfolio",
     description:
-      "Join the live chat room on Muhammad Imran's portfolio to connect with other visitors & discuss projects, web development, React & Node.js topics.",
+      "Join the live chat room on my portfolio to connect, chat with other visitors, and discuss React, Node.js, and web development.",
     h1: "Live Chat Room",
     intro:
       "Real-time chat to connect with other visitors and discuss projects, web development, and tech.",
@@ -110,19 +110,19 @@ const ROUTES = [
   {
     path: "/services",
     file: "services.html",
-    title: "Services — Web Development, Dashboards & SEO by Muhammad Imran",
+    title: "Web Development Services - Muhammad Imran Portfolio App",
     description:
-      "Senior web development services by Muhammad Imran — custom web apps, consulting, dashboard design, executive KPI dashboards & technical SEO from Pakistan.",
+      "Web development services by Muhammad Imran including custom web apps, consulting, admin dashboards, and technical SEO in Pakistan.",
     h1: "Web Development Services",
     intro:
-      "A focused list of services offered by Muhammad Imran — custom web app development, web consulting, dashboard design, executive KPI dashboards, and technical SEO. Every engagement is delivered personally, no agency layer.",
+      "A focused list of services offered by Muhammad Imran - custom web app development, web consulting, dashboard design, executive KPI dashboards, and technical SEO. Every engagement is delivered personally, no agency layer.",
   },
   {
     path: "/services/web-application-development",
     file: "services/web-application-development.html",
-    title: "Web Application Development Service Provider — Muhammad Imran",
+    title: "Web Application Development Services - Muhammad Imran",
     description:
-      "Hire a senior web application development service provider building React, Next.js, Node.js & MERN apps for startups, SaaS & enterprise teams worldwide.",
+      "Hire a senior web developer for custom React, Next.js, and Node.js web application development with clean code and high performance.",
     h1: "Web Application Development Service Provider",
     intro:
       "Muhammad Imran is an independent web application development service provider building production-grade React, Next.js, and Node.js apps for startups, SaaS founders, and enterprise teams worldwide. End-to-end delivery, weekly demos, fixed pricing.",
@@ -130,19 +130,19 @@ const ROUTES = [
   {
     path: "/services/web-consulting",
     file: "services/web-consulting.html",
-    title: "Web Consulting Service — Independent Senior Engineer & Advisor",
+    title: "Web Consulting Services - Muhammad Imran Web Advisor",
     description:
-      "Independent web consulting service for founders & product teams. Architecture reviews, tech audits, MERN guidance & senior engineering advice — book a session.",
+      "Independent web consulting service for founders and teams. Architecture reviews, tech audits, and expert senior engineering guidance.",
     h1: "Web Consulting Service for Founders & Product Teams",
     intro:
-      "An independent web consulting service from a senior engineer. Helping founders, product teams, and agencies pick the right stack, review architectures, fix slow apps, and plan clean rewrites — without agency upsells.",
+      "An independent web consulting service from a senior engineer. Helping founders, product teams, and agencies pick the right stack, review architectures, fix slow apps, and plan clean rewrites - without agency upsells.",
   },
   {
     path: "/services/dashboard-design",
     file: "services/dashboard-design.html",
-    title: "Dashboard Design Services — Custom Admin & Analytics UI",
+    title: "Dashboard Design Services - Custom Admin and Charts UI",
     description:
-      "Dashboard design services for SaaS, internal tools & analytics platforms. Clean, fast, accessible admin UIs built with React, Tailwind & charting libraries.",
+      "Professional dashboard design services for SaaS and internal tools. Build fast, responsive, and modern admin interfaces with React.",
     h1: "Dashboard Design Services for SaaS & Internal Tools",
     intro:
       "Custom dashboard design services for SaaS, internal tools, and analytics platforms. Clean, fast, accessible admin and analytics UIs designed and built end-to-end with React, Tailwind, and modern charting libraries.",
@@ -150,20 +150,20 @@ const ROUTES = [
   {
     path: "/services/executive-dashboards",
     file: "services/executive-dashboards.html",
-    title: "Executive Dashboards by a Senior Web Development Engineer",
+    title: "Executive Dashboard Development - Muhammad Imran Dev",
     description:
-      "Need web development agencies with executive dashboards? Hire one senior engineer who designs & builds C-suite KPI dashboards in React, Next.js, TypeScript.",
+      "Custom executive dashboard development for startups and enterprises. Get real-time business KPIs and analytics built in React and Node.",
     h1: "Executive Dashboards by a Senior Web Development Engineer",
     intro:
-      "Skip the agency. Hire one accountable senior engineer to design and build C-suite KPI dashboards — the kind founders, CEOs, and CFOs actually open every Monday morning. Real metrics, fast load times, weekly digests.",
+      "Skip the agency. Hire one accountable senior engineer to design and build C-suite KPI dashboards - the kind founders, CEOs, and CFOs actually open every Monday morning. Real metrics, fast load times, weekly digests.",
   },
   {
     path: "/services/seo-multan",
     file: "services/seo-multan.html",
-    title: "SEO Company in Multan — Web Developer & Technical SEO Expert",
+    title: "SEO Company in Multan - Web Developer and SEO Expert",
     description:
-      "Looking for a reliable SEO company in Multan? Get on-page SEO, technical audits, schema markup & Core Web Vitals fixes from a local senior web developer.",
-    h1: "SEO Company in Multan — Built by a Local Web Developer",
+      "Looking for a reliable SEO company in Multan? Get technical audits, schema markup, and speed optimization from a senior web developer.",
+    h1: "SEO Company in Multan - Built by a Local Web Developer",
     intro:
       "An honest, developer-led SEO company in Multan, Pakistan. Technical SEO audits, on-page optimization, schema markup, Core Web Vitals fixes, and local SEO done by a senior engineer who can edit the code, not just send keyword reports.",
   },

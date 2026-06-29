@@ -9,7 +9,7 @@ export const SAMPLE_PROMPTS = [
 
 export const INITIAL_MESSAGE =
   "Hi! 👋 I'm SmartTalk, Muhammad Imran's AI assistant.\n\n" +
-  "I can answer questions about his skills, projects, experience, and services — or help you plan a project. What would you like to know?";
+  "I can answer questions about his skills, projects, experience, and services - or help you plan a project. What would you like to know?";
 
 export const QUICK_ACTIONS = [
   { label: "🗂️ View My Projects", message: "Tell me about your projects" },

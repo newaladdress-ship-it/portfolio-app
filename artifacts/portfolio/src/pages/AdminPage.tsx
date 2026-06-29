@@ -27,7 +27,7 @@ type FeedbackReview = {
 type Toast = { id: number; title: string; body: string; type: "chat" | "contact" | "feedback" };
 
 function timeStr(ts: Timestamp | null): string {
-  if (!ts) return "—";
+  if (!ts) return "-";
   return ts.toDate().toLocaleString("en-GB", {
     day: "2-digit", month: "short", year: "numeric",
     hour: "2-digit", minute: "2-digit",
@@ -464,16 +464,16 @@ export default function AdminPage() {
         <div className="grid grid-cols-3 gap-4">
           <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 space-y-1">
             <p className="text-xs text-neutral-500 dark:text-neutral-400">Contact Messages</p>
-            <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">{loadingC ? "—" : contacts.length}</p>
+            <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">{loadingC ? "-" : contacts.length}</p>
           </div>
           <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 space-y-1">
             <p className="text-xs text-neutral-500 dark:text-neutral-400">Feedback Reviews</p>
-            <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">{loadingF ? "—" : feedbacks.length}</p>
+            <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">{loadingF ? "-" : feedbacks.length}</p>
             {avgRating && <p className="text-xs text-yellow-500 font-medium">⭐ {avgRating} avg</p>}
           </div>
           <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 space-y-1">
             <p className="text-xs text-neutral-500 dark:text-neutral-400">Chat Messages</p>
-            <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">{loadingCh ? "—" : chats.length}</p>
+            <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">{loadingCh ? "-" : chats.length}</p>
           </div>
         </div>
 
@@ -508,7 +508,7 @@ export default function AdminPage() {
         {tab === "contacts" && (
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500">
-              <HiOutlineRefresh size={11} className="animate-pulse text-green-500" /> Live — updates in real-time
+              <HiOutlineRefresh size={11} className="animate-pulse text-green-500" /> Live - updates in real-time
             </div>
             {loadingC && <div className="space-y-3">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-28 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 animate-pulse" />)}</div>}
             {!loadingC && contacts.length === 0 && (
@@ -578,7 +578,7 @@ export default function AdminPage() {
         {tab === "feedback" && (
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500">
-              <HiOutlineRefresh size={11} className="animate-pulse text-green-500" /> Live — updates in real-time
+              <HiOutlineRefresh size={11} className="animate-pulse text-green-500" /> Live - updates in real-time
               {avgRating && (
                 <span className="ml-2 rounded-full bg-yellow-400/10 border border-yellow-400/20 text-yellow-600 dark:text-yellow-400 px-2 py-0.5 text-[10px] font-medium">
                   ⭐ {avgRating} average rating
@@ -625,7 +625,7 @@ export default function AdminPage() {
         {tab === "chat" && (
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500">
-              <HiOutlineRefresh size={11} className="animate-pulse text-green-500" /> Live — hover a message and click reply to mention someone
+              <HiOutlineRefresh size={11} className="animate-pulse text-green-500" /> Live - hover a message and click reply to mention someone
             </div>
 
             {loadingCh && <div className="space-y-2">{Array.from({ length: 5 }).map((_, i) => <div key={i} className="h-16 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 animate-pulse" />)}</div>}

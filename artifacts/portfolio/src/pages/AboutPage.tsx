@@ -35,7 +35,7 @@ function ResumeViewer({ onClose }: { onClose: () => void }) {
           <div className="flex items-center gap-2">
             <HiOutlineEye size={16} className="text-neutral-500" />
             <span className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
-              Muhammad Imran — Resume
+              Muhammad Imran - Resume
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -250,8 +250,8 @@ export default function AboutPage() {
   return (
     <>
       <SEOHead
-        title="About Muhammad Imran — Web Developer in Multan, Pakistan | React, MERN Stack Expert"
-        description="Learn about Muhammad Imran — a professional web developer in Multan, Pakistan. Expert in React, Next.js, Node.js, MERN Stack, and full-stack development. Bio, skills, tech stack, and experience."
+        title="About Muhammad Imran - Web Developer in Multan, Pakistan"
+        description="Professional background, skills, and technical stack of Muhammad Imran, a React, Node.js, and full-stack web developer in Pakistan."
         path="/about"
       />
       <Story />

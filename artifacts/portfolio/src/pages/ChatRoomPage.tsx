@@ -325,7 +325,7 @@ function ChatRoom({ user, onLeave }: { user: ChatUser; onLeave: () => void }) {
       <SpotlightCard className="hidden md:flex flex-col w-44 shrink-0 p-4 space-y-3 overflow-y-auto">
         <div className="space-y-1">
           <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
-            {t.chat.online} — {ONLINE_USERS.length + 1}
+            {t.chat.online} - {ONLINE_USERS.length + 1}
           </p>
         </div>
         <div className="space-y-3">
@@ -464,8 +464,8 @@ export default function ChatRoomPage() {
   return (
     <section className="space-y-6">
       <SEOHead
-        title="Live Chat Room — Muhammad Imran Developer Portfolio"
-        description="Join the live chat room on Muhammad Imran's portfolio to connect with other visitors & discuss projects, web development, React & Node.js topics."
+        title="Live Chat Room - Muhammad Imran Web Developer Portfolio"
+        description="Join the live chat room on my portfolio to connect, chat with other visitors, and discuss React, Node.js, and web development."s portfolio to connect with other visitors & discuss projects, web development, React & Node.js topics."
         path="/chat"
       />
       <div className="space-y-2">

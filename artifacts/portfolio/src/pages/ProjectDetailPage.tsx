@@ -101,7 +101,7 @@ export default function ProjectDetailPage() {
 
       {/* Main content grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left — description + features + challenges */}
+        {/* Left - description + features + challenges */}
         <div className="lg:col-span-2 space-y-6">
           {/* About */}
           <SpotlightCard className="p-6 space-y-3">
@@ -143,7 +143,7 @@ export default function ProjectDetailPage() {
           </SpotlightCard>
         </div>
 
-        {/* Right — sidebar info */}
+        {/* Right - sidebar info */}
         <div className="space-y-5">
           {/* Meta info */}
           <SpotlightCard className="p-5 space-y-4">
@@ -206,7 +206,7 @@ export default function ProjectDetailPage() {
                 </a>
               )}
               {!project.liveUrl && !project.githubUrl && (
-                <p className="text-xs text-neutral-400 dark:text-neutral-600 italic text-center py-2">Private project — links not available</p>
+                <p className="text-xs text-neutral-400 dark:text-neutral-600 italic text-center py-2">Private project - links not available</p>
               )}
             </div>
           </SpotlightCard>

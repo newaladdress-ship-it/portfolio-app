@@ -28,8 +28,9 @@ const personSchema = {
     "@type": "PostalAddress",
     addressLocality: "Multan",
     addressRegion: "Punjab",
+    postalCode: "60060",
     addressCountry: "PK",
-    streetAddress: "Multan",
+    streetAddress: "Pracha Street, opposite Kalyar Garphics, near Chowk B.C.G., Gulzaib Colony Multan, 60600, Gulzaib Colony, Multan, 60060, Pakistan",
   },
   knowsAbout: [
     "React.js", "Next.js", "Node.js", "MongoDB", "MERN Stack",
@@ -41,7 +42,7 @@ const personSchema = {
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "Muhammad Imran — Web Developer Multan",
+  name: "Muhammad Imran - Web Developer Multan",
   description:
     "Freelance web developer in Multan, Pakistan specializing in React, Next.js, Node.js, and the MERN stack.",
   url: BASE_URL,
@@ -50,8 +51,9 @@ const localBusinessSchema = {
     "@type": "PostalAddress",
     addressLocality: "Multan",
     addressRegion: "Punjab",
+    postalCode: "60060",
     addressCountry: "PK",
-    streetAddress: "Multan, Punjab, Pakistan",
+    streetAddress: "Pracha Street, opposite Kalyar Garphics, near Chowk B.C.G., Gulzaib Colony Multan, 60600, Gulzaib Colony, Multan, 60060, Pakistan",
   },
   areaServed: ["Multan", "Lahore", "Islamabad", "Pakistan"],
   serviceType: [
@@ -167,13 +169,13 @@ export default function HomePage() {
   return (
     <>
       <SEOHead
-        title="Web Developer in Multan, Pakistan | Hire Muhammad Imran | React, Next.js & MERN Stack"
-        description="Hire a web developer in Multan, Pakistan. Muhammad Imran specializes in React, Next.js, Node.js & MERN Stack development. Build fast, scalable web applications. Available for freelance projects and remote work."
+        title="Web Developer in Multan - Muhammad Imran Portfolio App"
+        description="Hire Muhammad Imran, a expert web developer in Multan, Pakistan. Specializing in React, Next.js, and MERN stack development."
         path="/"
         jsonLd={[personSchema, localBusinessSchema, webSiteSchema]}
       />
 
-      {/* SECTION 1 — Hero */}
+      {/* SECTION 1 - Hero */}
       <section className="flex min-h-[80vh] flex-col justify-center py-10">
         <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 px-3 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-400">
           <MapPin size={13} style={{ color: ACCENT }} />
@@ -181,7 +183,7 @@ export default function HomePage() {
         </span>
 
         <h1 className="mt-5 text-balance text-4xl font-bold leading-tight tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-5xl">
-          Web Developer in Multan, Pakistan — Hire React, MERN & Next.js Expert
+          Web Developer in Multan, Pakistan - Hire React, MERN & Next.js Expert
         </h1>
 
         <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-lg">
@@ -208,7 +210,7 @@ export default function HomePage() {
         </ul>
       </section>
 
-      {/* SECTION 2 — Tech stack */}
+      {/* SECTION 2 - Tech stack */}
       <section className="border-t border-neutral-200 dark:border-neutral-800 py-12">
         <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
           Technologies I Work With as a Web Developer in Multan
@@ -226,10 +228,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 3 — What I build */}
+      {/* SECTION 3 - What I build */}
       <section className="border-t border-neutral-200 dark:border-neutral-800 py-12">
         <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
-          Web Development Services — React, MERN Stack &amp; Next.js in Multan
+          Web Development Services - React, MERN Stack &amp; Next.js in Multan
         </h2>
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
           {SERVICES.map((service) => (
@@ -260,7 +262,7 @@ export default function HomePage() {
         </Link>
       </section>
 
-      {/* SECTION 4 — Featured projects */}
+      {/* SECTION 4 - Featured projects */}
       <section className="border-t border-neutral-200 dark:border-neutral-800 py-12">
         <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
           Featured Web Development Projects by a Developer in Multan
@@ -315,11 +317,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 5 — About / credibility */}
+      {/* SECTION 5 - About / credibility */}
       <section className="grid grid-cols-1 gap-8 border-t border-neutral-200 dark:border-neutral-800 py-12 md:grid-cols-2 md:items-center">
         <div>
           <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
-            About Me — Web Developer in Multan
+            About Me - Web Developer in Multan
           </h2>
           <div className="mt-4 space-y-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
             <p>
@@ -357,7 +359,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 6 — Local SEO text */}
+      {/* SECTION 6 - Local SEO text */}
       <section className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 px-6 py-12 sm:px-10">
         <h2 className="text-balance text-center text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
           Professional Web Development Services in Multan, Pakistan
@@ -365,7 +367,7 @@ export default function HomePage() {
         <div className="mx-auto mt-6 max-w-3xl space-y-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
           <p>
             As a professional web developer in Multan, Pakistan, I offer complete web development
-            services Multan businesses can rely on — from custom websites to
+            services Multan businesses can rely on - from custom websites to
             full-stack web applications and MERN Stack solutions. Startups, local businesses, and
             individuals across Multan and beyond work with me to build fast, modern
             digital products. As a trusted React developer, web developer in Multan, and MERN stack specialist, I ensure
@@ -386,7 +388,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 7 — CTA banner */}
+      {/* SECTION 7 - CTA banner */}
       <section className="mt-12 overflow-hidden rounded-2xl bg-neutral-900 dark:bg-neutral-950 px-6 py-12 text-center sm:px-10">
         <div className="mx-auto flex max-w-2xl flex-col items-center">
           <span

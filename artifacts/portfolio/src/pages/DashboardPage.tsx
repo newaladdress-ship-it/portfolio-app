@@ -641,8 +641,8 @@ function WakaTimeSection() {
             {[
               { label: "Total Coding", value: data.data.human_readable_total },
               { label: "Daily Avg", value: data.data.human_readable_daily_average },
-              { label: "Best Day", value: data.data.best_day?.text ?? "—", sub: data.data.best_day?.date },
-              { label: "Today", value: today?.todayTotal ?? "—" },
+              { label: "Best Day", value: data.data.best_day?.text ?? "-", sub: data.data.best_day?.date },
+              { label: "Today", value: today?.todayTotal ?? "-" },
             ].map((s, i) => (
               <div key={i} className="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 p-3">
                 <p className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">{s.label}</p>
@@ -915,8 +915,8 @@ export default function DashboardPage() {
   return (
     <section className="space-y-8">
       <SEOHead
-        title="Live Dev Dashboard — GitHub & WakaTime Coding Stats"
-        description="Real-time developer dashboard with live GitHub activity, contribution graph, WakaTime coding hours, language & editor breakdown, plus analytics."
+        title="Live Developer Dashboard - Muhammad Imran Code Stats"
+        description="Real-time developer dashboard showing live GitHub activity, coding hours, language breakdown, and portfolio analytics for Muhammad Imran."
         path="/dashboard"
       />
       <div className="space-y-2">
@@ -951,7 +951,7 @@ export default function DashboardPage() {
       {/* WakaTime Coding Activity */}
       <WakaTimeSection />
 
-      {/* Tech Usage — live from WakaTime */}
+      {/* Tech Usage - live from WakaTime */}
       <WakaTimeLangSection />
 
       {/* Activity Chart */}

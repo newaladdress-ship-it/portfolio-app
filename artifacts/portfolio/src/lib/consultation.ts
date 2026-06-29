@@ -11,7 +11,7 @@ export const CONSULTATION_STEPS: string[] = [
   "Do you have any reference websites or apps you like?\n(or type 'no')",
   "What is your expected timeline for completion?",
   "Do you have content ready (text, images, logos), or should Muhammad Imran handle that too?",
-  "Do you have a budget range in mind?\n(optional — type 'skip' if you prefer not to share)",
+  "Do you have a budget range in mind?\n(optional - type 'skip' if you prefer not to share)",
 ];
 
 export const STEP_LABELS: string[] = [
@@ -62,7 +62,7 @@ export function buildIntroMessage(): string {
   return (
     `Great! I'd love to help you define your project requirements.\n\n` +
     `Muhammad Imran will review your brief personally. ` +
-    `I'll ask you ${TOTAL_STEPS} quick questions — one at a time.\n\n` +
+    `I'll ask you ${TOTAL_STEPS} quick questions - one at a time.\n\n` +
     `Question 1 of ${TOTAL_STEPS}:\n${CONSULTATION_STEPS[0]}`
   );
 }

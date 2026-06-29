@@ -13,7 +13,7 @@ export const PROJECT_DETAILS: Record<number, ProjectDetail> = {
     role: "Full Stack Developer",
     duration: "4 weeks",
     longDescription:
-      "This professional dental clinic website was built to help a local dental practice establish a strong online presence. The platform allows patients to learn about services, read about the dental team, and book appointments online without calling the clinic. The backend handles appointment scheduling with email notifications, while the admin panel lets clinic staff manage bookings and patient inquiries. The design follows medical industry standards — clean, trustworthy, and accessible.",
+      "This professional dental clinic website was built to help a local dental practice establish a strong online presence. The platform allows patients to learn about services, read about the dental team, and book appointments online without calling the clinic. The backend handles appointment scheduling with email notifications, while the admin panel lets clinic staff manage bookings and patient inquiries. The design follows medical industry standards - clean, trustworthy, and accessible.",
     features: [
       "Online appointment booking system with email confirmations",
       "Service showcase with detailed treatment descriptions",
@@ -98,7 +98,7 @@ export const PROJECT_DETAILS: Record<number, ProjectDetail> = {
     role: "Frontend Developer",
     duration: "2 weeks",
     longDescription:
-      "This product landing page was designed and built to maximize conversions for a digital product. Every section — from the hero to the pricing table — was crafted with conversion rate optimization principles in mind. The page features smooth scroll-triggered animations using GSAP and Framer Motion, a clear value proposition section, social proof, and a strong call-to-action. It was built with React and Tailwind CSS for rapid development and pixel-perfect responsive design.",
+      "This product landing page was designed and built to maximize conversions for a digital product. Every section - from the hero to the pricing table - was crafted with conversion rate optimization principles in mind. The page features smooth scroll-triggered animations using GSAP and Framer Motion, a clear value proposition section, social proof, and a strong call-to-action. It was built with React and Tailwind CSS for rapid development and pixel-perfect responsive design.",
     features: [
       "Hero section with animated headline and CTA buttons",
       "Scroll-triggered GSAP animations for engaging experience",
@@ -183,7 +183,7 @@ export const PROJECT_DETAILS: Record<number, ProjectDetail> = {
     role: "Full Stack Developer",
     duration: "4 weeks",
     longDescription:
-      "This personal portfolio website is a fully responsive, high-performance web application built to showcase Muhammad Imran's skills, projects, achievements, and professional experience. The site features a dark/light theme toggle, multi-language support (English, French, Japanese), a real-time chat room, an AI-powered SmartTalk assistant, a GitHub dashboard with live stats, a certificate viewer, and a feedback/review system. Every section is carefully crafted for performance, accessibility, and user experience — reflecting both technical depth and attention to design detail.",
+      "This personal portfolio website is a fully responsive, high-performance web application built to showcase Muhammad Imran's skills, projects, achievements, and professional experience. The site features a dark/light theme toggle, multi-language support (English, French, Japanese), a real-time chat room, an AI-powered SmartTalk assistant, a GitHub dashboard with live stats, a certificate viewer, and a feedback/review system. Every section is carefully crafted for performance, accessibility, and user experience - reflecting both technical depth and attention to design detail.",
     features: [
       "Multi-language support with instant switching (English, French, Japanese)",
       "Dark and light theme toggle with persistent preference",
@@ -197,20 +197,20 @@ export const PROJECT_DETAILS: Record<number, ProjectDetail> = {
       "WhatsApp floating contact button for instant communication",
     ],
     challenges:
-      "Integrating multiple real-time features — live chat, GitHub stats, and AI responses — while keeping the site fast and the codebase maintainable required careful separation of concerns, lazy loading, and thoughtful state management across the entire application.",
+      "Integrating multiple real-time features - live chat, GitHub stats, and AI responses - while keeping the site fast and the codebase maintainable required careful separation of concerns, lazy loading, and thoughtful state management across the entire application.",
   },
   11: {
     id: 11,
     role: "Full Stack Developer",
     duration: "3 weeks",
     longDescription:
-      "GeoTags Editor is a powerful, fully client-side GPS photo editing tool that lets users remove geotags, add precise GPS coordinates, and inspect complete EXIF metadata — all for free, with no login required. The tool processes JPEG images directly in the browser, meaning no photos are ever uploaded to a server, ensuring complete user privacy. An interactive OpenStreetMap integration allows users to simply click a location on the map to set latitude and longitude, making the workflow intuitive for non-technical users. Since launch, the platform has processed over 10 million photos and attracted more than 1 million users across 195+ countries.",
+      "GeoTags Editor is a powerful, fully client-side GPS photo editing tool that lets users remove geotags, add precise GPS coordinates, and inspect complete EXIF metadata - all for free, with no login required. The tool processes JPEG images directly in the browser, meaning no photos are ever uploaded to a server, ensuring complete user privacy. An interactive OpenStreetMap integration allows users to simply click a location on the map to set latitude and longitude, making the workflow intuitive for non-technical users. Since launch, the platform has processed over 10 million photos and attracted more than 1 million users across 195+ countries.",
     features: [
-      "Remove GPS geotag from photos with a single click — no account needed",
+      "Remove GPS geotag from photos with a single click - no account needed",
       "Add precise GPS coordinates manually or by clicking on an interactive map",
       "Full EXIF metadata viewer showing camera info, date, and location data",
-      "Batch processing — edit up to 3 photos simultaneously",
-      "100% client-side processing — photos never leave the user's device",
+      "Batch processing - edit up to 3 photos simultaneously",
+      "100% client-side processing - photos never leave the user's device",
       "Mobile-friendly design that works on Android, iPhone, and desktop",
     ],
     challenges:

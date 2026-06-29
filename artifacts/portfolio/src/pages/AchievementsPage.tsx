@@ -415,8 +415,8 @@ export default function AchievementsPage() {
   return (
     <section className="space-y-6">
       <SEOHead
-        title="Achievements & Certifications — Muhammad Imran, Developer"
-        description="Professional certifications & academic achievements of Muhammad Imran from DigiSkills, freeCodeCamp, Hunarmand Punjab & Emerson University."
+        title="Achievements and Certifications - Muhammad Imran Dev"
+        description="Professional certifications and achievements of Muhammad Imran from DigiSkills, freeCodeCamp, Hunarmand Punjab, and Emerson University."
         path="/achievements"
       />
       <div className="space-y-2">

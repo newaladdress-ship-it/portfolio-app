@@ -60,7 +60,7 @@ export default function ServicesIndexPage() {
         </h2>
         <p className="mt-1.5 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
           Send a short message describing what you are trying to build or fix. I will
-          reply within one business day with the right starting point — even if it is
+          reply within one business day with the right starting point - even if it is
           not one of the services listed above.
         </p>
         <div className="mt-3">

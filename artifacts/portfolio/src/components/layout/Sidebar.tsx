@@ -87,7 +87,7 @@ function LanguageSwitcher() {
   return (
     <button
       onClick={cycleLocale}
-      title={`Language: ${LOCALE_LABELS[locale]} — click to switch`}
+      title={`Language: ${LOCALE_LABELS[locale]} - click to switch`}
       aria-label="Switch language"
       className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all duration-300 border border-neutral-200 dark:border-neutral-700 min-w-[38px] justify-center"
     >

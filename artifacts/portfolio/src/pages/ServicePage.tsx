@@ -247,7 +247,7 @@ export default function ServicePage() {
         </div>
       </SpotlightCard>
 
-      {/* Related services — internal linking */}
+      {/* Related services - internal linking */}
       <div className="space-y-3">
         <SectionHeading title="Related services" icon={<HiOutlineSquares2X2 />} />
         <div className="grid sm:grid-cols-3 gap-3">

@@ -18,8 +18,8 @@ export default function LocationsIndexPage() {
   return (
     <section className="space-y-8">
       <SEOHead
-        title="Web Developer in Pakistan — Local Services in 10+ Cities | Muhammad Imran"
-        description="Hire Muhammad Imran as your web developer in Multan, Lahore, Islamabad, Karachi, Peshawar, and other cities across Pakistan. Local expertise, remote collaboration, in-person meetings available."
+        title="Web Developer in Pakistan - Local Services in 10 Cities"
+        description="Hire Muhammad Imran as your web developer across Multan, Lahore, Islamabad, Karachi, and other cities in Pakistan. Local support."
         path="/locations"
       />
 
@@ -39,7 +39,7 @@ export default function LocationsIndexPage() {
       <header className="space-y-3">
         <SectionHeading title="Service Locations" icon={<FaMapPin />} />
         <h1 className="text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">
-          Web Developer in Pakistan — Local Services in 10+ Cities
+          Web Developer in Pakistan - Local Services in 10+ Cities
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
           I serve businesses and organizations across Pakistan. Whether you are in Multan, Lahore, Islamabad, Karachi, or any major Pakistani city, I provide professional web development services. Choose your city for local expertise and personalized service.

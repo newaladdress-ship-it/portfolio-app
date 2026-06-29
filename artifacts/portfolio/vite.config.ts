@@ -432,7 +432,7 @@ ${ADMIN_WEBSITE}
 Email: ${ADMIN_EMAIL}
 ${originalMessage ? `\n---\nOriginal Message:\n${originalMessage}` : ""}`;
               
-              const emailSubject = `Re: Your inquiry — Reply from ${ADMIN_NAME}`;
+              const emailSubject = `Re: Your inquiry - Reply from ${ADMIN_NAME}`;
               
               console.log("[v0] DEBUG: Sending email via Resend");
               await sendEmailViaGmail(userEmail, emailSubject, emailBody);

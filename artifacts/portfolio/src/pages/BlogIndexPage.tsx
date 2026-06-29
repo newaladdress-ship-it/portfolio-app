@@ -13,8 +13,8 @@ export default function BlogIndexPage() {
   return (
     <section className="space-y-8">
       <SEOHead
-        title="Web Development Blog | React, Node.js, Next.js Tips & Guides"
-        description="Read expert web development tips, React tutorials, Node.js guides, and full-stack development articles by Muhammad Imran."
+        title="Web Development Blog - React and Node.js Coding Tips"
+        description="Read expert web development tutorials, React tips, Node.js guides, and full-stack development articles by Muhammad Imran."
         path="/blog"
       />
 

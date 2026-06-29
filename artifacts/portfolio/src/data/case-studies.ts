@@ -248,7 +248,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       }
     ],
     testimonial: {
-      quote: "Muhammad's team didn't just build a dashboard—they built the infrastructure for our scaling phase. The 99.98% uptime and real-time updates have been game-changers. Our customers love the reliability.",
+      quote: "Muhammad's team didn't just build a dashboard-they built the infrastructure for our scaling phase. The 99.98% uptime and real-time updates have been game-changers. Our customers love the reliability.",
       author: "Amir Patel",
       title: "Founder & CEO, DataFlow Analytics"
     },
