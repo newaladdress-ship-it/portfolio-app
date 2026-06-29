@@ -254,8 +254,8 @@ export default function ProjectsPage() {
   return (
     <section className="space-y-6">
       <SEOHead
-        title="Projects Portfolio — Muhammad Imran | React & MERN Apps"
-        description="Explore Muhammad Imran's project portfolio — modern web apps & full-stack builds using React, Next.js, Node.js, MongoDB, PostgreSQL & Tailwind."
+        title="Web Developer Portfolio — Muhammad Imran | React, MERN & Next.js Projects in Multan"
+        description="View portfolio projects by Muhammad Imran, a web developer in Multan, Pakistan. Modern web applications built with React, Next.js, Node.js, MERN Stack, MongoDB & Tailwind CSS."
         path="/projects"
       />
       <div className="space-y-2">

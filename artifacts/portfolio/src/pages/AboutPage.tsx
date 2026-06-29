@@ -250,8 +250,8 @@ export default function AboutPage() {
   return (
     <>
       <SEOHead
-        title="About Muhammad Imran — Full-Stack Web Developer Bio"
-        description="Background, skills & tech stack of Muhammad Imran — full-stack developer from Pakistan working with React, Next.js, Node.js, TypeScript & MongoDB."
+        title="About Muhammad Imran — Web Developer in Multan, Pakistan | React, MERN Stack Expert"
+        description="Learn about Muhammad Imran — a professional web developer in Multan, Pakistan. Expert in React, Next.js, Node.js, MERN Stack, and full-stack development. Bio, skills, tech stack, and experience."
         path="/about"
       />
       <Story />

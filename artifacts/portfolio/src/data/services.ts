@@ -508,15 +508,501 @@ export const SERVICES: Service[] = [
     ctaBody:
       "Share your URL and I will send back a short loom-style video walkthrough of the top 3 SEO problems and how to fix them — completely free.",
   },
+  {
+    slug: "react-development",
+    keyword: "React developer, React development services, hire React developer",
+    metaTitle: "React Development Services — Hire Expert React Developer in Multan, Pakistan",
+    metaDescription:
+      "Professional React development services by Muhammad Imran. Expert React developer in Multan, Pakistan building high-performance React applications, components, and interactive UIs for startups and enterprises.",
+    h1: "Expert React Development Services — Hire a React Developer",
+    intro:
+      "I build fast, interactive React applications for founders and product teams. From component architecture to state management and performance optimization, I deliver React development that scales. Whether you need a new React project or want to accelerate your existing codebase, I bring senior React expertise and a focus on clean, maintainable code.",
+    highlights: [
+      { label: "Expertise", value: "React 18+ · Hooks · Context · SWR" },
+      { label: "Speciality", value: "High-performance SPAs · Component libraries" },
+      { label: "Delivery", value: "2 – 8 weeks typical" },
+      { label: "Location", value: "Remote-first, based in Multan, Pakistan" },
+    ],
+    what: {
+      heading: "What this React development service includes",
+      body:
+        "I build React applications the right way — starting with component architecture, state management patterns, and performance budgets. Every React project I deliver is production-ready, well-documented, and easy for your team to extend.",
+      bullets: [
+        "Custom React application development from scratch or integration with existing systems",
+        "React component design and reusable component libraries for your team",
+        "State management with Redux, Zustand, or Context API for complex applications",
+        "Performance optimization — code splitting, memoization, bundle size audits",
+        "React hooks best practices and modern functional component patterns",
+        "Testing with Vitest, Jest, and React Testing Library for confident deployments",
+        "TypeScript integration for type-safe React components and better DX",
+        "SEO optimization for React apps with Next.js or static prerendering",
+      ],
+    },
+    process: {
+      heading: "React development workflow",
+      body:
+        "Clear communication and iterative delivery ensure your React project ships on schedule with code you love to maintain.",
+      bullets: [
+        "Requirements gathering — understand your React component needs and user flows",
+        "Architecture design — component hierarchy, state management, and API integration patterns",
+        "Development sprints — weekly builds with staging deployments for testing",
+        "Code review & optimization — performance tuning and best practices implementation",
+        "Handover & training — documentation so your team can confidently maintain the React codebase",
+      ],
+    },
+    stack: {
+      label: "React technologies I specialize in",
+      items: ["React 18+", "TypeScript", "Vite", "Next.js", "Redux", "Zustand", "React Query", "Tailwind CSS", "Jest", "Vitest", "React Testing Library", "Framer Motion"],
+    },
+    benefits: {
+      heading: "Why hire me as your React developer",
+      body:
+        "React development is more than writing components. It is about building systems that perform, scale, and remain maintainable over time.",
+      bullets: [
+        "Senior React expertise — 5+ years shipping production React applications",
+        "Performance-first approach — every React app targets 90+ Lighthouse scores",
+        "Clean, typed code — TypeScript and testing standards from day one",
+        "Mentorship included — your team learns React best practices working alongside me",
+        "Long-term support — optional retainer for bug fixes, enhancements, and guidance",
+      ],
+    },
+    faqs: [
+      {
+        q: "Do you work with existing React codebases?",
+        a: "Yes — I regularly refactor, optimize, and extend existing React applications. I start with a paid audit to understand the codebase and propose improvements.",
+      },
+      {
+        q: "What React projects do you take on?",
+        a: "From small component libraries to large single-page applications (SPAs). I work with startups on MVPs and enterprises on complex dashboard applications.",
+      },
+      {
+        q: "Do you provide React consulting?",
+        a: "Yes — I offer hourly React consulting, architecture reviews, and team mentoring. Book a call to discuss your React development needs.",
+      },
+      {
+        q: "How do you ensure React performance?",
+        a: "Through code splitting, lazy loading, memoization, bundle analysis, and Core Web Vitals monitoring. Every React project ships with a performance budget and Lighthouse scores tracked.",
+      },
+    ],
+    related: ["next-js-development", "javascript-development", "web-application-development"],
+    ctaHeading: "Start your React development project",
+    ctaBody:
+      "Describe your React needs — whether it is a new SPA, component library, or refactor of an existing codebase. I will provide a detailed quote and timeline.",
+  },
+  {
+    slug: "next-js-development",
+    keyword: "Next.js developer, Next.js development services, hire Next.js developer",
+    metaTitle: "Next.js Development Services — Hire Expert Next.js Developer in Pakistan",
+    metaDescription:
+      "Professional Next.js development by Muhammad Imran. Expert Next.js developer in Multan, Pakistan building fast, SEO-friendly Next.js applications with server-side rendering, static generation, and API routes.",
+    h1: "Next.js Development Services — Build Fast, SEO-Friendly Web Apps",
+    intro:
+      "I build next-generation web applications with Next.js. From server-side rendering (SSR) and static site generation (SSG) to API routes and middleware, I leverage Next.js to deliver web apps that are fast, scalable, and SEO-optimized out of the box.",
+    highlights: [
+      { label: "Framework", value: "Next.js 14+ · App Router · Vercel" },
+      { label: "Speciality", value: "SEO optimization · SSR/SSG · Performance" },
+      { label: "Delivery", value: "2 – 10 weeks typical" },
+      { label: "Location", value: "Remote-first, based in Multan, Pakistan" },
+    ],
+    what: {
+      heading: "What you get from Next.js development",
+      body:
+        "Next.js projects I deliver are production-ready, SEO-optimized, and built for performance. You get full-stack development with React frontend, Node.js API routes, and seamless database integration — all in one framework.",
+      bullets: [
+        "Next.js full-stack application development with server and client components",
+        "Static site generation (SSG) and incremental static regeneration (ISR) for performance",
+        "Server-side rendering (SSR) for dynamic, SEO-friendly content",
+        "API routes and middleware for backend logic without a separate server",
+        "Database integration with Prisma, Drizzle ORM, or raw SQL",
+        "Authentication and authorization with NextAuth.js, Clerk, or Auth0",
+        "Image optimization with Next.js Image component for fast loading",
+        "Deployment on Vercel with zero-config builds and automatic previews",
+      ],
+    },
+    process: {
+      heading: "Next.js development process",
+      body:
+        "Every Next.js project follows a structured path from discovery through launch, ensuring clarity at every milestone.",
+      bullets: [
+        "Discovery call — understand your business goals and Next.js requirements",
+        "Architecture & design — plan rendering strategy (SSG, SSR, hybrid), API structure, and data flow",
+        "Development with weekly demos — build features incrementally and get feedback fast",
+        "Performance audit — optimize images, bundle size, and Core Web Vitals before launch",
+        "Deployment & monitoring — launch to production with analytics and error tracking setup",
+      ],
+    },
+    stack: {
+      label: "Next.js technologies I use",
+      items: ["Next.js 14+", "React 18", "TypeScript", "Prisma", "Drizzle ORM", "PostgreSQL", "MongoDB", "Tailwind CSS", "Vercel", "NextAuth.js", "Clerk", "SWR"],
+    },
+    benefits: {
+      heading: "Why choose me for Next.js development",
+      body:
+        "Next.js is powerful, but getting it right requires experience. I handle the full Next.js stack so you can focus on your business.",
+      bullets: [
+        "SEO-first by default — every Next.js app ships with proper meta tags, structured data, and sitemap",
+        "Performance optimized — images lazy-loaded, code split by route, and assets cached",
+        "Full-stack expertise — frontend UI to backend API to database, all in Next.js",
+        "Vercel-native deployment — instant previews, automatic deploys, and built-in monitoring",
+        "Future-proof code — modern Next.js patterns (server components, hooks) that scale",
+      ],
+    },
+    faqs: [
+      {
+        q: "Should I use Next.js or just React?",
+        a: "Next.js is best for SEO-critical apps, content sites, and projects needing server-side logic. Use React for internal dashboards or tools where SEO does not matter.",
+      },
+      {
+        q: "Can you migrate from React to Next.js?",
+        a: "Yes — many of my projects start as React SPAs that I gradually migrate to Next.js to improve performance and SEO. This can happen incrementally without downtime.",
+      },
+      {
+        q: "What is server-side rendering (SSR) vs static generation (SSG)?",
+        a: "SSG is fast and cheap — pages are pre-built at deploy time. SSR is flexible — pages render per request. I help you choose the right mix for each route.",
+      },
+      {
+        q: "How much does Next.js deployment cost?",
+        a: "Vercel's free tier covers most projects. Paid plans start at $20/month. Next.js can also run on AWS, DigitalOcean, or self-hosted servers at lower cost.",
+      },
+    ],
+    related: ["react-development", "javascript-development", "web-application-development"],
+    ctaHeading: "Launch your Next.js application",
+    ctaBody:
+      "Share your idea or project requirements. Whether you need a new Next.js build or help scaling an existing app, let us discuss the right approach.",
+  },
+  {
+    slug: "nodejs-backend-development",
+    keyword: "Node.js developer, Node.js backend development, hire Node.js developer",
+    metaTitle: "Node.js Backend Development — Hire Expert Node.js Developer in Pakistan",
+    metaDescription:
+      "Professional Node.js backend development by Muhammad Imran. Expert Node.js developer in Multan building scalable APIs, real-time servers, and microservices with Express, TypeScript, and PostgreSQL.",
+    h1: "Node.js Backend Development — Build Scalable Server Applications",
+    intro:
+      "I build robust Node.js backends that power modern web applications. From RESTful APIs to real-time servers to microservices, I deliver Node.js solutions that are fast, secure, and built to scale. Every project includes authentication, error handling, logging, and monitoring from day one.",
+    highlights: [
+      { label: "Runtime", value: "Node.js 18+ · Express · TypeScript" },
+      { label: "Speciality", value: "REST APIs · Real-time · Microservices" },
+      { label: "Databases", value: "PostgreSQL · MongoDB · Redis" },
+      { label: "Location", value: "Remote-first, based in Multan, Pakistan" },
+    ],
+    what: {
+      heading: "What Node.js backend services I provide",
+      body:
+        "I build production-grade Node.js backends that handle real-world complexity — authentication, rate limiting, error handling, logging, and monitoring are built in, not added as afterthoughts.",
+      bullets: [
+        "RESTful API design with Express, Fastify, or Koa following OpenAPI standards",
+        "GraphQL API development with Apollo Server or similar for flexible data fetching",
+        "Database design and ORM integration with Prisma, Drizzle, or Sequelize",
+        "Authentication and authorization with JWT, OAuth2, or session-based strategies",
+        "Real-time features with WebSockets, Server-Sent Events, or Socket.io",
+        "Job queues and background tasks with Bull, RabbitMQ, or similar",
+        "File uploads and cloud storage integration (AWS S3, Cloudinary)",
+        "Payment processing integration (Stripe, PayPal APIs) with webhook handling",
+      ],
+    },
+    process: {
+      heading: "Node.js backend development workflow",
+      body:
+        "Clear API contracts and iterative development keep your Node.js backend project on track and well-tested.",
+      bullets: [
+        "API design & documentation — define endpoints, data schemas, and error responses upfront",
+        "Database modeling — normalize schema, plan indices, and optimize queries",
+        "Backend implementation — build endpoints with proper validation, error handling, and logging",
+        "Testing & security — unit tests, integration tests, and security best practices",
+        "Deployment & monitoring — setup monitoring, error tracking, and performance alerts",
+      ],
+    },
+    stack: {
+      label: "Node.js & backend technologies I use",
+      items: ["Node.js", "Express", "TypeScript", "Prisma", "Drizzle ORM", "PostgreSQL", "MongoDB", "Redis", "GraphQL", "JWT", "Docker", "AWS", "Vercel"],
+    },
+    benefits: {
+      heading: "Why hire me for Node.js backend development",
+      body:
+        "Node.js backends I build are not just functional — they are maintainable, testable, and ready to scale with your business.",
+      bullets: [
+        "Full-stack understanding — I know both frontend and backend, so APIs integrate smoothly",
+        "Production-ready from day one — error handling, logging, monitoring, and security included",
+        "TypeScript expertise — type-safe Node.js code that catches bugs before production",
+        "Optimized queries — database design and query optimization for performance",
+        "Scalability planned — architecture that grows from MVP to enterprise without rewrites",
+      ],
+    },
+    faqs: [
+      {
+        q: "Do you work with existing Node.js codebases?",
+        a: "Yes — I audit, refactor, and optimize existing Node.js backends. Common work includes performance tuning, security hardening, and adding new features.",
+      },
+      {
+        q: "REST API or GraphQL — which should I use?",
+        a: "REST is simpler and proven. GraphQL is more flexible for mobile and complex data needs. I help you choose based on your use case and team skill.",
+      },
+      {
+        q: "How do you handle authentication?",
+        a: "I implement JWT tokens, OAuth2 flows, or session-based auth depending on your needs. All approaches include rate limiting, refresh token rotation, and secure password handling.",
+      },
+      {
+        q: "What databases do you recommend?",
+        a: "PostgreSQL for relational data, MongoDB for flexible schemas, and Redis for caching/sessions. I choose based on your data model and query patterns.",
+      },
+    ],
+    related: ["web-application-development", "javascript-development", "database-design"],
+    ctaHeading: "Build your Node.js backend",
+    ctaBody:
+      "Share your API requirements or backend architecture needs. I will provide a detailed plan, timeline, and estimate for your Node.js project.",
+  },
+  {
+    slug: "database-design",
+    keyword: "database design, database architecture, data modeling",
+    metaTitle: "Database Design & Architecture Services — Expert Data Modeling in Pakistan",
+    metaDescription:
+      "Professional database design and data modeling by Muhammad Imran. Expert database architect in Multan designing PostgreSQL, MongoDB, and scalable database schemas for high-performance applications.",
+    h1: "Database Design & Architecture Services",
+    intro:
+      "A well-designed database is the foundation of a fast, scalable application. I design databases that perform, scale, and remain maintainable as your business grows. From schema design to query optimization to migration planning, I bring database architecture expertise to every project.",
+    highlights: [
+      { label: "Databases", value: "PostgreSQL · MongoDB · Redis" },
+      { label: "Speciality", value: "Schema design · Query optimization · Scaling" },
+      { label: "Format", value: "Consultation · Design · Implementation" },
+      { label: "Location", value: "Remote-first, based in Multan, Pakistan" },
+    ],
+    what: {
+      heading: "Database design services I provide",
+      body:
+        "I design databases that start lean and scale without restructuring. Proper normalization, indexing strategy, and query patterns avoid the costly rewrites that plague growing applications.",
+      bullets: [
+        "Entity-relationship (ER) modeling and schema normalization for PostgreSQL and MySQL",
+        "NoSQL schema design for MongoDB with document structure optimization",
+        "Index strategy and query optimization for fast, efficient data retrieval",
+        "Scaling patterns — sharding, replication, read replicas for high-traffic applications",
+        "Data migration planning for moving between databases or restructuring existing schemas",
+        "Backup and disaster recovery strategy to protect critical data",
+        "Performance monitoring and query analysis to identify bottlenecks",
+        "ORM selection and implementation (Prisma, Drizzle, Sequelize) tailored to your schema",
+      ],
+    },
+    process: {
+      heading: "Database design process",
+      body:
+        "Database architecture decisions early prevent expensive refactoring later. My process is thorough and collaborative.",
+      bullets: [
+        "Requirements gathering — understand data types, access patterns, and growth projections",
+        "Schema design — create normalized, efficient schema with proper relationships",
+        "Query optimization — plan indices and query patterns for performance",
+        "Scaling strategy — design for growth without denormalization or rewrites",
+        "Implementation & monitoring — build schema, setup monitoring, and optimize as needed",
+      ],
+    },
+    stack: {
+      label: "Database technologies I specialize in",
+      items: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Drizzle ORM", "Prisma", "SQL optimization", "Index strategy", "Replication", "Backup/Recovery"],
+    },
+    benefits: {
+      heading: "Why invest in proper database design",
+      body:
+        "Good database architecture is invisible to users but critical for performance. Invest early to avoid costly rewrites later.",
+      bullets: [
+        "Performance by design — proper schema and indices mean faster queries from day one",
+        "Scalability — architecture that handles growth without restructuring",
+        "Maintainability — clear, normalized schemas that your team understands",
+        "Cost efficiency — optimized queries mean lower cloud infrastructure bills",
+        "Data integrity — proper relationships and constraints prevent data corruption",
+      ],
+    },
+    faqs: [
+      {
+        q: "PostgreSQL or MongoDB — which should I use?",
+        a: "PostgreSQL for structured data, complex queries, and ACID requirements. MongoDB for flexible schemas, rapid prototyping, and document-based data.",
+      },
+      {
+        q: "How do I know if my database is optimized?",
+        a: "Slow queries, high CPU usage, and growing storage are warning signs. I provide an audit with specific recommendations for improvement.",
+      },
+      {
+        q: "What is database normalization?",
+        a: "Normalization removes data redundancy and improves query efficiency. I design schemas that balance normalization with query performance.",
+      },
+      {
+        q: "How much should I scale my database?",
+        a: "I analyze your traffic projections, data growth, and access patterns to recommend the right infrastructure — never over-provisioned.",
+      },
+    ],
+    related: ["nodejs-backend-development", "web-application-development", "web-consulting"],
+    ctaHeading: "Design your database properly",
+    ctaBody:
+      "Share your data requirements or existing schema. I will review, suggest improvements, and provide a design that scales with your business.",
+  },
+  {
+    slug: "full-stack-development",
+    keyword: "full-stack developer, full-stack development services, hire full-stack developer",
+    metaTitle: "Full-Stack Development Services — Hire Expert Full-Stack Developer in Pakistan",
+    metaDescription:
+      "Professional full-stack web development by Muhammad Imran. Expert full-stack developer in Multan, Pakistan building complete web applications with React, Node.js, PostgreSQL, and modern web technologies.",
+    h1: "Full-Stack Development Services — From Frontend to Backend & Database",
+    intro:
+      "I build complete web applications from the ground up. Full-stack projects I deliver include responsive user interfaces, robust backend APIs, optimized databases, and production deployment. You get one engineer who owns the entire stack, eliminating handoff delays and ensuring everything works together seamlessly.",
+    highlights: [
+      { label: "Stack", value: "React · Next.js · Node.js · PostgreSQL" },
+      { label: "Scope", value: "Complete applications, start to finish" },
+      { label: "Delivery", value: "4 – 12 weeks depending on complexity" },
+      { label: "Location", value: "Remote-first, based in Multan, Pakistan" },
+    ],
+    what: {
+      heading: "What full-stack development covers",
+      body:
+        "I build entire applications — user interface, backend logic, database, and deployment. Every component is production-ready, secure, and optimized. You get one accountable engineer for the whole project, not multiple handoffs between specialists.",
+      bullets: [
+        "Frontend development with React or Next.js for responsive, interactive user interfaces",
+        "Backend API development with Node.js and Express for reliable, scalable business logic",
+        "Database design and optimization with PostgreSQL or MongoDB",
+        "Authentication and authorization for secure user management",
+        "Payment integration (Stripe), email services, and third-party APIs",
+        "Deployment on Vercel, AWS, or self-hosted infrastructure",
+        "Performance optimization across frontend, backend, and database",
+        "Monitoring and logging to track application health and user behavior",
+      ],
+    },
+    process: {
+      heading: "Full-stack development workflow",
+      body:
+        "Clear milestones and regular communication keep your full-stack project on track from kickoff to launch.",
+      bullets: [
+        "Discovery & planning — understand your goals, users, and constraints",
+        "Architecture & design — plan frontend, backend, database, and API contracts",
+        "Sprint-based development — build features incrementally with weekly demos",
+        "Integration & testing — ensure all components work together correctly",
+        "Launch & monitoring — deploy to production and setup monitoring for reliability",
+      ],
+    },
+    stack: {
+      label: "Full-stack technologies I work with",
+      items: ["React", "Next.js", "Node.js", "Express", "TypeScript", "PostgreSQL", "MongoDB", "Prisma", "Tailwind CSS", "Vercel", "AWS", "Docker"],
+    },
+    benefits: {
+      heading: "Why choose a full-stack developer",
+      body:
+        "Full-stack development by one engineer means fewer handoffs, clearer communication, and applications that actually work together.",
+      bullets: [
+        "No miscommunication between frontend and backend teams — one engineer owns the whole system",
+        "Faster development — no waiting for other teams, decisions made quickly",
+        "Better UX/DX integration — API design matches what the frontend needs, not the other way around",
+        "End-to-end accountability — bugs are fixed by whoever built the system",
+        "Lower cost — pay one senior engineer instead of multiple specialists",
+      ],
+    },
+    faqs: [
+      {
+        q: "How is full-stack different from hiring a frontend and backend engineer?",
+        a: "One engineer eliminates handoffs and communication delays. I own the entire project, from API design to UI polish to database optimization. This speeds up development and reduces mistakes from miscommunication.",
+      },
+      {
+        q: "Can I start full-stack and add more developers later?",
+        a: "Yes — I build codebases that are clean, well-documented, and easy for others to extend. You can add team members as the project grows.",
+      },
+      {
+        q: "What if my project needs specialists?",
+        a: "For complex projects (large teams, DevOps, mobile), I assemble a small trusted team and lead delivery personally. Most projects stay with one engineer.",
+      },
+      {
+        q: "Do you provide full-stack support after launch?",
+        a: "Yes — optional retainer for bug fixes, feature additions, and scaling guidance. Many clients keep me on part-time after launch.",
+      },
+    ],
+    related: ["web-application-development", "react-development", "nodejs-backend-development"],
+    ctaHeading: "Start your full-stack project",
+    ctaBody:
+      "Share your idea or business needs. Whether you need an MVP or a full-featured application, I will scope it out and provide a clear timeline and investment.",
+  },
+  {
+    slug: "javascript-development",
+    keyword: "JavaScript developer, JavaScript development services, hire JavaScript developer",
+    metaTitle: "JavaScript Development Services — Expert JavaScript Developer in Multan, Pakistan",
+    metaDescription:
+      "Professional JavaScript development by Muhammad Imran. Expert JavaScript developer in Multan building high-performance applications with modern JavaScript (ES6+), Node.js, and JavaScript frameworks.",
+    h1: "JavaScript Development Services — Modern JavaScript Expert",
+    intro:
+      "I build applications with modern JavaScript. Whether it is frontend development with React, backend services with Node.js, or full-stack applications, JavaScript is at the core. I bring expertise in ES6+, TypeScript, async patterns, and JavaScript best practices to every project.",
+    highlights: [
+      { label: "Version", value: "ES6+ · JavaScript (modern) · TypeScript" },
+      { label: "Speciality", value: "Frontend · Backend · Full-stack" },
+      { label: "Deployment", value: "Vercel · AWS · Self-hosted" },
+      { label: "Location", value: "Remote-first, based in Multan, Pakistan" },
+    ],
+    what: {
+      heading: "JavaScript development services I offer",
+      body:
+        "Modern JavaScript powers applications across web, mobile, and backend. I bring mastery of JavaScript fundamentals, frameworks, and tooling to deliver clean, efficient applications.",
+      bullets: [
+        "Frontend JavaScript with React, Vue, or vanilla JavaScript for interactive user interfaces",
+        "Backend JavaScript with Node.js for server-side logic and APIs",
+        "Async JavaScript patterns — promises, async/await, event handling, streams",
+        "TypeScript integration for type-safe JavaScript across frontend and backend",
+        "JavaScript testing with Jest, Vitest, and Mocha for reliable, tested code",
+        "Module bundling and optimization with Vite, Webpack, and esbuild",
+        "ES6+ features — arrow functions, destructuring, spread operators, classes, modules",
+        "Package management with npm, yarn, or pnpm and dependency optimization",
+      ],
+    },
+    process: {
+      heading: "JavaScript development approach",
+      body:
+        "Clean, maintainable JavaScript is built on solid fundamentals and clear communication. Every project follows the same proven workflow.",
+      bullets: [
+        "Requirement analysis — understand JavaScript needs and project scope",
+        "Architecture & design — plan JavaScript structure, tooling, and dependencies",
+        "Development with testing — write tested, clean JavaScript code incrementally",
+        "Code review & optimization — performance tuning and JavaScript best practices",
+        "Deployment & monitoring — launch JavaScript application and setup monitoring",
+      ],
+    },
+    stack: {
+      label: "JavaScript technologies and tools",
+      items: ["JavaScript (ES6+)", "TypeScript", "Node.js", "React", "Next.js", "Vite", "Webpack", "Jest", "Vitest", "npm", "yarn", "Express"],
+    },
+    benefits: {
+      heading: "Why hire me for JavaScript development",
+      body:
+        "JavaScript expertise goes beyond syntax — it is about understanding async patterns, performance optimization, and building maintainable systems.",
+      bullets: [
+        "Deep JavaScript knowledge — ES6+ features, async patterns, closures, prototypes",
+        "Full-stack capability — JavaScript on frontend and backend for cohesive applications",
+        "Performance optimized — bundle size analysis, lazy loading, and efficient async code",
+        "Type safety — TypeScript integration to catch errors before runtime",
+        "Testing focus — well-tested JavaScript code that works reliably in production",
+      ],
+    },
+    faqs: [
+      {
+        q: "What is the difference between JavaScript and TypeScript?",
+        a: "JavaScript is flexible but error-prone. TypeScript adds type checking to catch bugs early. I use TypeScript for production applications and JavaScript for rapid prototyping.",
+      },
+      {
+        q: "Should I learn JavaScript or jump to a framework?",
+        a: "Learn JavaScript fundamentals first — then frameworks like React are much easier. I can mentor your team on core JavaScript concepts.",
+      },
+      {
+        q: "What about legacy JavaScript (ES5)?",
+        a: "I work with legacy code and gradually modernize it. Can add ES6+, modules, and modern tooling to existing JavaScript applications.",
+      },
+      {
+        q: "How do you keep JavaScript performant?",
+        a: "Through bundle analysis, code splitting, efficient algorithms, and proper async patterns. Every JavaScript project targets performance from day one.",
+      },
+    ],
+    related: ["react-development", "nodejs-backend-development", "full-stack-development"],
+    ctaHeading: "Build your JavaScript project",
+    ctaBody:
+      "From single-page applications to backend services, modern JavaScript can power your idea. Describe what you are building and I will propose the right JavaScript stack.",
+  },
 ];
 
 export const SERVICES_INDEX_META = {
-  metaTitle: "Expert Web Development Services in Multan & Pakistan | Muhammad Imran",
+  metaTitle: "Web Development Services in Multan, Pakistan | React, MERN, Next.js Developer",
   metaDescription:
-    "Expert web development services by Muhammad Imran — MERN Stack, React, Next.js development. Leading software development company in Multan, Pakistan offering custom web app development, consulting, and technical expertise.",
-  h1: "Expert Web Development Services in Multan & Pakistan",
+    "Professional web development services in Multan, Pakistan by Muhammad Imran. Expert React developer, MERN Stack specialist, and Next.js expert offering custom web app development, full-stack solutions, consulting, and technical expertise for startups and businesses.",
+  h1: "Web Development Services in Multan, Pakistan — Hire a Web Developer",
   intro:
-    "I deliver expert web development services as an independent senior engineer. Specializing in MERN Stack, React, Next.js, and Node.js — providing custom web applications and software development solutions to startups, agencies, and enterprises across Pakistan and globally. Every engagement is delivered by me personally with no middlemen or junior hand-offs.",
+    "I deliver professional web development services as an independent senior engineer based in Multan, Pakistan. As an expert web developer, React specialist, MERN Stack developer, and Next.js expert — I provide custom web applications and full-stack software development solutions to startups, agencies, and enterprises across Multan, Pakistan, and globally. Every web development project is delivered by me personally with no middlemen or junior hand-offs — just professional quality code.",
 };
 
 export function getServiceBySlug(slug: string): Service | undefined {

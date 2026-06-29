@@ -82,17 +82,17 @@ const SERVICES = [
   {
     icon: <Globe size={22} />,
     title: "Custom Web Applications",
-    body: "Full-stack web apps built with React and Node.js — from business dashboards to SaaS platforms. Serving clients in Multan, Lahore, and across Pakistan.",
+    body: "Full-stack web applications built with React and Node.js by a web developer in Multan. I build business dashboards, SaaS platforms, and custom solutions for clients in Multan, Lahore, and across Pakistan.",
   },
   {
     icon: <Zap size={22} />,
     title: "MERN Stack Development",
-    body: "End-to-end MERN Stack projects: MongoDB, Express.js, React, and Node.js. Fast, scalable, and production-ready.",
+    body: "Expert MERN Stack development: MongoDB, Express.js, React, and Node.js. I build fast, scalable, production-ready web applications as a skilled MERN developer in Pakistan.",
   },
   {
     icon: <Smartphone size={22} />,
     title: "Next.js & Performance",
-    body: "Server-side rendered apps with Next.js for maximum speed, SEO, and Core Web Vitals scores.",
+    body: "Next.js web development with server-side rendering for maximum speed, SEO, and Core Web Vitals scores. Hire a Next.js developer in Multan for modern, fast-loading websites.",
   },
 ];
 
@@ -157,8 +157,8 @@ export default function HomePage() {
   return (
     <>
       <SEOHead
-        title="Muhammad Imran — Web Developer in Multan, Pakistan | React & MERN Stack"
-        description="Freelance web developer in Multan, Pakistan. I build fast, modern web apps using React, Next.js, Node.js & MERN Stack. Available for hire. View my work."
+        title="Web Developer in Multan, Pakistan | Hire Muhammad Imran | React, Next.js & MERN Stack"
+        description="Hire a web developer in Multan, Pakistan. Muhammad Imran specializes in React, Next.js, Node.js & MERN Stack development. Build fast, scalable web applications. Available for freelance projects and remote work."
         path="/"
         jsonLd={[personSchema, localBusinessSchema, webSiteSchema]}
       />
@@ -171,13 +171,11 @@ export default function HomePage() {
         </span>
 
         <h1 className="mt-5 text-balance text-4xl font-bold leading-tight tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-5xl">
-          Web App Developer in Multan, Pakistan
+          Web Developer in Multan, Pakistan — Hire React, MERN & Next.js Expert
         </h1>
 
         <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-lg">
-          I build fast, scalable web applications using React, Next.js, and the
-          MERN Stack. Based in Multan, Pakistan — available for freelance
-          projects and remote positions worldwide.
+          I&apos;m a professional web developer in Multan, Pakistan specializing in React development, Next.js, and MERN Stack applications. I build fast, scalable web apps for startups and businesses. Available for freelance web development projects and remote positions worldwide.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -203,7 +201,7 @@ export default function HomePage() {
       {/* SECTION 2 — Tech stack */}
       <section className="border-t border-neutral-200 dark:border-neutral-800 py-12">
         <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
-          Technologies I Work With
+          Technologies I Work With as a Web Developer in Multan
         </h2>
         <div className="mt-6 flex flex-wrap gap-3">
           {TECH.map((tech) => (
@@ -221,7 +219,7 @@ export default function HomePage() {
       {/* SECTION 3 — What I build */}
       <section className="border-t border-neutral-200 dark:border-neutral-800 py-12">
         <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
-          What I Build for Clients in Multan &amp; Across Pakistan
+          Web Development Services — React, MERN Stack &amp; Next.js in Multan
         </h2>
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
           {SERVICES.map((service) => (
@@ -255,10 +253,10 @@ export default function HomePage() {
       {/* SECTION 4 — Featured projects */}
       <section className="border-t border-neutral-200 dark:border-neutral-800 py-12">
         <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
-          Featured Projects
+          Featured Web Development Projects by a Developer in Multan
         </h2>
         <h3 className="mt-2 text-sm font-normal text-neutral-600 dark:text-neutral-400">
-          A selection of web apps built with React, Next.js &amp; the MERN Stack
+          Web applications I&apos;ve built with React, Next.js, MERN Stack, and Node.js for clients worldwide
         </h3>
 
         <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -311,20 +309,17 @@ export default function HomePage() {
       <section className="grid grid-cols-1 gap-8 border-t border-neutral-200 dark:border-neutral-800 py-12 md:grid-cols-2 md:items-center">
         <div>
           <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
-            About Me
+            About Me — Web Developer in Multan
           </h2>
           <div className="mt-4 space-y-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
             <p>
-              I&apos;m Muhammad Imran, a web developer in Multan focused on
-              building modern, reliable products with React, Next.js, and the
-              MERN stack. As a React developer in Pakistan, I help startups and
-              businesses turn ideas into fast, production-ready web apps.
+              I&apos;m Muhammad Imran, a professional web developer in Multan, Pakistan focused on
+              building modern, reliable web applications with React, Next.js, and the
+              MERN stack. As an experienced React developer and MERN stack specialist in Pakistan, I help startups and
+              businesses turn ideas into fast, production-ready web applications and software solutions.
             </p>
             <p>
-              I work as a freelance developer with clients locally and remotely,
-              handling everything from frontend interfaces to Node.js APIs and
-              MongoDB databases. My goal is simple: clean code, great
-              performance, and websites that rank and convert.
+              I work as a freelance web developer with clients locally in Multan and across Pakistan, plus remote clients worldwide. I handle everything from frontend interfaces and React development to Node.js APIs, Express servers, and MongoDB database architecture. My goal is simple: clean code, great performance, and websites that rank and convert.
             </p>
           </div>
           <Link
@@ -355,25 +350,23 @@ export default function HomePage() {
       {/* SECTION 6 — Local SEO text */}
       <section className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 px-6 py-12 sm:px-10">
         <h2 className="text-balance text-center text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl">
-          Web Development Services Available in Multan &amp; Across Pakistan
+          Professional Web Development Services in Multan, Pakistan
         </h2>
         <div className="mx-auto mt-6 max-w-3xl space-y-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
           <p>
-            As a web developer in Multan, I offer complete web development
+            As a professional web developer in Multan, Pakistan, I offer complete web development
             services Multan businesses can rely on — from custom websites to
-            full-stack web applications. Startups, local businesses, and
-            individuals across the city work with me to build fast, modern
-            products, and as a React developer Multan clients trust, I make sure
-            every project is built on a solid, scalable foundation.
+            full-stack web applications and MERN Stack solutions. Startups, local businesses, and
+            individuals across Multan and beyond work with me to build fast, modern
+            digital products. As a trusted React developer, web developer in Multan, and MERN stack specialist, I ensure
+            every project is built on a solid, scalable, and maintainable foundation with clean code practices.
           </p>
           <p>
-            Beyond the city, I serve clients nationwide as a freelance web
-            developer Pakistan founders hire for serious builds. Whether you
-            need a MERN stack developer Pakistan teams can depend on or a Next.js
-            developer Pakistan startups choose for SEO-friendly, high-performance
-            sites, hiring a local web developer in Multan means clear
-            communication, fair pricing, and someone genuinely invested in your
-            success.
+            Beyond Multan, I serve clients nationwide as a freelance web
+            developer Pakistan startups and enterprises hire for serious web development projects. Whether you
+            need a MERN stack developer Pakistan teams depend on, a Next.js
+            developer for SEO-optimized websites, or a React developer for dynamic user interfaces,
+            hiring a local web developer in Multan means clear communication, fair pricing, fast turnaround, and someone genuinely invested in your business success and growth.
           </p>
         </div>
         <div className="mt-8 flex justify-center">
@@ -393,11 +386,11 @@ export default function HomePage() {
             <Briefcase size={22} />
           </span>
           <h2 className="mt-5 text-balance text-2xl font-bold text-white">
-            Ready to build something great?
+            Hire a Web Developer in Multan Today
           </h2>
           <p className="mt-3 text-pretty text-sm leading-relaxed text-neutral-300">
-            I&apos;m available for freelance projects in Multan, Lahore, and
-            remote work across Pakistan and worldwide.
+            I&apos;m available for freelance web development projects in Multan, Lahore, Islamabad,
+            and remote work across Pakistan and worldwide. Let&apos;s build your next great web application.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <PrimaryButton href="/contact">

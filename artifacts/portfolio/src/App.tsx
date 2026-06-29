@@ -3,7 +3,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 import Sidebar from "@/components/layout/Sidebar";
 import { initTheme } from "@/lib/theme";
-import { useProtectionStore } from "@/stores/protection";
 import ChatWidget from "@/components/chat/ChatWidget";
 import FloatingActions from "@/components/FloatingActions";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
@@ -22,6 +21,10 @@ const SmartTalkPage    = lazy(() => import("@/pages/SmartTalkPage"));
 const FeedbackPage     = lazy(() => import("@/pages/FeedbackPage"));
 const ServicesIndexPage = lazy(() => import("@/pages/ServicesIndexPage"));
 const ServicePage      = lazy(() => import("@/pages/ServicePage"));
+const LocationsIndexPage = lazy(() => import("@/pages/LocationsIndexPage"));
+const LocationPage     = lazy(() => import("@/pages/LocationPage"));
+const BlogIndexPage    = lazy(() => import("@/pages/BlogIndexPage"));
+const BlogPostPage     = lazy(() => import("@/pages/BlogPostPage"));
 const AdminPage        = lazy(() => import("@/pages/AdminPage"));
 
 function PageLoader() {
@@ -128,6 +131,10 @@ function AppLayout() {
                 <Route path="/smarttalk" component={SmartTalkPage} />
                 <Route path="/services" component={ServicesIndexPage} />
                 <Route path="/services/:slug" component={ServicePage} />
+                <Route path="/locations" component={LocationsIndexPage} />
+                <Route path="/locations/:slug" component={LocationPage} />
+                <Route path="/blog" component={BlogIndexPage} />
+                <Route path="/blog/:slug" component={BlogPostPage} />
                 <Route component={NotFound} />
               </Switch>
             </Suspense>
@@ -156,47 +163,6 @@ function RootRouter() {
   return <AppLayout />;
 }
 
-function CodeProtection() {
-  const { isProtected } = useProtectionStore();
-
-  useEffect(() => {
-    if (!isProtected) return;
-
-    const blockKey = (e: KeyboardEvent) => {
-      const ctrl = e.ctrlKey || e.metaKey;
-      const shift = e.shiftKey;
-      const key = e.key.toLowerCase();
-
-      // Ctrl+U — view source
-      if (ctrl && key === "u") { e.preventDefault(); return; }
-      // Ctrl+S — save page
-      if (ctrl && key === "s") { e.preventDefault(); return; }
-      // Ctrl+Shift+I — devtools inspect
-      if (ctrl && shift && key === "i") { e.preventDefault(); return; }
-      // Ctrl+Shift+J — console
-      if (ctrl && shift && key === "j") { e.preventDefault(); return; }
-      // Ctrl+Shift+C — element picker
-      if (ctrl && shift && key === "c") { e.preventDefault(); return; }
-      // F12 — devtools
-      if (e.key === "F12") { e.preventDefault(); return; }
-    };
-
-    const blockContext = (e: MouseEvent) => {
-      e.preventDefault();
-    };
-
-    document.addEventListener("keydown", blockKey);
-    document.addEventListener("contextmenu", blockContext);
-
-    return () => {
-      document.removeEventListener("keydown", blockKey);
-      document.removeEventListener("contextmenu", blockContext);
-    };
-  }, [isProtected]);
-
-  return null;
-}
-
 export default function App() {
   useEffect(() => {
     initTheme();
@@ -204,7 +170,6 @@ export default function App() {
 
   return (
     <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-      <CodeProtection />
       <RootRouter />
     </WouterRouter>
   );

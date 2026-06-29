@@ -227,8 +227,8 @@ export default function ContactPage() {
   return (
     <section className="space-y-6">
       <SEOHead
-        title="Contact Muhammad Imran — Hire a React & MERN Developer"
-        description="Contact Muhammad Imran for freelance web development — React, Next.js, Node.js & full-stack MERN projects. Email, phone & social links available."
+        title="Contact Web Developer in Multan — Hire Muhammad Imran | React, MERN, Next.js"
+        description="Contact Muhammad Imran, a web developer in Multan, Pakistan for freelance web development. Specializing in React, Next.js, Node.js & full-stack MERN Stack projects. Email, phone & social links available."
         path="/contact"
       />
       <div className="space-y-2">
