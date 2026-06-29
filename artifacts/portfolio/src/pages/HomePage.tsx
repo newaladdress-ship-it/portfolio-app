@@ -23,11 +23,13 @@ const personSchema = {
   jobTitle: "Web App Developer",
   url: BASE_URL,
   image: OG_IMAGE,
+  telephone: "+92 301 9316123",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Multan",
     addressRegion: "Punjab",
     addressCountry: "PK",
+    streetAddress: "Multan",
   },
   knowsAbout: [
     "React.js", "Next.js", "Node.js", "MongoDB", "MERN Stack",
@@ -43,6 +45,14 @@ const localBusinessSchema = {
   description:
     "Freelance web developer in Multan, Pakistan specializing in React, Next.js, Node.js, and the MERN stack.",
   url: BASE_URL,
+  telephone: "+92 301 9316123",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Multan",
+    addressRegion: "Punjab",
+    addressCountry: "PK",
+    streetAddress: "Multan, Punjab, Pakistan",
+  },
   areaServed: ["Multan", "Lahore", "Islamabad", "Pakistan"],
   serviceType: [
     "Web Development", "React Development",
@@ -396,6 +406,16 @@ export default function HomePage() {
             <PrimaryButton href="/contact">
               Start a Project <ArrowRight size={16} />
             </PrimaryButton>
+            <a
+              href="tel:+923019316123"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-green-600 px-6 py-3 text-sm font-semibold text-green-300 transition-all duration-200 hover:border-green-400 hover:bg-green-600/10 hover:-translate-y-0.5"
+              title="Call +92 301 9316123"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.854l.847 4.929a1 1 0 01-.964 1.144h-2.003l-.122 1.149c-.905.905-1.005 2.505-.405 3.705.6 1.2 1.6 2 2.8 2.8l1.906-1.906a1 1 0 011.414 0l2.121 2.121a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414 0L5.03 15.03c-1.2-.6-2.2-1.6-2.8-2.8-.6-1.2-.5-2.8.405-3.705L2 3z" />
+              </svg>
+              Call Me Now
+            </a>
             <Link
               href="/projects"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-600 px-6 py-3 text-sm font-semibold text-neutral-100 transition-all duration-200 hover:border-neutral-300 hover:-translate-y-0.5"
