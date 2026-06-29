@@ -19,11 +19,10 @@ import {
   HiOutlineSparkles,
   HiOutlineBriefcase,
 } from "react-icons/hi";
-import { HiOutlineChatBubbleLeftRight, HiOutlineShieldCheck, HiOutlineShieldExclamation, HiOutlineRocketLaunch, HiOutlineIdentification } from "react-icons/hi2";
+import { HiOutlineChatBubbleLeftRight, HiOutlineRocketLaunch, HiOutlineIdentification } from "react-icons/hi2";
 import { useThemeStore } from "@/stores/theme";
 import { useMenu } from "@/stores/menu";
 import { useLanguageStore } from "@/stores/language";
-import { useProtectionStore } from "@/stores/protection";
 import { useT, LOCALE_LABELS } from "@/lib/i18n";
 import { PERSONAL } from "@/data/personal";
 
@@ -93,27 +92,6 @@ function LanguageSwitcher() {
       className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all duration-300 border border-neutral-200 dark:border-neutral-700 min-w-[38px] justify-center"
     >
       {LOCALE_LABELS[locale]}
-    </button>
-  );
-}
-
-function ProtectionToggle() {
-  const { isProtected, toggle } = useProtectionStore();
-  return (
-    <button
-      onClick={toggle}
-      aria-label={isProtected ? "Code protection ON — click to disable" : "Code protection OFF — click to enable"}
-      title={isProtected ? "Code protection ON — click to disable" : "Code protection OFF — click to enable"}
-      className={`p-2 rounded-lg transition-all duration-300 ${
-        isProtected
-          ? "text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20"
-          : "text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20"
-      }`}
-    >
-      {isProtected
-        ? <HiOutlineShieldCheck size={20} />
-        : <HiOutlineShieldExclamation size={20} />
-      }
     </button>
   );
 }
@@ -219,7 +197,6 @@ export default function Sidebar() {
               <div className={`flex items-center gap-3 lg:hidden shrink-0 ${isOpen ? "h-[130px] flex-col-reverse !items-end justify-between pb-1" : ""}`}>
                 <div className="flex gap-1.5 items-center">
                   <PWAInstallButton />
-                  <ProtectionToggle />
                   <LanguageSwitcher />
                   <ThemeToggle />
                 </div>
@@ -268,7 +245,6 @@ export default function Sidebar() {
           </nav>
           <div className="border-t border-neutral-300 dark:border-neutral-700 my-4" />
           <div className="flex flex-wrap items-center gap-2 px-4">
-            <ProtectionToggle />
             <ThemeToggle />
             <LanguageSwitcher />
             <PWAInstallButton />
