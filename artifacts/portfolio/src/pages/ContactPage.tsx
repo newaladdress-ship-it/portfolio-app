@@ -60,9 +60,9 @@ const CONTACT_LINKS = [
   },
   {
     platform: "Phone",
-    handle: "+92 334 5636230",
+    handle: "+92 301 9316123",
     icon: <FaPhone size={20} />,
-    href: "tel:+923345636230",
+    href: "tel:+923019316123",
     tagline: "Available for calls",
     cta: "Call me",
     gradient: "from-green-500/20 via-emerald-500/10 to-transparent",
