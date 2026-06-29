@@ -477,4 +477,48 @@ export default defineConfig({
     },
   },
   base: basePath,
+  build: {
+    target: "ES2020",
+    minify: "esbuild",
+    esbuild: {
+      drop: ["console", "debugger"],
+    },
+    rollupOptions: {
+      output: {
+        // Optimize chunk size and naming
+        chunkFileNames: "js/[name]-[hash].js",
+        entryFileNames: "js/[name]-[hash].js",
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split(".");
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|gif|svg/.test(ext)) {
+            return `images/[name]-[hash][extname]`;
+          } else if (/woff|woff2|eot|ttf|otf/.test(ext)) {
+            return `fonts/[name]-[hash][extname]`;
+          } else if (ext === "css") {
+            return `css/[name]-[hash][extname]`;
+          }
+          return `[name]-[hash][extname]`;
+        },
+      },
+    },
+    // Compression settings
+    sourcemap: false,
+    reportCompressedSize: true,
+    chunkSizeWarningLimit: 500,
+    cssCodeSplit: true,
+    assetsInlineLimit: 4096, // Inline small assets
+  },
+  
+  // Optimization settings
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "react-router-dom",
+      "react-icons",
+      "clsx",
+      "date-fns",
+    ],
+  },
 });
