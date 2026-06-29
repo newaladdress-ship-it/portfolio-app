@@ -250,9 +250,27 @@ export default function Sidebar() {
             <PWAInstallButton />
           </div>
           <div className="border-t border-neutral-300 dark:border-neutral-700 my-4" />
-          <div className="flex flex-wrap items-center justify-center gap-1 text-center text-sm text-neutral-600 dark:text-neutral-400">
-            <p>© {new Date().getFullYear()}</p>
-            <p className="font-medium">{PERSONAL.name}</p>
+          <div className="space-y-2 px-4 py-3 text-center text-sm text-neutral-600 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+            <p className="font-medium text-neutral-900 dark:text-neutral-100">{PERSONAL.name}</p>
+            <a
+              href={PERSONAL.phoneLink}
+              className="flex items-center justify-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200"
+              title="Call now"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.854l.847 4.929a1 1 0 01-.964 1.144h-2.003l-.122 1.149c-.905.905-1.005 2.505-.405 3.705.6 1.2 1.6 2 2.8 2.8l1.906-1.906a1 1 0 011.414 0l2.121 2.121a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414 0L5.03 15.03c-1.2-.6-2.2-1.6-2.8-2.8-.6-1.2-.5-2.8.405-3.705L2 3z" />
+              </svg>
+              <span>{PERSONAL.phone}</span>
+            </a>
+            <div className="flex items-center justify-center gap-2 text-neutral-600 dark:text-neutral-400">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              <span>{PERSONAL.address}</span>
+            </div>
+            <p className="text-xs text-neutral-500 dark:text-neutral-500 pt-2 border-t border-neutral-200 dark:border-neutral-700">
+              © {new Date().getFullYear()}
+            </p>
           </div>
         </div>
       </div>

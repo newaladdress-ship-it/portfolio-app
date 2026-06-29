@@ -10,6 +10,9 @@ export const PERSONAL = {
   github: "https://github.com/muhammadimran9",
   linkedin: "https://www.linkedin.com/in/muhammad-imran-972364373/",
   email: "mi6062610@gmail.com",
+  phone: "+92 301 9316123",
+  phoneLink: "tel:+923019316123",
+  address: "Multan, Punjab, Pakistan",
   profileImage: "/logo.png",
 };
 
@@ -458,5 +461,6 @@ export const CONTACT_LINKS = [
   { platform: "Email", value: "mi6062610@gmail.com", href: "mailto:mi6062610@gmail.com" },
   { platform: "GitHub", value: "github.com/muhammadimran9", href: "https://github.com/muhammadimran9" },
   { platform: "LinkedIn", value: "linkedin.com/in/muhammad-imran-972364373", href: "https://www.linkedin.com/in/muhammad-imran-972364373/" },
-  { platform: "Phone", value: "+92 334 563 6230", href: "tel:+923345636230" },
+  { platform: "Phone", value: "+92 301 9316123", href: "tel:+923019316123" },
+  { platform: "Address", value: "Multan, Punjab, Pakistan", href: "#" },
 ];
