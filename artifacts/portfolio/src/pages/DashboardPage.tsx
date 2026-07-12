@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SEOHead from "@/components/SEOHead";
+import WakaTimeSetupModal from "@/components/WakaTimeSetupModal";
 import { BiCategory } from "react-icons/bi";
 import { SiGithub, SiWakatime } from "react-icons/si";
 import {
@@ -44,6 +45,7 @@ function WakaTimeLangSection() {
   const [langs, setLangs] = useState<WakaLang[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch("/api/wakatime/languages")
@@ -87,14 +89,54 @@ function WakaTimeLangSection() {
       )}
 
       {!loading && error && (
-        <div className="rounded-lg border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/20 p-4">
-          <p className="text-sm text-orange-800 dark:text-orange-300">
-            <span className="font-medium">WakaTime Configuration Issue:</span> The API key is not valid or has been revoked.
-            <br />
-            <span className="text-xs text-orange-700 dark:text-orange-400 mt-1 block">
-              To enable: Go to <a href="https://wakatime.com/settings/api-key" className="underline hover:text-orange-900 dark:hover:text-orange-200" target="_blank" rel="noopener noreferrer">WakaTime API Settings</a>, copy your API key, and update your environment variables.
-            </span>
-          </p>
+        <div className="space-y-4">
+          <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-4">
+            <p className="text-sm text-amber-800 dark:text-amber-300">
+              <span className="font-medium">WakaTime Setup Required</span>
+              <br />
+              <span className="text-xs text-amber-700 dark:text-amber-400">Add your API key to display your coding activity and statistics</span>
+            </p>
+          </div>
+          <button
+            onClick={() => setShowModal(true)}
+            className="w-full px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 font-medium transition-colors"
+          >
+            Add WakaTime API Key
+          </button>
+          <WakaTimeSetupModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            onApiKeySubmit={async (apiKey) => {
+              try {
+                const r = await fetch("/api/wakatime/setup", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ apiKey }),
+                });
+                if (r.ok) {
+                  // Reload data
+                  setError(false);
+                  setLoading(true);
+                  fetch("/api/wakatime/languages")
+                    .then(res => res.json())
+                    .then(d => {
+                      if (d.languages && d.languages.length > 0) {
+                        setLangs(d.languages);
+                        setError(false);
+                      } else {
+                        setError(true);
+                      }
+                    })
+                    .catch(() => setError(true))
+                    .finally(() => setLoading(false));
+                  return true;
+                }
+                return false;
+              } catch {
+                return false;
+              }
+            }}
+          />
         </div>
       )}
 
