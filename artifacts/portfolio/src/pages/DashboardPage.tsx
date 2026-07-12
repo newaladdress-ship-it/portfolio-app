@@ -87,12 +87,18 @@ function WakaTimeLangSection() {
       )}
 
       {!loading && error && (
-        <div className="rounded-lg border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-900/20 p-4">
-          <p className="text-sm text-orange-800 dark:text-orange-300">
-            <span className="font-medium">WakaTime Configuration Issue:</span> The API key is not valid or has been revoked.
+        <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-4">
+          <p className="text-sm text-amber-800 dark:text-amber-300">
+            <span className="font-medium">WakaTime Setup Required:</span> Add your API key to start tracking coding activity.
             <br />
-            <span className="text-xs text-orange-700 dark:text-orange-400 mt-1 block">
-              To enable: Go to <a href="https://wakatime.com/settings/api-key" className="underline hover:text-orange-900 dark:hover:text-orange-200" target="_blank" rel="noopener noreferrer">WakaTime API Settings</a>, copy your API key, and update your environment variables.
+            <span className="text-xs text-amber-700 dark:text-amber-400 mt-2 block">
+              <strong>Steps:</strong>
+              <ol className="list-decimal list-inside mt-1 space-y-1">
+                <li>Get your API key from <a href="https://wakatime.com/settings/api-key" className="underline hover:text-amber-900 dark:hover:text-amber-200" target="_blank" rel="noopener noreferrer">WakaTime Settings</a></li>
+                <li>Go to v0 Settings (top-right) → Vars → Add <code className="bg-amber-100 dark:bg-amber-900/40 px-1 rounded">WAKATIME_API_KEY</code></li>
+                <li>Paste your API key and save</li>
+                <li>Refresh the page to see your stats</li>
+              </ol>
             </span>
           </p>
         </div>

@@ -14,7 +14,7 @@ router.get("/wakatime/stats", async (req, res) => {
   try {
     const apiKey = process.env["WAKATIME_API_KEY"];
     if (!apiKey) {
-      res.status(503).json({ error: "WakaTime API key not configured" });
+      res.status(503).json({ error: "WakaTime API key not configured", errorCode: "NO_API_KEY" });
       return;
     }
 
@@ -25,15 +25,16 @@ router.get("/wakatime/stats", async (req, res) => {
     );
 
     if (!r.ok) {
-      res.status(r.status).json({ error: `WakaTime API error: ${r.status}` });
+      const errorMessage = r.status === 401 ? "Invalid or expired API key" : `WakaTime API error: ${r.status}`;
+      res.status(r.status).json({ error: errorMessage, errorCode: r.status === 401 ? "INVALID_KEY" : "API_ERROR" });
       return;
     }
 
     const data = await r.json();
     res.set("Cache-Control", "no-store");
     res.json(data);
-  } catch {
-    res.status(500).json({ error: "Failed to fetch WakaTime stats" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch WakaTime stats", errorCode: "FETCH_ERROR" });
   }
 });
 
@@ -41,7 +42,7 @@ router.get("/wakatime/today", async (req, res) => {
   try {
     const apiKey = process.env["WAKATIME_API_KEY"];
     if (!apiKey) {
-      res.status(503).json({ error: "WakaTime API key not configured" });
+      res.status(503).json({ error: "WakaTime API key not configured", errorCode: "NO_API_KEY" });
       return;
     }
 
@@ -51,7 +52,8 @@ router.get("/wakatime/today", async (req, res) => {
     );
 
     if (!r.ok) {
-      res.status(r.status).json({ error: `WakaTime API error: ${r.status}` });
+      const errorMessage = r.status === 401 ? "Invalid or expired API key" : `WakaTime API error: ${r.status}`;
+      res.status(r.status).json({ error: errorMessage, errorCode: r.status === 401 ? "INVALID_KEY" : "API_ERROR" });
       return;
     }
 
@@ -65,8 +67,8 @@ router.get("/wakatime/today", async (req, res) => {
       todayDigital: gt?.digital ?? null,
       timezone: data?.data?.range?.timezone ?? null,
     });
-  } catch {
-    res.status(500).json({ error: "Failed to fetch today's stats" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch today's stats", errorCode: "FETCH_ERROR" });
   }
 });
 
@@ -74,7 +76,7 @@ router.get("/wakatime/languages", async (req, res) => {
   try {
     const apiKey = process.env["WAKATIME_API_KEY"];
     if (!apiKey) {
-      res.status(503).json({ error: "WakaTime API key not configured" });
+      res.status(503).json({ error: "WakaTime API key not configured", errorCode: "NO_API_KEY" });
       return;
     }
 
@@ -84,7 +86,8 @@ router.get("/wakatime/languages", async (req, res) => {
     );
 
     if (!r.ok) {
-      res.status(r.status).json({ error: `WakaTime API error: ${r.status}` });
+      const errorMessage = r.status === 401 ? "Invalid or expired API key" : `WakaTime API error: ${r.status}`;
+      res.status(r.status).json({ error: errorMessage, errorCode: r.status === 401 ? "INVALID_KEY" : "API_ERROR" });
       return;
     }
 
@@ -100,8 +103,8 @@ router.get("/wakatime/languages", async (req, res) => {
 
     res.set("Cache-Control", "no-store");
     res.json({ languages, range: json?.data?.range ?? "all_time" });
-  } catch {
-    res.status(500).json({ error: "Failed to fetch WakaTime language stats" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch WakaTime language stats", errorCode: "FETCH_ERROR" });
   }
 });
 
