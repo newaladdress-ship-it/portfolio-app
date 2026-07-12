@@ -1,4 +1,6 @@
 import { Router } from "express";
+import * as fs from "fs";
+import * as path from "path";
 
 const router = Router();
 
@@ -105,6 +107,52 @@ router.get("/wakatime/languages", async (req, res) => {
     res.json({ languages, range: json?.data?.range ?? "all_time" });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch WakaTime language stats", errorCode: "FETCH_ERROR" });
+  }
+});
+
+router.post("/wakatime/setup", async (req, res) => {
+  try {
+    const { apiKey } = req.body;
+    if (!apiKey || typeof apiKey !== "string" || !apiKey.trim()) {
+      res.status(400).json({ error: "API key is required" });
+      return;
+    }
+
+    // Validate the API key by making a test request
+    const testR = await fetch(
+      "https://wakatime.com/api/v1/users/current/stats/last_7_days",
+      { headers: makeHeaders(apiKey.trim()) }
+    );
+
+    if (!testR.ok) {
+      res.status(401).json({ error: "Invalid WakaTime API key", errorCode: "INVALID_KEY" });
+      return;
+    }
+
+    // Save to .env.development.local
+    const envPath = path.join(process.cwd(), ".env.development.local");
+    let envContent = "";
+
+    if (fs.existsSync(envPath)) {
+      envContent = fs.readFileSync(envPath, "utf-8");
+    }
+
+    // Update or add WAKATIME_API_KEY
+    const keyLine = `WAKATIME_API_KEY=${apiKey.trim()}`;
+    if (envContent.includes("WAKATIME_API_KEY=")) {
+      envContent = envContent.replace(/WAKATIME_API_KEY=.*/g, keyLine);
+    } else {
+      envContent = envContent + (envContent ? "\n" : "") + keyLine;
+    }
+
+    fs.writeFileSync(envPath, envContent, "utf-8");
+
+    // Update process.env for immediate use
+    process.env["WAKATIME_API_KEY"] = apiKey.trim();
+
+    res.json({ success: true, message: "API key saved successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to save API key", errorCode: "SAVE_ERROR" });
   }
 });
 
