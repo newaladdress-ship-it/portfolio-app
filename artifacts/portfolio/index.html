@@ -9,7 +9,7 @@
     <meta name="description" content="Muhammad Imran is a leading web developer in Multan, Pakistan. Expert in React, Next.js, and MERN Stack. Specializing in web development, software development, and app development services." />
     <meta name="keywords" content="web developer in multan, website development, expert web development services, web developer, software development company, website developer in pakistan, software company in multan, MERN Stack, React Developer, Next.js, Full Stack Developer" />
     <meta name="author" content="Muhammad Imran" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, agentic" />
     <meta name="google-site-verification" content="Hs9vYTLHsbVavGkWWEBPfzfLLNZyErctUiFFF-QlqhE" />
     <meta name="theme-color" content="#fbe400" />
     <!-- Canonical and OG tags are set dynamically per-page via react-helmet-async -->
@@ -96,14 +96,14 @@
       })(window, document, "clarity", "script", "xegwojkkuh");
     </script>
 
-    <!-- Theme init - prevents dark/light flash, defaults to dark -->
+    <!-- Theme init - prevents dark/light flash, defaults to light -->
     <script>
       (function() {
         var stored = localStorage.getItem('theme');
-        if (stored === 'light') {
-          document.documentElement.classList.remove('dark');
-        } else {
+        if (stored === 'dark') {
           document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
         }
       })();
     </script>

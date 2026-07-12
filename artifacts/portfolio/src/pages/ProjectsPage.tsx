@@ -34,13 +34,41 @@ const ALL_CATEGORIES = ["all", ...Array.from(new Set(PROJECTS.map((p) => p.categ
 type Project = typeof PROJECTS[0];
 
 function LivePreviewThumb({ url, fallbackImg, name }: { url: string; fallbackImg: string; name: string }) {
-  const [state, setState] = useState<"loading" | "live" | "blocked">("loading");
+  const [state, setState] = useState<"idle" | "loading" | "live" | "blocked">("idle");
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Detect mobile screen or touch device to completely disable iframes on mobile
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    timerRef.current = setTimeout(() => setState("blocked"), 6000);
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth < 1024 || navigator.maxTouchPoints > 0);
+    }
+  }, []);
+
+  function handleMouseEnter() {
+    if (isMobile) return;
+    if (state !== "idle") return;
+    hoverTimerRef.current = setTimeout(() => {
+      setState("loading");
+      timerRef.current = setTimeout(() => setState("blocked"), 6000);
+    }, 600); // 600ms hover delay to avoid loading if just passing through
+  }
+
+  function handleMouseLeave() {
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current);
+      hoverTimerRef.current = null;
+    }
+  }
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+    };
   }, []);
 
   function handleLoad() {
@@ -68,9 +96,13 @@ function LivePreviewThumb({ url, fallbackImg, name }: { url: string; fallbackImg
     setState("blocked");
   }
 
-  if (state === "blocked") {
+  if (isMobile || state === "idle" || state === "blocked") {
     return (
-      <>
+      <div 
+        className="w-full h-full relative"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <img
           src={fallbackImg}
           alt={`${name} screenshot`}
@@ -88,12 +120,15 @@ function LivePreviewThumb({ url, fallbackImg, name }: { url: string; fallbackImg
           <HiOutlineExternalLink size={10} />
           Visit Site
         </a>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div 
+      className="w-full h-full relative"
+      onMouseLeave={handleMouseLeave}
+    >
       {state === "loading" && (
         <div className="absolute inset-0 flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 z-10">
           <div className="h-6 w-6 rounded-full border-2 border-blue-500 border-t-transparent animate-spin" />
@@ -122,7 +157,7 @@ function LivePreviewThumb({ url, fallbackImg, name }: { url: string; fallbackImg
           Live Preview
         </div>
       )}
-    </>
+    </div>
   );
 }
 

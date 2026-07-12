@@ -89,54 +89,8 @@ function WakaTimeLangSection() {
       )}
 
       {!loading && error && (
-        <div className="space-y-4">
-          <div className="rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-4">
-            <p className="text-sm text-amber-800 dark:text-amber-300">
-              <span className="font-medium">WakaTime Setup Required</span>
-              <br />
-              <span className="text-xs text-amber-700 dark:text-amber-400">Add your API key to display your coding activity and statistics</span>
-            </p>
-          </div>
-          <button
-            onClick={() => setShowModal(true)}
-            className="w-full px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 font-medium transition-colors"
-          >
-            Add WakaTime API Key
-          </button>
-          <WakaTimeSetupModal
-            isOpen={showModal}
-            onClose={() => setShowModal(false)}
-            onApiKeySubmit={async (apiKey) => {
-              try {
-                const r = await fetch("/api/wakatime/setup", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ apiKey }),
-                });
-                if (r.ok) {
-                  // Reload data
-                  setError(false);
-                  setLoading(true);
-                  fetch("/api/wakatime/languages")
-                    .then(res => res.json())
-                    .then(d => {
-                      if (d.languages && d.languages.length > 0) {
-                        setLangs(d.languages);
-                        setError(false);
-                      } else {
-                        setError(true);
-                      }
-                    })
-                    .catch(() => setError(true))
-                    .finally(() => setLoading(false));
-                  return true;
-                }
-                return false;
-              } catch {
-                return false;
-              }
-            }}
-          />
+        <div className="text-center py-6 text-sm text-neutral-500 dark:text-neutral-400">
+          No coding statistics available.
         </div>
       )}
 
@@ -669,10 +623,7 @@ function WakaTimeSection() {
 
       {!loading && error && (
         <div className="rounded-xl border border-yellow-200 dark:border-yellow-800/40 bg-yellow-50 dark:bg-yellow-900/10 p-4 space-y-1">
-          <p className="text-sm font-medium text-yellow-700 dark:text-yellow-400">WakaTime not connected</p>
-          <p className="text-xs text-yellow-600 dark:text-yellow-500">
-            Add your <span className="font-mono font-semibold">WAKATIME_API_KEY</span> to enable live coding stats.
-          </p>
+          <p className="text-sm font-medium text-yellow-700 dark:text-yellow-400">No coding activity available.</p>
         </div>
       )}
 

@@ -216,4 +216,68 @@ export const PROJECT_DETAILS: Record<number, ProjectDetail> = {
     challenges:
       "The biggest challenge was manipulating EXIF binary data reliably across different JPEG variants while preserving image quality and all non-GPS metadata. Ensuring cross-browser compatibility for file reading, EXIF parsing, and blob download required extensive testing across Chrome, Safari, and Firefox on both mobile and desktop.",
   },
+  16: {
+    id: 16,
+    role: "Frontend Developer & SEO Specialist",
+    duration: "1 week",
+    longDescription:
+      "A professional, high-performance website built for local plumbing contractors specializing in slab leak detection in Owensboro, Kentucky. The site features a clean layout, interactive contact tools, service descriptions, and localized service pages. Optimized from the ground up for local SEO to rank organically in search engine result pages.",
+    features: [
+      "Service listings and service area maps",
+      "Optimized structured schema JSON-LD for LocalBusiness and PlumbingService",
+      "Fast page load times (< 1.5 seconds) on mobile devices",
+      "Secure contact form and click-to-call integrations for lead generation",
+      "Fully responsive design optimized for mobile and desktop users",
+    ],
+    challenges:
+      "Balancing localized content for multiple nearby areas while keeping clean URL routing and ensuring all pages load rapidly on slow mobile connections.",
+  },
+  17: {
+    id: 17,
+    role: "Frontend Developer & SEO Specialist",
+    duration: "1 week",
+    longDescription:
+      "A lead generation and services website created for a pest control provider in Paterson, New Jersey. The platform showcases specialized termite inspection, prevention, and treatment services, prompting conversions through call-to-actions and clean service structure. Designed with a clean code footprint to maximize local search rankings.",
+    features: [
+      "Detailed termite inspection and treatment service listings",
+      "Structured local schema tags for LocalBusiness and PestControl",
+      "Click-to-call mobile CTAs and custom contact forms",
+      "SEO keyword optimization for Paterson, NJ pest searches",
+      "Optimized loading speed with minified assets",
+    ],
+    challenges:
+      "Designing a service page layout that educates homeowners about termite damage while preserving clear paths to conversion and keeping asset weight minimal.",
+  },
+  18: {
+    id: 18,
+    role: "Full Stack Developer",
+    duration: "3 weeks",
+    longDescription:
+      "FreeIndexer is a SaaS utility that allows bloggers, SEO specialists, and agencies to submit URLs, backlinks, and sitemaps in bulk to search engines. It integrates directly with IndexNow and search engine submission APIs to trigger instant crawling, and features a clean dashboard to track indexing status and performance metrics.",
+    features: [
+      "Bulk URL and backlink queueing and submission",
+      "Sitemap.xml parser to automatically extract and queue pages",
+      "Direct integration with IndexNow, Bing Webmaster, and Yandex APIs",
+      "Real-time indexing status tracking dashboard",
+      "PageSpeed and Core Web Vitals scoring dashboard",
+    ],
+    challenges:
+      "Handling high volumes of concurrent API requests and managing rate limits imposed by search engine endpoints while providing immediate visual feedback to the user.",
+  },
+  19: {
+    id: 19,
+    role: "Frontend Developer",
+    duration: "2 weeks",
+    longDescription:
+      "A modern Next.js web application built for a mobile pet spa company in Tampa Bay, Florida. It features detailed dog and cat grooming service descriptions, booking request forms, localized service area coverage pages, and customer testimonials. Built with clean components for quick rendering and responsiveness.",
+    features: [
+      "Responsive services catalogue for dogs, cats, and puppies",
+      "Interactive booking and quote request forms",
+      "Interactive service areas directories covering Tampa neighborhoods",
+      "Fully optimized with Tailwind CSS for rapid responsive layouts",
+      "SEO best practices with localized meta headers",
+    ],
+    challenges:
+      "Optimizing Next.js page generation for a large number of localized service pages without bloated CSS or JS bundles, keeping the mobile viewport highly performant.",
+  },
 };
