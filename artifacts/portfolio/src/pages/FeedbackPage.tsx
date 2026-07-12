@@ -343,7 +343,7 @@ export default function FeedbackPage() {
     <section className="space-y-6">
       <SEOHead
         title="Client Reviews and Feedback for Muhammad Imran Developer"
-        description="Read genuine client reviews of web developer Muhammad Imran or share your feedback after collaborating on React and MERN projects."s web development work or share your own feedback after collaborating on a React or MERN project."
+        description="Read genuine client reviews of web developer Muhammad Imran or share your feedback after collaborating on React and MERN projects."
         path="/feedback"
       />
       <div className="space-y-2">

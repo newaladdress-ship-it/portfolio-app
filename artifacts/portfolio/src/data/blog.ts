@@ -86,7 +86,7 @@ We pay special attention to asynchronous request pipelines, ensuring that promis
 
 Below is a complete, production-grade implementation showing the concepts of React Performance Optimization: Complete Guide 2024 in action. This TypeScript code contains complete error handling, configuration mappings, logging hooks, and memory cache managers. It can serve as a drop-in service for your enterprise web application.
 
-```typescript
+\`\`\`
 // Production-ready service implementation for React Performance Optimization: Complete Guide 2024
 import { EventEmitter } from 'events';
 
@@ -3058,7 +3058,7 @@ function Deprecated(message: string) {
   return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = function(...args: any[]) {
-      console.warn(\`⚠️ \${propertyKey} is deprecated: \${message}\`);
+      console.warn(\`⚠��� \${propertyKey} is deprecated: \${message}\`);
       return originalMethod.apply(this, args);
     };
   };
