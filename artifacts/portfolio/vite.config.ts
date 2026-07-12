@@ -177,7 +177,6 @@ function apiRoutesPlugin(): Plugin {
         // WakaTime Languages
         if (urlPath === "/api/wakatime/languages") {
           const apiKey = process.env["WAKATIME_API_KEY"];
-          console.log("[v0] WakaTime Languages - API Key exists:", !!apiKey);
           if (!apiKey) {
             res.statusCode = 503;
             res.setHeader("Content-Type", "application/json");
@@ -189,7 +188,6 @@ function apiRoutesPlugin(): Plugin {
               "https://wakatime.com/api/v1/users/current/stats/all_time",
               { headers: makeWakaHeaders(apiKey) }
             );
-            console.log("[v0] WakaTime response status:", r.status);
             if (!r.ok) {
               res.statusCode = r.status;
               res.setHeader("Content-Type", "application/json");
@@ -207,7 +205,6 @@ function apiRoutesPlugin(): Plugin {
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ languages, range: json?.data?.range ?? "all_time" }));
           } catch (err) {
-            console.error("[v0] WakaTime error:", err);
             res.statusCode = 500;
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ error: "Failed to fetch WakaTime language stats" }));
