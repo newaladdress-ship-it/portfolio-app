@@ -682,222 +682,33 @@ function WakaTimeSection() {
 /*  Umami Analytics Section                                                   */
 /* ────────────────────────────────────────────────────────────────────────── */
 
-type UmamiStats = {
-  pageviews: { value: number; prev: number };
-  visitors: { value: number; prev: number };
-  visits: { value: number; prev: number };
-  bounces: { value: number; prev: number };
-  totaltime: { value: number; prev: number };
-};
-
-type UmamiPageview = { x: string; y: number };
-
-type UmamiData = {
-  stats: UmamiStats;
-  pageviews: { pageviews: UmamiPageview[]; sessions: UmamiPageview[] };
-  period: string;
-};
-
-const UMAMI_PERIODS = [
-  { label: "Last 24 hours", value: "24h" },
-  { label: "Last 7 days", value: "7d" },
-  { label: "Last 30 days", value: "30d" },
-];
-
-function pct(curr: number, prev: number): string {
-  if (prev === 0) return curr === 0 ? "0%" : "+100%";
-  const p = ((curr - prev) / prev) * 100;
-  return (p >= 0 ? "+" : "") + p.toFixed(0) + "%";
-}
-
-function fmtDuration(secs: number): string {
-  if (secs < 60) return `${secs}s`;
-  const m = Math.floor(secs / 60);
-  const s = secs % 60;
-  return s > 0 ? `${m}m ${s}s` : `${m}m`;
-}
-
-function SparklineSVG({ data }: { data: number[] }) {
-  if (data.length < 2) return <div className="h-16 flex items-center justify-center text-xs text-neutral-500">No data yet</div>;
-  const max = Math.max(...data, 1);
-  const w = 100;
-  const h = 48;
-  const step = w / (data.length - 1);
-  const pts = data
-    .map((v, i) => `${i * step},${h - (v / max) * (h - 4)}`)
-    .join(" ");
-  const fill = data
-    .map((v, i) => `${i * step},${h - (v / max) * (h - 4)}`)
-    .concat([`${w},${h}`, `0,${h}`])
-    .join(" ");
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-16" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="ug" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <polygon points={fill} fill="url(#ug)" />
-      <polyline points={pts} fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function UmamiStatCard({
-  label, value, prev, isRate, isDuration,
-}: {
-  label: string; value: number; prev: number; isRate?: boolean; isDuration?: boolean;
-}) {
-  const v = value ?? 0;
-  const p = prev ?? 0;
-  const change = pct(v, p);
-  const isPositive = !change.startsWith("-");
-  const isZero = change === "0%";
-  const display = isDuration ? fmtDuration(v) : isRate ? `${v.toFixed(1)}%` : v.toLocaleString();
-
-  return (
-    <div className="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 p-4 space-y-1.5">
-      <p className="text-xs text-neutral-500 dark:text-neutral-400">{label}</p>
-      <p className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 leading-tight">{display}</p>
-      <span className={`inline-block rounded px-1.5 py-0.5 text-[10px] font-semibold ${
-        isZero
-          ? "bg-green-500/20 text-green-500"
-          : isPositive && !isRate
-          ? "bg-green-500/20 text-green-500"
-          : !isPositive && !isRate
-          ? "bg-red-500/20 text-red-500"
-          : "bg-neutral-200 dark:bg-neutral-700 text-neutral-500"
-      }`}>
-        {change}
-      </span>
-    </div>
-  );
-}
-
 function UmamiSection() {
-  const [data, setData] = useState<UmamiData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [period, setPeriod] = useState("24h");
-  const [lastFetched, setLastFetched] = useState<Date | null>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  async function fetchData(p = period, silent = false) {
-    try {
-      if (!silent) setLoading(true);
-      setError(null);
-      const r = await fetch(`/api/umami/stats?period=${p}`);
-      const d = await r.json();
-      if (d.error) { setError(d.error); }
-      else { setData(d); setLastFetched(new Date()); }
-    } catch {
-      setError("Failed to load");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  function scheduleNext() {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(async () => { await fetchData(period, true); scheduleNext(); }, 5 * 60 * 1000);
-  }
-
-  useEffect(() => {
-    fetchData(period).then(() => scheduleNext());
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [period]);
-
-  function changePeriod(p: string) { setPeriod(p); }
-
-  const pvData = (data?.pageviews?.pageviews ?? []).map((d) => d.y);
-  const s = data?.stats;
-  const bounceRate = s && s.visits.value > 0 ? (s.bounces.value / s.visits.value) * 100 : 0;
-  const prevBounceRate = s && s.visits.prev > 0 ? (s.bounces.prev / s.visits.prev) * 100 : 0;
-  const avgDuration = s && s.visits.value > 0 ? Math.round(s.totaltime.value / s.visits.value) : 0;
-  const prevDuration = s && s.visits.prev > 0 ? Math.round(s.totaltime.prev / s.visits.prev) : 0;
-
   return (
-    <SpotlightCard className="p-6 space-y-5">
-      {/* Header */}
-      <div className="flex items-center justify-between flex-wrap gap-2">
+    <SpotlightCard className="p-6 space-y-4">
+      <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="flex items-center gap-2">
-          <span className="text-lg">📊</span>
-          <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">Analytics</h3>
-          <span className="flex items-center gap-1 rounded-full bg-purple-100 dark:bg-purple-900/30 px-2 py-0.5 text-[10px] font-medium text-purple-700 dark:text-purple-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse" />
-            Umami
-          </span>
+          <span className="h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse" />
+          <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">
+            Website Traffic Analytics
+          </h3>
         </div>
-        <div className="flex items-center gap-2 flex-wrap">
-          {lastFetched && (
-            <span className="text-[10px] text-neutral-400 dark:text-neutral-500">Updated {timeAgo(lastFetched.toISOString())}</span>
-          )}
-          <select
-            value={period}
-            onChange={(e) => changePeriod(e.target.value)}
-            className="rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-2 py-1 text-[11px] text-neutral-700 dark:text-neutral-300 focus:outline-none"
-          >
-            {UMAMI_PERIODS.map((p) => (
-              <option key={p.value} value={p.value}>{p.label}</option>
-            ))}
-          </select>
-          <button onClick={() => fetchData(period)} disabled={loading}
-            className="flex items-center gap-1 rounded-lg border border-neutral-200 dark:border-neutral-700 px-2 py-1 text-[11px] text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50">
-            <HiOutlineRefresh size={12} className={loading ? "animate-spin" : ""} /> Refresh
-          </button>
-        </div>
+        <a
+          href="https://cloud.umami.is/share/hmcwzA74Z1Y9CAbm"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 text-xs text-blue-500 hover:underline"
+        >
+          View Full Report <HiOutlineExternalLink size={12} />
+        </a>
       </div>
-
-      {/* Not configured state */}
-      {!loading && error?.includes("not configured") && (
-        <div className="rounded-xl border border-purple-200 dark:border-purple-800/40 bg-purple-50 dark:bg-purple-900/10 p-4 space-y-1">
-          <p className="text-sm font-medium text-purple-700 dark:text-purple-400">Umami Analytics not connected</p>
-          <p className="text-xs text-purple-600 dark:text-purple-500">
-            Add <span className="font-mono font-semibold">UMAMI_API_KEY</span> and{" "}
-            <span className="font-mono font-semibold">UMAMI_WEBSITE_ID</span> to enable live visitor stats.
-          </p>
-        </div>
-      )}
-
-      {/* Error state */}
-      {!loading && error && !error.includes("not configured") && (
-        <div className="rounded-xl border border-yellow-200 dark:border-yellow-800/40 bg-yellow-50 dark:bg-yellow-900/10 p-4">
-          <p className="text-sm text-yellow-700 dark:text-yellow-400">{error}</p>
-        </div>
-      )}
-
-      {/* Skeleton */}
-      {loading && (
-        <div className="space-y-4 animate-pulse">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-20 rounded-xl bg-neutral-100 dark:bg-neutral-800" />
-            ))}
-          </div>
-          <div className="h-16 rounded-xl bg-neutral-100 dark:bg-neutral-800" />
-        </div>
-      )}
-
-      {/* Data */}
-      {!loading && data && s && (
-        <div className="space-y-4">
-          {/* Stat cards */}
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
-            <UmamiStatCard label="Visitors" value={s.visitors.value} prev={s.visitors.prev} />
-            <UmamiStatCard label="Visits" value={s.visits.value} prev={s.visits.prev} />
-            <UmamiStatCard label="Views" value={s.pageviews.value} prev={s.pageviews.prev} />
-            <UmamiStatCard label="Bounce rate" value={bounceRate} prev={prevBounceRate} isRate />
-            <UmamiStatCard label="Visit duration" value={avgDuration} prev={prevDuration} isDuration />
-          </div>
-
-          {/* Sparkline chart */}
-          <div className="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/30 p-4">
-            <p className="text-[10px] text-neutral-400 uppercase tracking-wide mb-2">Pageviews over time</p>
-            <SparklineSVG data={pvData} />
-          </div>
-        </div>
-      )}
+      <div className="w-full rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 h-[500px] bg-neutral-50 dark:bg-neutral-950">
+        <iframe
+          src="https://cloud.umami.is/share/hmcwzA74Z1Y9CAbm"
+          style={{ width: "100%", height: "100%", border: "none" }}
+          title="Umami Analytics Dashboard"
+          loading="lazy"
+        />
+      </div>
     </SpotlightCard>
   );
 }
