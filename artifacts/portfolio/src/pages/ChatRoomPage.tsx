@@ -465,7 +465,7 @@ export default function ChatRoomPage() {
     <section className="space-y-6">
       <SEOHead
         title="Live Chat Room - Muhammad Imran Web Developer Portfolio"
-        description="Join the live chat room on my portfolio to connect, chat with other visitors, and discuss React, Node.js, and web development."s portfolio to connect with other visitors & discuss projects, web development, React & Node.js topics."
+        description="Join the live chat room on my portfolio to connect with other visitors and discuss projects, web development, React and Node.js topics."
         path="/chat"
       />
       <div className="space-y-2">
