@@ -98,7 +98,7 @@ export default function LocationsIndexPage() {
                       {location.intro.split(".")[0]}.
                     </p>
                     <div className="mt-3 flex items-center gap-1 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                      Learn more <HiOutlineArrowRight size={12} />
+                      Learn more <MdArrowForward size={12} />
                     </div>
                   </SpotlightCard>
                 </Link>
@@ -131,7 +131,7 @@ export default function LocationsIndexPage() {
                       {location.intro.split(".")[0]}.
                     </p>
                     <div className="mt-3 flex items-center gap-1 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                      Learn more <HiOutlineArrowRight size={12} />
+                      Learn more <MdArrowForward size={12} />
                     </div>
                   </SpotlightCard>
                 </Link>
@@ -164,7 +164,7 @@ export default function LocationsIndexPage() {
                       {location.intro.split(".")[0]}.
                     </p>
                     <div className="mt-3 flex items-center gap-1 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                      Learn more <HiOutlineArrowRight size={12} />
+                      Learn more <MdArrowForward size={12} />
                     </div>
                   </SpotlightCard>
                 </Link>
@@ -197,7 +197,7 @@ export default function LocationsIndexPage() {
                       {location.intro.split(".")[0]}.
                     </p>
                     <div className="mt-3 flex items-center gap-1 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                      Learn more <HiOutlineArrowRight size={12} />
+                      Learn more <MdArrowForward size={12} />
                     </div>
                   </SpotlightCard>
                 </Link>

@@ -1,6 +1,9 @@
 import { Link } from "wouter";
 import SEOHead from "@/components/SEOHead";
-import { PERSONAL } from "@/data/personal";
+import { PERSONAL, PROJECTS } from "@/data/personal";
+import { SERVICES as ALL_SERVICES } from "@/data/services";
+import { LOCATIONS } from "@/data/locations";
+import { BLOG_POSTS } from "@/data/blog";
 import {
   SiReact, SiNextdotjs, SiNodedotjs, SiExpress, SiMongodb,
   SiJavascript, SiTypescript, SiTailwindcss, SiGithub,
@@ -8,7 +11,7 @@ import {
 import { TbApi } from "react-icons/tb";
 import {
   Globe, Zap, Smartphone, MapPin, ArrowRight, Code2,
-  CheckCircle2, Briefcase,
+  CheckCircle2, Briefcase, User,
 } from "lucide-react";
 
 const BASE_URL = "https://www.imrandigitals.online";
@@ -194,7 +197,7 @@ export default function HomePage() {
           <PrimaryButton href="/projects">
             View My Projects <ArrowRight size={16} />
           </PrimaryButton>
-          <SecondaryButton href="/hire-me">Hire Me</SecondaryButton>
+          <SecondaryButton href="/contact">Hire Me</SecondaryButton>
         </div>
 
         <ul className="mt-8 flex flex-col gap-3 text-sm text-neutral-600 dark:text-neutral-400 sm:flex-row sm:gap-8">
@@ -424,6 +427,150 @@ export default function HomePage() {
             >
               View My Work
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 8 - Website Directory (Sitemap) */}
+      <section className="border-t border-neutral-200 dark:border-neutral-800 py-12 mt-12">
+        <h2 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 sm:text-2xl mb-8">
+          Explore Website Directory
+        </h2>
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-5 text-sm">
+          {/* Column 1: Core Pages */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
+              <User className="text-blue-500 shrink-0" size={16} /> Core Pages
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                  Home Page
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                  About My Story
+                </Link>
+              </li>
+              <li>
+                <Link href="/dev-profile" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                  Developer Profile
+                </Link>
+              </li>
+              <li>
+                <Link href="/achievements" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                  Achievements & Certs
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors font-medium">
+                  Contact & Hire Me
+                </Link>
+              </li>
+              <li>
+                <Link href="/admin" className="text-neutral-400 dark:text-neutral-600 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors text-xs font-mono">
+                  /admin
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2: Web Applications */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
+              <Zap className="text-yellow-500 shrink-0" size={16} /> Interactive Apps
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/dashboard" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                  Analytics Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link href="/chat" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                  Live Chat Room
+                </Link>
+              </li>
+              <li>
+                <Link href="/smarttalk" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                  SmartTalk AI Chat
+                </Link>
+              </li>
+              <li>
+                <Link href="/feedback" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                  Feedback Board
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Services */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
+              <Briefcase className="text-green-500 shrink-0" size={16} /> Services
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/services" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors font-semibold">
+                  All Services ({ALL_SERVICES.length})
+                </Link>
+              </li>
+              {ALL_SERVICES.slice(0, 4).map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/services/${s.slug}`} className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors block truncate max-w-full" title={s.h1}>
+                    {s.h1.split(" & ")[0].split(" Development")[0]}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Locations */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
+              <MapPin className="text-red-500 shrink-0" size={16} /> Cities Served
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/locations" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors font-semibold">
+                  All Cities ({LOCATIONS.length})
+                </Link>
+              </li>
+              {LOCATIONS.slice(0, 4).map((loc) => (
+                <li key={loc.slug}>
+                  <Link href={`/locations/${loc.slug}`} className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors">
+                    Developer in {loc.city}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 5: Projects & Blog */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
+              <Globe className="text-purple-500 shrink-0" size={16} /> Insights & Work
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/projects" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors font-semibold">
+                  All Projects ({PROJECTS.length})
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors font-semibold">
+                  Developer Blog ({BLOG_POSTS.length})
+                </Link>
+              </li>
+              {BLOG_POSTS.slice(0, 3).map((post) => (
+                <li key={post.slug}>
+                  <Link href={`/blog/${post.slug}`} className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors block truncate max-w-full" title={post.title}>
+                    {post.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

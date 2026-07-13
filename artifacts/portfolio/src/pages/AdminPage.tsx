@@ -137,7 +137,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
 export default function AdminPage() {
   usePushNotifications("admin");
   const [authed, setAuthed] = useState(() => sessionStorage.getItem("admin_auth") === "1");
-  const [tab, setTab] = useState<"contacts" | "feedback" | "chat" | "email-logs">("contacts");
+  const [tab, setTab] = useState<"contacts" | "feedback" | "chat" | "email-logs" | "settings">("contacts");
 
   const [contacts, setContacts] = useState<ContactMessage[]>([]);
   const [chats, setChats] = useState<ChatMessage[]>([]);
@@ -379,7 +379,7 @@ export default function AdminPage() {
       addToast({ 
         title: "Failed to send reply", 
         body: message, 
-        type: "error" 
+        type: "contact" 
       });
     } finally {
       setEmailReplying(false);

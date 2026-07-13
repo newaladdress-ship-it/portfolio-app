@@ -6,7 +6,44 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = resolve(__dirname, "..", "dist");
 const BASE_URL = "https://imrandigitals.online";
 
-const ROUTES = [
+// Dynamic TS data parser
+function parseTSData(filename, arrayName) {
+  const content = readFileSync(resolve(__dirname, "..", "src", "data", filename), "utf8");
+  
+  const arrayStart = content.indexOf(`const ${arrayName}`);
+  const arrayExportStart = content.indexOf(`export const ${arrayName}`);
+  const startIdx = arrayStart !== -1 ? arrayStart : arrayExportStart;
+  if (startIdx === -1) return [];
+  
+  const objects = [];
+  const parts = content.substring(startIdx).split(/\{\r?\n\s+"?slug"?:/);
+  
+  for (let i = 1; i < parts.length; i++) {
+    const part = parts[i];
+    
+    const slugMatch = part.match(/^\s*"([^"]+)"/);
+    if (!slugMatch) continue;
+    const slug = slugMatch[1];
+    
+    const metaTitleMatch = part.match(/"?metaTitle"?:\s*"([^"]+)"/) || part.match(/"?title"?:\s*"([^"]+)"/);
+    const metaTitle = metaTitleMatch ? metaTitleMatch[1] : "";
+    
+    const metaDescMatch = part.match(/"?metaDescription"?:\s*(?:"([^"]+)"|`([^`]+)`)/) || part.match(/"?excerpt"?:\s*"([^"]+)"/);
+    const metaDescription = metaDescMatch ? (metaDescMatch[1] || metaDescMatch[2]) : "";
+    
+    const h1Match = part.match(/"?h1"?:\s*"([^"]+)"/) || part.match(/"?title"?:\s*"([^"]+)"/);
+    const h1 = h1Match ? h1Match[1] : "";
+    
+    const introMatch = part.match(/"?intro"?:\s*(?:`([^`]+)`|"([^"]+)")/) || part.match(/"?excerpt"?:\s*"([^"]+)"/);
+    const intro = introMatch ? (introMatch[1] || introMatch[2]) : "";
+    
+    objects.push({ slug, metaTitle, metaDescription, h1, intro });
+  }
+  
+  return objects;
+}
+
+const CORE_ROUTES = [
   {
     path: "/",
     file: "index.html",
@@ -118,56 +155,67 @@ const ROUTES = [
       "A focused list of services offered by Muhammad Imran - custom web app development, web consulting, dashboard design, executive KPI dashboards, and technical SEO. Every engagement is delivered personally, no agency layer.",
   },
   {
-    path: "/services/web-application-development",
-    file: "services/web-application-development.html",
-    title: "Web Application Development Services - Muhammad Imran",
+    path: "/locations",
+    file: "locations.html",
+    title: "Web Developer in Pakistan - Local Services in 10 Cities",
     description:
-      "Hire a senior web developer for custom React, Next.js, and Node.js web application development with clean code and high performance.",
-    h1: "Web Application Development Service Provider",
+      "Hire Muhammad Imran as your web developer across Multan, Lahore, Islamabad, Karachi, and other cities in Pakistan. Local support.",
+    h1: "Service Locations",
     intro:
-      "Muhammad Imran is an independent web application development service provider building production-grade React, Next.js, and Node.js apps for startups, SaaS founders, and enterprise teams worldwide. End-to-end delivery, weekly demos, fixed pricing.",
+      "I serve businesses and organizations across Pakistan. Whether you are in Multan, Lahore, Islamabad, Karachi, or any major Pakistani city, I provide professional web development services.",
   },
   {
-    path: "/services/web-consulting",
-    file: "services/web-consulting.html",
-    title: "Web Consulting Services - Muhammad Imran Web Advisor",
+    path: "/blog",
+    file: "blog.html",
+    title: "Web Development Blog - React and Node.js Coding Tips",
     description:
-      "Independent web consulting service for founders and teams. Architecture reviews, tech audits, and expert senior engineering guidance.",
-    h1: "Web Consulting Service for Founders & Product Teams",
+      "Read expert web development tutorials, React tips, Node.js guides, and full-stack development articles by Muhammad Imran.",
+    h1: "Web Development Tips, Tutorials & Guides",
     intro:
-      "An independent web consulting service from a senior engineer. Helping founders, product teams, and agencies pick the right stack, review architectures, fix slow apps, and plan clean rewrites - without agency upsells.",
-  },
-  {
-    path: "/services/dashboard-design",
-    file: "services/dashboard-design.html",
-    title: "Dashboard Design Services - Custom Admin and Charts UI",
-    description:
-      "Professional dashboard design services for SaaS and internal tools. Build fast, responsive, and modern admin interfaces with React.",
-    h1: "Dashboard Design Services for SaaS & Internal Tools",
-    intro:
-      "Custom dashboard design services for SaaS, internal tools, and analytics platforms. Clean, fast, accessible admin and analytics UIs designed and built end-to-end with React, Tailwind, and modern charting libraries.",
-  },
-  {
-    path: "/services/executive-dashboards",
-    file: "services/executive-dashboards.html",
-    title: "Executive Dashboard Development - Muhammad Imran Dev",
-    description:
-      "Custom executive dashboard development for startups and enterprises. Get real-time business KPIs and analytics built in React and Node.",
-    h1: "Executive Dashboards by a Senior Web Development Engineer",
-    intro:
-      "Skip the agency. Hire one accountable senior engineer to design and build C-suite KPI dashboards - the kind founders, CEOs, and CFOs actually open every Monday morning. Real metrics, fast load times, weekly digests.",
-  },
-  {
-    path: "/services/seo-multan",
-    file: "services/seo-multan.html",
-    title: "SEO Company in Multan - Web Developer and SEO Expert",
-    description:
-      "Looking for a reliable SEO company in Multan? Get technical audits, schema markup, and speed optimization from a senior web developer.",
-    h1: "SEO Company in Multan - Built by a Local Web Developer",
-    intro:
-      "An honest, developer-led SEO company in Multan, Pakistan. Technical SEO audits, on-page optimization, schema markup, Core Web Vitals fixes, and local SEO done by a senior engineer who can edit the code, not just send keyword reports.",
+      "Expert articles on React, Node.js, Next.js, database optimization, and full-stack web development. Learn best practices and industry insights.",
   },
 ];
+
+const ROUTES = [...CORE_ROUTES];
+
+// Parse and add Services
+const SERVICES_DATA = parseTSData("services.ts", "SERVICES");
+for (const s of SERVICES_DATA) {
+  ROUTES.push({
+    path: `/services/${s.slug}`,
+    file: `services/${s.slug}.html`,
+    title: s.metaTitle,
+    description: s.metaDescription,
+    h1: s.h1,
+    intro: s.intro,
+  });
+}
+
+// Parse and add Locations
+const LOCATIONS_DATA = parseTSData("locations.ts", "LOCATIONS");
+for (const loc of LOCATIONS_DATA) {
+  ROUTES.push({
+    path: `/locations/${loc.slug}`,
+    file: `locations/${loc.slug}.html`,
+    title: loc.metaTitle,
+    description: loc.metaDescription,
+    h1: loc.h1,
+    intro: loc.intro,
+  });
+}
+
+// Parse and add Blog posts
+const BLOG_DATA = parseTSData("blog.ts", "BLOG_POSTS");
+for (const post of BLOG_DATA) {
+  ROUTES.push({
+    path: `/blog/${post.slug}`,
+    file: `blog/${post.slug}.html`,
+    title: post.metaTitle || `${post.h1} | Muhammad Imran Blog`,
+    description: post.metaDescription,
+    h1: post.h1,
+    intro: post.intro,
+  });
+}
 
 const indexHtml = readFileSync(resolve(DIST, "index.html"), "utf8");
 

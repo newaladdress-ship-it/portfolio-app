@@ -45,7 +45,7 @@ export default function BlogIndexPage() {
 
       {/* Featured Posts */}
       <div className="space-y-3">
-        <SectionHeading title="Featured Articles" icon={<HiOutlineNewspaperStack />} />
+        <SectionHeading title="Featured Articles" icon={<MdArticle />} />
         <div className="grid sm:grid-cols-3 gap-4 mt-2">
           {featured.map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
@@ -81,7 +81,7 @@ export default function BlogIndexPage() {
 
       {/* Recent Posts */}
       <div className="space-y-3">
-        <SectionHeading title="Latest Articles" icon={<HiOutlineNewspaperStack />} />
+        <SectionHeading title="Latest Articles" icon={<MdArticle />} />
         <div className="grid sm:grid-cols-2 gap-4 mt-2">
           {recentPosts.map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
@@ -113,7 +113,7 @@ export default function BlogIndexPage() {
 
       {/* Categories */}
       <div className="space-y-3">
-        <SectionHeading title="Browse by Category" icon={<HiOutlineNewspaperStack />} />
+        <SectionHeading title="Browse by Category" icon={<MdArticle />} />
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-2">
           {Object.entries(BLOG_CATEGORIES).map(([key, category]) => (
             <SpotlightCard key={key} className="p-4">

@@ -2,6 +2,21 @@
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist",
   "devCommand": "pnpm run dev",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.imrandigitals.online"
+        }
+      ],
+      "destination": "https://imrandigitals.online/:path*",
+      "permanent": true
+    }
+  ],
   "env": [
     "GITHUB_USERNAME",
     "WAKATIME_API_KEY",

@@ -13,7 +13,8 @@ const BASE_URL = "https://imrandigitals.online";
 const DEFAULT_IMAGE = `${BASE_URL}/opengraph.jpg`;
 
 export default function SEOHead({ title, description, path, type = "website", jsonLd }: SEOHeadProps) {
-  const canonical = `${BASE_URL}${path}`;
+  const cleanPath = path === "/" ? "/" : path.replace(/\/+$/, "");
+  const canonical = `${BASE_URL}${cleanPath}`;
   const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
   return (
