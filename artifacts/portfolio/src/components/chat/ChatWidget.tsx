@@ -468,7 +468,7 @@ export default function ChatWidget() {
               {isConsultDone && (
                 <div className="pl-7 space-y-2 pt-1">
                   <a
-                    href={`https://wa.me/923345636230?text=${WA_TEXT}`}
+                    href={`https://wa.me/923019316123?text=${WA_TEXT}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white text-sm font-semibold transition-colors cursor-pointer"

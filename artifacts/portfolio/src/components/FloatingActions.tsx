@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle, X, Phone } from "lucide-react";
 import { HiOutlineSparkles } from "react-icons/hi";
 
 const WA_MSG = encodeURIComponent(
@@ -28,7 +28,12 @@ export default function FloatingActions() {
 
   const openWhatsApp = () => {
     setExpanded(false);
-    window.open(`https://wa.me/923345636230?text=${WA_MSG}`, "_blank", "noopener,noreferrer");
+    window.open(`https://wa.me/923019316123?text=${WA_MSG}`, "_blank", "noopener,noreferrer");
+  };
+
+  const openCall = () => {
+    setExpanded(false);
+    window.location.href = "tel:+923019316123";
   };
 
   return (
@@ -51,6 +56,20 @@ export default function FloatingActions() {
             : "opacity-0 translate-y-4 pointer-events-none"
         }`}
       >
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            openCall();
+          }}
+          className="group relative w-12 h-12 rounded-full bg-blue-600 text-white shadow-lg hover:scale-110 active:scale-95 transition-all duration-200 flex items-center justify-center cursor-pointer"
+          aria-label="Call Me"
+        >
+          <Phone size={22} />
+          <span className="absolute right-full mr-2 px-2 py-1 rounded-lg bg-neutral-800 text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            Call Me
+          </span>
+        </button>
+
         <button
           onClick={(e) => {
             e.stopPropagation();

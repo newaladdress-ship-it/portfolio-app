@@ -485,7 +485,7 @@ export default function SmartTalkPage() {
               </p>
               <div className="flex gap-3 w-full max-w-sm">
                 <a
-                  href={`https://wa.me/923345636230?text=${WA_TEXT}`}
+                  href={`https://wa.me/923019316123?text=${WA_TEXT}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white text-sm font-semibold transition-colors shadow-md cursor-pointer"

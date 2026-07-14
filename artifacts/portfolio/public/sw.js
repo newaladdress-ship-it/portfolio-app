@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mi-portfolio-v4';
+const CACHE_NAME = 'mi-portfolio-v5';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
