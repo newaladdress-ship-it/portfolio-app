@@ -6,19 +6,7 @@
   "framework": "vite",
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.imrandigitals.online"
-        }
-      ],
-      "destination": "https://imrandigitals.online/:path*",
-      "permanent": true
-    }
-  ],
+
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
