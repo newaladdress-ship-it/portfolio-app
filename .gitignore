@@ -54,3 +54,7 @@ Thumbs.db
 .env.*.local
 .env.production
 .env.development
+
+# Attached Assets
+/attached_assets
+
