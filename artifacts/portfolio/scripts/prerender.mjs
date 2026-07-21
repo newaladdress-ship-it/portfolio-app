@@ -174,6 +174,14 @@ const CORE_ROUTES = [
     intro:
       "Expert articles on React, Node.js, Next.js, database optimization, and full-stack web development. Learn best practices and industry insights.",
   },
+  {
+    path: "/admin",
+    file: "admin.html",
+    title: "Admin Panel - Muhammad Imran Portfolio",
+    description: "Secure admin dashboard for managing contacts, reviews, and website settings.",
+    h1: "Admin Panel",
+    intro: "Secure admin dashboard.",
+  },
 ];
 
 const ROUTES = [...CORE_ROUTES];
