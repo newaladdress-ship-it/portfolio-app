@@ -53,9 +53,9 @@ router.get("/umami/stats", async (req, res) => {
       return;
     }
 
-    const rawStats = await statsRes.json();
-    const pageviews = pageviewRes.ok ? await pageviewRes.json() : { pageviews: [], sessions: [] };
-    const rawPrev = prevStatsRes.ok ? await prevStatsRes.json() : {};
+    const rawStats = (await statsRes.json()) as any;
+    const pageviews = pageviewRes.ok ? (await pageviewRes.json()) as any : { pageviews: [], sessions: [] };
+    const rawPrev = prevStatsRes.ok ? (await prevStatsRes.json()) as any : {};
 
     const stats = normalize(rawStats, rawPrev);
 

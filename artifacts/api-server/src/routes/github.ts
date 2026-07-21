@@ -32,7 +32,7 @@ router.get("/github/events", async (req, res) => {
     }
 
     const pollInterval = ghRes.headers.get("X-Poll-Interval") ?? "60";
-    const data: any[] = await ghRes.json();
+    const data = (await ghRes.json()) as any[];
 
     const filtered = data
       .filter((e) => {
@@ -65,8 +65,8 @@ router.get("/github/stats", async (req, res) => {
       return;
     }
 
-    const user = await userRes.json();
-    const repos: any[] = reposRes.ok ? await reposRes.json() : [];
+    const user = (await userRes.json()) as any;
+    const repos = reposRes.ok ? (await reposRes.json()) as any[] : [];
 
     const totalStars = repos.reduce((acc, r) => acc + (r.stargazers_count ?? 0), 0);
     const languages = repos
@@ -77,7 +77,7 @@ router.get("/github/stats", async (req, res) => {
       }, {});
 
     const topLanguages = Object.entries(languages)
-      .sort((a, b) => b[1] - a[1])
+      .sort((a, b) => (b[1] as number) - (a[1] as number))
       .slice(0, 5)
       .map(([lang]) => lang);
 

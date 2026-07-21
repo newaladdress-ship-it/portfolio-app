@@ -59,7 +59,7 @@ router.get("/wakatime/today", async (req, res) => {
       return;
     }
 
-    const data = await r.json();
+    const data = (await r.json()) as any;
     const gt = data?.data?.grand_total ?? null;
 
     res.set("Cache-Control", "no-store");
@@ -93,7 +93,7 @@ router.get("/wakatime/languages", async (req, res) => {
       return;
     }
 
-    const json = await r.json();
+    const json = (await r.json()) as any;
     const languages: { name: string; percent: number; text: string }[] =
       (json?.data?.languages ?? [])
         .slice(0, 10)
