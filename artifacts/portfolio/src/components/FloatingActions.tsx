@@ -37,7 +37,7 @@ export default function FloatingActions() {
   };
 
   return (
-    <div className="fixed bottom-6 right-4 z-50 flex flex-col-reverse items-center gap-3">
+    <div className="fixed bottom-24 md:bottom-6 right-4 z-50 flex flex-col-reverse items-center gap-3">
       <button
         onClick={(e) => {
           e.stopPropagation();

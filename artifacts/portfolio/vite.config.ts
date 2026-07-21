@@ -467,6 +467,9 @@ ${originalMessage ? `\n---\nOriginal Message:\n${originalMessage}` : ""}`;
 }
 
 export default defineConfig({
+  esbuild: {
+    drop: ["console", "debugger"],
+  },
   plugins: [react(), tailwindcss(), apiRoutesPlugin()],
   resolve: {
     alias: {
@@ -477,9 +480,6 @@ export default defineConfig({
   build: {
     target: "ES2020",
     minify: "esbuild",
-    esbuild: {
-      drop: ["console", "debugger"],
-    },
     rollupOptions: {
       output: {
         // Optimize chunk size and naming
@@ -499,14 +499,6 @@ export default defineConfig({
         },
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (
-              id.includes("react") ||
-              id.includes("react-dom") ||
-              id.includes("wouter") ||
-              id.includes("scheduler")
-            ) {
-              return "react-vendor";
-            }
             if (id.includes("framer-motion")) {
               return "framer-motion";
             }

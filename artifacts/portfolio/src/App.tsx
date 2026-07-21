@@ -2,6 +2,7 @@ import { Switch, Route, Router as WouterRouter, useLocation, Link } from "wouter
 import { lazy, Suspense, useEffect } from "react";
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 import Sidebar from "@/components/layout/Sidebar";
+import BottomNav from "@/components/layout/BottomNav";
 import { initTheme } from "@/lib/theme";
 import ChatWidget from "@/components/chat/ChatWidget";
 import FloatingActions from "@/components/FloatingActions";
@@ -115,7 +116,7 @@ function AppLayout() {
       <div className="mx-auto max-w-6xl overflow-x-hidden">
         <div className="flex min-h-screen flex-col lg:flex-row lg:gap-8 lg:py-8 lg:px-4">
           <Sidebar />
-          <main className="flex flex-1 flex-col py-8 pt-24 lg:pt-0 px-5 lg:px-0">
+          <main className="flex flex-1 flex-col py-8 pt-24 pb-24 md:pb-8 lg:pt-0 px-5 lg:px-0">
             <Suspense fallback={<PageLoader />}>
               <Switch>
                 <Route path="/" component={HomePage} />
@@ -142,6 +143,7 @@ function AppLayout() {
           </main>
         </div>
       </div>
+      <BottomNav />
       <ChatWidget />
       <FloatingActions />
       <PWAInstallPrompt />

@@ -344,7 +344,7 @@ export default function ChatWidget() {
       <div
         className={`fixed z-[60] flex flex-col transition-all duration-300 ${
           open
-            ? "inset-x-3 bottom-3 top-16 sm:inset-x-auto sm:top-auto sm:bottom-24 sm:right-4 sm:w-96 sm:h-[580px] sm:max-h-[84vh]"
+            ? "inset-x-3 bottom-20 top-16 sm:inset-x-auto sm:top-auto sm:bottom-24 sm:right-4 sm:w-96 sm:h-[580px] sm:max-h-[84vh]"
             : "w-0 h-0 overflow-hidden pointer-events-none bottom-24 right-4"
         }`}
       >
@@ -598,7 +598,7 @@ export default function ChatWidget() {
       </div>
 
       {hasNew && !open && (
-        <span className="fixed bottom-[76px] right-[14px] z-[61] w-3 h-3 rounded-full bg-red-500 animate-pulse pointer-events-none" />
+        <span className="fixed bottom-[148px] md:bottom-[76px] right-[14px] z-[61] w-3 h-3 rounded-full bg-red-500 animate-pulse pointer-events-none" />
       )}
     </>
   );
