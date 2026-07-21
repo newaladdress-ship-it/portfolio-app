@@ -239,6 +239,9 @@ importers:
       pino-http:
         specifier: ^10
         version: 10.5.0
+      resend:
+        specifier: ^6.12.3
+        version: 6.12.3
       web-push:
         specifier: ^3.6.7
         version: 3.6.7
