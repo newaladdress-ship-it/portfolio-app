@@ -508,6 +508,12 @@ export default defineConfig({
             if (id.includes("firebase") || id.includes("@firebase")) {
               return "firebase-vendor";
             }
+            if (id.includes("@google/genai") || id.includes("@google/generative-ai") || id.includes("openai")) {
+              return "ai-vendor";
+            }
+            if (id.includes("recharts")) {
+              return "recharts-vendor";
+            }
             return "vendor";
           }
         },

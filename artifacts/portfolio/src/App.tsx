@@ -4,10 +4,11 @@ import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 import Sidebar from "@/components/layout/Sidebar";
 import BottomNav from "@/components/layout/BottomNav";
 import { initTheme } from "@/lib/theme";
-import ChatWidget from "@/components/chat/ChatWidget";
-import FloatingActions from "@/components/FloatingActions";
-import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import { useT } from "@/lib/i18n";
+
+const ChatWidget       = lazy(() => import("@/components/chat/ChatWidget"));
+const FloatingActions  = lazy(() => import("@/components/FloatingActions"));
+const PWAInstallPrompt = lazy(() => import("@/components/PWAInstallPrompt"));
 
 const HomePage         = lazy(() => import("@/pages/HomePage"));
 const DevProfilePage   = lazy(() => import("@/pages/DevProfilePage"));
@@ -144,9 +145,11 @@ function AppLayout() {
         </div>
       </div>
       <BottomNav />
-      <ChatWidget />
-      <FloatingActions />
-      <PWAInstallPrompt />
+      <Suspense fallback={null}>
+        <ChatWidget />
+        <FloatingActions />
+        <PWAInstallPrompt />
+      </Suspense>
     </div>
   );
 }

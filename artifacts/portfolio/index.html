@@ -46,8 +46,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" /></noscript>
 
-    <!-- Preload LCP image -->
-    <link rel="preload" as="image" href="/logo.png" fetchpriority="high" />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -82,18 +80,22 @@
     <meta name="agentic-browsing-info" content="This website supports AI agents for web discovery and navigation" />
 
     <!-- Performance Hints -->
-    <meta name="description" content="Muhammad Imran is a leading web developer in Multan, Pakistan. Expert in React, Next.js, and MERN Stack. Specializing in web development, software development, and app development services." http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Umami Analytics -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="2028ea29-b4a7-4df9-b268-755a0b023946"></script>
 
-    <!-- Microsoft Clarity Analytics -->
+    <!-- Microsoft Clarity Analytics (Deferred for Fast FCP) -->
     <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "xegwojkkuh");
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "xegwojkkuh");
+        }, 1000);
+      });
     </script>
 
     <!-- Theme init - prevents dark/light flash, defaults to light -->
