@@ -1,5 +1,5 @@
+import React, { lazy, Suspense, useEffect } from "react";
 import { Switch, Route, Router as WouterRouter, useLocation, Link } from "wouter";
-import { lazy, Suspense, useEffect } from "react";
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 import Sidebar from "@/components/layout/Sidebar";
 import BottomNav from "@/components/layout/BottomNav";
@@ -10,7 +10,7 @@ const ChatWidget       = lazy(() => import("@/components/chat/ChatWidget"));
 const FloatingActions  = lazy(() => import("@/components/FloatingActions"));
 const PWAInstallPrompt = lazy(() => import("@/components/PWAInstallPrompt"));
 
-const HomePage         = lazy(() => import("@/pages/HomePage"));
+import HomePage from "@/pages/HomePage";
 const DevProfilePage   = lazy(() => import("@/pages/DevProfilePage"));
 const AboutPage        = lazy(() => import("@/pages/AboutPage"));
 const AchievementsPage = lazy(() => import("@/pages/AchievementsPage"));
@@ -113,11 +113,11 @@ function NextPageButton() {
 
 function AppLayout() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black transition-colors duration-200 overflow-x-hidden">
-      <div className="mx-auto max-w-6xl overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-black transition-colors duration-200">
+      <div className="mx-auto max-w-6xl">
         <div className="flex min-h-screen flex-col lg:flex-row lg:gap-8 lg:py-8 lg:px-4">
           <Sidebar />
-          <main className="flex flex-1 flex-col py-8 pt-24 pb-24 md:pb-8 lg:pt-0 px-5 lg:px-0">
+          <main className="flex flex-1 flex-col py-8 pt-24 pb-24 md:pb-8 lg:pt-0 px-5 lg:px-0 min-w-0 overflow-x-hidden">
             <Suspense fallback={<PageLoader />}>
               <Switch>
                 <Route path="/" component={HomePage} />
@@ -133,8 +133,6 @@ function AppLayout() {
                 <Route path="/smarttalk" component={SmartTalkPage} />
                 <Route path="/services" component={ServicesIndexPage} />
                 <Route path="/services/:slug" component={ServicePage} />
-                <Route path="/locations" component={LocationsIndexPage} />
-                <Route path="/locations/:slug" component={LocationPage} />
                 <Route path="/blog" component={BlogIndexPage} />
                 <Route path="/blog/:slug" component={BlogPostPage} />
                 <Route component={NotFound} />

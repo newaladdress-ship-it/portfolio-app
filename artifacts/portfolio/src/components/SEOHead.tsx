@@ -1,44 +1,39 @@
-import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 
 interface SEOHeadProps {
   title: string;
   description: string;
   path: string;
   type?: string;
-  /** One or more JSON-LD schema objects to inject into the document head. */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const BASE_URL = "https://imrandigitals.online";
-const DEFAULT_IMAGE = `${BASE_URL}/opengraph.jpg`;
+const BASE_URL = "https://www.imrandigitals.online";
 
-export default function SEOHead({ title, description, path, type = "website", jsonLd }: SEOHeadProps) {
-  const cleanPath = path === "/" ? "/" : path.replace(/\/+$/, "");
-  const canonical = `${BASE_URL}${cleanPath}`;
-  const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+export default function SEOHead({ title, description, path }: SEOHeadProps) {
+  useEffect(() => {
+    if (title) document.title = title;
 
-  return (
-    <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={canonical} />
+    // Meta description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement("meta");
+      metaDesc.setAttribute("name", "description");
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute("content", description);
 
-      <meta property="og:type" content={type} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:url" content={canonical} />
-      <meta property="og:image" content={DEFAULT_IMAGE} />
+    // Canonical link
+    const cleanPath = path === "/" ? "/" : path.replace(/\/+$/, "");
+    const canonicalUrl = `${BASE_URL}${cleanPath}`;
+    let linkCanonical = document.querySelector('link[rel="canonical"]');
+    if (!linkCanonical) {
+      linkCanonical = document.createElement("link");
+      linkCanonical.setAttribute("rel", "canonical");
+      document.head.appendChild(linkCanonical);
+    }
+    linkCanonical.setAttribute("href", canonicalUrl);
+  }, [title, description, path]);
 
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={DEFAULT_IMAGE} />
-
-      {schemas.map((schema, i) => (
-        <script key={i} type="application/ld+json">
-          {JSON.stringify(schema)}
-        </script>
-      ))}
-    </Helmet>
-  );
+  return null;
 }

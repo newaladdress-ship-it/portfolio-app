@@ -1,7 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import PWAInstallButton from "@/components/PWAInstallButton";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import {
   BiHomeCircle,
   BiUser,
@@ -11,25 +10,29 @@ import {
 } from "react-icons/bi";
 import { PiCertificate } from "react-icons/pi";
 import {
-  HiOutlineSun,
-  HiOutlineMoon,
+  HiOutlineChatAlt2,
   HiOutlineMenuAlt2,
   HiX,
-  HiOutlineChatAlt2,
-  HiOutlineSparkles,
-  HiOutlineBriefcase,
 } from "react-icons/hi";
-import { HiOutlineChatBubbleLeftRight, HiOutlineRocketLaunch, HiOutlineIdentification } from "react-icons/hi2";
-import { useThemeStore } from "@/stores/theme";
+import {
+  HiOutlineBriefcase,
+  HiOutlineRocketLaunch,
+  HiOutlineChatBubbleLeftRight,
+  HiOutlineSparkles,
+  HiOutlineIdentification,
+  HiOutlineSun,
+  HiOutlineMoon,
+} from "react-icons/hi2";
+import { PERSONAL } from "@/data/personal";
 import { useMenu } from "@/stores/menu";
+import { useThemeStore } from "@/stores/theme";
 import { useLanguageStore } from "@/stores/language";
 import { useT, LOCALE_LABELS } from "@/lib/i18n";
-import { PERSONAL } from "@/data/personal";
 
 function MenuItem({ title, href, icon, badge }: { title: string; href: string; icon: React.ReactNode; badge?: string }) {
   const [pathname] = useLocation();
-  const { hideMenu } = useMenu();
   const isActive = pathname === href;
+  const hideMenu = () => useMenu.getState().hideMenu();
 
   return (
     <Link
@@ -68,8 +71,13 @@ function MenuItem({ title, href, icon, badge }: { title: string; href: string; i
 }
 
 function ThemeToggle() {
-  const { theme, toggleTheme } = useThemeStore();
+  const [theme, setTh] = useState(() => useThemeStore.getState().theme);
+  useEffect(() => {
+    return useThemeStore.subscribe((state) => setTh(state.theme));
+  }, []);
+  const toggleTheme = () => useThemeStore.getState().toggleTheme();
   const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+
   return (
     <button
       onClick={toggleTheme}
@@ -83,15 +91,20 @@ function ThemeToggle() {
 }
 
 function LanguageSwitcher() {
-  const { locale, cycleLocale } = useLanguageStore();
+  const [locale, setLoc] = useState(() => useLanguageStore.getState().locale);
+  useEffect(() => {
+    return useLanguageStore.subscribe((state) => setLoc(state.locale));
+  }, []);
+  const cycleLocale = () => useLanguageStore.getState().cycleLocale();
+
   return (
     <button
       onClick={cycleLocale}
-      title={`Language: ${LOCALE_LABELS[locale]} - click to switch`}
+      title={`Language: ${LOCALE_LABELS[locale] || "EN"} - click to switch`}
       aria-label="Switch language"
       className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-all duration-300 border border-neutral-200 dark:border-neutral-700 min-w-[38px] justify-center"
     >
-      {LOCALE_LABELS[locale]}
+      {LOCALE_LABELS[locale] || "EN"}
     </button>
   );
 }
@@ -148,7 +161,11 @@ function ProfileHeader({ imageSize }: { imageSize: number }) {
 
 export default function Sidebar() {
   const t = useT();
-  const { isOpen, toggleMenu, hideMenu } = useMenu();
+  const [isOpen, setIsOpen] = useState(() => useMenu.getState().isOpen);
+  useEffect(() => {
+    return useMenu.subscribe((state) => setIsOpen(state.isOpen));
+  }, []);
+  const toggleMenu = () => useMenu.getState().toggleMenu();
   const [isMobile, setIsMobile] = useState(false);
 
   const MENU_ITEMS = [
@@ -185,16 +202,16 @@ export default function Sidebar() {
   const imageSize = isMobile ? 40 : 100;
 
   return (
-    <header className="lg:w-1/5">
-      <div className="sticky top-0 z-10 flex flex-col transition-all duration-300 lg:max-h-screen lg:overflow-y-auto lg:py-8 lg:pr-1 lg:[scrollbar-width:thin]">
-        {/* Mobile/Desktop Header */}
-        <div
-          className={`fixed z-20 w-full max-w-full bg-white px-3 py-3 sm:p-5 shadow-sm dark:border-b dark:border-neutral-800 dark:bg-black lg:relative lg:border-none lg:!bg-transparent lg:p-0 xl:shadow-none transition-colors duration-200 ${isOpen ? "pb-0" : ""}`}
-        >
-          <div className="flex items-center justify-between lg:flex-col lg:space-y-4">
-            <ProfileHeader imageSize={imageSize} />
-            {isMobile && (
-              <div className={`flex items-center gap-3 lg:hidden shrink-0 ${isOpen ? "h-[130px] flex-col-reverse !items-end justify-between pb-1" : ""}`}>
+    <header className="lg:w-1/5 shrink-0">
+      <div className="lg:sticky lg:top-8 lg:h-[calc(100vh-4rem)] flex flex-col transition-all duration-300">
+        {/* Mobile Header Top Bar */}
+        {isMobile && (
+          <div
+            className={`fixed top-0 left-0 right-0 z-30 w-full max-w-full bg-white/90 dark:bg-black/90 backdrop-blur-md px-3 py-3 sm:p-5 shadow-sm dark:border-b dark:border-neutral-800 transition-colors duration-200 shrink-0 ${isOpen ? "pb-0" : ""}`}
+          >
+            <div className="flex items-center justify-between">
+              <ProfileHeader imageSize={40} />
+              <div className={`flex items-center gap-3 shrink-0 ${isOpen ? "h-[130px] flex-col-reverse !items-end justify-between pb-1" : ""}`}>
                 <div className="flex gap-1.5 items-center">
                   <PWAInstallButton />
                   <LanguageSwitcher />
@@ -210,66 +227,46 @@ export default function Sidebar() {
                   {isOpen ? <HiX size={22} /> : <HiOutlineMenuAlt2 size={22} />}
                 </button>
               </div>
+            </div>
+
+            {/* Mobile menu dropdown */}
+            {isOpen && (
+              <div id="mobile-nav" className="overflow-hidden transition-all duration-300">
+                <div className="mt-4 pb-4 space-y-1">
+                  {MENU_ITEMS.map((item) => (
+                    <MenuItem key={item.href} {...item} />
+                  ))}
+                </div>
+              </div>
             )}
           </div>
+        )}
 
-          {/* Mobile menu */}
-          {isMobile && (
-            <AnimatePresence>
-              {isOpen && (
-                <motion.div
-                  id="mobile-nav"
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="overflow-hidden"
-                >
-                  <div className="mt-4 pb-4 space-y-1">
-                    {MENU_ITEMS.map((item) => (
-                      <MenuItem key={item.href} {...item} />
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          )}
-        </div>
+        {/* Desktop Sidebar Layout - Pinned Profile Header at Top, Scrollable Nav in Middle */}
+        <div className="hidden lg:flex lg:flex-col lg:h-full min-h-0">
+          {/* PINNED TOP: Profile Header */}
+          <div className="shrink-0 pb-3">
+            <ProfileHeader imageSize={100} />
+          </div>
 
-        {/* Desktop sidebar content */}
-        <div className="hidden lg:block mt-16 lg:mt-0">
-          <div className="border-t border-neutral-300 dark:border-neutral-700 my-4" />
-          <nav className="space-y-1">
+          <div className="border-t border-neutral-300 dark:border-neutral-700 mb-3 shrink-0" />
+
+          {/* SCROLLABLE MIDDLE: Menu Items */}
+          <nav className="flex-1 min-h-0 overflow-y-auto space-y-1 pr-1 lg:[scrollbar-width:thin]">
             {MENU_ITEMS.map((item) => (
               <MenuItem key={item.href} {...item} />
             ))}
           </nav>
-          <div className="border-t border-neutral-300 dark:border-neutral-700 my-4" />
-          <div className="flex flex-wrap items-center gap-2 px-4">
-            <ThemeToggle />
-            <LanguageSwitcher />
-            <PWAInstallButton />
-          </div>
-          <div className="border-t border-neutral-300 dark:border-neutral-700 my-4" />
-          <div className="space-y-2 px-4 py-3 text-center text-sm text-neutral-600 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
-            <p className="font-medium text-neutral-900 dark:text-neutral-100">{PERSONAL.name}</p>
-            <a
-              href={PERSONAL.phoneLink}
-              className="flex items-center justify-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200"
-              title="Call now"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.854l.847 4.929a1 1 0 01-.964 1.144h-2.003l-.122 1.149c-.905.905-1.005 2.505-.405 3.705.6 1.2 1.6 2 2.8 2.8l1.906-1.906a1 1 0 011.414 0l2.121 2.121a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414 0L5.03 15.03c-1.2-.6-2.2-1.6-2.8-2.8-.6-1.2-.5-2.8.405-3.705L2 3z" />
-              </svg>
-              <span>{PERSONAL.phone}</span>
-            </a>
-            <div className="flex items-center justify-center gap-2 text-neutral-600 dark:text-neutral-400">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-              </svg>
-              <span>{PERSONAL.address}</span>
+
+          {/* PINNED BOTTOM: Controls & Copyright */}
+          <div className="border-t border-neutral-300 dark:border-neutral-700 pt-3 mt-3 shrink-0">
+            <div className="flex items-center gap-2 px-2">
+              <ThemeToggle />
+              <LanguageSwitcher />
+              <PWAInstallButton />
             </div>
-            <p className="text-xs text-neutral-500 dark:text-neutral-500 pt-2 border-t border-neutral-200 dark:border-neutral-700">
-              © {new Date().getFullYear()}
+            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 px-2 mt-2">
+              © {new Date().getFullYear()} {PERSONAL.name}
             </p>
           </div>
         </div>

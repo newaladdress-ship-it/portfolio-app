@@ -72,6 +72,8 @@
     "zod": "catalog:"
   },
   "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "@google/genai": "^1.50.1",
     "@google/generative-ai": "^0.24.1",
     "@types/nodemailer": "^8.0.0",

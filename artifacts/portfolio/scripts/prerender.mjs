@@ -199,19 +199,6 @@ for (const s of SERVICES_DATA) {
   });
 }
 
-// Parse and add Locations
-const LOCATIONS_DATA = parseTSData("locations.ts", "LOCATIONS");
-for (const loc of LOCATIONS_DATA) {
-  ROUTES.push({
-    path: `/locations/${loc.slug}`,
-    file: `locations/${loc.slug}.html`,
-    title: loc.metaTitle,
-    description: loc.metaDescription,
-    h1: loc.h1,
-    intro: loc.intro,
-  });
-}
-
 // Parse and add Blog posts
 const BLOG_DATA = parseTSData("blog.ts", "BLOG_POSTS");
 for (const post of BLOG_DATA) {

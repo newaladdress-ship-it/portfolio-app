@@ -383,8 +383,12 @@ translations.fr = buildT("fr");
 translations.ja = buildT("ja");
 
 export function useT() {
-  const locale = useLanguageStore((s) => s.locale);
-  return translations[locale];
+  let locale: Locale = "en";
+  try {
+    const v = localStorage.getItem("portfolio-locale");
+    if (v === "fr" || v === "ja") locale = v;
+  } catch {}
+  return translations[locale] || translations.en;
 }
 
 export const LOCALE_LABELS: Record<string, string> = {
