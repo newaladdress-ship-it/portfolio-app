@@ -504,8 +504,11 @@ type WakaStat = { name: string; text: string; percent: number };
 
 type WakaData = {
   data: {
-    human_readable_total: string;
-    human_readable_daily_average: string;
+    human_readable_total?: string;
+    human_readable_total_including_other_language?: string;
+    human_readable_daily_average?: string;
+    human_readable_daily_average_including_other_language?: string;
+    human_readable_range?: string;
     best_day?: { date: string; text: string };
     languages: WakaStat[];
     editors: WakaStat[];
@@ -547,7 +550,25 @@ function WakaBreakdownRow({ items, colors }: { items: WakaStat[]; colors?: Recor
   );
 }
 
+const RANGES = [
+  { id: "last_7_days", label: "Last 7 Days" },
+  { id: "last_30_days", label: "Last 30 Days" },
+  { id: "all_time", label: "All Time" },
+];
+
+function formatTopDay(dateStr?: string) {
+  if (!dateStr) return "-";
+  const date = new Date(dateStr + "T00:00:00");
+  if (isNaN(date.getTime())) return dateStr;
+  const dayName = date.toLocaleDateString("en-US", { weekday: "short" });
+  const monthName = date.toLocaleDateString("en-US", { month: "short" });
+  const dayNum = date.getDate();
+  const suffix = ["th", "st", "nd", "rd"][(dayNum % 10 > 3 || [11, 12, 13].includes(dayNum % 100)) ? 0 : dayNum % 10];
+  return `${dayName} ${monthName} ${dayNum}${suffix}`;
+}
+
 function WakaTimeSection() {
+  const [range, setRange] = useState("last_7_days");
   const [data, setData] = useState<WakaData | null>(null);
   const [today, setToday] = useState<WakaToday | null>(null);
   const [loading, setLoading] = useState(true);
@@ -555,12 +576,12 @@ function WakaTimeSection() {
   const [lastFetched, setLastFetched] = useState<Date | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  async function fetchData(silent = false) {
+  async function fetchData(targetRange = range, silent = false) {
     try {
       if (!silent) setLoading(true);
       setError(null);
       const [statsRes, todayRes] = await Promise.all([
-        fetch("/api/wakatime/stats"),
+        fetch(`/api/wakatime/stats?range=${targetRange}`),
         fetch("/api/wakatime/today"),
       ]);
       const stats = await statsRes.json();
@@ -580,93 +601,178 @@ function WakaTimeSection() {
 
   function scheduleNext() {
     if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(async () => { await fetchData(true); scheduleNext(); }, WAKA_REFRESH_MS);
+    timerRef.current = setTimeout(async () => { await fetchData(range, true); scheduleNext(); }, WAKA_REFRESH_MS);
   }
 
   useEffect(() => {
-    fetchData().then(() => scheduleNext());
+    fetchData(range).then(() => scheduleNext());
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, []);
+  }, [range]);
+
+  const totalCoding = data?.data
+    ? (data.data.human_readable_total_including_other_language ?? data.data.human_readable_total ?? "-")
+    : "-";
+
+  const dailyAvg = data?.data
+    ? (data.data.human_readable_daily_average_including_other_language ?? data.data.human_readable_daily_average ?? "-")
+    : "-";
+
+  const rangeLabel = range === "last_7_days" ? "the Last 7 Days" : range === "last_30_days" ? "the Last 30 Days" : "All Time";
+  const dailyAvgSub = range === "last_7_days" ? "over 7 days" : range === "last_30_days" ? "over 30 days" : "all time avg";
+  const topDayFormatted = formatTopDay(data?.data?.best_day?.date);
 
   return (
-    <SpotlightCard className="p-6 space-y-5">
-      {/* Header */}
-      <div className="flex items-center justify-between flex-wrap gap-2">
-        <div className="flex items-center gap-2">
-          <SiWakatime size={18} className="text-blue-500" />
-          <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">WakaTime</h3>
-          <span className="flex items-center gap-1 rounded-full bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 text-[10px] font-medium text-blue-700 dark:text-blue-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
-            All Time
-          </span>
+    <SpotlightCard className="p-6 space-y-6">
+      {/* Top Header matching WakaTime dashboard */}
+      <div className="flex items-start justify-between flex-wrap gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <SiWakatime size={18} className="text-blue-500" />
+            <span className="text-xs uppercase tracking-widest font-semibold text-neutral-400">
+              WAKATIME DASHBOARD
+            </span>
+          </div>
+          <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
+            Activity Overview
+          </h2>
         </div>
-        <div className="flex items-center gap-2">
+
+        <div className="flex items-center gap-3 flex-wrap">
+          {/* Range Selector */}
+          <div className="flex items-center rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800/80 p-1 text-xs">
+            {RANGES.map(r => (
+              <button
+                key={r.id}
+                onClick={() => setRange(r.id)}
+                className={`px-3 py-1 rounded-lg font-medium text-xs transition-all ${
+                  range === r.id
+                    ? "bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-sm"
+                    : "text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200"
+                }`}
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+
           {lastFetched && (
-            <span className="text-[10px] text-neutral-400 dark:text-neutral-500">Updated {timeAgo(lastFetched.toISOString())}</span>
+            <span className="text-[10px] text-neutral-400">Updated {timeAgo(lastFetched.toISOString())}</span>
           )}
-          <button onClick={() => fetchData()} disabled={loading}
-            className="flex items-center gap-1 rounded-lg border border-neutral-200 dark:border-neutral-700 px-2 py-1 text-[11px] text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50">
-            <HiOutlineRefresh size={12} className={loading ? "animate-spin" : ""} /> Refresh
+
+          <button
+            onClick={() => fetchData(range)}
+            disabled={loading}
+            className="flex items-center gap-1 rounded-xl border border-neutral-200 dark:border-neutral-700 px-3 py-1.5 text-xs text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50"
+          >
+            <HiOutlineRefresh size={14} className={loading ? "animate-spin" : ""} /> Refresh
           </button>
-          <a href="https://wakatime.com" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-1 rounded-lg border border-neutral-200 dark:border-neutral-700 px-2 py-1 text-[11px] text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-            WakaTime <HiOutlineExternalLink size={10} />
+          <a
+            href="https://wakatime.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 rounded-xl border border-neutral-200 dark:border-neutral-700 px-3 py-1.5 text-xs text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          >
+            WakaTime <HiOutlineExternalLink size={12} />
           </a>
         </div>
       </div>
 
       {loading && (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 animate-pulse">
-          {Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-16 rounded-xl bg-neutral-100 dark:bg-neutral-800" />)}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-4 animate-pulse">
+          <div className="h-28 rounded-2xl bg-neutral-100 dark:bg-neutral-800 lg:col-span-1" />
+          <div className="grid grid-cols-3 gap-3 lg:col-span-3">
+            <div className="h-28 rounded-2xl bg-neutral-100 dark:bg-neutral-800" />
+            <div className="h-28 rounded-2xl bg-neutral-100 dark:bg-neutral-800" />
+            <div className="h-28 rounded-2xl bg-neutral-100 dark:bg-neutral-800" />
+          </div>
         </div>
       )}
 
       {!loading && error && (
-        <div className="rounded-xl border border-yellow-200 dark:border-yellow-800/40 bg-yellow-50 dark:bg-yellow-900/10 p-4 space-y-1">
+        <div className="rounded-2xl border border-yellow-200 dark:border-yellow-800/40 bg-yellow-50 dark:bg-yellow-900/10 p-5">
           <p className="text-sm font-medium text-yellow-700 dark:text-yellow-400">No coding activity available.</p>
         </div>
       )}
 
       {!loading && data && (
-        <div className="space-y-5">
-          {/* Summary row */}
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {[
-              { label: "Total Coding", value: data.data.human_readable_total },
-              { label: "Daily Avg", value: data.data.human_readable_daily_average },
-              { label: "Best Day", value: data.data.best_day?.text ?? "-", sub: data.data.best_day?.date },
-              { label: "Today", value: today?.todayTotal ?? "-" },
-            ].map((s, i) => (
-              <div key={i} className="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 p-3">
-                <p className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wide">{s.label}</p>
-                <p className="mt-1 text-sm font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">{s.value}</p>
-                {s.sub && <p className="text-[10px] text-neutral-400 mt-0.5">{s.sub}</p>}
+        <div className="space-y-6">
+          {/* Main Activity Overview Card matching official WakaTime screenshot */}
+          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/70 dark:bg-neutral-900/50 p-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-center">
+              
+              {/* Left Column: Huge Total Coding Hours */}
+              <div className="lg:col-span-5 space-y-1.5">
+                <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
+                  over {rangeLabel}
+                </p>
+                <div className="text-4xl sm:text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tight leading-none">
+                  {totalCoding}
+                </div>
               </div>
-            ))}
+
+              {/* Right Column: 3 Cards Grid */}
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {/* CURRENT DAY */}
+                <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 space-y-1 shadow-sm">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
+                    CURRENT DAY
+                  </p>
+                  <p className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-neutral-100">
+                    {today?.todayTotal ?? "0 mins"}
+                  </p>
+                  <p className="text-[11px] text-neutral-400">Today</p>
+                </div>
+
+                {/* DAILY AVERAGE */}
+                <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 space-y-1 shadow-sm">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
+                    DAILY AVERAGE
+                  </p>
+                  <p className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-neutral-100">
+                    {dailyAvg}
+                  </p>
+                  <p className="text-[11px] text-neutral-400">{dailyAvgSub}</p>
+                </div>
+
+                {/* MOST ACTIVE */}
+                <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 space-y-1 shadow-sm">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
+                    MOST ACTIVE
+                  </p>
+                  <p className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-neutral-100 truncate">
+                    {topDayFormatted}
+                  </p>
+                  <p className="text-[11px] text-neutral-400">
+                    {data.data.best_day?.text ? `${data.data.best_day.text} (top day)` : "top day"}
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
 
-          {/* Breakdowns grid */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {/* Breakdowns Grid (Languages, Editors, OS, Machines) */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {data.data.languages?.length > 0 && (
-              <div className="space-y-2">
+              <div className="space-y-3 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
                 <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">Languages</p>
                 <WakaBreakdownRow items={data.data.languages} colors={LANG_COLORS} />
               </div>
             )}
             {data.data.editors?.length > 0 && (
-              <div className="space-y-2">
+              <div className="space-y-3 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
                 <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">Editors</p>
                 <WakaBreakdownRow items={data.data.editors} />
               </div>
             )}
             {data.data.operating_systems?.length > 0 && (
-              <div className="space-y-2">
+              <div className="space-y-3 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
                 <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">Operating Systems</p>
                 <WakaBreakdownRow items={data.data.operating_systems} />
               </div>
             )}
             {data.data.machines?.length > 0 && (
-              <div className="space-y-2">
+              <div className="space-y-3 rounded-2xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
                 <p className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">Machines</p>
                 <WakaBreakdownRow items={data.data.machines} />
               </div>
