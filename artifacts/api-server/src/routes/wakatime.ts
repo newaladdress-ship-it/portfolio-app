@@ -20,6 +20,7 @@ router.get("/wakatime/stats", async (req, res) => {
       return;
     }
 
+    const force = req.query["force"] === "true";
     const range = (typeof req.query["range"] === "string" && req.query["range"]) || "all_time";
     const r = await fetch(
       `https://wakatime.com/api/v1/users/current/stats/${encodeURIComponent(range)}`,
@@ -33,7 +34,11 @@ router.get("/wakatime/stats", async (req, res) => {
     }
 
     const data = await r.json();
-    res.set("Cache-Control", "no-store");
+    if (force) {
+      res.set("Cache-Control", "no-cache, no-store, must-revalidate");
+    } else {
+      res.set("Cache-Control", "public, max-age=3600, s-maxage=3600, stale-while-revalidate=600");
+    }
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch WakaTime stats", errorCode: "FETCH_ERROR" });
@@ -48,6 +53,7 @@ router.get("/wakatime/today", async (req, res) => {
       return;
     }
 
+    const force = req.query["force"] === "true";
     const r = await fetch(
       "https://wakatime.com/api/v1/users/current/status_bar/today",
       { headers: makeHeaders(apiKey) }
@@ -62,7 +68,11 @@ router.get("/wakatime/today", async (req, res) => {
     const data = (await r.json()) as any;
     const gt = data?.data?.grand_total ?? null;
 
-    res.set("Cache-Control", "no-store");
+    if (force) {
+      res.set("Cache-Control", "no-cache, no-store, must-revalidate");
+    } else {
+      res.set("Cache-Control", "public, max-age=3600, s-maxage=3600, stale-while-revalidate=600");
+    }
     res.json({
       todayTotal: gt?.text ?? "0 mins",
       todaySecs: gt?.total_seconds ?? 0,
@@ -82,6 +92,7 @@ router.get("/wakatime/languages", async (req, res) => {
       return;
     }
 
+    const force = req.query["force"] === "true";
     const r = await fetch(
       "https://wakatime.com/api/v1/users/current/stats/all_time",
       { headers: makeHeaders(apiKey) }
@@ -103,7 +114,11 @@ router.get("/wakatime/languages", async (req, res) => {
           text: l.text,
         }));
 
-    res.set("Cache-Control", "no-store");
+    if (force) {
+      res.set("Cache-Control", "no-cache, no-store, must-revalidate");
+    } else {
+      res.set("Cache-Control", "public, max-age=3600, s-maxage=3600, stale-while-revalidate=600");
+    }
     res.json({ languages, range: json?.data?.range ?? "all_time" });
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch WakaTime language stats", errorCode: "FETCH_ERROR" });

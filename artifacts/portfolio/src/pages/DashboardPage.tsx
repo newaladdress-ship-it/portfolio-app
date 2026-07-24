@@ -524,7 +524,7 @@ const PALETTE = [
   "bg-cyan-500", "bg-yellow-500", "bg-red-500", "bg-pink-500",
 ];
 
-const WAKA_REFRESH_MS = 30 * 1000;
+const WAKA_REFRESH_MS = 60 * 60 * 1000;
 
 function WakaBreakdownRow({ items, colors }: { items: WakaStat[]; colors?: Record<string, string> }) {
   return (
@@ -576,13 +576,14 @@ function WakaTimeSection() {
   const [lastFetched, setLastFetched] = useState<Date | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  async function fetchData(targetRange = range, silent = false) {
+  async function fetchData(targetRange = range, silent = false, force = false) {
     try {
       if (!silent) setLoading(true);
       setError(null);
+      const forceQuery = force ? "&force=true" : "";
       const [statsRes, todayRes] = await Promise.all([
-        fetch(`/api/wakatime/stats?range=${targetRange}`),
-        fetch("/api/wakatime/today"),
+        fetch(`/api/wakatime/stats?range=${targetRange}${forceQuery}`),
+        fetch(`/api/wakatime/today?${force ? "force=true" : ""}`),
       ]);
       const stats = await statsRes.json();
       const todayData = await todayRes.json();
@@ -660,7 +661,7 @@ function WakaTimeSection() {
           )}
 
           <button
-            onClick={() => fetchData(range)}
+            onClick={() => fetchData(range, false, true)}
             disabled={loading}
             className="flex items-center gap-1 rounded-xl border border-neutral-200 dark:border-neutral-700 px-3 py-1.5 text-xs text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50"
           >
