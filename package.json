@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "preinstall": "sh -c 'rm -f package-lock.json yarn.lock'",
+    "preinstall": "node -e \"import('fs').then(fs => { ['package-lock.json', 'yarn.lock'].forEach(f => fs.existsSync(f) && fs.existsSync(f) && fs.unlinkSync(f)); })\"",
     "dev": "pnpm --filter @workspace/portfolio run dev",
     "build": "pnpm run typecheck && pnpm -r --if-present run build && node -e \"import('fs').then(fs => { if (fs.existsSync('artifacts/api-server/dist/app.mjs')) { fs.mkdirSync('api', { recursive: true }); fs.copyFileSync('artifacts/api-server/dist/app.mjs', 'api/app.mjs'); } })\"",
     "typecheck:libs": "tsc --build",
