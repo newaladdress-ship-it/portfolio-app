@@ -1,0 +1,21 @@
+# Muhammad Imran — Web Developer in Multan, Pakistan
+ 
+> Muhammad Imran is a full stack developer based in Multan, Pakistan, specializing in React, Next.js, and MERN stack web application development. Available for freelance and remote projects for businesses, startups, and agencies worldwide.
+ 
+## About
+- [About Muhammad Imran](https://www.imrandigitals.online/about): Background, experience, and technical approach of a Multan-based full stack developer specializing in React, Next.js, Node.js, and MongoDB.
+ 
+## Services
+- [Web Development Services](https://www.imrandigitals.online/#services): Business websites, MERN stack applications, Next.js/React development, AI-powered web apps, Chrome extension development, dashboards and admin panels, technical and local SEO.
+ 
+## Work
+- [Projects](https://www.imrandigitals.online/projects): Portfolio of web applications, business websites, and custom software built for clients across Pakistan and internationally.
+- [Achievements](https://www.imrandigitals.online/achievements): Certifications, milestones, and professional credentials.
+ 
+## Contact
+- [Contact](https://www.imrandigitals.online/contact): Get a project quote or start a conversation about a web development or SEO project.
+ 
+## Optional
+- Location: Multan, Punjab, Pakistan
+- Availability: Remote, worldwide
+- Core stack: React, Next.js, TypeScript, Node.js, Express.js, MongoDB, Firebase, Tailwind CSS
