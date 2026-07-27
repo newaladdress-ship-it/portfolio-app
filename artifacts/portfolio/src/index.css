@@ -6,17 +6,38 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Outfit', sans-serif;
+  --color-surface: var(--surface);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-stone: var(--border-stone);
+  --color-terracotta: var(--accent-terracotta);
+  --color-terracotta-hover: var(--accent-hover);
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Manrope', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F5F2EC;
+  --foreground: #17211E;
+  --surface: #FFFEFA;
+  --text-secondary: #5C655F;
+  --border-stone: #D9D4CA;
+  --accent-terracotta: #C96A3D;
+  --accent-hover: #A9512A;
+  --dark-bg: #17211E;
+  --dark-fg: #F7F3EC;
 }
 
 .dark {
-  --background: #000000;
-  --foreground: #ededed;
+  --background: #121917;
+  --foreground: #F5F2EC;
+  --surface: #1B2421;
+  --text-secondary: #9DA6A0;
+  --border-stone: #2A3632;
+  --accent-terracotta: #D4794B;
+  --accent-hover: #E38A5C;
+  --dark-bg: #0C1210;
+  --dark-fg: #F7F3EC;
   color-scheme: dark;
 }
 
@@ -30,21 +51,20 @@
   }
 
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    border-radius: 3px;
     background-color: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    border-radius: 3px;
-    background-color: #525252;
+    border-radius: 4px;
+    background-color: #D9D4CA;
   }
 
   .dark ::-webkit-scrollbar-thumb {
-    background-color: #a3a3a3;
+    background-color: #2A3632;
   }
 
   html,
@@ -55,19 +75,29 @@
   }
 
   html {
-    font-family: 'Outfit', sans-serif;
-    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
     background-color: var(--background);
     color: var(--foreground);
     transition: background-color 0.2s ease, color 0.2s ease;
+    scroll-behavior: smooth;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
   }
 
   #root {
@@ -76,7 +106,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid #ca8a04;
+    outline: 2px solid #C96A3D;
     outline-offset: 3px;
   }
 
@@ -90,8 +120,35 @@
   }
 }
 
-@layer components {
-  .hexagon {
-    clip-path: polygon(0 25%, 50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%);
+@layer utilities {
+  .font-heading {
+    font-family: 'Manrope', sans-serif;
+  }
+  .font-sans {
+    font-family: 'Inter', sans-serif;
+  }
+  .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .bg-warm-ivory {
+    background-color: #F5F2EC;
+  }
+  .bg-parchment {
+    background-color: #FFFEFA;
+  }
+  .text-charcoal {
+    color: #17211E;
+  }
+  .text-sage {
+    color: #5C655F;
+  }
+  .border-stone {
+    border-color: #D9D4CA;
+  }
+  .bg-terracotta {
+    background-color: #C96A3D;
+  }
+  .text-terracotta {
+    color: #C96A3D;
   }
 }

@@ -13,16 +13,16 @@ const primaryLinks = [
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-14 border-t border-neutral-200 pt-8 dark:border-neutral-800">
+    <footer className="mt-16 bg-[#17211E] text-[#F7F3EC] rounded-2xl p-8 sm:p-10 border border-[#2A3632]">
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-3 lg:col-span-1">
-          <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Imran Digitals</p>
-          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-            Web development, technical SEO, and reliable digital products for businesses in Multan and worldwide.
+          <p className="text-base font-heading font-semibold text-[#F7F3EC]">Imran Digitals</p>
+          <p className="text-sm font-sans leading-relaxed text-[#9DA6A0]">
+            Web development, technical SEO, and custom digital systems for business owners in Multan and remote clients worldwide.
           </p>
           <a
             href={`mailto:${PERSONAL.email}`}
-            className="inline-flex items-center gap-2 text-sm font-medium text-neutral-700 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-mono text-[#C96A3D] hover:text-[#E38A5C] transition-colors"
           >
             <Mail size={15} aria-hidden="true" />
             {PERSONAL.email}
@@ -30,11 +30,11 @@ export default function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Explore</h2>
-          <ul className="mt-3 space-y-2">
+          <h2 className="text-xs font-mono tracking-wider uppercase text-[#9DA6A0]">Explore</h2>
+          <ul className="mt-3 space-y-2 font-sans">
             {primaryLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-sm text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white">
+                <Link href={link.href} className="text-sm text-[#F7F3EC]/80 hover:text-[#C96A3D] transition-colors">
                   {link.label}
                 </Link>
               </li>
@@ -43,11 +43,11 @@ export default function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Services</h2>
-          <ul className="mt-3 space-y-2">
+          <h2 className="text-xs font-mono tracking-wider uppercase text-[#9DA6A0]">Services</h2>
+          <ul className="mt-3 space-y-2 font-sans">
             {SERVICES.slice(0, 5).map((service) => (
               <li key={service.slug}>
-                <Link href={`/services/${service.slug}`} className="text-sm text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white">
+                <Link href={`/services/${service.slug}`} className="text-sm text-[#F7F3EC]/80 hover:text-[#C96A3D] transition-colors">
                   {service.h1.replace("Expert ", "").replace(" Services", "")}
                 </Link>
               </li>
@@ -56,19 +56,19 @@ export default function SiteFooter() {
         </div>
 
         <div className="space-y-3">
-          <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Based in Multan</h2>
-          <p className="flex items-start gap-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-            <MapPin size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
+          <h2 className="text-xs font-mono tracking-wider uppercase text-[#9DA6A0]">Location</h2>
+          <p className="flex items-start gap-2 text-sm font-sans leading-relaxed text-[#9DA6A0]">
+            <MapPin size={16} className="mt-0.5 shrink-0 text-[#C96A3D]" aria-hidden="true" />
             Multan, Pakistan — available for remote projects worldwide.
           </p>
-          <Link href="/locations/multan" className="inline-flex items-center gap-1 text-sm font-medium text-neutral-700 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-white">
+          <Link href="/locations/multan" className="inline-flex items-center gap-1 text-sm font-sans text-[#C96A3D] hover:underline">
             Web developer in Multan <ArrowUpRight size={15} aria-hidden="true" />
           </Link>
         </div>
       </div>
-      <div className="mt-8 flex flex-col gap-2 border-t border-neutral-200 py-5 text-xs text-neutral-500 dark:border-neutral-800 dark:text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-8 flex flex-col gap-2 border-t border-[#2A3632] pt-6 text-xs font-mono text-[#9DA6A0] sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} Imran Digitals. All rights reserved.</p>
-        <p>Built with accessibility, performance, and search visibility in mind.</p>
+        <p>Built for speed, accessibility & search visibility.</p>
       </div>
     </footer>
   );

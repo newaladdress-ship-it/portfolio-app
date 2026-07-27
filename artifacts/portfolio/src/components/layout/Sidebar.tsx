@@ -39,32 +39,27 @@ function MenuItem({ title, href, icon, badge }: { title: string; href: string; i
       href={href}
       onClick={hideMenu}
       className={`
-        flex items-center gap-2 py-2 px-4
-        text-neutral-700 dark:text-neutral-400
-        hover:text-neutral-900 hover:dark:text-neutral-300
-        rounded-lg group
-        lg:hover:scale-105 lg:transition-all lg:duration-300
+        flex items-center gap-2.5 py-2 px-3.5 text-sm font-sans
+        rounded-lg transition-all duration-200 group
         ${isActive
-          ? "bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:!text-neutral-200"
-          : "hover:dark:lg:bg-neutral-800 hover:dark:!text-neutral-300 hover:lg:bg-neutral-200 hover:lg:rounded-lg"
+          ? "bg-[#FFFEFA] dark:bg-[#1B2421] text-[#17211E] dark:text-[#F5F2EC] font-medium border border-[#D9D4CA] dark:border-[#2A3632] shadow-xs"
+          : "text-[#5C655F] dark:text-[#9DA6A0] hover:text-[#17211E] dark:hover:text-[#F5F2EC] hover:bg-[#FFFEFA]/60 dark:hover:bg-[#1B2421]/60"
         }
       `}
     >
-      <div className={`transition-all duration-300 group-hover:-rotate-12 ${isActive ? "animate-pulse" : ""}`}>
+      <div className={`transition-transform duration-200 group-hover:scale-110 ${isActive ? "text-[#C96A3D]" : ""}`}>
         {icon}
       </div>
-      <div className="flex-grow flex items-center gap-2">
-        {title}
+      <div className="flex-grow flex items-center justify-between gap-2">
+        <span>{title}</span>
         {badge && (
-          <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-yellow-400/20 text-yellow-800 dark:text-yellow-300 border border-yellow-400/30 leading-none">
+          <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-[#C96A3D]/15 text-[#C96A3D] dark:text-[#D4794B] border border-[#C96A3D]/30 leading-none">
             {badge}
           </span>
         )}
       </div>
       {isActive && (
-        <svg className="w-5 h-5 text-gray-500 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
-        </svg>
+        <span className="w-1.5 h-1.5 rounded-full bg-[#C96A3D]" />
       )}
     </Link>
   );
