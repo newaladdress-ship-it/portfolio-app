@@ -6,12 +6,35 @@ import { HiOutlineBriefcase, HiOutlineArrowRight } from "react-icons/hi";
 import { SERVICES, SERVICES_INDEX_META } from "@/data/services";
 
 export default function ServicesIndexPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://imrandigitals.online/services" },
+    ],
+  };
+
+  const serviceCollectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Web Development Services",
+    description: "Expert web development and SEO services by Muhammad Imran.",
+    itemListElement: SERVICES.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.h1,
+      url: `https://imrandigitals.online/services/${s.slug}`,
+    })),
+  };
+
   return (
     <section className="space-y-6">
       <SEOHead
         title={SERVICES_INDEX_META.metaTitle}
         description={SERVICES_INDEX_META.metaDescription}
         path="/services"
+        jsonLd={[breadcrumbJsonLd, serviceCollectionJsonLd]}
       />
 
       <nav

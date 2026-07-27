@@ -19,7 +19,7 @@ export const LOCATIONS: Location[] = [
     slug: "multan",
     city: "Multan",
     province: "Punjab",
-    metaTitle: "Web Developer in Multan | Imran Digitals",
+    metaTitle: "Expert Web Developer in Multan | Custom Sites & SEO",
     metaDescription:
       "Imran Digitals is a web developer in Multan building fast business websites, React applications, and technical SEO foundations for local and remote clients.",
     h1: "Web Developer in Multan for Websites, Web Apps and SEO",
@@ -32,11 +32,12 @@ export const LOCATIONS: Location[] = [
       { label: "Core stack", value: "React and Node.js" },
     ],
     about:
-      "Imran Digitals works directly with businesses in Multan that need more than a template site. Every project starts with the business goal, then pairs a responsive interface with dependable engineering, technical SEO, and a practical launch plan. Remote collaboration is also available across Pakistan and internationally.",
+      "Imran Digitals works directly with businesses in Multan that need more than a template site. Based near Pracha Street and Chowk B.C.G., I serve clients across Gulzaib Colony, Bosan Road, and the wider Multan area. Every project starts with the business goal, then pairs a responsive interface with dependable engineering, technical SEO, and a practical launch plan. Remote collaboration is also available across Pakistan and internationally.",
     services: [
-      "Business website development and redesigns",
+      "Business website development and redesigns in Multan",
       "Custom React, Next.js, and MERN stack applications",
       "Technical SEO and website speed optimization",
+      "Local SEO Expert services for Multan businesses",
       "Dashboard, API, and third-party integration work",
       "Website maintenance and ongoing improvements",
     ],

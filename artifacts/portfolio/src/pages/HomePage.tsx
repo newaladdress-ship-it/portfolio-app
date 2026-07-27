@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "wouter";
 import SEOHead from "@/components/SEOHead";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import { PERSONAL } from "@/data/personal";
 import {
   ArrowRight, Code2, Search, Building2,
@@ -140,10 +141,10 @@ export default function HomePage() {
   return (
     <>
       <SEOHead
-        title="Muhammad Imran | Web Developer in Multan & Full-Stack Specialist"
-        description="Full-stack web developer with 2+ years of experience in Multan, Pakistan. Specializing in fast business websites, custom React/Next.js web apps, and technical SEO."
+        title="Muhammad Imran | Web Developer & SEO Specialist in Multan"
+        description="Full-stack web developer in Multan, Pakistan. I build fast business websites, custom React/Next.js apps, and technical SEO solutions for global clients."
         path="/"
-        jsonLd={[personSchema, localBusinessSchema, webSiteSchema, homeFaqSchema]}
+        jsonLd={[personJsonLd, localBusinessJsonLd]}
       />
 
       <div className="space-y-20 py-6 font-sans">
@@ -160,7 +161,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg sm:text-xl text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed max-w-3xl font-sans">
-              I build fast, custom web applications and business websites for local clients in Multan and remote businesses worldwide. Clear communication, clean maintainable code, and measurable performance.
+              I build fast, custom web applications and business websites for local clients in **Multan** and remote businesses worldwide. As a leading **web developer in Multan**, I specialize in React, Next.js, and **MERN stack development** with a focus on clear communication and measurable performance.
             </p>
 
             <div className="pt-2 flex flex-wrap gap-4 items-center">
@@ -245,11 +246,11 @@ export default function HomePage() {
 
         {/* ---------------- 3. SELECTED WORK (ID="WORK") ---------------- */}
         <section id="work" className="space-y-8 scroll-mt-12">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-2">
               <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Selected Portfolio</p>
               <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                Recent Case Studies & Projects
+                Recent Web Development Projects & Case Studies
               </h2>
             </div>
             <Link
@@ -311,11 +312,12 @@ export default function HomePage() {
 
                   <div className="lg:col-span-5">
                     <div className="relative rounded-xl overflow-hidden border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC] dark:bg-[#121917]">
-                      <img
+                      <OptimizedImage
                         src={study.image}
                         alt={`${study.title} screenshot`}
+                        width={800}
+                        height={480}
                         className="w-full h-56 sm:h-64 object-cover hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
                       />
                     </div>
                   </div>

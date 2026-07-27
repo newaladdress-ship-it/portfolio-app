@@ -51,16 +51,29 @@ export default function BlogPostPage() {
     description: post.excerpt,
     image: "https://imrandigitals.online/opengraph.jpg",
     datePublished: post.date,
+    dateModified: post.date,
     author: {
       "@type": "Person",
       name: post.author,
       url: "https://imrandigitals.online",
+      jobTitle: "Full-Stack Web Developer",
+      sameAs: [
+        "https://github.com/muhammadimran9",
+        "https://www.linkedin.com/in/muhammad-imran-972364373/"
+      ]
     },
     publisher: {
       "@type": "Organization",
-      name: "Muhammad Imran - Web Developer",
-      url: "https://imrandigitals.online",
+      name: "Imran Digitals",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://imrandigitals.online/logo.png"
+      }
     },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://imrandigitals.online/blog/${post.slug}`
+    }
   };
 
   const breadcrumbJsonLd = {

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import SEOHead from "@/components/SEOHead";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { BiCollection } from "react-icons/bi";
@@ -103,11 +104,11 @@ function LivePreviewThumb({ url, fallbackImg, name }: { url: string; fallbackImg
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <img
+        <OptimizedImage
           src={fallbackImg}
           alt={`${name} screenshot`}
-          loading="lazy"
-          decoding="async"
+          width={500}
+          height={300}
           className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <a
@@ -172,13 +173,11 @@ function ProjectCard({ project }: { project: Project }) {
         {previewUrl ? (
           <LivePreviewThumb url={previewUrl} fallbackImg={project.image} name={project.name} />
         ) : (
-          <img
+          <OptimizedImage
             src={project.image}
             alt={`${project.name} - project screenshot`}
-            loading="lazy"
-            decoding="async"
             width={500}
-            height={176}
+            height={300}
             className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105"
           />
         )}
@@ -286,12 +285,35 @@ export default function ProjectsPage() {
       return a.id - b.id;
     });
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Projects", item: "https://imrandigitals.online/projects" },
+    ],
+  };
+
+  const projectCollectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Project Portfolio",
+    description: "A collection of web development projects by Muhammad Imran.",
+    itemListElement: PROJECTS.filter(p => p.isShow).map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: p.name,
+      url: `https://imrandigitals.online/projects/${toSlug(p.name)}`,
+    })),
+  };
+
   return (
     <section className="space-y-6">
       <SEOHead
         title="Projects Portfolio - Muhammad Imran React and MERN Apps"
         description="Explore the project portfolio of Muhammad Imran, featuring modern React, Next.js, Node.js, and full-stack web applications."
         path="/projects"
+        jsonLd={[breadcrumbJsonLd, projectCollectionJsonLd]}
       />
       <div className="space-y-2">
         <SectionHeading title={t.projects.heading} icon={<BiCollection />} />

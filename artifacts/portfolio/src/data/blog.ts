@@ -36,7 +36,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-07-24",
     readTime: 6,
     author: "Muhammad Imran",
-    metaTitle: "Website Cost in Multan: 2026 Pricing Guide",
+    metaTitle: "Website Development Cost in Multan: 2026 Pricing Guide",
     metaDescription: "Real 2026 pricing for business websites, e-commerce, and web apps in Multan. What affects cost, what to avoid, and how to budget correctly.",
     keywords: [
       "website cost in Multan",
@@ -158,7 +158,7 @@ A standard business website usually takes 1-2 weeks; e-commerce and custom appli
     date: "2026-07-24",
     readTime: 6,
     author: "Muhammad Imran",
-    metaTitle: "React vs WordPress: Best Choice for Multan Business",
+    metaTitle: "React vs WordPress: Best Website Choice for Multan Business",
     metaDescription: "Comparing React/Next.js and WordPress for small business websites in Multan — speed, SEO, cost, and which fits your business type in 2026.",
     keywords: [
       "React vs WordPress",

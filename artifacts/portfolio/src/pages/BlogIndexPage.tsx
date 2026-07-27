@@ -10,12 +10,35 @@ export default function BlogIndexPage() {
   const featured = getFeaturedBlogPosts(3);
   const recentPosts = BLOG_POSTS.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 12);
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://imrandigitals.online/blog" },
+    ],
+  };
+
+  const blogCollectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Web Development Blog",
+    description: "Tutorials and guides on React, Node.js, and modern web development.",
+    itemListElement: recentPosts.map((post, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: post.title,
+      url: `https://imrandigitals.online/blog/${post.slug}`,
+    })),
+  };
+
   return (
     <section className="space-y-8">
       <SEOHead
         title="Web Development Blog - React and Node.js Coding Tips"
         description="Read expert web development tutorials, React tips, Node.js guides, and full-stack development articles by Muhammad Imran."
         path="/blog"
+        jsonLd={[breadcrumbJsonLd, blogCollectionJsonLd]}
       />
 
       {/* Breadcrumbs */}
