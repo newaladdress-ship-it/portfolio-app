@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useRoute, Link, Redirect } from "wouter";
 import SEOHead from "@/components/SEOHead";
 import SectionHeading from "@/components/layout/SectionHeading";
@@ -6,6 +7,29 @@ import Breakline from "@/components/layout/Breakline";
 import { MdCalendarToday, MdPerson, MdTimer, MdLocalOffer } from "react-icons/md";
 import { MdArrowForward, MdArrowBack } from "react-icons/md";
 import { getBlogPostBySlug, BLOG_POSTS, BLOG_CATEGORIES } from "@/data/blog";
+
+function BlogContent({ content }: { content: string }) {
+  let isCodeBlock = false;
+
+  return (
+    <div className="space-y-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+      {content.split("\n").map((line, index) => {
+        const key = `${index}-${line.slice(0, 20)}`;
+        if (line.startsWith("```")) {
+          isCodeBlock = !isCodeBlock;
+          return null;
+        }
+        if (isCodeBlock) {
+          return <pre key={key} className="overflow-x-auto rounded-lg bg-neutral-950 p-4 text-xs text-neutral-100"><code>{line}</code></pre>;
+        }
+        if (line.startsWith("## ")) return <h2 key={key}>{line.slice(3)}</h2>;
+        if (line.startsWith("### ")) return <h3 key={key}>{line.slice(4)}</h3>;
+        if (!line.trim()) return <Fragment key={key} />;
+        return <p key={key}>{line}</p>;
+      })}
+    </div>
+  );
+}
 
 export default function BlogPostPage() {
   const [, params] = useRoute<{ slug: string }>("/blog/:slug");
@@ -39,6 +63,16 @@ export default function BlogPostPage() {
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://imrandigitals.online/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://imrandigitals.online/blog/${post.slug}` },
+    ],
+  };
+
   return (
     <article className="space-y-8 max-w-2xl mx-auto">
       <SEOHead
@@ -46,10 +80,7 @@ export default function BlogPostPage() {
         description={post.metaDescription}
         path={`/blog/${post.slug}`}
         type="article"
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        jsonLd={[articleSchema, breadcrumbJsonLd]}
       />
 
       {/* Breadcrumbs */}
@@ -101,22 +132,7 @@ export default function BlogPostPage() {
 
       {/* Content */}
       <div className="prose prose-neutral dark:prose-invert max-w-none">
-        <div
-          dangerouslySetInnerHTML={{
-            __html: post.content
-              .split("\n")
-              .map((line) => {
-                if (line.startsWith("## ")) return `<h2>${line.substring(3)}</h2>`;
-                if (line.startsWith("### ")) return `<h3>${line.substring(4)}</h3>`;
-                if (line.startsWith("\`\`\`")) return "<pre><code>";
-                if (line === "\`\`\`") return "</code></pre>";
-                if (line.trim() === "") return "<br />";
-                return `<p>${line}</p>`;
-              })
-              .join("\n"),
-          }}
-          className="space-y-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300"
-        />
+        <BlogContent content={post.content} />
       </div>
 
       <Breakline />

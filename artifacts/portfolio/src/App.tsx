@@ -3,6 +3,7 @@ import { Switch, Route, Router as WouterRouter, useLocation, Link } from "wouter
 import { HiArrowRight, HiArrowLeft } from "react-icons/hi";
 import Sidebar from "@/components/layout/Sidebar";
 import BottomNav from "@/components/layout/BottomNav";
+import SiteFooter from "@/components/layout/SiteFooter";
 import { initTheme } from "@/lib/theme";
 import { useT } from "@/lib/i18n";
 
@@ -133,12 +134,15 @@ function AppLayout() {
                 <Route path="/smarttalk" component={SmartTalkPage} />
                 <Route path="/services" component={ServicesIndexPage} />
                 <Route path="/services/:slug" component={ServicePage} />
+                <Route path="/locations" component={LocationsIndexPage} />
+                <Route path="/locations/:slug" component={LocationPage} />
                 <Route path="/blog" component={BlogIndexPage} />
                 <Route path="/blog/:slug" component={BlogPostPage} />
                 <Route component={NotFound} />
               </Switch>
             </Suspense>
             <NextPageButton />
+            <SiteFooter />
           </main>
         </div>
       </div>

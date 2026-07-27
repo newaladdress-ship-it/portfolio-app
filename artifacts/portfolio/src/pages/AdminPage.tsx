@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import SEOHead from "@/components/SEOHead";
 import { usePushNotifications, notifyVisitors } from "@/hooks/usePushNotifications";
 import {
   collection, onSnapshot, query, orderBy,
@@ -419,7 +420,14 @@ export default function AdminPage() {
     setAuthed(false);
   };
 
-  if (!authed) return <PasswordGate onUnlock={() => setAuthed(true)} />;
+  if (!authed) {
+    return (
+      <>
+        <SEOHead title="Admin | Imran Digitals" description="Private administration area." path="/admin" noIndex />
+        <PasswordGate onUnlock={() => setAuthed(true)} />
+      </>
+    );
+  }
 
   const avgRating = feedbacks.length
     ? (feedbacks.reduce((s, f) => s + f.rating, 0) / feedbacks.length).toFixed(1)
@@ -427,6 +435,7 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-black">
+      <SEOHead title="Admin | Imran Digitals" description="Private administration area." path="/admin" noIndex />
       <ToastContainer toasts={toasts} onRemove={removeToast} />
 
       <header className="sticky top-0 z-10 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-6 py-4">

@@ -50,20 +50,23 @@ export default function ServicePage() {
     url: `https://imrandigitals.online/services/${service.slug}`,
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://imrandigitals.online/services" },
+      { "@type": "ListItem", position: 3, name: service.h1, item: `https://imrandigitals.online/services/${service.slug}` },
+    ],
+  };
+
   return (
     <section className="space-y-8">
       <SEOHead
         title={service.metaTitle}
         description={service.metaDescription}
         path={`/services/${service.slug}`}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        jsonLd={[serviceJsonLd, faqJsonLd, breadcrumbJsonLd]}
       />
 
       {/* Breadcrumbs */}

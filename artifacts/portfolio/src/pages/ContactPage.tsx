@@ -156,8 +156,9 @@ function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-1.5">
-              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t.contact.name}</label>
+              <label htmlFor="contact-name" className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t.contact.name}</label>
               <input
+                id="contact-name"
                 type="text"
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
@@ -167,8 +168,9 @@ function ContactForm() {
               />
             </div>
             <div className="space-y-1.5">
-              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t.contact.email}</label>
+              <label htmlFor="contact-email" className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t.contact.email}</label>
               <input
+                id="contact-email"
                 type="email"
                 value={form.email}
                 onChange={e => setForm({ ...form, email: e.target.value })}
@@ -179,8 +181,9 @@ function ContactForm() {
             </div>
           </div>
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t.contact.message}</label>
+            <label htmlFor="contact-message" className="text-sm font-medium text-neutral-700 dark:text-neutral-300">{t.contact.message}</label>
             <textarea
+              id="contact-message"
               value={form.message}
               onChange={e => setForm({ ...form, message: e.target.value })}
               placeholder={t.contact.messagePlaceholder}

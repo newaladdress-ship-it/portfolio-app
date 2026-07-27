@@ -157,12 +157,12 @@ const CORE_ROUTES = [
   {
     path: "/locations",
     file: "locations.html",
-    title: "Web Developer in Pakistan - Local Services in 10 Cities",
+    title: "Web Developer in Multan, Pakistan | Imran Digitals",
     description:
-      "Hire Muhammad Imran as your web developer across Multan, Lahore, Islamabad, Karachi, and other cities in Pakistan. Local support.",
-    h1: "Service Locations",
+      "Imran Digitals is a web developer in Multan serving businesses across Pakistan and worldwide with websites, web applications, and technical SEO.",
+    h1: "Web Developer in Multan, Serving Pakistan and Worldwide",
     intro:
-      "I serve businesses and organizations across Pakistan. Whether you are in Multan, Lahore, Islamabad, Karachi, or any major Pakistani city, I provide professional web development services.",
+      "Based in Multan, I work directly with local businesses and collaborate remotely with clients across Pakistan and worldwide.",
   },
   {
     path: "/blog",
@@ -173,14 +173,6 @@ const CORE_ROUTES = [
     h1: "Web Development Tips, Tutorials & Guides",
     intro:
       "Expert articles on React, Node.js, Next.js, database optimization, and full-stack web development. Learn best practices and industry insights.",
-  },
-  {
-    path: "/admin",
-    file: "admin.html",
-    title: "Admin Panel - Muhammad Imran Portfolio",
-    description: "Secure admin dashboard for managing contacts, reviews, and website settings.",
-    h1: "Admin Panel",
-    intro: "Secure admin dashboard.",
   },
 ];
 
@@ -209,6 +201,19 @@ for (const post of BLOG_DATA) {
     description: post.metaDescription,
     h1: post.h1,
     intro: post.intro,
+  });
+}
+
+// Parse and add location pages when local service areas are configured.
+const LOCATIONS_DATA = parseTSData("locations.ts", "LOCATIONS");
+for (const location of LOCATIONS_DATA) {
+  ROUTES.push({
+    path: `/locations/${location.slug}`,
+    file: `locations/${location.slug}.html`,
+    title: location.metaTitle,
+    description: location.metaDescription,
+    h1: location.h1,
+    intro: location.intro,
   });
 }
 

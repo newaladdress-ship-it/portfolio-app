@@ -7,6 +7,7 @@ import Breakline from "@/components/layout/Breakline";
 import { FaMapPin } from "react-icons/fa6";
 import { MdLightbulb, MdHelpOutline, MdArrowForward, MdCheckCircle, MdBusinessCenter } from "react-icons/md";
 import { getLocationBySlug } from "@/data/locations";
+import { PERSONAL } from "@/data/personal";
 
 export default function LocationPage() {
   const [, params] = useRoute<{ slug: string }>("/locations/:slug");
@@ -17,11 +18,11 @@ export default function LocationPage() {
     return <Redirect to="/locations" />;
   }
 
-  const localBusinessSchema = {
+  const professionalServiceSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "ProfessionalService",
     name: `Muhammad Imran - Web Developer in ${location.city}`,
-    description: `Professional web developer based in ${location.city}, ${location.province}, Pakistan`,
+    description: `Professional web developer serving ${location.city}, ${location.province}, Pakistan`,
     url: `https://imrandigitals.online/locations/${location.slug}`,
     image: "https://imrandigitals.online/opengraph.jpg",
     areaServed: {
@@ -29,11 +30,12 @@ export default function LocationPage() {
       name: location.city,
     },
     priceRange: "PKR",
-    telephone: "+92-300-XXXXXX",
+    telephone: PERSONAL.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: location.city,
-      addressRegion: location.province,
+      streetAddress: PERSONAL.address,
+      addressLocality: "Multan",
+      addressRegion: "Punjab",
       addressCountry: "PK",
     },
   };
@@ -48,20 +50,23 @@ export default function LocationPage() {
     })),
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Locations", item: "https://imrandigitals.online/locations" },
+      { "@type": "ListItem", position: 3, name: location.city, item: `https://imrandigitals.online/locations/${location.slug}` },
+    ],
+  };
+
   return (
     <section className="space-y-8">
       <SEOHead
         title={location.metaTitle}
         description={location.metaDescription}
         path={`/locations/${location.slug}`}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        jsonLd={[professionalServiceSchema, faqJsonLd, breadcrumbJsonLd]}
       />
 
       {/* Breadcrumbs */}

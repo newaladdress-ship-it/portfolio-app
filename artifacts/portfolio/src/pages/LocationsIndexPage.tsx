@@ -18,8 +18,8 @@ export default function LocationsIndexPage() {
   return (
     <section className="space-y-8">
       <SEOHead
-        title="Web Developer in Pakistan - Local Services in 10 Cities"
-        description="Hire Muhammad Imran as your web developer across Multan, Lahore, Islamabad, Karachi, and other cities in Pakistan. Local support."
+        title="Web Developer in Multan, Pakistan | Imran Digitals"
+        description="Imran Digitals is a web developer in Multan serving businesses across Pakistan and worldwide with websites, web applications, and technical SEO."
         path="/locations"
       />
 
@@ -39,10 +39,10 @@ export default function LocationsIndexPage() {
       <header className="space-y-3">
         <SectionHeading title="Service Locations" icon={<FaMapPin />} />
         <h1 className="text-2xl sm:text-3xl font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">
-          Web Developer in Pakistan - Local Services in 10+ Cities
+          Web Developer in Multan, Serving Pakistan and Worldwide
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-          I serve businesses and organizations across Pakistan. Whether you are in Multan, Lahore, Islamabad, Karachi, or any major Pakistani city, I provide professional web development services. Choose your city for local expertise and personalized service.
+          Based in Multan, I work directly with local businesses and collaborate remotely with clients across Pakistan and worldwide. Explore the local service page or get in touch to discuss your project.
         </p>
       </header>
 
@@ -53,7 +53,7 @@ export default function LocationsIndexPage() {
         <SectionHeading title="Punjab" icon={<FaMapPin />} />
         <SectionSubHeading>
           <p>
-            Punjab is Pakistan's largest province with the most active tech and business ecosystem. I serve businesses across Punjab including Multan (my base), Lahore, Faisalabad, Gujranwala, Sialkot, and Rawalpindi.
+            Multan is my home base. I work with local businesses in Punjab and offer the same focused, remote-friendly process to teams throughout Pakistan.
           </p>
         </SectionSubHeading>
         <div className="grid sm:grid-cols-2 gap-3 mt-2">

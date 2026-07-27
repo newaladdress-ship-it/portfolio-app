@@ -143,6 +143,16 @@ const FAQ_ITEMS = [
   },
 ];
 
+const homeFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+
 /* ---------------- Services Data (Section 5) ---------------- */
 
 const SERVICES_DATA = [
@@ -286,7 +296,7 @@ export default function HomePage() {
         title="Web Developer in Multan | Web Application & Website Developer Pakistan | Imran Digitals"
         description="Looking for a web developer in Multan? Muhammad Imran builds fast, SEO-friendly websites, MERN stack web applications, and admin dashboards with React & Next.js."
         path="/"
-        jsonLd={[personSchema, localBusinessSchema, webSiteSchema]}
+        jsonLd={[personSchema, localBusinessSchema, webSiteSchema, homeFaqSchema]}
       />
 
       {/* ---------------- 1. HERO SECTION ---------------- */}
