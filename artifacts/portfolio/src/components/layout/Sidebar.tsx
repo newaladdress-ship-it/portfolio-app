@@ -120,7 +120,7 @@ function ProfileAvatar({ size }: { size: number }) {
         alt={`${PERSONAL.name} profile photo`}
         width={size}
         height={size}
-        fetchpriority="high"
+        fetchPriority="high"
         decoding="async"
         loading="eager"
         onError={() => setImgError(true)}

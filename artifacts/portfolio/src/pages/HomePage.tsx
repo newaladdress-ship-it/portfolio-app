@@ -262,7 +262,7 @@ export default function HomePage() {
           </div>
 
           <div className="space-y-8">
-            {selectedCaseStudies.map((study) => (
+            {selectedCaseStudies.map((study, index) => (
               <article
                 key={study.id}
                 className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-6 shadow-xs hover:border-[#C96A3D]/60 transition-colors duration-200"
@@ -317,7 +317,7 @@ export default function HomePage() {
                         alt={`${study.title} screenshot`}
                         width={800}
                         height={480}
-                        fetchpriority={index === 0 ? "high" : "auto"}
+                        fetchPriority={index === 0 ? "high" : "auto"}
                         loading={index === 0 ? "eager" : "lazy"}
                         className="w-full h-56 sm:h-64 object-cover hover:scale-105 transition-transform duration-500"
                       />
