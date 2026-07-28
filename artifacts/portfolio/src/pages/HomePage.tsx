@@ -144,7 +144,7 @@ export default function HomePage() {
         title="Muhammad Imran | Web Developer & SEO Specialist in Multan"
         description="Full-stack web developer in Multan, Pakistan. I build fast business websites, custom React/Next.js apps, and technical SEO solutions for global clients."
         path="/"
-        jsonLd={[personJsonLd, localBusinessJsonLd]}
+        jsonLd={[personSchema, localBusinessSchema, webSiteSchema, homeFaqSchema]}
       />
 
       <div className="space-y-20 py-6 font-sans">

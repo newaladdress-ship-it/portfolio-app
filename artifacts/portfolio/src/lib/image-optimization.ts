@@ -14,6 +14,7 @@ export interface OptimizedImageProps {
   className?: string;
   priority?: boolean;
   format?: ImageFormat;
+  style?: React.CSSProperties;
 }
 
 /**

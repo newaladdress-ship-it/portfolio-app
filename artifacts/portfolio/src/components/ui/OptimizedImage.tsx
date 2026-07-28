@@ -3,7 +3,7 @@ import { getOptimizedImageAttrs, OptimizedImageProps } from "@/lib/image-optimiz
 
 export default function OptimizedImage(props: OptimizedImageProps & { fetchpriority?: "high" | "low" | "auto", loading?: "lazy" | "eager" }) {
   const { className, style, fetchpriority, loading, ...rest } = props;
-  const attrs = getOptimizedImageAttrs(rest);
+  const attrs = getOptimizedImageAttrs(rest as OptimizedImageProps);
   
   // For production, we would use a real WebP source if available
   // Here we assume the build process or CDN handles format conversion via query params
@@ -15,7 +15,7 @@ export default function OptimizedImage(props: OptimizedImageProps & { fetchprior
       <img
         {...attrs}
         className={className}
-        style={{ ...attrs.style, ...style }}
+        style={{ ...attrs.style, ...(style as any) }}
         fetchpriority={fetchpriority}
         loading={loading || attrs.loading}
       />
