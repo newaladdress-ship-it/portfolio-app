@@ -113,6 +113,14 @@ function NextPageButton() {
 
 
 function AppLayout() {
+  const [isDeferredLoaded, setIsDeferredLoaded] = React.useState(false);
+
+  useEffect(() => {
+    // Load non-critical components after a delay to improve FCP/LCP
+    const timer = setTimeout(() => setIsDeferredLoaded(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-black transition-colors duration-200">
       <div className="mx-auto max-w-6xl">
@@ -147,11 +155,13 @@ function AppLayout() {
         </div>
       </div>
       <BottomNav />
-      <Suspense fallback={null}>
-        <ChatWidget />
-        <FloatingActions />
-        <PWAInstallPrompt />
-      </Suspense>
+      {isDeferredLoaded && (
+        <Suspense fallback={null}>
+          <ChatWidget />
+          <FloatingActions />
+          <PWAInstallPrompt />
+        </Suspense>
+      )}
     </div>
   );
 }

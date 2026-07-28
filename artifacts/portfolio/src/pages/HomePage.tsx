@@ -312,11 +312,13 @@ export default function HomePage() {
 
                   <div className="lg:col-span-5">
                     <div className="relative rounded-xl overflow-hidden border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC] dark:bg-[#121917]">
-                      <OptimizedImage
+                        <OptimizedImage
                         src={study.image}
                         alt={`${study.title} screenshot`}
                         width={800}
                         height={480}
+                        fetchpriority={index === 0 ? "high" : "auto"}
+                        loading={index === 0 ? "eager" : "lazy"}
                         className="w-full h-56 sm:h-64 object-cover hover:scale-105 transition-transform duration-500"
                       />
                     </div>

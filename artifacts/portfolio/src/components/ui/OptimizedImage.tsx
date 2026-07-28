@@ -1,8 +1,8 @@
 import React from "react";
 import { getOptimizedImageAttrs, OptimizedImageProps } from "@/lib/image-optimization";
 
-export default function OptimizedImage(props: OptimizedImageProps) {
-  const { className, style, ...rest } = props;
+export default function OptimizedImage(props: OptimizedImageProps & { fetchpriority?: "high" | "low" | "auto", loading?: "lazy" | "eager" }) {
+  const { className, style, fetchpriority, loading, ...rest } = props;
   const attrs = getOptimizedImageAttrs(rest);
   
   // For production, we would use a real WebP source if available
@@ -16,6 +16,8 @@ export default function OptimizedImage(props: OptimizedImageProps) {
         {...attrs}
         className={className}
         style={{ ...attrs.style, ...style }}
+        fetchpriority={fetchpriority}
+        loading={loading || attrs.loading}
       />
     </picture>
   );
