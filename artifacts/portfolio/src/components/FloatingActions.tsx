@@ -3,7 +3,7 @@ import { MessageCircle, X, Phone } from "lucide-react";
 import { HiOutlineSparkles } from "react-icons/hi";
 
 const WA_MSG = encodeURIComponent(
-  "Hi Muhammad! 👋 I visited your portfolio at https://imrandigitals.online and I'd like to get more info."
+  "Hi Muhammad! 👋 I visited your portfolio at https://www.imrandigitals.online and I'd like to get more info."
 );
 
 export default function FloatingActions() {

@@ -23,8 +23,8 @@ export default function LocationPage() {
     "@type": "ProfessionalService",
     name: `Muhammad Imran - Web Developer in ${location.city}`,
     description: `Professional web developer serving ${location.city}, ${location.province}, Pakistan`,
-    url: `https://imrandigitals.online/locations/${location.slug}`,
-    image: "https://imrandigitals.online/opengraph.jpg",
+    url: `https://www.imrandigitals.online/locations/${location.slug}`,
+    image: "https://www.imrandigitals.online/opengraph.jpg",
     areaServed: {
       "@type": "City",
       name: location.city,
@@ -54,9 +54,9 @@ export default function LocationPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
-      { "@type": "ListItem", position: 2, name: "Locations", item: "https://imrandigitals.online/locations" },
-      { "@type": "ListItem", position: 3, name: location.city, item: `https://imrandigitals.online/locations/${location.slug}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Locations", item: "https://www.imrandigitals.online/locations" },
+      { "@type": "ListItem", position: 3, name: location.city, item: `https://www.imrandigitals.online/locations/${location.slug}` },
     ],
   };
 

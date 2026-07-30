@@ -14,8 +14,8 @@ export default function BlogIndexPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
-      { "@type": "ListItem", position: 2, name: "Blog", item: "https://imrandigitals.online/blog" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.imrandigitals.online/blog" },
     ],
   };
 
@@ -28,7 +28,7 @@ export default function BlogIndexPage() {
       "@type": "ListItem",
       position: i + 1,
       name: post.title,
-      url: `https://imrandigitals.online/blog/${post.slug}`,
+      url: `https://www.imrandigitals.online/blog/${post.slug}`,
     })),
   };
 

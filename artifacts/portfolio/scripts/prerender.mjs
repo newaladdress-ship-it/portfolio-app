@@ -4,9 +4,10 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = resolve(__dirname, "..", "dist");
-const BASE_URL = "https://imrandigitals.online";
+const PUBLIC_DIR = resolve(__dirname, "..", "public");
+const BASE_URL = "https://www.imrandigitals.online";
 
-// Dynamic TS data parser
+// Dynamic TS data parser for services, blog, and locations
 function parseTSData(filename, arrayName) {
   const filePath = resolve(__dirname, "..", "src", "data", filename);
   if (!existsSync(filePath)) return [];
@@ -39,7 +40,6 @@ function parseTSData(filename, arrayName) {
     const introMatch = part.match(/"?intro"?:\s*(?:`([^`]+)`|"([^"]+)")/) || part.match(/"?excerpt"?:\s*"([^"]+)"/);
     const intro = introMatch ? (introMatch[1] || introMatch[2]) : "";
 
-    // Extract additional content for full injection
     const bulletsMatch = part.match(/"?bullets"?:\s*\[([\s\S]*?)\]/);
     const bullets = bulletsMatch ? bulletsMatch[1].split(",").map(b => b.trim().replace(/^"|"$/g, '')) : [];
 
@@ -60,14 +60,54 @@ function parseTSData(filename, arrayName) {
   return objects;
 }
 
+// Dynamic parser for projects from personal.ts
+function parseTSProjects() {
+  const filePath = resolve(__dirname, "..", "src", "data", "personal.ts");
+  if (!existsSync(filePath)) return [];
+  const content = readFileSync(filePath, "utf8");
+  const idx = content.indexOf("export const PROJECTS");
+  if (idx === -1) return [];
+  const projectsBlock = content.substring(idx);
+  
+  const objects = [];
+  const blockMatches = [...projectsBlock.matchAll(/\{\s*id:\s*\d+[\s\S]*?name:\s*"([^"]+)"[\s\S]*?description:\s*"([^"]+)"[\s\S]*?isShow:\s*(true|false)/g)];
+  for (const m of blockMatches) {
+    if (m[3] === "true") {
+      const name = m[1];
+      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      const description = m[2];
+      objects.push({
+        slug,
+        metaTitle: `${name} - Web Project Case Study | Muhammad Imran`,
+        metaDescription: description,
+        h1: name,
+        intro: description
+      });
+    }
+  }
+  return objects;
+}
+
 const CORE_ROUTES = [
   {
     path: "/",
     file: "index.html",
-    title: "Web Developer in Multan - Muhammad Imran Portfolio App",
-    description: "Hire Muhammad Imran, a expert web developer in Multan, Pakistan. Specializing in React, Next.js, and MERN stack development.",
+    title: "Muhammad Imran - Web Developer in Multan | Expert Web Development Services Pakistan",
+    description: "Hire Muhammad Imran, an expert web developer in Multan, Pakistan. Specializing in React, Next.js, and MERN stack development.",
     h1: "Web App Developer in Multan, Pakistan",
-    content: "I build fast, scalable web applications using React, Next.js, and the MERN Stack. Based in Multan, Pakistan - available for freelance projects and remote positions worldwide. Specializing in custom code, technical SEO, and production-grade systems."
+    content: "I build fast, scalable web applications using React, Next.js, and the MERN Stack. Based in Multan, Pakistan - available for freelance projects and remote positions worldwide. Specializing in custom code, technical SEO, and production-grade systems.",
+    changefreq: "daily",
+    priority: "1.0"
+  },
+  {
+    path: "/about",
+    file: "about.html",
+    title: "About Muhammad Imran - Web Developer in Multan, Pakistan",
+    description: "Professional background, skills, and technical stack of Muhammad Imran, a React, Node.js, and full-stack web developer in Pakistan.",
+    h1: "About Muhammad Imran",
+    content: "MERN Stack Developer with hands-on experience in React.js, Node.js, Express.js, Next.js, MongoDB, and Tailwind CSS. Specializing in full-stack web applications and technical SEO.",
+    changefreq: "monthly",
+    priority: "0.9"
   },
   {
     path: "/services",
@@ -75,21 +115,116 @@ const CORE_ROUTES = [
     title: "Web Development Services in Multan - Imran Digitals",
     description: "Expert web development services including custom web apps, technical SEO, and dashboard design by Muhammad Imran in Multan.",
     h1: "Professional Web Development Services",
-    content: "Custom web application development, MERN stack solutions, Next.js development, Technical SEO, and Digital Consulting services for businesses in Multan and worldwide."
+    content: "Custom web application development, MERN stack solutions, Next.js development, Technical SEO, and Digital Consulting services for businesses in Multan and worldwide.",
+    changefreq: "weekly",
+    priority: "0.95"
+  },
+  {
+    path: "/projects",
+    file: "projects.html",
+    title: "Projects Portfolio - Muhammad Imran React and MERN Apps",
+    description: "Explore the project portfolio of Muhammad Imran, featuring modern React, Next.js, Node.js, and full-stack web applications.",
+    h1: "Web Development Projects Portfolio",
+    content: "Explore a showcase of web applications, e-commerce stores, custom tools, and client websites built with React, Next.js, and Node.js.",
+    changefreq: "weekly",
+    priority: "0.9"
   },
   {
     path: "/blog",
     file: "blog.html",
-    title: "Web Development Blog - Coding Tips & Tutorials | Imran Digitals",
-    description: "Read the latest web development tips, React tutorials, and SEO guides from Muhammad Imran, a full-stack developer in Multan.",
+    title: "Web Development Blog - React and Node.js Coding Tips",
+    description: "Read expert web development tutorials, React tips, Node.js guides, and full-stack development articles by Muhammad Imran.",
     h1: "Web Development Insights & Tutorials",
-    content: "Sharing knowledge on React, Node.js, Next.js, and modern web development best practices to help developers and businesses build better software."
+    content: "Sharing knowledge on React, Node.js, Next.js, and modern web development best practices to help developers and businesses build better software.",
+    changefreq: "weekly",
+    priority: "0.9"
+  },
+  {
+    path: "/locations",
+    file: "locations.html",
+    title: "Web Development Locations - Muhammad Imran Services",
+    description: "Professional web development services offered in Multan, Lahore, Islamabad, and across Pakistan and worldwide.",
+    h1: "Web Development Services Locations",
+    content: "Providing custom website development, MERN stack solutions, and technical SEO across Pakistan and globally.",
+    changefreq: "weekly",
+    priority: "0.9"
+  },
+  {
+    path: "/achievements",
+    file: "achievements.html",
+    title: "Achievements & Certifications - Muhammad Imran",
+    description: "Certifications, awards, and professional milestones of Muhammad Imran, Web Developer in Multan, Pakistan.",
+    h1: "Achievements & Certifications",
+    content: "View Meta React Developer Certification, AWS Cloud Practitioner credentials, and awards earned by Muhammad Imran.",
+    changefreq: "monthly",
+    priority: "0.8"
+  },
+  {
+    path: "/contact",
+    file: "contact.html",
+    title: "Contact Muhammad Imran - Web Developer in Multan",
+    description: "Get in touch with Muhammad Imran for web development projects, freelance inquiries, or software consultation.",
+    h1: "Get in Touch",
+    content: "Contact Muhammad Imran via email, phone, or contact form for custom web application development and technical SEO projects.",
+    changefreq: "monthly",
+    priority: "0.8"
+  },
+  {
+    path: "/feedback",
+    file: "feedback.html",
+    title: "Client Feedback & Reviews - Muhammad Imran",
+    description: "Read reviews, testimonials, and feedback from clients who have worked with web developer Muhammad Imran.",
+    h1: "Client Testimonials & Feedback",
+    content: "Client feedback and project reviews for Muhammad Imran's web development services and software development work.",
+    changefreq: "monthly",
+    priority: "0.7"
+  },
+  {
+    path: "/smarttalk",
+    file: "smarttalk.html",
+    title: "SmartTalk AI Assistant - Muhammad Imran Portfolio",
+    description: "Interactive AI assistant to learn more about Muhammad Imran's web development services, skills, and projects.",
+    h1: "SmartTalk AI Assistant",
+    content: "Ask SmartTalk AI about web development services, tech stack details, availability, and project quotes.",
+    changefreq: "monthly",
+    priority: "0.7"
+  },
+  {
+    path: "/dev-profile",
+    file: "dev-profile.html",
+    title: "Developer Profile - Muhammad Imran",
+    description: "Technical profile, GitHub stats, and coding experience details of web developer Muhammad Imran.",
+    h1: "Developer Technical Profile",
+    content: "Comprehensive overview of programming stacks, tools, GitHub stats, and technical capabilities.",
+    changefreq: "monthly",
+    priority: "0.7"
+  },
+  {
+    path: "/dashboard",
+    file: "dashboard.html",
+    title: "Developer Dashboard - Live Metrics & Analytics",
+    description: "Live activity dashboard showing GitHub activity, coding metrics, and site analytics for Muhammad Imran.",
+    h1: "Live Metrics & Analytics Dashboard",
+    content: "Real-time metrics tracking coding activity, GitHub commits, and website performance data.",
+    changefreq: "weekly",
+    priority: "0.7"
+  },
+  {
+    path: "/chat",
+    file: "chat.html",
+    title: "Live Chat Room - Muhammad Imran Portfolio",
+    description: "Join the live chat room on Muhammad Imran's portfolio website to leave messages or ask questions.",
+    h1: "Live Portfolio Chat Room",
+    content: "Connect directly in the portfolio chat room for inquiries and feedback.",
+    changefreq: "monthly",
+    priority: "0.7"
   }
 ];
 
 const SERVICES_DATA = parseTSData("services.ts", "SERVICES");
 const BLOG_DATA = parseTSData("blog.ts", "BLOG_POSTS");
 const LOCATIONS_DATA = parseTSData("locations.ts", "LOCATIONS");
+const PROJECTS_DATA = parseTSProjects();
 
 const ROUTES = [...CORE_ROUTES];
 
@@ -100,7 +235,9 @@ for (const s of SERVICES_DATA) {
     title: s.metaTitle,
     description: s.metaDescription,
     h1: s.h1,
-    content: `${s.intro} ${s.bullets.join(". ")} ${s.faqs.map(f => `${f.q}: ${f.a}`).join(" ")}`
+    content: `${s.intro} ${s.bullets.join(". ")} ${s.faqs.map(f => `${f.q}: ${f.a}`).join(" ")}`,
+    changefreq: "monthly",
+    priority: "0.9"
   });
 }
 
@@ -111,7 +248,9 @@ for (const post of BLOG_DATA) {
     title: post.metaTitle || `${post.h1} | Muhammad Imran Blog`,
     description: post.metaDescription,
     h1: post.h1,
-    content: post.intro
+    content: post.intro,
+    changefreq: "monthly",
+    priority: "0.85"
   });
 }
 
@@ -122,7 +261,22 @@ for (const loc of LOCATIONS_DATA) {
     title: loc.metaTitle,
     description: loc.metaDescription,
     h1: loc.h1,
-    content: `${loc.intro} ${loc.faqs.map(f => `${f.q}: ${f.a}`).join(" ")}`
+    content: `${loc.intro} ${loc.faqs.map(f => `${f.q}: ${f.a}`).join(" ")}`,
+    changefreq: "monthly",
+    priority: "0.85"
+  });
+}
+
+for (const p of PROJECTS_DATA) {
+  ROUTES.push({
+    path: `/projects/${p.slug}`,
+    file: `projects/${p.slug}.html`,
+    title: p.metaTitle,
+    description: p.metaDescription,
+    h1: p.h1,
+    content: p.intro,
+    changefreq: "monthly",
+    priority: "0.85"
   });
 }
 
@@ -188,6 +342,50 @@ function escapeAttr(s) {
   return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+function generateSitemapAndRobots(routes) {
+  const today = new Date().toISOString().split("T")[0];
+
+  let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+`;
+
+  for (const route of routes) {
+    const loc = `${BASE_URL}${route.path === "/" ? "/" : route.path}`;
+    sitemapXml += `  <url>
+    <loc>${loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${route.changefreq || "monthly"}</changefreq>
+    <priority>${route.priority || "0.8"}</priority>
+  </url>\n`;
+  }
+
+  sitemapXml += `</urlset>\n`;
+
+  const sitemapDistPath = resolve(DIST, "sitemap.xml");
+  const sitemapPublicPath = resolve(PUBLIC_DIR, "sitemap.xml");
+  writeFileSync(sitemapDistPath, sitemapXml, "utf8");
+  writeFileSync(sitemapPublicPath, sitemapXml, "utf8");
+
+  const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: ${BASE_URL}/sitemap.xml
+
+Disallow: /admin
+Disallow: /admin/
+`;
+
+  const robotsDistPath = resolve(DIST, "robots.txt");
+  const robotsPublicPath = resolve(PUBLIC_DIR, "robots.txt");
+  writeFileSync(robotsDistPath, robotsTxt, "utf8");
+  writeFileSync(robotsPublicPath, robotsTxt, "utf8");
+
+  console.log(`[prerender] Successfully generated sitemap.xml with ${routes.length} URLs and robots.txt`);
+}
+
 let count = 0;
 for (const route of ROUTES) {
   const html = buildHtml(route);
@@ -198,3 +396,5 @@ for (const route of ROUTES) {
 }
 
 console.log(`[prerender] Wrote ${count} static HTML files with full content injection.`);
+
+generateSitemapAndRobots(ROUTES);

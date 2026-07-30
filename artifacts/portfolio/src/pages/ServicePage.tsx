@@ -43,20 +43,20 @@ export default function ServicePage() {
     provider: {
       "@type": "Person",
       name: "Muhammad Imran",
-      url: "https://imrandigitals.online",
+      url: "https://www.imrandigitals.online",
     },
     areaServed: { "@type": "Country", name: "Worldwide" },
     serviceType: service.keyword,
-    url: `https://imrandigitals.online/services/${service.slug}`,
+    url: `https://www.imrandigitals.online/services/${service.slug}`,
   };
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
-      { "@type": "ListItem", position: 2, name: "Services", item: "https://imrandigitals.online/services" },
-      { "@type": "ListItem", position: 3, name: service.h1, item: `https://imrandigitals.online/services/${service.slug}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://www.imrandigitals.online/services" },
+      { "@type": "ListItem", position: 3, name: service.h1, item: `https://www.imrandigitals.online/services/${service.slug}` },
     ],
   };
 

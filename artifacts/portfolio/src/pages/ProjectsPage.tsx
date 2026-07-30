@@ -289,8 +289,8 @@ export default function ProjectsPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
-      { "@type": "ListItem", position: 2, name: "Projects", item: "https://imrandigitals.online/projects" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Projects", item: "https://www.imrandigitals.online/projects" },
     ],
   };
 
@@ -303,7 +303,7 @@ export default function ProjectsPage() {
       "@type": "ListItem",
       position: i + 1,
       name: p.name,
-      url: `https://imrandigitals.online/projects/${toSlug(p.name)}`,
+      url: `https://www.imrandigitals.online/projects/${toSlug(p.name)}`,
     })),
   };
 

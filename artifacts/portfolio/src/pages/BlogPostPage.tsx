@@ -49,13 +49,13 @@ export default function BlogPostPage() {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    image: "https://imrandigitals.online/opengraph.jpg",
+    image: "https://www.imrandigitals.online/opengraph.jpg",
     datePublished: post.date,
     dateModified: post.date,
     author: {
       "@type": "Person",
       name: post.author,
-      url: "https://imrandigitals.online",
+      url: "https://www.imrandigitals.online",
       jobTitle: "Full-Stack Web Developer",
       sameAs: [
         "https://github.com/muhammadimran9",
@@ -67,12 +67,12 @@ export default function BlogPostPage() {
       name: "Imran Digitals",
       logo: {
         "@type": "ImageObject",
-        url: "https://imrandigitals.online/logo.png"
+        url: "https://www.imrandigitals.online/logo.png"
       }
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://imrandigitals.online/blog/${post.slug}`
+      "@id": `https://www.imrandigitals.online/blog/${post.slug}`
     }
   };
 
@@ -80,9 +80,9 @@ export default function BlogPostPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
-      { "@type": "ListItem", position: 2, name: "Blog", item: "https://imrandigitals.online/blog" },
-      { "@type": "ListItem", position: 3, name: post.title, item: `https://imrandigitals.online/blog/${post.slug}` },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.imrandigitals.online/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://www.imrandigitals.online/blog/${post.slug}` },
     ],
   };
 

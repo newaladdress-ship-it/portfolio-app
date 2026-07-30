@@ -10,8 +10,8 @@ export default function ServicesIndexPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.online/" },
-      { "@type": "ListItem", position: 2, name: "Services", item: "https://imrandigitals.online/services" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.imrandigitals.online/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://www.imrandigitals.online/services" },
     ],
   };
 
@@ -24,7 +24,7 @@ export default function ServicesIndexPage() {
       "@type": "ListItem",
       position: i + 1,
       name: s.h1,
-      url: `https://imrandigitals.online/services/${s.slug}`,
+      url: `https://www.imrandigitals.online/services/${s.slug}`,
     })),
   };
 
