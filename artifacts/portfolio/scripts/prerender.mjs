@@ -76,10 +76,31 @@ function parseTSProjects() {
       const name = m[1];
       const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
       const description = m[2];
+      
+      // Standardize metaTitle length to 50-60 chars
+      let metaTitle = `${name} Case Study | Imran Digitals`;
+      if (metaTitle.length < 50) {
+        metaTitle = `${name} Web App Case Study | Imran Digitals`;
+      }
+      if (metaTitle.length > 60) {
+        metaTitle = `${name} | Imran Digitals`;
+        if (metaTitle.length > 60) metaTitle = metaTitle.substring(0, 60);
+      }
+      
+      // Standardize metaDescription length to 145-160 chars
+      let metaDesc = description.trim().replace(/\s+/g, " ");
+      if (metaDesc.length > 160) {
+        metaDesc = metaDesc.substring(0, 157).replace(/\s+\S*$/, "") + "...";
+      } else if (metaDesc.length < 145) {
+        const filler = " Explore architectural highlights, technical stack choices, and key features developed by Muhammad Imran.";
+        const needed = 152 - metaDesc.length;
+        if (needed > 0) metaDesc = metaDesc + filler.substring(0, needed);
+      }
+
       objects.push({
         slug,
-        metaTitle: `${name} - Web Project Case Study | Muhammad Imran`,
-        metaDescription: description,
+        metaTitle,
+        metaDescription: metaDesc,
         h1: name,
         intro: description
       });
@@ -92,8 +113,8 @@ const CORE_ROUTES = [
   {
     path: "/",
     file: "index.html",
-    title: "Muhammad Imran - Web Developer in Multan | Expert Web Development Services Pakistan",
-    description: "Hire Muhammad Imran, an expert web developer in Multan, Pakistan. Specializing in React, Next.js, and MERN stack development.",
+    title: "Muhammad Imran - Web Developer in Multan | Imran Digitals",
+    description: "Hire Muhammad Imran, senior web developer in Multan, Pakistan specializing in custom React, Next.js, and Node.js web applications for global clients.",
     h1: "Web App Developer in Multan, Pakistan",
     content: "I build fast, scalable web applications using React, Next.js, and the MERN Stack. Based in Multan, Pakistan - available for freelance projects and remote positions worldwide. Specializing in custom code, technical SEO, and production-grade systems.",
     changefreq: "daily",
@@ -102,8 +123,8 @@ const CORE_ROUTES = [
   {
     path: "/about",
     file: "about.html",
-    title: "About Muhammad Imran - Web Developer in Multan, Pakistan",
-    description: "Professional background, skills, and technical stack of Muhammad Imran, a React, Node.js, and full-stack web developer in Pakistan.",
+    title: "About Muhammad Imran - Full Stack Web Developer Multan",
+    description: "Explore the technical background, programming skills, and full-stack software experience of Muhammad Imran, a senior web developer based in Multan, Pakistan.",
     h1: "About Muhammad Imran",
     content: "MERN Stack Developer with hands-on experience in React.js, Node.js, Express.js, Next.js, MongoDB, and Tailwind CSS. Specializing in full-stack web applications and technical SEO.",
     changefreq: "monthly",
@@ -112,8 +133,8 @@ const CORE_ROUTES = [
   {
     path: "/services",
     file: "services.html",
-    title: "Web Development Services in Multan - Imran Digitals",
-    description: "Expert web development services including custom web apps, technical SEO, and dashboard design by Muhammad Imran in Multan.",
+    title: "Web Development Services in Multan | Imran Digitals",
+    description: "Expert web development services in Multan including custom React web apps, Next.js software architecture, technical SEO, and executive dashboard design.",
     h1: "Professional Web Development Services",
     content: "Custom web application development, MERN stack solutions, Next.js development, Technical SEO, and Digital Consulting services for businesses in Multan and worldwide.",
     changefreq: "weekly",
@@ -122,8 +143,8 @@ const CORE_ROUTES = [
   {
     path: "/projects",
     file: "projects.html",
-    title: "Projects Portfolio - Muhammad Imran React and MERN Apps",
-    description: "Explore the project portfolio of Muhammad Imran, featuring modern React, Next.js, Node.js, and full-stack web applications.",
+    title: "Web App Projects Portfolio | Muhammad Imran Developer",
+    description: "Browse the web development portfolio of Muhammad Imran featuring production React, Next.js, Node.js applications, e-commerce stores, and custom software.",
     h1: "Web Development Projects Portfolio",
     content: "Explore a showcase of web applications, e-commerce stores, custom tools, and client websites built with React, Next.js, and Node.js.",
     changefreq: "weekly",
@@ -132,8 +153,8 @@ const CORE_ROUTES = [
   {
     path: "/blog",
     file: "blog.html",
-    title: "Web Development Blog - React and Node.js Coding Tips",
-    description: "Read expert web development tutorials, React tips, Node.js guides, and full-stack development articles by Muhammad Imran.",
+    title: "Web Development Blog & Technical Tutorials | Imran Digitals",
+    description: "Read practical web development tutorials, React tips, Next.js guides, Node.js patterns, and technical SEO insights written by software developer Muhammad Imran.",
     h1: "Web Development Insights & Tutorials",
     content: "Sharing knowledge on React, Node.js, Next.js, and modern web development best practices to help developers and businesses build better software.",
     changefreq: "weekly",
@@ -142,8 +163,8 @@ const CORE_ROUTES = [
   {
     path: "/locations",
     file: "locations.html",
-    title: "Web Development Locations - Muhammad Imran Services",
-    description: "Professional web development services offered in Multan, Lahore, Islamabad, and across Pakistan and worldwide.",
+    title: "Web Development Services Locations | Imran Digitals",
+    description: "Professional web development services available in Multan, Lahore, Islamabad, Karachi, and across Pakistan and worldwide with remote-first software delivery.",
     h1: "Web Development Services Locations",
     content: "Providing custom website development, MERN stack solutions, and technical SEO across Pakistan and globally.",
     changefreq: "weekly",
@@ -152,8 +173,8 @@ const CORE_ROUTES = [
   {
     path: "/achievements",
     file: "achievements.html",
-    title: "Achievements & Certifications - Muhammad Imran",
-    description: "Certifications, awards, and professional milestones of Muhammad Imran, Web Developer in Multan, Pakistan.",
+    title: "Achievements & Certifications | Muhammad Imran Portfolio",
+    description: "View verified certifications, professional software credentials, academic milestones, and awards earned by web developer Muhammad Imran in Multan, Pakistan.",
     h1: "Achievements & Certifications",
     content: "View Meta React Developer Certification, AWS Cloud Practitioner credentials, and awards earned by Muhammad Imran.",
     changefreq: "monthly",
@@ -162,8 +183,8 @@ const CORE_ROUTES = [
   {
     path: "/contact",
     file: "contact.html",
-    title: "Contact Muhammad Imran - Web Developer in Multan",
-    description: "Get in touch with Muhammad Imran for web development projects, freelance inquiries, or software consultation.",
+    title: "Contact Muhammad Imran | Web Developer in Multan",
+    description: "Connect with Muhammad Imran for web development services, technical software consultations, custom React apps, or freelance software engineering projects.",
     h1: "Get in Touch",
     content: "Contact Muhammad Imran via email, phone, or contact form for custom web application development and technical SEO projects.",
     changefreq: "monthly",
@@ -172,8 +193,8 @@ const CORE_ROUTES = [
   {
     path: "/feedback",
     file: "feedback.html",
-    title: "Client Feedback & Reviews - Muhammad Imran",
-    description: "Read reviews, testimonials, and feedback from clients who have worked with web developer Muhammad Imran.",
+    title: "Client Feedback & Project Reviews | Imran Digitals",
+    description: "Read authentic client feedback, project reviews, and software engineering testimonials from businesses that hired web developer Muhammad Imran for web builds.",
     h1: "Client Testimonials & Feedback",
     content: "Client feedback and project reviews for Muhammad Imran's web development services and software development work.",
     changefreq: "monthly",
@@ -182,8 +203,8 @@ const CORE_ROUTES = [
   {
     path: "/smarttalk",
     file: "smarttalk.html",
-    title: "SmartTalk AI Assistant - Muhammad Imran Portfolio",
-    description: "Interactive AI assistant to learn more about Muhammad Imran's web development services, skills, and projects.",
+    title: "SmartTalk AI Assistant | Muhammad Imran Web Portfolio",
+    description: "Interact with SmartTalk AI assistant on Muhammad Imran's portfolio to get instant answers about web development services, tech stack options, and project quotes.",
     h1: "SmartTalk AI Assistant",
     content: "Ask SmartTalk AI about web development services, tech stack details, availability, and project quotes.",
     changefreq: "monthly",
@@ -192,8 +213,8 @@ const CORE_ROUTES = [
   {
     path: "/dev-profile",
     file: "dev-profile.html",
-    title: "Developer Profile - Muhammad Imran",
-    description: "Technical profile, GitHub stats, and coding experience details of web developer Muhammad Imran.",
+    title: "Developer Technical Profile | Muhammad Imran Portfolio",
+    description: "Comprehensive technical developer profile of Muhammad Imran detailing active programming language skills, GitHub statistics, and software engineering tools.",
     h1: "Developer Technical Profile",
     content: "Comprehensive overview of programming stacks, tools, GitHub stats, and technical capabilities.",
     changefreq: "monthly",
@@ -202,8 +223,8 @@ const CORE_ROUTES = [
   {
     path: "/dashboard",
     file: "dashboard.html",
-    title: "Developer Dashboard - Live Metrics & Analytics",
-    description: "Live activity dashboard showing GitHub activity, coding metrics, and site analytics for Muhammad Imran.",
+    title: "Developer Dashboard & Analytics | Imran Digitals",
+    description: "Explore the live developer activity dashboard displaying GitHub repositories, real-time coding metrics, system stats, and site performance analytics for Imran.",
     h1: "Live Metrics & Analytics Dashboard",
     content: "Real-time metrics tracking coding activity, GitHub commits, and website performance data.",
     changefreq: "weekly",
@@ -212,13 +233,13 @@ const CORE_ROUTES = [
   {
     path: "/chat",
     file: "chat.html",
-    title: "Live Chat Room - Muhammad Imran Portfolio",
-    description: "Join the live chat room on Muhammad Imran's portfolio website to leave messages or ask questions.",
+    title: "Live Developer Chat Room | Muhammad Imran Portfolio",
+    description: "Join the interactive live chat room on Muhammad Imran's portfolio website to send instant messages, discuss web project requirements, or ask technical questions.",
     h1: "Live Portfolio Chat Room",
-    content: "Connect directly in the portfolio chat room for inquiries and feedback.",
+    content: "Connect directly with Muhammad Imran in the real-time portfolio chat room to discuss web application development.",
     changefreq: "monthly",
     priority: "0.7"
-  }
+  },
 ];
 
 const SERVICES_DATA = parseTSData("services.ts", "SERVICES");

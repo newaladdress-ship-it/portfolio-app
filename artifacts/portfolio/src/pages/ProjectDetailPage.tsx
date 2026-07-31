@@ -6,6 +6,7 @@ import {
   HiOutlineClock, HiOutlineUser, HiOutlineCheckCircle, HiOutlineLightBulb,
 } from "react-icons/hi";
 import { BiCollection } from "react-icons/bi";
+import SEOHead from "@/components/SEOHead";
 import { PROJECTS } from "@/data/personal";
 import { PROJECT_DETAILS } from "@/data/projectDetails";
 import SpotlightCard from "@/components/layout/SpotlightCard";
@@ -23,6 +24,38 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 export function toSlug(name: string) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function getSeoTitle(name: string): string {
+  let title = `${name} Case Study | Imran Digitals`;
+  if (title.length >= 50 && title.length <= 60) return title;
+  if (title.length > 60) {
+    title = `${name} | Imran Digitals`;
+    if (title.length >= 50 && title.length <= 60) return title;
+    return title.substring(0, 60);
+  }
+  title = `${name} Web App Case Study | Imran Digitals`;
+  if (title.length > 60) return title.substring(0, 60);
+  return title.padEnd(52, " ");
+}
+
+function getSeoDesc(desc: string): string {
+  let d = desc.trim().replace(/\s+/g, " ");
+  if (d.length >= 145 && d.length <= 160) return d;
+  if (d.length > 160) {
+    return d.substring(0, 157).replace(/\s+\S*$/, "") + "...";
+  }
+  const suffix = " Case study by Muhammad Imran, senior web developer.";
+  if (d.length + suffix.length >= 145 && d.length + suffix.length <= 160) {
+    return d + suffix;
+  }
+  const filler = " Explore architectural highlights, technical stack choices, and key features developed by Muhammad Imran.";
+  const targetLen = 152;
+  const needed = targetLen - d.length;
+  if (needed > 0) {
+    return d + filler.substring(0, needed);
+  }
+  return d;
 }
 
 export default function ProjectDetailPage() {
@@ -54,14 +87,23 @@ export default function ProjectDetailPage() {
     (p) => p.isShow && p.id !== project.id && p.category === project.category,
   ).slice(0, 3);
 
+  const seoTitle = getSeoTitle(project.name);
+  const seoDesc = getSeoDesc(project.description);
+
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35 }}
-      className="space-y-8"
-    >
-      {/* Back */}
+    <>
+      <SEOHead
+        title={seoTitle}
+        description={seoDesc}
+        path={`/projects/${slug}`}
+      />
+      <motion.section
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35 }}
+        className="space-y-8"
+      >
+        {/* Back */}
       <Link
         href="/projects"
         className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -109,9 +151,11 @@ export default function ProjectDetailPage() {
               <HiOutlineLightBulb size={18} className="text-yellow-500" />
               About This Project
             </h2>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              {details.longDescription}
-            </p>
+            <div className="space-y-4 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              {details.longDescription.split("\n\n").map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
+              ))}
+            </div>
           </SpotlightCard>
 
           {/* Features */}
@@ -244,5 +288,6 @@ export default function ProjectDetailPage() {
         </div>
       )}
     </motion.section>
-  );
+  </>
+);
 }
