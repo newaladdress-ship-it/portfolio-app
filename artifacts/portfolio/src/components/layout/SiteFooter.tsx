@@ -68,7 +68,10 @@ export default function SiteFooter() {
       </div>
       <div className="mt-8 flex flex-col gap-2 border-t border-[#2A3632] pt-6 text-xs font-mono text-[#9DA6A0] sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} Imran Digitals. All rights reserved.</p>
-        <p>Built for speed, accessibility & search visibility.</p>
+        <div className="flex items-center gap-4">
+          <p>Built for speed, accessibility & search visibility.</p>
+          <Link href="/admin" className="hover:text-[#C96A3D] transition-colors" title="Admin Access">Admin</Link>
+        </div>
       </div>
     </footer>
   );

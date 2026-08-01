@@ -240,6 +240,16 @@ const CORE_ROUTES = [
     changefreq: "monthly",
     priority: "0.7"
   },
+  {
+    path: "/admin",
+    file: "admin.html",
+    title: "Admin Panel | Imran Digitals",
+    description: "Private administration area for Imran Digitals.",
+    h1: "Admin Panel",
+    content: "Private administration area for Imran Digitals site management.",
+    changefreq: "never",
+    priority: "0.1"
+  },
 ];
 
 const SERVICES_DATA = parseTSData("services.ts", "SERVICES");
@@ -374,6 +384,7 @@ function generateSitemapAndRobots(routes) {
 `;
 
   for (const route of routes) {
+    if (route.path === "/admin") continue;
     const loc = `${BASE_URL}${route.path === "/" ? "/" : route.path}`;
     sitemapXml += `  <url>
     <loc>${loc}</loc>
