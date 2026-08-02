@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -6,6 +6,21 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = resolve(__dirname, "..", "dist");
 const PUBLIC_DIR = resolve(__dirname, "..", "public");
 const BASE_URL = "https://www.imrandigitals.online";
+
+// Inline main CSS bundle for instantaneous FCP < 0.6s
+let criticalCss = "";
+try {
+  const cssDir = resolve(DIST, "css");
+  if (existsSync(cssDir)) {
+    const files = readdirSync(cssDir);
+    const mainCss = files.find(f => f.startsWith("index-") && f.endsWith(".css"));
+    if (mainCss) {
+      criticalCss = readFileSync(resolve(cssDir, mainCss), "utf8");
+    }
+  }
+} catch (e) {
+  console.warn("[prerender] Warning: could not inline critical CSS:", e.message);
+}
 
 // Dynamic TS data parser for services, blog, and locations
 function parseTSData(filename, arrayName) {
@@ -354,6 +369,8 @@ function buildHtml(route) {
     jsonLdScript = `\n    <script type="application/ld+json">\n${JSON.stringify([personLd, localBusinessLd])}\n    </script>`;
   }
 
+  const styleTag = criticalCss ? `\n    <style id="critical-css">${criticalCss}</style>` : "";
+
   const headInjection = `
     <link rel="canonical" href="${canonical}" />
     <meta property="og:type" content="website" />
@@ -364,13 +381,17 @@ function buildHtml(route) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeAttr(route.title)}" />
     <meta name="twitter:description" content="${escapeAttr(route.description)}" />
-    <meta name="twitter:image" content="${ogImage}" />${jsonLdScript}`;
+    <meta name="twitter:image" content="${ogImage}" />${jsonLdScript}${styleTag}`;
 
   let html = indexHtml
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(route.title)}</title>`)
     .replace(
       /<meta name="description" content="[^"]*"\s*\/?>/,
       `<meta name="description" content="${escapeAttr(route.description)}" />`
+    )
+    .replace(
+      /<link rel="stylesheet"([^>]+)href="\/css\//g,
+      '<link rel="stylesheet"$1media="print" onload="this.media=\'all\'" href="/css/'
     );
 
   html = html.replace("</head>", `${headInjection}\n  </head>`);

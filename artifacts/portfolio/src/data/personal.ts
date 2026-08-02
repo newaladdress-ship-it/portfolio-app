@@ -208,6 +208,18 @@ export const ACHIEVEMENTS = [
     isShow: true,
   },
   {
+    id: 24,
+    name: "Introduction to Front-End Development",
+    issuingOrganization: "Meta",
+    issueDate: "2024-07-20",
+    image: "/certificates/intro-to-frontend-development-meta.pdf",
+    type: "Certificate",
+    category: "Frontend",
+    credentialId: "OBW2LOHL6J99",
+    urlCredential: "/certificates/intro-to-frontend-development-meta.pdf",
+    isShow: true,
+  },
+  {
     id: 2,
     name: "Full-Stack Web Development Specialization",
     issuingOrganization: "University of London",

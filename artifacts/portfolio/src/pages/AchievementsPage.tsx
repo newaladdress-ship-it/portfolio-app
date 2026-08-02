@@ -38,6 +38,17 @@ const CERTIFICATES: Certificate[] = [
     label: "Featured Cert",
   },
   {
+    id: 24,
+    filename: "intro-to-frontend-development-meta.pdf",
+    title: "Introduction to Front-End Development",
+    issuer: "Meta",
+    category: "Frontend",
+    color: "from-blue-600/20 to-cyan-500/10",
+    isLocal: true,
+    credentialId: "OBW2LOHL6J99",
+    label: "Meta Certified",
+  },
+  {
     id: 2,
     filename: "full-stack-web-development-university-of-london.pdf",
     title: "Full-Stack Web Development Specialization",

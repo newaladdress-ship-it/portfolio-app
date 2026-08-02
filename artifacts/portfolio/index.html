@@ -50,14 +50,16 @@
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
 
+    <!-- Preload LCP Primary Logo -->
+    <link rel="preload" href="/logo.png" as="image" type="image/png" fetchpriority="high" />
+
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
     <link rel="dns-prefetch" href="https://avatars.githubusercontent.com" />
 
-    <!-- Non-render-blocking Google Fonts with instant system font swap -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" />
+    <!-- Non-render-blocking Google Fonts with system font fallback -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" />
@@ -98,29 +100,49 @@
     <!-- Performance Hints -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Umami Analytics (Deferred for Fast Mobile FCP) -->
+    <!-- Deferred Non-Critical Analytics (GTag, Clarity, Umami) -->
     <script type="text/javascript">
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          var u = document.createElement('script');
-          u.defer = true;
-          u.src = "https://cloud.umami.is/script.js";
-          u.setAttribute("data-website-id", "2028ea29-b4a7-4df9-b268-755a0b023946");
-          document.head.appendChild(u);
-        }, 3000);
-      });
-    </script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L5JK23V3YP');
 
-    <!-- Microsoft Clarity Analytics (Deferred for Fast FCP) -->
-    <script type="text/javascript">
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "xegwojkkuh");
-        }, 1000);
+      function initAnalytics() {
+        // GTag
+        var g = document.createElement('script');
+        g.async = true;
+        g.src = "https://www.googletagmanager.com/gtag/js?id=G-L5JK23V3YP";
+        document.head.appendChild(g);
+
+        // Umami
+        var u = document.createElement('script');
+        u.defer = true;
+        u.src = "https://cloud.umami.is/script.js";
+        u.setAttribute("data-website-id", "2028ea29-b4a7-4df9-b268-755a0b023946");
+        document.head.appendChild(u);
+
+        // Clarity
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "xegwojkkuh");
+      }
+
+      var loaded = false;
+      function scheduleAnalytics() {
+        if (loaded) return;
+        loaded = true;
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(function() { setTimeout(initAnalytics, 2000); });
+        } else {
+          setTimeout(initAnalytics, 3500);
+        }
+      }
+
+      window.addEventListener('load', scheduleAnalytics);
+      ['pointerdown', 'scroll', 'keydown'].forEach(function(evt) {
+        window.addEventListener(evt, scheduleAnalytics, { once: true, passive: true });
       });
     </script>
 
