@@ -43,15 +43,15 @@ const STACKS = [
   { name: "C",          icon: <SiC size={26} />,            bg: "bg-blue-800/10",                               color: "text-blue-800 dark:text-blue-400" },
   { name: "C++",        icon: <SiCplusplus size={26} />,   bg: "bg-blue-600/10",                               color: "text-blue-600" },
   { name: "Windsurf",   icon: <SiWindsurf size={26} />,    bg: "bg-teal-500/10",                               color: "text-teal-500" },
-  { name: "VS Code",    icon: <img src="/icon-vscode.svg"  width={26} height={26} alt="VS Code" />, bg: "bg-blue-500/10", color: "text-blue-500" },
-  { name: "Cursor",     icon: <img src="/icon-cursor.svg" width={26} height={26} alt="Cursor" className="dark:invert" />, bg: "bg-neutral-200/60 dark:bg-neutral-800/80", color: "text-neutral-800 dark:text-neutral-200" },
+  { name: "VS Code",    icon: <img src="/icon-vscode.svg"  width={26} height={26} loading="lazy" decoding="async" alt="VS Code" />, bg: "bg-blue-500/10", color: "text-blue-500" },
+  { name: "Cursor",     icon: <img src="/icon-cursor.svg" width={26} height={26} loading="lazy" decoding="async" alt="Cursor" className="dark:invert" />, bg: "bg-neutral-200/60 dark:bg-neutral-800/80", color: "text-neutral-800 dark:text-neutral-200" },
   { name: "Replit",     icon: <SiReplit size={26} />,     bg: "bg-orange-500/10",                             color: "text-orange-500" },
   { name: "Vercel",     icon: <SiVercel size={26} />,     bg: "bg-neutral-800/10 dark:bg-neutral-300/10",     color: "text-neutral-800 dark:text-neutral-300" },
   { name: "Figma",      icon: <SiFigma size={26} />,      bg: "bg-purple-500/10",                             color: "text-purple-500" },
   { name: "Postman",    icon: <SiPostman size={26} />,    bg: "bg-orange-600/10",                             color: "text-orange-600" },
   { name: "Claude",     icon: <SiAnthropic size={26} />,  bg: "bg-amber-500/10",                              color: "text-amber-600" },
   { name: "Gemini",     icon: <SiGooglegemini size={26} />, bg: "bg-blue-400/10",                             color: "text-blue-500" },
-  { name: "v0",         icon: <img src="/icon-v0.svg" width={26} height={26} alt="v0" className="dark:invert" />, bg: "bg-neutral-800/10 dark:bg-neutral-300/10", color: "text-neutral-800 dark:text-neutral-200" },
+  { name: "v0",         icon: <img src="/icon-v0.svg" width={26} height={26} loading="lazy" decoding="async" alt="v0" className="dark:invert" />, bg: "bg-neutral-800/10 dark:bg-neutral-300/10", color: "text-neutral-800 dark:text-neutral-200" },
   { name: "Amazon Q",   icon: <span className="text-[22px] font-black leading-none" style={{ fontFamily: "Georgia, serif" }}>Q</span>, bg: "bg-orange-400/10", color: "text-orange-500" },
   { name: "Flutter",        icon: <SiFlutter size={26} />,        bg: "bg-sky-400/10",    color: "text-sky-500" },
   { name: "Dart",           icon: <SiDart size={26} />,           bg: "bg-blue-500/10",   color: "text-blue-500" },
@@ -248,21 +248,61 @@ export default function DevProfilePage() {
           {/* Achievements */}
           <BentoCard className="p-6 flex flex-col justify-between gap-4 min-h-[180px] group">
             <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-                <PiCertificate size={18} className="text-green-500" />
-                {t.nav.achievements}
+              <div className="flex flex-wrap items-center justify-between gap-1 text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                <div className="flex items-center gap-2">
+                  <PiCertificate size={18} className="text-green-500" />
+                  {t.nav.achievements}
+                </div>
+                <span className="rounded-full bg-green-500/10 px-2 py-0.5 text-[10px] font-bold text-green-600 dark:text-green-400 border border-green-500/20">
+                  23 Verified
+                </span>
               </div>
               <p className="text-xs text-neutral-500 dark:text-neutral-400">{t.achievements.sub}</p>
             </div>
-            <div className="flex items-center justify-center">
-              <div className="grid grid-cols-3 gap-2">
-                {["Cert", "Award", "Best", "Gold", "Merit", "Grad"].map((label, i) => (
-                  <div key={i} className="flex h-9 w-9 items-center justify-center rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                    <PiCertificate size={16} className="text-green-500" />
-                  </div>
-                ))}
+            
+            {/* Featured Certificate Badges */}
+            <div className="grid grid-cols-2 gap-2 my-1">
+              <div className="flex items-center gap-2 rounded-xl border border-indigo-500/20 bg-indigo-500/10 p-2 text-indigo-700 dark:text-indigo-300">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-indigo-500/20">
+                  <PiCertificate size={16} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold leading-tight truncate">ActAI SkillBridge</p>
+                  <p className="text-[9px] text-neutral-500 dark:text-neutral-400 truncate">Certified Specialist</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-xl border border-purple-500/20 bg-purple-500/10 p-2 text-purple-700 dark:text-purple-300">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-purple-500/20">
+                  <PiCertificate size={16} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold leading-tight truncate">UofL Full-Stack</p>
+                  <p className="text-[9px] text-neutral-500 dark:text-neutral-400 truncate">Specialization</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-xl border border-blue-500/20 bg-blue-500/10 p-2 text-blue-700 dark:text-blue-300">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-500/20">
+                  <PiCertificate size={16} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold leading-tight truncate">Google Prompting</p>
+                  <p className="text-[9px] text-neutral-500 dark:text-neutral-400 truncate">AI Essentials</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-xl border border-amber-500/20 bg-amber-500/10 p-2 text-amber-700 dark:text-amber-300">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-amber-500/20">
+                  <PiCertificate size={16} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold leading-tight truncate">DevHub Internship</p>
+                  <p className="text-[9px] text-neutral-500 dark:text-neutral-400 truncate">Frontend & Flutter</p>
+                </div>
               </div>
             </div>
+
             <Link href="/achievements">
               <span className="flex items-center gap-1 text-xs font-medium text-green-600 dark:text-green-400 group-hover:underline cursor-pointer">
                 {t.common.viewCerts} <HiOutlineExternalLink size={13} />

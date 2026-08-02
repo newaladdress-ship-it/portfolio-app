@@ -11,9 +11,9 @@
   --color-border-stone: var(--border-stone);
   --color-terracotta: var(--accent-terracotta);
   --color-terracotta-hover: var(--accent-hover);
-  --font-sans: 'Inter', sans-serif;
-  --font-heading: 'Manrope', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Manrope', 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 :root {

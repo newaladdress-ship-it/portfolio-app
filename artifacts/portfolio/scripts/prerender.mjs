@@ -317,6 +317,43 @@ function buildHtml(route) {
   const canonical = `${BASE_URL}${route.path === "/" ? "/" : route.path}`;
   const ogImage = `${BASE_URL}/opengraph.jpg`;
 
+  let jsonLdScript = "";
+  if (route.path === "/") {
+    const personLd = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Muhammad Imran",
+      jobTitle: "Web Developer & Full-Stack Specialist",
+      url: BASE_URL,
+      image: ogImage,
+      telephone: "+923019316123",
+      email: "mi6062610@gmail.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Multan",
+        addressRegion: "Punjab",
+        postalCode: "60060",
+        addressCountry: "PK",
+      },
+      knowsAbout: ["React", "Next.js", "Node.js", "MERN Stack", "JavaScript", "TypeScript", "Web Development", "Technical SEO"],
+      sameAs: ["https://github.com/muhammadimran9", "https://www.linkedin.com/in/muhammad-imran-972364373/"],
+    };
+
+    const localBusinessLd = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: "Imran Digitals - Web Developer Multan",
+      description: "Muhammad Imran is a full stack web developer in Multan building fast, reliable websites and MERN stack web apps.",
+      url: BASE_URL,
+      telephone: "+923019316123",
+      areaServed: ["Multan", "Lahore", "Islamabad", "Pakistan", "Worldwide"],
+      serviceType: ["Website Development", "MERN Stack Web Applications", "Next.js Development", "Technical SEO"],
+      priceRange: "$$",
+    };
+
+    jsonLdScript = `\n    <script type="application/ld+json">\n${JSON.stringify([personLd, localBusinessLd])}\n    </script>`;
+  }
+
   const headInjection = `
     <link rel="canonical" href="${canonical}" />
     <meta property="og:type" content="website" />
@@ -327,7 +364,7 @@ function buildHtml(route) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeAttr(route.title)}" />
     <meta name="twitter:description" content="${escapeAttr(route.description)}" />
-    <meta name="twitter:image" content="${ogImage}" />`;
+    <meta name="twitter:image" content="${ogImage}" />${jsonLdScript}`;
 
   let html = indexHtml
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(route.title)}</title>`)
@@ -342,6 +379,39 @@ function buildHtml(route) {
     <h1>${escapeHtml(route.h1)}</h1>
     <p>${escapeHtml(route.content || "")}</p>
   </div>`;
+
+  let rootContent = "";
+  if (route.path === "/") {
+    rootContent = `<div style="background-color:#F5F2EC;color:#17211E;min-height:100vh;font-family:'Inter',system-ui,-apple-system,sans-serif;">
+      <div style="max-width:56rem;margin:0 auto;padding:2rem 1.25rem;padding-top:6rem;">
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;border-radius:0.375rem;background-color:#FFFEFA;border:1px solid #D9D4CA;padding:0.375rem 0.875rem;font-size:0.75rem;font-family:monospace;color:#5C655F;">
+          <span style="width:0.5rem;height:0.5rem;border-radius:9999px;background-color:#C96A3D;"></span>
+          <span>Full-Stack Web Developer · 2+ Years Experience</span>
+        </div>
+        <h1 style="font-size:2.25rem;line-height:1.15;font-weight:700;letter-spacing:-0.02em;margin-top:1.5rem;margin-bottom:1.5rem;color:#17211E;font-family:'Manrope',system-ui,sans-serif;">
+          Websites and digital systems that make your business easier to trust.
+        </h1>
+        <p style="font-size:1.125rem;line-height:1.6;color:#5C655F;max-width:48rem;margin-bottom:1.5rem;">
+          I build fast, custom web applications and business websites for local clients in <strong>Multan</strong> and remote businesses worldwide. As a leading <strong>web developer in Multan</strong>, I specialize in React, Next.js, and <strong>MERN stack development</strong> with a focus on clear communication and measurable performance.
+        </p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="/contact" style="display:inline-flex;align-items:center;padding:0.875rem 1.5rem;border-radius:0.5rem;background-color:#C96A3D;color:#ffffff;font-weight:500;font-size:0.875rem;text-decoration:none;">Start a project →</a>
+          <a href="#work" style="display:inline-flex;align-items:center;padding:0.875rem 1.5rem;border-radius:0.5rem;background-color:#FFFEFA;color:#17211E;border:1px solid #D9D4CA;font-weight:500;font-size:0.875rem;text-decoration:none;">View selected work</a>
+        </div>
+      </div>
+    </div>`;
+  } else {
+    rootContent = `<div style="background-color:#F5F2EC;color:#17211E;min-height:100vh;font-family:'Inter',system-ui,-apple-system,sans-serif;">
+      <div style="max-width:56rem;margin:0 auto;padding:2rem 1.25rem;padding-top:6rem;">
+        <h1 style="font-size:2.25rem;line-height:1.15;font-weight:700;letter-spacing:-0.02em;margin-bottom:1rem;color:#17211E;font-family:'Manrope',system-ui,sans-serif;">
+          ${escapeHtml(route.h1)}
+        </h1>
+        <p style="font-size:1.125rem;line-height:1.6;color:#5C655F;max-width:48rem;margin-bottom:1.5rem;">
+          ${escapeHtml(route.description || route.content || "")}
+        </p>
+      </div>
+    </div>`;
+  }
 
   const fallback = `<noscript>
     <div style="max-width:680px;margin:80px auto;padding:0 24px;font-family:system-ui,sans-serif;color:#222;line-height:1.6">
@@ -360,7 +430,7 @@ function buildHtml(route) {
 
   html = html.replace(
     '<div id="root"></div>',
-    `<div id="root">${seoBlock}</div>${fallback}`
+    `<div id="root">${rootContent}</div>${fallback}`
   );
 
   return html;

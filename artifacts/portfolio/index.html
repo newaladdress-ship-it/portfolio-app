@@ -12,13 +12,20 @@
     <meta name="robots" content="index, follow, agentic" />
     <meta name="google-site-verification" content="Hs9vYTLHsbVavGkWWEBPfzfLLNZyErctUiFFF-QlqhE" />
     <meta name="msvalidate.01" content="207473D434A6B2FA4E2217EFA3CB53DB" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L5JK23V3YP"></script>
+    <!-- Deferred Google tag (gtag.js) for Fast Mobile FCP -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-L5JK23V3YP');
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-L5JK23V3YP";
+          document.head.appendChild(s);
+        }, 2500);
+      });
     </script>
     <meta name="theme-color" content="#F5F2EC" />
     <!-- Canonical and OG tags are set dynamically per-page via react-helmet-async -->
@@ -46,15 +53,15 @@
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://www.google-analytics.com" />
-
-    <!-- Font Preloading (Self-hosting is better, but preloading fonts from Google helps) -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" media="all" />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
     <link rel="dns-prefetch" href="https://avatars.githubusercontent.com" />
 
+    <!-- Non-render-blocking Google Fonts with instant system font swap -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" />
+    </noscript>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -91,8 +98,18 @@
     <!-- Performance Hints -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Umami Analytics -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="2028ea29-b4a7-4df9-b268-755a0b023946"></script>
+    <!-- Umami Analytics (Deferred for Fast Mobile FCP) -->
+    <script type="text/javascript">
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var u = document.createElement('script');
+          u.defer = true;
+          u.src = "https://cloud.umami.is/script.js";
+          u.setAttribute("data-website-id", "2028ea29-b4a7-4df9-b268-755a0b023946");
+          document.head.appendChild(u);
+        }, 3000);
+      });
+    </script>
 
     <!-- Microsoft Clarity Analytics (Deferred for Fast FCP) -->
     <script type="text/javascript">

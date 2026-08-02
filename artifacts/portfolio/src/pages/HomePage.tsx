@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "wouter";
 import SEOHead from "@/components/SEOHead";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import LazyViewport from "@/components/ui/LazyViewport";
 import { PERSONAL } from "@/data/personal";
 import {
   ArrowRight, Code2, Search, Building2,
@@ -113,7 +114,7 @@ export default function HomePage() {
       description: "An automated URL and sitemap indexer utilizing IndexNow protocols and search engine APIs to streamline crawling for webmasters and digital marketers.",
       outcome: "Instant API-driven submission workflow replacing manual Google Search Console indexing.",
       tags: ["React", "TypeScript", "Vite", "IndexNow API"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=480&fit=crop",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=75",
       liveUrl: "https://www.freeindexer.online/",
     },
     {
@@ -123,7 +124,7 @@ export default function HomePage() {
       description: "A high-conversion service platform for a mobile pet grooming business in Florida, built on Next.js with fast mobile response and area lookup tools.",
       outcome: "Clean mobile-first UX with streamlined booking conversion pathways.",
       tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&h=480&fit=crop",
+      image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=600&q=75",
       liveUrl: "https://mobilepetgroomingtampa.lovable.app/",
     },
     {
@@ -133,7 +134,7 @@ export default function HomePage() {
       description: "A privacy-focused browser tool for editing photo GPS geotags and EXIF metadata without uploading files to third-party servers.",
       outcome: "Zero server lag metadata processing executed entirely client-side.",
       tags: ["JavaScript", "EXIF.js", "OpenStreetMap", "Leaflet"],
-      image: "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?w=800&h=480&fit=crop",
+      image: "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=600&q=75",
       liveUrl: "https://geotagseditor.online/",
     },
   ];
@@ -315,10 +316,10 @@ export default function HomePage() {
                         <OptimizedImage
                         src={study.image}
                         alt={`${study.title} screenshot`}
-                        width={800}
-                        height={480}
-                        fetchPriority={index === 0 ? "high" : "auto"}
-                        loading={index === 0 ? "eager" : "lazy"}
+                        width={600}
+                        height={360}
+                        fetchPriority="low"
+                        loading="lazy"
                         className="w-full h-56 sm:h-64 object-cover hover:scale-105 transition-transform duration-500"
                       />
                     </div>
@@ -330,198 +331,208 @@ export default function HomePage() {
         </section>
 
         {/* ---------------- 4. WHAT YOU CAN HIRE ME FOR ---------------- */}
-        <section className="space-y-8 pt-4">
-          <div className="space-y-2">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Capabilities & Services</p>
-            <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-              What You Can Hire Me For
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="w-10 h-10 rounded-lg bg-[#C96A3D]/10 flex items-center justify-center text-[#C96A3D]">
-                  <Building2 size={22} />
-                </div>
-                <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                  Business Websites That Generate Leads
-                </h3>
-                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                  For shops, clinics, service providers, and local companies in Multan and across Pakistan. Sites built to turn visitors into phone calls and WhatsApp inquiries.
-                </p>
-              </div>
-              <ul className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] space-y-1.5 pt-4 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
-                <li>✓ Fast Mobile Load Speeds</li>
-                <li>✓ Local SEO & Schema Ready</li>
-                <li>✓ Clear Call-To-Action Pathways</li>
-              </ul>
+        <LazyViewport fallbackHeight="300px">
+          <section className="space-y-8 pt-4">
+            <div className="space-y-2">
+              <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Capabilities & Services</p>
+              <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                What You Can Hire Me For
+              </h2>
             </div>
 
-            <div className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="w-10 h-10 rounded-lg bg-[#C96A3D]/10 flex items-center justify-center text-[#C96A3D]">
-                  <Layers size={22} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 space-y-4 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#C96A3D]/10 flex items-center justify-center text-[#C96A3D]">
+                    <Building2 size={22} />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                    Business Websites That Generate Leads
+                  </h3>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                    For shops, clinics, service providers, and local companies in Multan and across Pakistan. Sites built to turn visitors into phone calls and WhatsApp inquiries.
+                  </p>
                 </div>
-                <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                  Custom Web Applications & Dashboards
-                </h3>
-                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                  Full custom web applications built on React, Next.js, Node, and MongoDB. Bespoke admin portals, customer portals, and internal management platforms.
-                </p>
+                <ul className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] space-y-1.5 pt-4 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
+                  <li>✓ Fast Mobile Load Speeds</li>
+                  <li>✓ Local SEO & Schema Ready</li>
+                  <li>✓ Clear Call-To-Action Pathways</li>
+                </ul>
               </div>
-              <ul className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] space-y-1.5 pt-4 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
-                <li>✓ MERN Stack & Next.js 14+</li>
-                <li>✓ Secure REST API Integrations</li>
-                <li>✓ Custom Admin & User Workflows</li>
-              </ul>
-            </div>
 
-            <div className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="w-10 h-10 rounded-lg bg-[#C96A3D]/10 flex items-center justify-center text-[#C96A3D]">
-                  <Search size={22} />
+              <div className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 space-y-4 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#C96A3D]/10 flex items-center justify-center text-[#C96A3D]">
+                    <Layers size={22} />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                    Custom Web Applications & Dashboards
+                  </h3>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                    Full custom web applications built on React, Next.js, Node, and MongoDB. Bespoke admin portals, customer portals, and internal management platforms.
+                  </p>
                 </div>
-                <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                  SEO, Performance & AI Automation
-                </h3>
-                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                  Core Web Vitals auditing, technical SEO code fixes, site speed rebuilding, and practical AI feature integration for business productivity.
-                </p>
+                <ul className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] space-y-1.5 pt-4 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
+                  <li>✓ MERN Stack & Next.js 14+</li>
+                  <li>✓ Secure REST API Integrations</li>
+                  <li>✓ Custom Admin & User Workflows</li>
+                </ul>
               </div>
-              <ul className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] space-y-1.5 pt-4 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
-                <li>✓ Technical SEO & Indexing</li>
-                <li>✓ Performance & Speed Rebuilds</li>
-                <li>✓ Pragmatic AI & Utility Features</li>
-              </ul>
+
+              <div className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 space-y-4 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#C96A3D]/10 flex items-center justify-center text-[#C96A3D]">
+                    <Search size={22} />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                    SEO, Performance & AI Automation
+                  </h3>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                    Core Web Vitals auditing, technical SEO code fixes, site speed rebuilding, and practical AI feature integration for business productivity.
+                  </p>
+                </div>
+                <ul className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] space-y-1.5 pt-4 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
+                  <li>✓ Technical SEO & Indexing</li>
+                  <li>✓ Performance & Speed Rebuilds</li>
+                  <li>✓ Pragmatic AI & Utility Features</li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </LazyViewport>
 
         {/* ---------------- 5. HOW WORKING TOGETHER FEELS ---------------- */}
-        <section className="space-y-8 pt-4">
-          <div className="space-y-2">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Simple Process</p>
-            <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-              How Working Together Feels
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
-            <div className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3">
-              <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#C96A3D]/15 text-[#C96A3D]">
-                01 // Clarify
-              </span>
-              <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">Discovery & Requirements</h3>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                We review your business goals, outline clear deliverable scope, fixed pricing, and realistic timelines upfront. No unexpected costs or scope creep.
-              </p>
+        <LazyViewport fallbackHeight="250px">
+          <section className="space-y-8 pt-4">
+            <div className="space-y-2">
+              <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Simple Process</p>
+              <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                How Working Together Feels
+              </h2>
             </div>
 
-            <div className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3">
-              <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#C96A3D]/15 text-[#C96A3D]">
-                02 // Build
-              </span>
-              <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">Clean Code Architecture</h3>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                I develop the website or application using modern React/Next.js stack, providing status updates along the way with regular preview links.
-              </p>
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
+              <div className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3">
+                <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#C96A3D]/15 text-[#C96A3D]">
+                  01 // Clarify
+                </span>
+                <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">Discovery & Requirements</h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  We review your business goals, outline clear deliverable scope, fixed pricing, and realistic timelines upfront. No unexpected costs or scope creep.
+                </p>
+              </div>
 
-            <div className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3">
-              <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#C96A3D]/15 text-[#C96A3D]">
-                03 // Improve
-              </span>
-              <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">Launch & Support</h3>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Final testing, SEO configuration, domain deployment, and post-launch support to ensure your product runs smoothly without maintenance headaches.
-              </p>
+              <div className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3">
+                <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#C96A3D]/15 text-[#C96A3D]">
+                  02 // Build
+                </span>
+                <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">Clean Code Architecture</h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  I develop the website or application using modern React/Next.js stack, providing status updates along the way with regular preview links.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3">
+                <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[#C96A3D]/15 text-[#C96A3D]">
+                  03 // Improve
+                </span>
+                <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">Launch & Support</h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  Final testing, SEO configuration, domain deployment, and post-launch support to ensure your product runs smoothly without maintenance headaches.
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </LazyViewport>
 
         {/* ---------------- 6. ABOUT ME SNAPSHOT ---------------- */}
-        <section className="rounded-2xl bg-[#17211E] text-[#F7F3EC] p-8 sm:p-10 space-y-6 border border-[#2A3632]">
-          <div className="max-w-3xl space-y-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">About Muhammad Imran</span>
-            <h2 className="font-heading text-3xl font-bold text-[#F7F3EC]">
-              Developer Discipline with Direct Communication
-            </h2>
-            <p className="text-sm sm:text-base font-sans text-[#9DA6A0] leading-relaxed">
-              With 2+ years of hands-on experience in full-stack web development and technical SEO based in Multan, I combine engineering discipline with transparent communication. You work directly with the developer building your site — ensuring your requirements are built right the first time.
-            </p>
-          </div>
+        <LazyViewport fallbackHeight="200px">
+          <section className="rounded-2xl bg-[#17211E] text-[#F7F3EC] p-8 sm:p-10 space-y-6 border border-[#2A3632]">
+            <div className="max-w-3xl space-y-4">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">About Muhammad Imran</span>
+              <h2 className="font-heading text-3xl font-bold text-[#F7F3EC]">
+                Developer Discipline with Direct Communication
+              </h2>
+              <p className="text-sm sm:text-base font-sans text-[#9DA6A0] leading-relaxed">
+                With 2+ years of hands-on experience in full-stack web development and technical SEO based in Multan, I combine engineering discipline with transparent communication. You work directly with the developer building your site — ensuring your requirements are built right the first time.
+              </p>
+            </div>
 
-          <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-[#F7F3EC]/80">
-            <span>• Full Stack (MERN & Next.js)</span>
-            <span>• Multan, Pakistan</span>
-            <span>• Available for Freelance & Remote Contracts</span>
-          </div>
-        </section>
+            <div className="pt-2 flex flex-wrap gap-4 text-xs font-mono text-[#F7F3EC]/80">
+              <span>• Full Stack (MERN & Next.js)</span>
+              <span>• Multan, Pakistan</span>
+              <span>• Available for Freelance & Remote Contracts</span>
+            </div>
+          </section>
+        </LazyViewport>
 
         {/* ---------------- 7. FAQ ACCORDION ---------------- */}
-        <section className="space-y-6 pt-4">
-          <div className="space-y-2">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Questions Answered</p>
-            <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-              Frequently Asked Questions
-            </h2>
-          </div>
+        <LazyViewport fallbackHeight="250px">
+          <section className="space-y-6 pt-4">
+            <div className="space-y-2">
+              <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Questions Answered</p>
+              <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                Frequently Asked Questions
+              </h2>
+            </div>
 
-          <div className="space-y-3 font-sans">
-            {FAQ_ITEMS.map((item, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] overflow-hidden"
-                >
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    className="w-full p-5 text-left font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC] flex items-center justify-between gap-4 text-base"
+            <div className="space-y-3 font-sans">
+              {FAQ_ITEMS.map((item, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] overflow-hidden"
                   >
-                    <span>{item.q}</span>
-                    {isOpen ? <ChevronUp size={18} className="text-[#C96A3D] shrink-0" /> : <ChevronDown size={18} className="text-[#5C655F] shrink-0" />}
-                  </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed border-t border-[#D9D4CA]/40 dark:border-[#2A3632]/40 pt-3">
-                      {item.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </section>
+                    <button
+                      onClick={() => toggleFaq(idx)}
+                      className="w-full p-5 text-left font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC] flex items-center justify-between gap-4 text-base"
+                    >
+                      <span>{item.q}</span>
+                      {isOpen ? <ChevronUp size={18} className="text-[#C96A3D] shrink-0" /> : <ChevronDown size={18} className="text-[#5C655F] shrink-0" />}
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed border-t border-[#D9D4CA]/40 dark:border-[#2A3632]/40 pt-3">
+                        {item.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        </LazyViewport>
 
         {/* ---------------- 8. CONTACT & INQUIRY ---------------- */}
-        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-8 sm:p-10 space-y-8">
-          <div className="max-w-2xl space-y-3">
-            <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Get In Touch</p>
-            <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-              Ready to Discuss Your Project?
-            </h2>
-            <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-              Send a quick message about your website or app requirements. I respond within 24 hours with project advice and transparent quote estimation.
-            </p>
-          </div>
+        <LazyViewport fallbackHeight="200px">
+          <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-8 sm:p-10 space-y-8">
+            <div className="max-w-2xl space-y-3">
+              <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Get In Touch</p>
+              <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                Ready to Discuss Your Project?
+              </h2>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Send a quick message about your website or app requirements. I respond within 24 hours with project advice and transparent quote estimation.
+              </p>
+            </div>
 
-          <div className="flex flex-wrap gap-4 items-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors"
-            >
-              Go to Contact Form <ArrowRight size={16} />
-            </Link>
+            <div className="flex flex-wrap gap-4 items-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors"
+              >
+                Go to Contact Form <ArrowRight size={16} />
+              </Link>
 
-            <a
-              href={`mailto:${PERSONAL.email}`}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#F5F2EC] dark:bg-[#121917] text-[#17211E] dark:text-[#F5F2EC] border border-[#D9D4CA] dark:border-[#2A3632] font-mono text-sm hover:border-[#C96A3D] transition-colors"
-            >
-              <Mail size={16} /> {PERSONAL.email}
-            </a>
-          </div>
-        </section>
+              <a
+                href={`mailto:${PERSONAL.email}`}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#F5F2EC] dark:bg-[#121917] text-[#17211E] dark:text-[#F5F2EC] border border-[#D9D4CA] dark:border-[#2A3632] font-mono text-sm hover:border-[#C96A3D] transition-colors"
+              >
+                <Mail size={16} /> {PERSONAL.email}
+              </a>
+            </div>
+          </section>
+        </LazyViewport>
       </div>
     </>
   );
