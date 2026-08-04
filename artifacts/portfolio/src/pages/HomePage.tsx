@@ -149,8 +149,13 @@ export default function HomePage() {
       />
 
       <div className="space-y-20 py-6 font-sans">
+        {/* ---------------- AI SUMMARY (Hidden visually, readable by crawlers) ---------------- */}
+        <div className="sr-only" id="ai-summary">
+          Muhammad Imran is a full-stack web developer based in Multan, Pakistan, specializing in React, Next.js, and the MERN stack. He provides custom web application development, technical SEO, and business website solutions for local and international clients.
+        </div>
+
         {/* ---------------- 1. HERO SECTION ---------------- */}
-        <section className="relative pt-4 pb-4">
+        <header className="relative pt-4 pb-4">
           <div className="max-w-4xl space-y-6">
             <div className="inline-flex items-center gap-2 rounded-md bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] px-3.5 py-1.5 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
               <span className="w-2 h-2 rounded-full bg-[#C96A3D] animate-pulse" />
@@ -214,7 +219,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </header>
 
         {/* ---------------- 2. PROOF STRIP ---------------- */}
         <section className="border-y border-[#D9D4CA] dark:border-[#2A3632] py-6">
@@ -332,10 +337,10 @@ export default function HomePage() {
 
         {/* ---------------- 4. WHAT YOU CAN HIRE ME FOR ---------------- */}
         <LazyViewport fallbackHeight="300px">
-          <section className="space-y-8 pt-4">
+          <section className="space-y-8 pt-4" aria-labelledby="services-heading">
             <div className="space-y-2">
               <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Capabilities & Services</p>
-              <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+              <h2 id="services-heading" className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
                 What You Can Hire Me For
               </h2>
             </div>
