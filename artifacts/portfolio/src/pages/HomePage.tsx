@@ -231,84 +231,11 @@ export default function HomePage() {
             </div>
           </div>
 
-<<<<<<< HEAD
-          {/* Refined Project Interface Visual Frame */}
-          <div className="mt-10 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-4 sm:p-6 shadow-xs overflow-hidden">
-            <div className="flex items-center justify-between pb-4 border-b border-[#D9D4CA]/60 dark:border-[#2A3632]/60 font-mono text-xs text-[#5C655F] dark:text-[#9DA6A0]">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-[#D9D4CA] dark:bg-[#2A3632]" />
-                <span className="w-3 h-3 rounded-full bg-[#D9D4CA] dark:bg-[#2A3632]" />
-                <span className="w-3 h-3 rounded-full bg-[#D9D4CA] dark:bg-[#2A3632]" />
-                <span className="ml-2 hidden sm:inline">imran-studio // active-architecture</span>
-              </div>
-              <span className="text-[#C96A3D] font-medium">Status: Available for Q3 Projects</span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 font-sans">
-              <div className="p-4 rounded-lg bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2">
-                <p className="text-xs font-mono uppercase tracking-wider text-[#5C655F] dark:text-[#9DA6A0]">Architecture</p>
-                <p className="font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC]">React & Next.js Systems</p>
-                <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0]">Server-side rendering, optimized bundles, zero runtime bloat.</p>
-              </div>
-
-              <div className="p-4 rounded-lg bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2">
-                <p className="text-xs font-mono uppercase tracking-wider text-[#5C655F] dark:text-[#9DA6A0]">Search Visibility</p>
-                <p className="font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC]">Technical SEO & Speed</p>
-                <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0]">Clean semantic HTML, schema markup & Core Web Vitals standard.</p>
-              </div>
-
-              <div className="p-4 rounded-lg bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2">
-                <p className="text-xs font-mono uppercase tracking-wider text-[#5C655F] dark:text-[#9DA6A0]">Full-Stack Data</p>
-                <p className="font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC]">MERN & REST Workflows</p>
-                <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0]">Node.js backend pipelines, MongoDB storage & API integration.</p>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* ---------------- 2. PROOF STRIP ---------------- */}
-        <section className="border-y border-[#D9D4CA] dark:border-[#2A3632] py-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
-            <div className="flex items-start gap-3">
-              <Clock className="w-5 h-5 text-[#C96A3D] shrink-0 mt-1" />
-              <div>
-                <p className="font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC] text-sm">2+ Years Active Experience</p>
-                <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] mt-0.5">Shipping full-stack web applications & business sites with 24h response time.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <ShieldCheck className="w-5 h-5 text-[#C96A3D] shrink-0 mt-1" />
-              <div>
-                <p className="font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC] text-sm">Custom Code Quality</p>
-                <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] mt-0.5">No fragile template bloat. React, Next.js, and clean maintainable structure.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <Globe className="w-5 h-5 text-[#C96A3D] shrink-0 mt-1" />
-              <div>
-                <p className="font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC] text-sm">Multan + Remote Ready</p>
-                <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] mt-0.5">Serving local companies in Multan and international remote clients.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------- 3. SELECTED WORK (ID="WORK") ---------------- */}
-        <section id="work" className="space-y-8 scroll-mt-12">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div className="space-y-2">
-              <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Selected Portfolio</p>
-              <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                Recent Web Development Projects & Case Studies
-=======
           {/* Benefit-Focused Expertise Section: What I Build */}
           <div className="mt-12 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 shadow-xs">
             <div>
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-[#17211E] dark:text-[#F5F2EC] tracking-tight mb-6">
                 What I Build
->>>>>>> 7a5392e (feat: update portfolio with Microsoft Clarity analytics, SEO enhancements, and content updates)
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
@@ -374,7 +301,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </header>
 
         {/* ---------------- 2. TRUST SECTION: WHY WORK WITH ME? ---------------- */}
         <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 shadow-xs">
