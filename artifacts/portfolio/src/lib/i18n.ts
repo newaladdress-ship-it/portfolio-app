@@ -116,7 +116,7 @@ function buildT(locale: Locale) {
         readMore: "Read More",
         viewCerts: "View certificates",
         joinChat: "Join the chat",
-        hireMe: "Hire me",
+        hireMe: "Contact me",
         noProjects: "No projects found",
         noCerts: "No certificates found",
         pageNotFound: "Page not found",

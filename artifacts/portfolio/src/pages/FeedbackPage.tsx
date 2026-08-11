@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import SEOHead from "@/components/SEOHead";
 import { notifyAdmin } from "@/hooks/usePushNotifications";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,8 +11,21 @@ import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import SectionHeading from "@/components/layout/SectionHeading";
 import SectionSubHeading from "@/components/layout/SectionSubHeading";
 import SpotlightCard from "@/components/layout/SpotlightCard";
+import Breakline from "@/components/layout/Breakline";
 import { auth, googleProvider, db } from "@/lib/firebase";
-import { useT } from "@/lib/i18n";
+import {
+  MessageSquare,
+  Sparkles,
+  CheckCircle2,
+  Lock,
+  ArrowRight,
+  Heart,
+  Layout,
+  Briefcase,
+  Layers,
+  Smartphone,
+  Lightbulb,
+} from "lucide-react";
 
 type FeedbackUser = {
   name: string;
@@ -25,7 +39,7 @@ function StarRating({ value, onChange }: { value: number; onChange: (v: number) 
   const [hovered, setHovered] = useState(0);
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1.5 font-sans">
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}
@@ -33,20 +47,20 @@ function StarRating({ value, onChange }: { value: number; onChange: (v: number) 
           onClick={() => onChange(star)}
           onMouseEnter={() => setHovered(star)}
           onMouseLeave={() => setHovered(0)}
-          className="transition-transform duration-150 hover:scale-110"
+          className="transition-transform duration-150 hover:scale-110 focus:outline-none"
         >
           <HiStar
-            size={32}
+            size={36}
             className={`transition-colors duration-150 ${
               star <= (hovered || value)
-                ? "text-yellow-400"
-                : "text-neutral-200 dark:text-neutral-700"
+                ? "text-[#C96A3D]"
+                : "text-[#D9D4CA] dark:text-[#2A3632]"
             }`}
           />
         </button>
       ))}
       {(hovered || value) > 0 && (
-        <span className="ml-2 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+        <span className="ml-3 text-sm font-mono font-semibold text-[#C96A3D]">
           {STAR_LABELS[hovered || value]}
         </span>
       )}
@@ -55,7 +69,6 @@ function StarRating({ value, onChange }: { value: number; onChange: (v: number) 
 }
 
 function AuthGate({ onLogin }: { onLogin: (user: FeedbackUser) => void }) {
-  const t = useT();
   const [step, setStep] = useState<"choose" | "github-name">("choose");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState<"google" | "github" | null>(null);
@@ -89,110 +102,137 @@ function AuthGate({ onLogin }: { onLogin: (user: FeedbackUser) => void }) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-10">
-      <SpotlightCard className="w-full max-w-sm">
-        <div className="p-8 space-y-6">
-          <AnimatePresence mode="wait">
-            {step === "choose" ? (
-              <motion.div
-                key="choose"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-6"
-              >
-                <div className="text-center space-y-2">
-                  <div className="flex justify-center">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-yellow-400/20 text-yellow-500 border border-yellow-400/30">
-                      <HiOutlineChatBubbleLeftRight size={28} />
-                    </div>
-                  </div>
-                  <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                    {t.feedback.signInTitle}
-                  </h2>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                    {t.feedback.signInSub}
-                  </p>
-                </div>
+    <SpotlightCard className="p-6 sm:p-8 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-6 font-sans">
+      <AnimatePresence mode="wait">
+        {step === "choose" ? (
+          <motion.div
+            key="choose"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="space-y-6"
+          >
+            <div className="space-y-3 text-left">
+              <div className="inline-flex items-center gap-2 rounded-md bg-[#F5F2EC] dark:bg-[#121917] border border-[#D9D4CA] dark:border-[#2A3632] px-3 py-1 text-xs font-mono text-[#C96A3D]">
+                <Lock size={13} />
+                <span>Secure Feedback System</span>
+              </div>
+              <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                Leave a Review
+              </h2>
+              <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Sign in to share your experience and leave feedback. You can continue securely using your existing <strong className="text-[#17211E] dark:text-[#F5F2EC]">Google</strong> or <strong className="text-[#17211E] dark:text-[#F5F2EC]">GitHub</strong> account.
+              </p>
+            </div>
 
-                <div className="space-y-3">
-                  <button
-                    onClick={handleGoogle}
-                    disabled={loading !== null}
-                    className="flex w-full items-center gap-3 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-3 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-700 disabled:opacity-60 transition-colors shadow-sm"
-                  >
-                    <SiGoogle size={18} className="text-red-500 shrink-0" />
-                    {loading === "google" ? "Signing in…" : t.feedback.google}
-                  </button>
-                  <button
-                    onClick={() => setStep("github-name")}
-                    disabled={loading !== null}
-                    className="flex w-full items-center gap-3 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-3 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-700 disabled:opacity-60 transition-colors shadow-sm"
-                  >
-                    <SiGithub size={18} className="text-neutral-700 dark:text-neutral-300 shrink-0" />
-                    {t.feedback.github}
-                  </button>
-                </div>
+            {/* Why Sign In Section */}
+            <div className="p-5 rounded-xl bg-[#F5F2EC]/60 dark:bg-[#121917] border border-[#D9D4CA]/80 dark:border-[#2A3632] space-y-3">
+              <h3 className="text-xs font-mono font-semibold uppercase text-[#C96A3D] tracking-wider">
+                Why Sign In?
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Authentication helps keep feedback associated with a real account and reduces spam and automated submissions.
+              </p>
+              <p className="text-xs font-mono font-semibold text-[#17211E] dark:text-[#F5F2EC] pt-1">
+                After signing in, you'll be able to:
+              </p>
+              <ul className="space-y-2 text-sm text-[#5C655F] dark:text-[#9DA6A0]">
+                {[
+                  "Share your experience with my portfolio",
+                  "Leave a review or general feedback",
+                  "Tell me what you found useful",
+                  "Suggest improvements",
+                  "Share thoughts about my projects and presentation",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5">
+                    <CheckCircle2 size={15} className="text-[#C96A3D] shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-                {error && <p className="text-center text-xs text-red-500">{error}</p>}
-              </motion.div>
-            ) : (
-              <motion.div
-                key="github-name"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="space-y-6"
+            {/* OAuth buttons */}
+            <div className="space-y-3 pt-2">
+              <p className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">Continue With</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  onClick={handleGoogle}
+                  disabled={loading !== null}
+                  className="flex items-center justify-center gap-3 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] px-4 py-3 text-sm font-heading font-medium text-[#17211E] dark:text-[#F5F2EC] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] disabled:opacity-60 transition-colors shadow-xs"
+                >
+                  <SiGoogle size={18} className="text-red-500 shrink-0" />
+                  <span>{loading === "google" ? "Signing in…" : "Continue with Google"}</span>
+                </button>
+                <button
+                  onClick={() => setStep("github-name")}
+                  disabled={loading !== null}
+                  className="flex items-center justify-center gap-3 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] px-4 py-3 text-sm font-heading font-medium text-[#17211E] dark:text-[#F5F2EC] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] disabled:opacity-60 transition-colors shadow-xs"
+                >
+                  <SiGithub size={18} className="shrink-0" />
+                  <span>Continue with GitHub</span>
+                </button>
+              </div>
+            </div>
+
+            {error && <p className="text-xs text-red-500 font-mono text-center">{error}</p>}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="github-name"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="space-y-5"
+          >
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setStep("choose")}
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#D9D4CA] dark:border-[#2A3632] text-[#5C655F] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] transition-colors"
               >
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => setStep("choose")}
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-neutral-200 dark:border-neutral-700 text-neutral-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-                  >
-                    <HiX size={14} />
-                  </button>
-                  <div className="flex items-center gap-2 text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                    <SiGithub size={15} />
-                    Signing in with GitHub
-                  </div>
-                </div>
-                <div className="text-center space-y-1">
-                  <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-                    What's your name?
-                  </h2>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                    This will appear with your review
-                  </p>
-                </div>
-                <form onSubmit={handleGithub} className="space-y-4">
-                  <input
-                    autoFocus
-                    type="text"
-                    placeholder="e.g. Alex R."
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    maxLength={30}
-                    className="w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-4 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition"
-                  />
-                  <button
-                    type="submit"
-                    disabled={!name.trim()}
-                    className="w-full rounded-xl bg-yellow-400 hover:bg-yellow-500 disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors"
-                  >
-                    Continue
-                  </button>
-                </form>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </SpotlightCard>
-    </div>
+                <HiX size={14} />
+              </button>
+              <div className="flex items-center gap-2 text-sm font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC]">
+                <SiGithub size={16} />
+                Signing in with GitHub
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <h2 className="text-lg font-heading font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                What's your name?
+              </h2>
+              <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0]">
+                This display name will appear with your portfolio review.
+              </p>
+            </div>
+
+            <form onSubmit={handleGithub} className="space-y-4">
+              <input
+                autoFocus
+                type="text"
+                placeholder="e.g. Alex R."
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={30}
+                className="w-full rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC]/60 dark:bg-[#121917] px-4 py-3 text-sm text-[#17211E] dark:text-[#F5F2EC] placeholder-[#5C655F]/60 focus:outline-none focus:border-[#C96A3D] transition-colors"
+              />
+              <button
+                type="submit"
+                disabled={!name.trim()}
+                className="w-full rounded-xl bg-[#C96A3D] hover:bg-[#A9512A] disabled:opacity-40 disabled:cursor-not-allowed px-4 py-3 text-sm font-heading font-medium text-white transition-colors"
+              >
+                Continue
+              </button>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </SpotlightCard>
   );
 }
 
 function ReviewForm({ user, onDone }: { user: FeedbackUser; onDone: () => void }) {
-  const t = useT();
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
@@ -202,21 +242,25 @@ function ReviewForm({ user, onDone }: { user: FeedbackUser; onDone: () => void }
     if (!rating || !review.trim()) return;
     setStatus("submitting");
     try {
-      await addDoc(collection(db, "feedback_reviews"), {
-        name: user.name,
-        provider: user.provider,
-        photoURL: user.photoURL ?? null,
-        rating,
-        review: review.trim(),
-        createdAt: serverTimestamp(),
-      });
-      // Notify admin about new review
-      notifyAdmin(
-        `New ${rating}-star Review from ${user.name}`,
+      if (db) {
+        await addDoc(collection(db, "feedback_reviews"), {
+          name: user.name,
+          provider: user.provider,
+          photoURL: user.photoURL ?? null,
+          rating,
+          review: review.trim(),
+          approved: false, // moderation queue flag
+          createdAt: serverTimestamp(),
+        });
+      }
+
+      await notifyAdmin(
+        `⭐ New ${rating}-star Review from ${user.name}`,
         review.trim().slice(0, 100),
         "/admin",
         "feedback-review"
       );
+
       if (user.provider === "google") {
         await signOut(auth).catch(() => {});
       }
@@ -228,154 +272,305 @@ function ReviewForm({ user, onDone }: { user: FeedbackUser; onDone: () => void }
 
   if (status === "done") {
     return (
-      <div className="flex flex-col items-center justify-center py-10">
-        <SpotlightCard className="w-full max-w-md">
-          <div className="p-10 flex flex-col items-center text-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
-              <HiStar size={32} className="text-yellow-400" />
-            </div>
-            <div className="space-y-1">
-              <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                {t.feedback.thankYou}
-              </h2>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                {t.feedback.thankYouSub}
-              </p>
-            </div>
-            <div className="flex items-center gap-1 mt-2">
-              {[1, 2, 3, 4, 5].map((s) => (
-                <HiStar
-                  key={s}
-                  size={20}
-                  className={s <= rating ? "text-yellow-400" : "text-neutral-200 dark:text-neutral-700"}
-                />
-              ))}
-            </div>
-            <button
-              onClick={onDone}
-              className="mt-2 flex items-center gap-2 rounded-xl bg-neutral-900 dark:bg-neutral-100 px-5 py-2.5 text-sm font-medium text-white dark:text-neutral-900 hover:opacity-90 transition-opacity"
-            >
-              {t.feedback.backBtn}
-            </button>
-          </div>
-        </SpotlightCard>
-      </div>
+      <SpotlightCard className="p-8 sm:p-10 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] text-center space-y-6 font-sans">
+        <div className="w-16 h-16 rounded-2xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center mx-auto">
+          <HiStar size={32} />
+        </div>
+        <div className="space-y-2 max-w-md mx-auto">
+          <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+            Thanks for your feedback!
+          </h2>
+          <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+            Your review has been submitted successfully.
+          </p>
+          <p className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] pt-1">
+            Note: All feedback undergoes brief moderation before appearing publicly on the portfolio.
+          </p>
+        </div>
+
+        <div className="flex items-center justify-center gap-1">
+          {[1, 2, 3, 4, 5].map((s) => (
+            <HiStar
+              key={s}
+              size={22}
+              className={s <= rating ? "text-[#C96A3D]" : "text-[#D9D4CA] dark:text-[#2A3632]"}
+            />
+          ))}
+        </div>
+
+        <div className="pt-2">
+          <button
+            onClick={onDone}
+            className="inline-flex items-center gap-2 rounded-lg bg-[#C96A3D] hover:bg-[#A9512A] px-6 py-3 text-sm font-heading font-medium text-white transition-colors"
+          >
+            Submit Another Review
+          </button>
+        </div>
+      </SpotlightCard>
     );
   }
 
   const initials = user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
-  const avatarColors = ["bg-blue-500", "bg-purple-500", "bg-pink-500", "bg-green-500", "bg-orange-500"];
-  const avatarColor = avatarColors[user.name.charCodeAt(0) % avatarColors.length];
 
   return (
-    <div className="flex flex-col items-center py-6">
-      <SpotlightCard className="w-full max-w-lg">
-        <form onSubmit={handleSubmit} className="p-7 space-y-6">
-          {/* Signed in as */}
-          <div className="flex items-center gap-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700 px-4 py-3">
-            {user.photoURL ? (
-              <img
-                src={user.photoURL}
-                alt={user.name}
-                referrerPolicy="no-referrer"
-                className="h-9 w-9 rounded-full object-cover shrink-0"
-              />
-            ) : (
-              <div className={`${avatarColor} h-9 w-9 flex items-center justify-center rounded-full text-white text-sm font-bold shrink-0`}>
-                {initials}
-              </div>
-            )}
-            <div className="min-w-0">
-              <p className="text-sm font-medium text-neutral-800 dark:text-neutral-200 truncate">{user.name}</p>
-              <div className="flex items-center gap-1 text-[11px] text-neutral-400 dark:text-neutral-500">
-                {user.provider === "google"
-                  ? <SiGoogle size={10} className="text-red-500" />
-                  : <SiGithub size={10} />}
-                <span>Signed in via {user.provider === "google" ? "Google" : "GitHub"}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Star rating */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-              {t.feedback.ratingLabel}
-            </label>
-            <StarRating value={rating} onChange={setRating} />
-          </div>
-
-          {/* Review text */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                {t.feedback.reviewLabel}
-              </label>
-              <span className="text-[11px] text-neutral-400">{review.length}/500 {t.feedback.charCount}</span>
-            </div>
-            <textarea
-              value={review}
-              onChange={(e) => setReview(e.target.value.slice(0, 500))}
-              placeholder={t.feedback.reviewPlaceholder}
-              rows={5}
-              required
-              className="w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-4 py-3 text-sm text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition resize-none"
+    <SpotlightCard className="p-6 sm:p-8 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-6 font-sans">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Signed in user badge */}
+        <div className="flex items-center gap-3 rounded-xl bg-[#F5F2EC]/60 dark:bg-[#121917] border border-[#D9D4CA]/80 dark:border-[#2A3632] px-4 py-3">
+          {user.photoURL ? (
+            <img
+              src={user.photoURL}
+              alt={user.name}
+              referrerPolicy="no-referrer"
+              className="h-10 w-10 rounded-full object-cover shrink-0"
             />
+          ) : (
+            <div className="h-10 w-10 flex items-center justify-center rounded-full bg-[#C96A3D] text-white text-sm font-mono font-bold shrink-0">
+              {initials}
+            </div>
+          )}
+          <div className="min-w-0">
+            <p className="text-sm font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC] truncate">
+              {user.name}
+            </p>
+            <div className="flex items-center gap-1.5 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
+              {user.provider === "google" ? (
+                <SiGoogle size={12} className="text-red-500" />
+              ) : (
+                <SiGithub size={12} />
+              )}
+              <span>Signed in via {user.provider === "google" ? "Google" : "GitHub"}</span>
+            </div>
           </div>
+        </div>
 
-          <button
-            type="submit"
-            disabled={!rating || !review.trim() || status === "submitting"}
-            className="w-full rounded-xl bg-yellow-400 hover:bg-yellow-500 disabled:opacity-40 disabled:cursor-not-allowed px-4 py-2.5 text-sm font-semibold text-neutral-900 transition-colors"
-          >
-            {status === "submitting" ? t.feedback.submitting : t.feedback.submitBtn}
-          </button>
-        </form>
-      </SpotlightCard>
-    </div>
+        {/* Rating */}
+        <div className="space-y-2">
+          <h2 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+            How was your experience?
+          </h2>
+          <StarRating value={rating} onChange={setRating} />
+        </div>
+
+        {/* Review text */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-sm font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC]">
+              Your feedback
+            </label>
+            <span className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
+              {review.length}/500 characters
+            </span>
+          </div>
+          <textarea
+            value={review}
+            onChange={(e) => setReview(e.target.value.slice(0, 500))}
+            placeholder="Tell Muhammad Imran what you think..."
+            rows={5}
+            required
+            className="w-full rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC]/60 dark:bg-[#121917] px-4 py-3 text-sm text-[#17211E] dark:text-[#F5F2EC] placeholder-[#5C655F]/60 focus:outline-none focus:border-[#C96A3D] transition-colors resize-y"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={!rating || !review.trim() || status === "submitting"}
+          className="w-full rounded-xl bg-[#C96A3D] hover:bg-[#A9512A] disabled:opacity-40 disabled:cursor-not-allowed px-4 py-3.5 text-sm font-heading font-medium text-white transition-colors shadow-xs"
+        >
+          {status === "submitting" ? "Submitting Feedback…" : "Submit Feedback"}
+        </button>
+      </form>
+    </SpotlightCard>
   );
 }
 
 export default function FeedbackPage() {
-  const t = useT();
   const [user, setUser] = useState<FeedbackUser | null>(null);
 
-  return (
-    <section className="space-y-6">
-      <SEOHead
-        title="Client Reviews and Feedback for Muhammad Imran Developer"
-        description="Read genuine client reviews of web developer Muhammad Imran or share your feedback after collaborating on React and MERN projects."
-        path="/feedback"
-      />
-      <div className="space-y-2">
-        <SectionHeading title={t.feedback.heading} icon={<HiOutlineChatBubbleLeftRight />} />
-        <SectionSubHeading>
-          <p>{t.feedback.sub}</p>
-        </SectionSubHeading>
-      </div>
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://imrandigitals.com/" },
+      { "@type": "ListItem", position: 2, name: "Portfolio Feedback", item: "https://imrandigitals.com/feedback" },
+    ],
+  };
 
-      <AnimatePresence mode="wait">
-        {!user ? (
-          <motion.div
-            key="auth"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25 }}
-          >
-            <AuthGate onLogin={setUser} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="review"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25 }}
-          >
-            <ReviewForm user={user} onDone={() => setUser(null)} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
+  return (
+    <>
+      <SEOHead
+        title="Portfolio Feedback | Muhammad Imran"
+        description="Share your feedback about Muhammad Imran's portfolio, projects, and web development work. Sign in securely with Google or GitHub to leave a review."
+        path="/feedback"
+        jsonLd={[breadcrumbJsonLd]}
+      />
+
+      <div className="space-y-16 py-6 font-sans">
+        {/* Breadcrumb Navigation */}
+        <nav
+          aria-label="Breadcrumb"
+          className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]"
+        >
+          <Link href="/" className="hover:text-[#C96A3D] transition-colors">
+            Home
+          </Link>
+          <span className="mx-2 text-[#D9D4CA] dark:text-[#2A3632]">/</span>
+          <span className="text-[#17211E] dark:text-[#F5F2EC]">Feedback</span>
+        </nav>
+
+        {/* ---------------- HERO / HEADER ---------------- */}
+        <section className="space-y-6">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-md bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] px-3.5 py-1.5 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
+              <Sparkles size={14} className="text-[#C96A3D]" />
+              <span>User Interaction &amp; Portfolio Reviews</span>
+            </div>
+
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-[#17211E] dark:text-[#F5F2EC]">
+              Portfolio Feedback
+            </h1>
+
+            <h2 className="font-heading text-xl sm:text-2xl font-semibold text-[#C96A3D]">
+              Share Your Experience
+            </h2>
+          </div>
+
+          <div className="space-y-3 text-base sm:text-lg leading-relaxed text-[#5C655F] dark:text-[#9DA6A0] max-w-4xl font-sans">
+            <p>
+              Your feedback helps me understand what works well across my portfolio and where I can improve.
+            </p>
+            <p>
+              If you've explored my projects, services, development work, or professional background, I'd appreciate hearing your thoughts.
+            </p>
+          </div>
+        </section>
+
+        <Breakline className="my-8" />
+
+        {/* ---------------- INTERACTIVE REVIEW GATE / FORM ---------------- */}
+        <section className="space-y-6">
+          <AnimatePresence mode="wait">
+            {!user ? (
+              <motion.div
+                key="auth"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25 }}
+              >
+                <AuthGate onLogin={setUser} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="review"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25 }}
+              >
+                <ReviewForm user={user} onDone={() => setUser(null)} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </section>
+
+        <Breakline className="my-8" />
+
+        {/* ---------------- WHAT KIND OF FEEDBACK CAN YOU SHARE? ---------------- */}
+        <section className="space-y-6 font-sans">
+          <div className="space-y-2">
+            <SectionHeading title="What Kind of Feedback Can You Share?" icon={<Lightbulb />} />
+            <SectionSubHeading>
+              <p>You can comment on anything related to the portfolio, including:</p>
+            </SectionSubHeading>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <Layout size={20} />
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                Portfolio Experience
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Was the website easy to navigate and understand?
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <Layers size={20} />
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                Projects
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Did the projects and case studies clearly explain the work?
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <Briefcase size={20} />
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                Services
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Were the services and development capabilities easy to understand?
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <Smartphone size={20} />
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                Design &amp; Usability
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                How was your experience using the website on desktop or mobile?
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 md:col-span-2 lg:col-span-2">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <Sparkles size={20} />
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                Suggestions
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Is there anything you'd like to see added, changed, or explained better?
+              </p>
+            </div>
+          </div>
+
+          <p className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] text-center">
+            Your feedback can be positive, critical, or simply a suggestion. Honest feedback is welcome.
+          </p>
+        </section>
+
+        <Breakline className="my-8" />
+
+        {/* ---------------- THANK YOU ---------------- */}
+        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4 font-sans">
+          <div className="space-y-3 max-w-3xl">
+            <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+              Thank You
+            </h2>
+            <div className="space-y-3 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+              <p>
+                Whether you've worked with me, explored my projects, or simply visited the portfolio, your feedback is valuable.
+              </p>
+              <p className="font-semibold text-[#17211E] dark:text-[#F5F2EC]">
+                Thank you for taking the time to share your experience.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

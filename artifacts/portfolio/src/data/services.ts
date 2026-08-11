@@ -319,9 +319,9 @@ export const SERVICES: Service[] = [
     keyword: "web development agencies with executive dashboards",
     metaTitle: "Executive Dashboard Development - Muhammad Imran Dev",
     metaDescription: "Custom executive dashboard development for startups and enterprises. Get real-time business KPIs and analytics built in React and Node.",
-    h1: "Executive Dashboards by a Senior Web Development Engineer",
+    h1: "Executive Dashboards & Business Analytics Development",
     intro:
-      "Searching for web development agencies with executive dashboards in their portfolio? You can hire one accountable senior engineer instead. I design and build C-suite KPI dashboards - the kind founders, CEOs, and board members actually open before their morning coffee. Real metrics, fast load times, and a layout that respects the reader's time.",
+      "Searching for custom executive dashboards for your business or startup? You can hire an accountable full-stack web developer to design and build C-suite KPI dashboards - the kind founders, CEOs, and team members actually open before their morning coffee. Real metrics, fast load times, and a layout that respects the reader's time.",
     highlights: [
       { label: "Audience", value: "Founders · CEOs · CFOs · Board members" },
       { label: "Output", value: "Web dashboard + scheduled PDF / email digest" },
@@ -413,10 +413,10 @@ export const SERVICES: Service[] = [
     slug: "seo-multan",
     keyword: "seo company in multan",
     metaTitle: "SEO Company in Multan - Web Developer and SEO Expert",
-    metaDescription: "Looking for a reliable SEO company in Multan? Get technical audits, schema markup, and speed optimization from a senior web developer.",
-    h1: "SEO Company in Multan - Built by a Local Web Developer",
+    metaDescription: "Technical SEO audits, schema markup, and speed optimization from a full-stack web developer in Multan.",
+    h1: "Technical SEO & Performance Services in Multan",
     intro:
-      "I am Muhammad Imran, a senior web developer based in Multan, Pakistan offering technical SEO services to local businesses, agencies, and online stores. If you are searching for an honest SEO company in Multan that actually understands code, you are in the right place. No spammy backlinks, no monthly retainer that hides the work - just real, technical SEO that helps your site rank.",
+      "I am Muhammad Imran, a full-stack web developer based in Multan, Pakistan offering technical SEO services to local businesses, agencies, and online stores. If you are searching for honest technical SEO that actually focuses on clean code, site speed, and search visibility, you are in the right place. No spammy tactics, no hidden retainers - just real, technical SEO that helps your site rank.",
     highlights: [
       { label: "Location", value: "Multan, Pakistan - local meetings welcome" },
       { label: "Focus", value: "Technical & on-page SEO" },
@@ -986,11 +986,11 @@ export const SERVICES: Service[] = [
 ];
 
 export const SERVICES_INDEX_META = {
-  metaTitle: "Web Development Services - React and MERN Stack Developer",
-  metaDescription: "Web development services by Muhammad Imran in Multan, Pakistan. Specializing in custom React, Next.js, and MERN stack web applications.",
-  h1: "Web Development Services in Multan, Pakistan - Hire a Web Developer",
+  metaTitle: "Web Development Services in Multan | Imran Digitals",
+  metaDescription: "Web development services in Multan by Muhammad Imran. Build business websites, React and Next.js apps, custom web applications, and full-stack solutions.",
+  h1: "Web Development Services in Multan",
   intro:
-    "I deliver professional web development services as an independent senior engineer based in Multan, Pakistan. As an expert web developer, React specialist, MERN Stack developer, and Next.js expert - I provide custom web applications and full-stack software development solutions to startups, agencies, and enterprises across Multan, Pakistan, and globally. Every web development project is delivered by me personally with no middlemen or junior hand-offs - just professional quality code.",
+    "I'm Muhammad Imran, a full-stack web developer based in Multan, Pakistan. I build business websites, custom web applications, dashboards, and software-oriented web systems for businesses, startups, agencies, and remote clients.",
 };
 
 export function getServiceBySlug(slug: string): Service | undefined {

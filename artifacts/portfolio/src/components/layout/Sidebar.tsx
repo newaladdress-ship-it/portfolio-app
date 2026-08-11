@@ -170,7 +170,6 @@ export default function Sidebar() {
     { title: t.nav.achievements, href: "/achievements", icon: <PiCertificate size={20} /> },
     { title: t.nav.projects,     href: "/projects",    icon: <BiCollection size={20} /> },
     { title: t.nav.services,     href: "/services",    icon: <HiOutlineBriefcase size={20} /> },
-    { title: "Hire Me",          href: "/contact",     icon: <HiOutlineRocketLaunch size={20} /> },
     { title: "Blog",             href: "/blog",        icon: <BiBook size={20} /> },
     { title: "Locations",        href: "/locations",   icon: <HiOutlineBriefcase size={20} /> },
     { title: t.nav.dashboard,    href: "/dashboard",   icon: <BiCategory size={20} /> },

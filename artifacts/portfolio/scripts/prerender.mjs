@@ -128,10 +128,10 @@ const CORE_ROUTES = [
   {
     path: "/",
     file: "index.html",
-    title: "Muhammad Imran - Web Developer in Multan | Imran Digitals",
-    description: "Hire Muhammad Imran, senior web developer in Multan, Pakistan specializing in custom React, Next.js, and Node.js web applications for global clients.",
-    h1: "Web App Developer in Multan, Pakistan",
-    content: "I build fast, scalable web applications using React, Next.js, and the MERN Stack. Based in Multan, Pakistan - available for freelance projects and remote positions worldwide. Specializing in custom code, technical SEO, and production-grade systems.",
+    title: "Muhammad Imran | Full-Stack Web Developer in Multan",
+    description: "Full-stack web developer in Multan, Pakistan specializing in React, Next.js, MERN, TypeScript and technical SEO. Building fast websites and custom web apps.",
+    h1: "Fast, scalable websites and custom web applications built around your business goals.",
+    content: "I'm Muhammad Imran, a full-stack web developer based in Multan, Pakistan. I build business websites, custom web applications, dashboards, and digital tools using React, Next.js, TypeScript, Node.js, and modern web technologies. Based in Multan · Available across Pakistan & Worldwide.",
     changefreq: "daily",
     priority: "1.0"
   },
@@ -407,17 +407,23 @@ function buildHtml(route) {
       <div style="max-width:56rem;margin:0 auto;padding:2rem 1.25rem;padding-top:6rem;">
         <div style="display:inline-flex;align-items:center;gap:0.5rem;border-radius:0.375rem;background-color:#FFFEFA;border:1px solid #D9D4CA;padding:0.375rem 0.875rem;font-size:0.75rem;font-family:monospace;color:#5C655F;">
           <span style="width:0.5rem;height:0.5rem;border-radius:9999px;background-color:#C96A3D;"></span>
-          <span>Full-Stack Web Developer · 2+ Years Experience</span>
+          <span>Full-Stack Web Developer in Multan</span>
         </div>
         <h1 style="font-size:2.25rem;line-height:1.15;font-weight:700;letter-spacing:-0.02em;margin-top:1.5rem;margin-bottom:1.5rem;color:#17211E;font-family:'Manrope',system-ui,sans-serif;">
-          Websites and digital systems that make your business easier to trust.
+          Fast, scalable websites and custom web applications built around your business goals.
         </h1>
+        <p style="font-size:1.125rem;line-height:1.6;color:#5C655F;max-width:48rem;margin-bottom:1rem;">
+          I'm Muhammad Imran, a full-stack web developer based in Multan, Pakistan. I build business websites, custom web applications, dashboards, and digital tools using React, Next.js, TypeScript, Node.js, and modern web technologies.
+        </p>
         <p style="font-size:1.125rem;line-height:1.6;color:#5C655F;max-width:48rem;margin-bottom:1.5rem;">
-          I build fast, custom web applications and business websites for local clients in <strong>Multan</strong> and remote businesses worldwide. As a leading <strong>web developer in Multan</strong>, I specialize in React, Next.js, and <strong>MERN stack development</strong> with a focus on clear communication and measurable performance.
+          Whether you need a professional website that generates inquiries, a custom application for your business, or a high-performance web experience, I focus on clean development, responsive design, technical SEO, and long-term maintainability.
+        </p>
+        <p style="font-size:0.875rem;font-weight:600;color:#17211E;margin-bottom:1.5rem;">
+          Based in Multan · Available across Pakistan &amp; Worldwide
         </p>
         <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-          <a href="/contact" style="display:inline-flex;align-items:center;padding:0.875rem 1.5rem;border-radius:0.5rem;background-color:#C96A3D;color:#ffffff;font-weight:500;font-size:0.875rem;text-decoration:none;">Start a project →</a>
-          <a href="#work" style="display:inline-flex;align-items:center;padding:0.875rem 1.5rem;border-radius:0.5rem;background-color:#FFFEFA;color:#17211E;border:1px solid #D9D4CA;font-weight:500;font-size:0.875rem;text-decoration:none;">View selected work</a>
+          <a href="/contact" style="display:inline-flex;align-items:center;padding:0.875rem 1.5rem;border-radius:0.5rem;background-color:#C96A3D;color:#ffffff;font-weight:500;font-size:0.875rem;text-decoration:none;">Start a Project →</a>
+          <a href="#work" style="display:inline-flex;align-items:center;padding:0.875rem 1.5rem;border-radius:0.5rem;background-color:#FFFEFA;color:#17211E;border:1px solid #D9D4CA;font-weight:500;font-size:0.875rem;text-decoration:none;">View My Work</a>
         </div>
       </div>
     </div>`;
