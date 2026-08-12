@@ -115,8 +115,8 @@ export default function ProjectDetailPage() {
     (p) => p.isShow && p.id !== project.id && p.category === project.category
   ).slice(0, 3);
 
-  const seoTitle = getSeoTitle(project.name);
-  const seoDesc = getSeoDesc(project.description);
+  const seoTitle = details?.metaTitle || getSeoTitle(project.name);
+  const seoDesc = details?.metaDescription || getSeoDesc(project.description);
 
   return (
     <>
@@ -279,6 +279,26 @@ export default function ProjectDetailPage() {
               </div>
             </SpotlightCard>
 
+            {/* Overview Bullets */}
+            {details.overviewBullets && details.overviewBullets.length > 0 && (
+              <SpotlightCard className="p-6 sm:p-8 space-y-4 border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] rounded-2xl">
+                <h2 className="text-lg font-heading font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                  Project Overview &amp; Requirements
+                </h2>
+                <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  The goal of this project was to create more than a basic informational website. The platform was designed to:
+                </p>
+                <ul className="space-y-2.5">
+                  {details.overviewBullets.map((bullet, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-[#17211E] dark:text-[#F5F2EC]">
+                      <span className="mt-1.5 h-2 w-2 rounded-full bg-[#C96A3D] shrink-0" />
+                      <span className="leading-relaxed">{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </SpotlightCard>
+            )}
+
             {/* Key Features */}
             <SpotlightCard className="p-6 sm:p-8 space-y-5 border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] rounded-2xl">
               <h2 className="text-lg font-heading font-bold text-[#17211E] dark:text-[#F5F2EC] flex items-center gap-2">
@@ -305,10 +325,48 @@ export default function ProjectDetailPage() {
               <h2 className="text-lg font-heading font-bold text-[#17211E] dark:text-[#F5F2EC]">
                 Technical Challenge &amp; Solution
               </h2>
-              <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                {details.challenges}
-              </p>
+              <div className="space-y-4 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                <div>
+                  <h3 className="font-semibold text-[#17211E] dark:text-[#F5F2EC] mb-1">Technical Challenge</h3>
+                  <p>{details.challenges}</p>
+                </div>
+                {details.solution && (
+                  <div>
+                    <h3 className="font-semibold text-[#17211E] dark:text-[#F5F2EC] mb-1">Technical Solution</h3>
+                    <p>{details.solution}</p>
+                  </div>
+                )}
+              </div>
             </SpotlightCard>
+
+            {/* Demonstrates */}
+            {details.demonstrates && details.demonstrates.length > 0 && (
+              <SpotlightCard className="p-6 sm:p-8 space-y-4 border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] rounded-2xl">
+                <h2 className="text-lg font-heading font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                  What This Project Demonstrates
+                </h2>
+                <ul className="space-y-2.5">
+                  {details.demonstrates.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-[#17211E] dark:text-[#F5F2EC]">
+                      <span className="mt-1.5 h-2 w-2 rounded-full bg-[#C96A3D] shrink-0" />
+                      <span className="leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </SpotlightCard>
+            )}
+
+            {/* Why It Matters */}
+            {details.whyItMatters && (
+              <SpotlightCard className="p-6 sm:p-8 space-y-4 border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] rounded-2xl">
+                <h2 className="text-lg font-heading font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                  Why This Project Matters
+                </h2>
+                <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  {details.whyItMatters}
+                </p>
+              </SpotlightCard>
+            )}
           </div>
 
           {/* Right Column - Sidebar Meta & Quick Links */}

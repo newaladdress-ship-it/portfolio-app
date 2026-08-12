@@ -157,7 +157,10 @@ function ProfileHeader({ imageSize }: { imageSize: number }) {
 
 export default function Sidebar() {
   const t = useT();
+  const [pathname] = useLocation();
   const [isOpen, setIsOpen] = useState(() => useMenu.getState().isOpen);
+  const navRef = React.useRef<HTMLElement>(null);
+
   useEffect(() => {
     return useMenu.subscribe((state) => setIsOpen(state.isOpen));
   }, []);
@@ -195,6 +198,63 @@ export default function Sidebar() {
     }
     return () => { document.body.style.overflow = "auto"; };
   }, [isOpen]);
+
+  // Synchronize sidebar scroll position with page scroll position
+  useEffect(() => {
+    if (isMobile) return;
+
+    let rAFId: number | null = null;
+
+    const syncScroll = () => {
+      if (!navRef.current) return;
+
+      const scrollTop = Math.max(
+        window.scrollY || 0,
+        window.pageYOffset || 0,
+        document.documentElement.scrollTop || 0,
+        document.body.scrollTop || 0
+      );
+
+      const scrollHeight = Math.max(
+        document.documentElement.scrollHeight || 0,
+        document.body.scrollHeight || 0
+      );
+
+      const clientHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+      const totalDocScroll = scrollHeight - clientHeight;
+
+      if (totalDocScroll <= 10) return;
+
+      const progress = Math.min(1, Math.max(0, scrollTop / totalDocScroll));
+      const maxNavScroll = navRef.current.scrollHeight - navRef.current.clientHeight;
+
+      if (maxNavScroll > 0) {
+        navRef.current.scrollTop = Math.round(progress * maxNavScroll);
+      }
+    };
+
+    const onScroll = () => {
+      if (rAFId !== null) cancelAnimationFrame(rAFId);
+      rAFId = requestAnimationFrame(syncScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+
+    syncScroll();
+    const timer1 = setTimeout(syncScroll, 100);
+    const timer2 = setTimeout(syncScroll, 500);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (rAFId !== null) cancelAnimationFrame(rAFId);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [isMobile, pathname]);
 
   const imageSize = isMobile ? 40 : 100;
 
@@ -239,7 +299,7 @@ export default function Sidebar() {
           </div>
         )}
 
-        {/* Desktop Sidebar Layout - Pinned Profile Header at Top, Scrollable Nav in Middle */}
+        {/* Desktop Sidebar Layout - Profile Header at Top, Scrollable Nav with Dynamic Bottom Controls (No Scrollbar) */}
         <div className="hidden lg:flex lg:flex-col lg:h-full min-h-0">
           {/* PINNED TOP: Profile Header */}
           <div className="shrink-0 pb-3">
@@ -248,24 +308,27 @@ export default function Sidebar() {
 
           <div className="border-t border-neutral-300 dark:border-neutral-700 mb-3 shrink-0" />
 
-          {/* SCROLLABLE MIDDLE: Menu Items */}
-          <nav className="flex-1 min-h-0 overflow-y-auto space-y-1 pr-1 lg:[scrollbar-width:thin]">
+          {/* SCROLLABLE MIDDLE: Menu Items + Dynamic Bottom Controls (Scrollbar Hidden) */}
+          <nav
+            ref={navRef}
+            className="flex-1 min-h-0 overflow-y-auto space-y-1 pr-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             {MENU_ITEMS.map((item) => (
               <MenuItem key={item.href} {...item} />
             ))}
-          </nav>
 
-          {/* PINNED BOTTOM: Controls & Copyright */}
-          <div className="border-t border-neutral-300 dark:border-neutral-700 pt-3 mt-3 shrink-0">
-            <div className="flex items-center gap-2 px-2">
-              <ThemeToggle />
-              <LanguageSwitcher />
-              <PWAInstallButton />
+            {/* DYNAMIC BOTTOM: Controls & Copyright (Shows when scrolled to bottom) */}
+            <div className="border-t border-neutral-300 dark:border-neutral-700 pt-3 mt-4">
+              <div className="flex items-center gap-2 px-2">
+                <ThemeToggle />
+                <LanguageSwitcher />
+                <PWAInstallButton />
+              </div>
+              <p className="text-[11px] text-neutral-500 dark:text-neutral-400 px-2 mt-2 pb-2">
+                © {new Date().getFullYear()} {PERSONAL.name}
+              </p>
             </div>
-            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 px-2 mt-2">
-              © {new Date().getFullYear()} {PERSONAL.name}
-            </p>
-          </div>
+          </nav>
         </div>
       </div>
     </header>

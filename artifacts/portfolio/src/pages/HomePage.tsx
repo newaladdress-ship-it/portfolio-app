@@ -7,7 +7,8 @@ import { PERSONAL } from "@/data/personal";
 import {
   ArrowRight, Code2, Search, Building2,
   ChevronDown, ChevronUp, Mail, ExternalLink,
-  Layers, ShieldCheck, Clock, Globe, Database, LayoutDashboard, Users
+  Layers, ShieldCheck, Clock, Globe, Database, LayoutDashboard, Users,
+  Sparkles, Cpu, Bot, CheckCircle2, Wrench
 } from "lucide-react";
 
 const BASE_URL = "https://www.imrandigitals.online";
@@ -19,7 +20,7 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Muhammad Imran",
-  jobTitle: "Web Developer & Full-Stack Specialist",
+  jobTitle: "Full-Stack & AI Developer",
   url: BASE_URL,
   image: OG_IMAGE,
   telephone: PERSONAL.phone,
@@ -34,7 +35,7 @@ const personSchema = {
   },
   knowsAbout: [
     "React", "Next.js", "Node.js", "Express", "MongoDB", "MERN Stack",
-    "JavaScript", "TypeScript", "Web Development", "Technical SEO",
+    "JavaScript", "TypeScript", "Web Development", "AI Solutions", "Technical SEO",
   ],
   sameAs: [PERSONAL.github, PERSONAL.linkedin],
 };
@@ -44,7 +45,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "Imran Digitals - Web Developer Multan",
   description:
-    "Muhammad Imran is a full stack web developer in Multan with 2+ years of experience building fast, reliable websites and MERN stack web apps for businesses and startups.",
+    "Muhammad Imran is a full stack web developer and AI developer in Multan with experience building fast, reliable websites, custom web apps, and AI solutions for businesses and startups.",
   url: BASE_URL,
   telephone: PERSONAL.phone,
   address: {
@@ -58,7 +59,7 @@ const localBusinessSchema = {
   areaServed: ["Multan", "Lahore", "Islamabad", "Pakistan", "Worldwide"],
   serviceType: [
     "Website Development", "MERN Stack Web Applications",
-    "Next.js Development", "Technical SEO", "Chrome Extensions",
+    "Next.js Development", "AI Solutions & Integrations", "Technical SEO", "Chrome Extensions",
   ],
   priceRange: "$$",
 };
@@ -73,31 +74,35 @@ const webSiteSchema = {
 const FAQ_ITEMS = [
   {
     q: "Who is Muhammad Imran?",
-    a: "Muhammad Imran is a full-stack web developer based in Multan, Pakistan. He specializes in React, Next.js, TypeScript, Node.js, MERN development, Firebase, custom web applications, and technical SEO.",
+    a: "Muhammad Imran is a full-stack web developer and AI developer based in Multan, Pakistan. He specializes in MERN stack development, React, Next.js, custom web applications, software development, technical SEO, and practical AI-powered solutions.",
   },
   {
     q: "Do you build both websites and software?",
-    a: "Yes. I build professional business websites as well as custom web applications, dashboards, internal tools, SaaS interfaces, APIs, and database-driven systems.",
+    a: "Yes. I build business websites as well as custom web applications, dashboards, internal tools, SaaS interfaces, APIs, and software systems based on specific business requirements.",
+  },
+  {
+    q: "Do you build AI applications?",
+    a: "Yes. I build and integrate practical AI features into websites and software, including AI assistants, conversational interfaces, AI-powered workflows, automation, and custom AI integrations.",
+  },
+  {
+    q: "Do you use AI coding tools?",
+    a: "Yes. I use modern AI-assisted development tools such as Cursor, Claude, Claude Code, Codex, GitHub Copilot, Replit, v0, Google AI Studio, and Antigravity as part of my development workflow.",
   },
   {
     q: "Do you work with clients outside Multan?",
-    a: "Yes. I'm based in Multan, Pakistan, but I work remotely with businesses, startups, agencies, and teams across Pakistan and internationally.",
+    a: "Yes. Although I'm based in Multan, Pakistan, I work remotely with businesses, startups, agencies, and teams in Pakistan and internationally.",
   },
   {
     q: "What technologies do you use?",
-    a: "My core technologies include React, Next.js, TypeScript, JavaScript, Node.js, MongoDB, Firebase, Tailwind CSS, REST APIs, and other modern web development tools depending on the project requirements.",
+    a: "My primary development technologies include React, Next.js, TypeScript, Node.js, MongoDB, Express.js, Firebase, REST APIs, and modern AI technologies and development tools.",
   },
   {
     q: "Can you improve an existing website?",
-    a: "Yes. I can work on existing websites to improve performance, mobile usability, technical SEO, functionality, architecture, or specific development issues.",
-  },
-  {
-    q: "Do you build SEO-friendly websites?",
-    a: "Yes. SEO considerations can be incorporated during development, including semantic HTML, metadata, structured data, crawlability, internal linking, responsive design, and performance optimization.",
+    a: "Yes. I can work on existing websites and applications to improve performance, technical SEO, user experience, functionality, maintainability, or add new features including AI-powered functionality.",
   },
   {
     q: "How do I start a project?",
-    a: "Send a brief description of your project through the contact form. I'll review the requirements and respond with initial guidance, questions, and the next steps for discussing the project.",
+    a: "Send a brief description of what you want to build or improve through the contact form. I'll review your requirements and respond with practical next steps.",
   },
 ];
 
@@ -120,6 +125,21 @@ export default function HomePage() {
 
   const selectedCaseStudies = [
     {
+      id: 99,
+      title: "SmartTalk AI — Interactive AI Portfolio Assistant",
+      category: "Interactive AI Portfolio Assistant",
+      description: "SmartTalk AI is an AI-powered assistant built into the Imran Digitals portfolio to help visitors explore Muhammad Imran's projects, technical skills, services, experience, and development capabilities through a conversational interface.",
+      challenge: "A traditional portfolio requires visitors to navigate through multiple pages to find specific information about a developer's skills, projects, and services.",
+      solution: "I developed an interactive AI assistant that provides a conversational way to explore portfolio information and helps visitors understand relevant services or discuss what they want to build.",
+      focus: "AI application development · conversational interfaces · AI integration · user experience",
+      outcome: "An interactive AI-powered portfolio experience that allows visitors to explore professional information and development capabilities through natural-language conversation.",
+      tags: ["Gemini AI", "React", "TypeScript", "AI API Integration"],
+      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=75",
+      liveUrl: "/smarttalk",
+      isInternalLink: true,
+      buttonText: "Visit SmartTalk AI",
+    },
+    {
       id: 18,
       title: "FreeIndexer — URL & Sitemap Indexing Platform",
       category: "SaaS Web Application",
@@ -138,46 +158,46 @@ export default function HomePage() {
       category: "Client-Side Web Application",
       description: "GeoTags Metadata Editor is a browser-based utility for viewing and editing GPS information and EXIF metadata in photos without requiring users to upload their images to a third-party server.",
       challenge: "Users need a simple way to manage photo GPS metadata while keeping their original images private.",
-      solution: "I built a client-side processing workflow that allows metadata operations to take place directly in the browser. Interactive mapping functionality helps users work with geographic coordinates while processing remains focused on the user's device.",
-      focus: "Privacy-first development · browser APIs · geolocation · image metadata",
-      outcome: "A lightweight web utility that lets users work with photo GPS metadata directly in the browser without relying on server-side image processing.",
-      tags: ["JavaScript", "EXIF.js", "Leaflet", "OpenStreetMap"],
-      image: "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=600&q=75",
-      liveUrl: "https://geotagseditor.online/",
+      solution: "I developed a client-side EXIF manipulation tool using JavaScript that reads and modifies image geolocation tags directly inside the browser.",
+      focus: "Client-side processing · EXIF metadata manipulation · Map interface · privacy-focused workflow",
+      outcome: "A fast utility allowing users to fix or customize image metadata cleanly without server uploads.",
+      tags: ["JavaScript", "EXIF.js", "Leaflet Maps", "HTML5"],
+      image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=75",
+      liveUrl: "https://geotags.online/",
     },
     {
-      id: 19,
-      title: "Mobile Pet Grooming Tampa",
-      category: "Lead Generation Business Website",
-      description: "A mobile-first website developed for a local pet grooming business serving customers in Florida.",
-      challenge: "Local service businesses need websites that communicate their services quickly, work reliably on mobile devices, and make it easy for potential customers to take the next step.",
-      solution: "I developed a responsive Next.js website with clear service information, location-focused content, streamlined calls to action, and a mobile-first interface designed around the customer journey.",
-      focus: "Local business websites · mobile UX · lead generation · performance · search visibility",
-      outcome: "A focused service website designed to help visitors understand the offering quickly and move naturally toward contacting or booking the business.",
-      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=600&q=75",
-      liveUrl: "https://mobilepetgroomingtampa.lovable.app/",
-    },
-    {
-      id: 8,
-      title: "PakBizBranches — Pakistan Business Directory",
-      category: "Directory & Data-Driven Web Application",
-      description: "PakBizBranches is a Pakistan-focused business directory designed to organize business information across cities, categories, and individual business listings.",
-      challenge: "A directory platform needs to handle structured business data, dynamic pages, search-friendly URLs, scalable content generation, and a large number of location and business pages while maintaining a usable experience.",
-      solution: "I developed the platform using Next.js, TypeScript, Tailwind CSS, Firebase Firestore, and Firebase Storage, with dynamic business and location-based pages generated from structured data.",
-      focus: "Dynamic websites · database-driven pages · local SEO · scalable architecture · structured business data",
-      outcome: "A scalable directory platform capable of organizing and presenting business information across multiple locations and categories through dynamically generated pages.",
+      id: 16,
+      title: "PakBiz Branches — Business Directory Directory Platform",
+      category: "Multi-Directory Business Portal",
+      description: "PakBiz Branches is a structured business directory platform built to organize company listings, regional branches, and service locations across Pakistan.",
+      challenge: "Businesses and consumers required an accessible repository for localized company contact details.",
+      solution: "Engineered a performant Next.js & Firebase platform with instant search filters, structured data implementation, and administrative entry validation.",
+      focus: "Full-stack architecture · Firestore optimization · SEO structured data · responsive portal",
+      outcome: "A search-engine optimized directory system serving fast page loads and clear navigation across devices.",
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase", "Firestore", "Firebase Storage"],
       image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=600&q=75",
       liveUrl: "https://pakbizbranhces.online/",
     },
   ];
 
+  const aiUsageList = [
+    "Rapid application prototyping",
+    "Code generation and refactoring",
+    "Debugging and troubleshooting",
+    "UI and component development",
+    "API and integration work",
+    "Technical research",
+    "Documentation",
+    "Testing and iteration",
+    "AI feature development",
+    "Workflow automation",
+  ];
+
   return (
     <>
       <SEOHead
-        title="Muhammad Imran | Full-Stack Web Developer in Multan"
-        description="Full-stack web developer in Multan, Pakistan specializing in React, Next.js, MERN, TypeScript and technical SEO. Building fast websites and custom web apps."
+        title="Muhammad Imran | Full-Stack & AI Developer in Multan"
+        description="Full-stack and AI developer in Multan, Pakistan specializing in MERN, React, Next.js, custom web apps, AI solutions, and technical SEO."
         path="/"
         jsonLd={[personSchema, localBusinessSchema, webSiteSchema, homeFaqSchema]}
       />
@@ -185,7 +205,7 @@ export default function HomePage() {
       <div className="space-y-20 py-6 font-sans">
         {/* ---------------- AI SUMMARY (Hidden visually, readable by crawlers) ---------------- */}
         <div className="sr-only" id="ai-summary">
-          Muhammad Imran is a full-stack web developer based in Multan, Pakistan, specializing in React, Next.js, and the MERN stack. He provides custom web application development, technical SEO, and business website solutions for local and international clients.
+          Muhammad Imran is a full-stack web developer and AI developer based in Multan, Pakistan, specializing in React, Next.js, MERN stack, and AI solutions. He provides custom web application development, software, AI tools, technical SEO, and business website solutions for local and international clients.
         </div>
 
         {/* ---------------- 1. HERO SECTION ---------------- */}
@@ -193,19 +213,19 @@ export default function HomePage() {
           <div className="max-w-4xl space-y-6">
             <div className="inline-flex items-center gap-2 rounded-md bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] px-3.5 py-1.5 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
               <span className="w-2 h-2 rounded-full bg-[#C96A3D] animate-pulse" />
-              <span>Full-Stack Web Developer in Multan</span>
+              <span>Full-Stack Web Developer &amp; AI Developer in Multan</span>
             </div>
 
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#17211E] dark:text-[#F5F2EC] leading-[1.15]">
-              Fast, scalable websites and custom web applications built around your business goals.
+              Fast, scalable websites, custom web applications, software, and AI-powered digital solutions built around your business goals.
             </h1>
 
             <div className="space-y-4 text-lg sm:text-xl text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed max-w-3xl font-sans">
               <p>
-                I'm Muhammad Imran, a full-stack web developer based in Multan, Pakistan. I build business websites, custom web applications, dashboards, and digital tools using React, Next.js, TypeScript, Node.js, and modern web technologies.
+                I'm Muhammad Imran, a full-stack web developer and AI developer based in Multan, Pakistan. I build business websites, custom web applications, dashboards, software systems, digital tools, and AI-powered solutions using React, Next.js, TypeScript, Node.js, MongoDB, and modern AI technologies.
               </p>
               <p>
-                Whether you need a professional website that generates inquiries, a custom application for your business, or a high-performance web experience, I focus on clean development, responsive design, technical SEO, and long-term maintainability.
+                Whether you need a professional website, a custom business application, a MERN stack solution, or an AI-powered feature or application, I focus on practical development, responsive design, technical SEO, performance, and long-term maintainability.
               </p>
             </div>
 
@@ -238,14 +258,14 @@ export default function HomePage() {
                 What I Build
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-sans">
                 <div className="p-5 rounded-xl bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2.5">
                   <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
                     <Globe size={20} />
                   </div>
                   <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">Business Websites</h3>
                   <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                    Professional, responsive websites designed to explain your services clearly, build trust, and turn visitors into calls, messages, and inquiries.
+                    Professional, responsive websites designed to explain your services clearly, build trust, generate inquiries, and provide a strong foundation for search visibility.
                   </p>
                 </div>
 
@@ -255,7 +275,17 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">Custom Web Applications</h3>
                   <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                    Purpose-built web applications for businesses, startups, and teams that need functionality beyond a standard website.
+                    Purpose-built web applications for businesses, startups, and teams that need functionality beyond a standard website, including portals, SaaS interfaces, workflows, and data-driven systems.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-xl bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2.5">
+                  <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                    <Sparkles size={20} />
+                  </div>
+                  <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">AI-Powered Websites &amp; Applications</h3>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                    AI-powered websites and web applications that use modern AI technologies to provide intelligent assistants, automation, content workflows, search, recommendations, and other practical business features.
                   </p>
                 </div>
 
@@ -265,7 +295,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">React &amp; Next.js Development</h3>
                   <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                    Modern front-end and full-stack development using React, Next.js, TypeScript, and scalable component-based architecture.
+                    Modern front-end and full-stack development using React, Next.js, TypeScript, and scalable component-based architecture for fast and maintainable digital products.
                   </p>
                 </div>
 
@@ -275,7 +305,17 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">MERN Stack Development</h3>
                   <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                    Custom applications using MongoDB, Express, React, and Node.js, including dashboards, APIs, authentication, and business workflows.
+                    Custom applications using MongoDB, Express.js, React, and Node.js, including dashboards, APIs, authentication, database-driven systems, and business workflows.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-xl bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2.5">
+                  <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                    <Bot size={20} />
+                  </div>
+                  <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">AI Integration &amp; Custom AI Solutions</h3>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                    Practical AI integrations for websites, software, and business systems, including custom AI assistants, AI-powered workflows, API integrations, and AI features built around specific business requirements.
                   </p>
                 </div>
 
@@ -285,7 +325,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">Technical SEO &amp; Performance</h3>
                   <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                    SEO-focused development covering semantic HTML, metadata, structured data, crawlability, Core Web Vitals, mobile performance, and technical improvements.
+                    SEO-focused development covering semantic HTML, metadata, structured data, crawlability, Core Web Vitals, mobile performance, internal linking, and development-level technical improvements.
                   </p>
                 </div>
 
@@ -317,7 +357,7 @@ export default function HomePage() {
                 </div>
                 <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">Direct Communication</h3>
                 <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                  You work directly with the developer building your website or application, so requirements, feedback, and technical decisions stay clear from start to finish.
+                  You work directly with the developer building your website, application, or digital system, so requirements, feedback, and technical decisions stay clear from start to finish.
                 </p>
               </div>
 
@@ -333,11 +373,21 @@ export default function HomePage() {
 
               <div className="p-5 rounded-xl bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2.5">
                 <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                  <Sparkles size={20} />
+                </div>
+                <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">AI-Assisted &amp; AI-Powered Development</h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  I use modern AI development tools and AI technologies alongside traditional software engineering to prototype, develop, debug, automate, and improve digital products. AI is used where it provides practical value—not simply because it is available.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-xl bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2.5">
+                <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
                   <Clock size={20} />
                 </div>
                 <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">Performance-Focused</h3>
                 <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                  Websites are developed with responsive layouts, efficient code, mobile performance, accessibility, and search visibility in mind.
+                  Websites and applications are developed with responsive layouts, efficient code, mobile performance, accessibility, and search visibility in mind.
                 </p>
               </div>
 
@@ -361,7 +411,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2.5">
+              <div className="p-5 rounded-xl bg-[#F5F2EC]/70 dark:bg-[#121917]/70 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 space-y-2.5 sm:col-span-2 lg:col-span-1">
                 <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
                   <ShieldCheck size={20} />
                 </div>
@@ -387,7 +437,7 @@ export default function HomePage() {
                   Real projects demonstrate more than a list of technologies. Each project below represents a specific problem, development challenge, and practical solution.
                 </p>
                 <p>
-                  I build websites, web applications, digital tools, dashboards, and business systems using modern technologies such as React, Next.js, TypeScript, Node.js, Firebase, and REST APIs.
+                  I build websites, web applications, digital tools, dashboards, AI assistants, and business systems using modern technologies such as React, Next.js, TypeScript, Node.js, Firebase, REST APIs, and Gemini AI.
                 </p>
                 <p>
                   Explore selected projects to see what was built, which technologies were used, and how development decisions were made around performance, usability, scalability, SEO, and business requirements.
@@ -453,14 +503,23 @@ export default function HomePage() {
 
                     {study.liveUrl && (
                       <div className="pt-2">
-                        <a
-                          href={study.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[#17211E] dark:text-[#F5F2EC] hover:text-[#C96A3D] transition-colors"
-                        >
-                          Visit Live Project <ExternalLink size={13} />
-                        </a>
+                        {study.isInternalLink ? (
+                          <Link
+                            href={study.liveUrl}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#C96A3D] hover:bg-[#A9512A] text-white text-xs font-mono font-medium transition-colors"
+                          >
+                            {study.buttonText || "Visit Project"} <ArrowRight size={13} />
+                          </Link>
+                        ) : (
+                          <a
+                            href={study.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[#17211E] dark:text-[#F5F2EC] hover:text-[#C96A3D] transition-colors"
+                          >
+                            Visit Live Project <ExternalLink size={13} />
+                          </a>
+                        )}
                       </div>
                     )}
                   </div>
@@ -484,16 +543,16 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ---------------- 4. SERVICES: WEB & SOFTWARE DEVELOPMENT SERVICES ---------------- */}
+        {/* ---------------- 4. SERVICES: WEB, SOFTWARE & AI DEVELOPMENT SERVICES ---------------- */}
         <LazyViewport fallbackHeight="300px">
           <section className="space-y-8 pt-4" aria-labelledby="services-heading">
             <div className="space-y-3 max-w-3xl">
               <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Services &amp; Solutions</p>
               <h2 id="services-heading" className="font-heading text-3xl sm:text-4xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                Web &amp; Software Development Services
+                Web, Software &amp; AI Development Services
               </h2>
               <p className="text-sm sm:text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans">
-                I build digital solutions around the actual requirements of your business, from professional websites and landing pages to custom web applications, dashboards, APIs, and internal business systems.
+                I build digital solutions around the actual requirements of your business, from professional websites and landing pages to custom web applications, software systems, dashboards, APIs, AI-powered applications, and internal business tools. My development work combines full-stack engineering with practical AI integration where it can improve a product, automate a workflow, or create a better user experience.
               </p>
             </div>
 
@@ -522,6 +581,20 @@ export default function HomePage() {
                   </h3>
                   <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
                     Web applications designed around workflows that standard websites cannot handle. I develop custom platforms, customer portals, management systems, SaaS interfaces, internal tools, and data-driven applications using modern full-stack technologies.
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-6 rounded-2xl border border-[#C96A3D]/40 dark:border-[#C96A3D]/40 bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3 flex flex-col justify-between shadow-xs">
+                <div className="space-y-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#C96A3D]/15 flex items-center justify-center text-[#C96A3D]">
+                    <Bot size={22} />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                    AI Development &amp; Custom AI Solutions
+                  </h3>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                    AI-powered features and applications designed around real business requirements. I can integrate AI into websites and software, build conversational assistants, connect applications with AI APIs, and develop practical AI workflows and automation. Projects can include AI assistants, AI-powered web applications, intelligent search, content workflows, business automation, and custom AI features integrated into existing software.
                   </p>
                 </div>
               </div>
@@ -568,7 +641,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3 flex flex-col justify-between">
+              <div className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-3 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
                 <div className="space-y-3">
                   <div className="w-10 h-10 rounded-lg bg-[#C96A3D]/10 flex items-center justify-center text-[#C96A3D]">
                     <Search size={22} />
@@ -585,7 +658,52 @@ export default function HomePage() {
           </section>
         </LazyViewport>
 
-        {/* ---------------- 5. WHO I WORK WITH ---------------- */}
+        {/* ---------------- 5. AI-ASSISTED DEVELOPMENT SECTION ---------------- */}
+        <LazyViewport fallbackHeight="300px">
+          <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-8 shadow-xs">
+            <div className="space-y-4 max-w-3xl">
+              <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">AI-Assisted Development</p>
+              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                Modern AI Tools, Combined With Real Software Engineering
+              </h2>
+              <div className="space-y-3 text-sm sm:text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans">
+                <p>
+                  I use modern AI development tools to accelerate research, prototyping, coding, debugging, testing, documentation, and iteration while keeping engineering decisions and code quality under human control.
+                </p>
+                <p>
+                  My AI-assisted development workflow includes tools and platforms such as <strong className="text-[#17211E] dark:text-[#F5F2EC]">Cursor, Claude, Claude Code, Codex, GitHub Copilot, Replit, v0, Google AI Studio, and Antigravity</strong>, alongside standard development tools and workflows.
+                </p>
+                <p>
+                  These tools help me move faster, experiment with ideas, and solve development problems more efficiently—but they complement software engineering rather than replace it.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4 pt-2">
+              <h3 className="font-heading text-xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+                What I Use AI For
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-sans">
+                {aiUsageList.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-3 p-3.5 rounded-xl bg-[#F5F2EC]/80 dark:bg-[#121917]/80 border border-[#D9D4CA]/50 dark:border-[#2A3632]/50 text-sm text-[#17211E] dark:text-[#F5F2EC]"
+                  >
+                    <CheckCircle2 size={18} className="text-[#C96A3D] shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 rounded-xl bg-[#C96A3D]/10 border border-[#C96A3D]/25 font-mono text-xs sm:text-sm font-semibold text-[#17211E] dark:text-[#F5F2EC] flex items-center gap-3">
+              <Sparkles size={20} className="text-[#C96A3D] shrink-0 animate-pulse" />
+              <span>The goal is not simply to code faster. The goal is to build better software efficiently.</span>
+            </div>
+          </section>
+        </LazyViewport>
+
+        {/* ---------------- 6. WHO I WORK WITH ---------------- */}
         <LazyViewport fallbackHeight="250px">
           <section className="space-y-8 pt-4">
             <div className="space-y-2 max-w-3xl">
@@ -649,7 +767,7 @@ export default function HomePage() {
           </section>
         </LazyViewport>
 
-        {/* ---------------- 6. PROCESS: A CLEAR DEVELOPMENT PROCESS ---------------- */}
+        {/* ---------------- 7. PROCESS: A CLEAR DEVELOPMENT PROCESS ---------------- */}
         <LazyViewport fallbackHeight="250px">
           <section className="space-y-8 pt-4">
             <div className="space-y-2 max-w-3xl">
@@ -723,7 +841,7 @@ export default function HomePage() {
           </section>
         </LazyViewport>
 
-        {/* ---------------- 7. FAQ ACCORDION ---------------- */}
+        {/* ---------------- 8. FAQ ACCORDION ---------------- */}
         <LazyViewport fallbackHeight="250px">
           <section className="space-y-6 pt-4">
             <div className="space-y-2 max-w-3xl">
@@ -760,19 +878,19 @@ export default function HomePage() {
           </section>
         </LazyViewport>
 
-        {/* ---------------- 8. FINAL CTA ---------------- */}
+        {/* ---------------- 9. FINAL CTA ---------------- */}
         <LazyViewport fallbackHeight="200px">
           <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-8 sm:p-10 space-y-6">
             <div className="max-w-3xl space-y-3 font-sans">
               <p className="text-xs font-mono uppercase tracking-widest text-[#C96A3D]">Get In Touch</p>
               <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                Have a Website or Software Project in Mind?
+                Have a Website, Software or AI Project in Mind?
               </h2>
               <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Whether you need a business website, custom web application, dashboard, SaaS interface, or technical improvement to an existing project, let's discuss what you are trying to build.
+                Whether you need a business website, custom web application, dashboard, SaaS interface, AI-powered application, or technical improvement to an existing project, let's discuss what you're trying to build.
               </p>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Send a brief description of your requirements, your current website or application if you have one, and what you want to improve. I'll review the project and get back to you with practical next steps.
+                Send a brief description of your requirements, your current website or application if you have one, and the outcome you want to achieve. I'll review the project and get back to you with practical next steps.
               </p>
             </div>
 
@@ -785,10 +903,10 @@ export default function HomePage() {
               </Link>
 
               <a
-                href={`mailto:${PERSONAL.email}`}
+                href="mailto:muhammadimrandigitals@gmail.com"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#F5F2EC] dark:bg-[#121917] text-[#17211E] dark:text-[#F5F2EC] border border-[#D9D4CA] dark:border-[#2A3632] font-mono text-sm hover:border-[#C96A3D] transition-colors"
               >
-                <Mail size={16} /> {PERSONAL.email}
+                <Mail size={16} /> muhammadimrandigitals@gmail.com
               </a>
             </div>
 

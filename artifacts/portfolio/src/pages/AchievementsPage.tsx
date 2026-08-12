@@ -17,6 +17,10 @@ import {
   Sparkles,
   Award,
   BookOpen,
+  Search,
+  CheckCircle2,
+  Briefcase,
+  ShieldCheck,
 } from "lucide-react";
 import SectionHeading from "@/components/layout/SectionHeading";
 import SectionSubHeading from "@/components/layout/SectionSubHeading";
@@ -46,7 +50,7 @@ const CERTIFICATES: Certificate[] = [
     filename: "full-stack-web-development-university-of-london.pdf",
     title: "Full-Stack Web Development Specialization",
     issuer: "University of London",
-    category: "Web Dev",
+    category: "Web Development",
     color: "from-purple-500/20 to-indigo-600/10",
     isLocal: true,
     credentialId: "PPBYC5K8D6AE",
@@ -60,13 +64,13 @@ const CERTIFICATES: Certificate[] = [
     filename: "intro-to-frontend-development-meta.pdf",
     title: "Introduction to Front-End Development",
     issuer: "Meta",
-    category: "Frontend",
+    category: "Frontend Development",
     color: "from-blue-600/20 to-cyan-500/10",
     isLocal: true,
     credentialId: "OBW2LOHL6J99",
     label: "Meta Certified",
     description:
-      "Training focused on the foundations of modern frontend development and the technologies used to create interactive web experiences.",
+      "Training focused on the foundations of modern frontend development and interactive web experiences.",
     isFeatured: true,
   },
   {
@@ -74,13 +78,13 @@ const CERTIFICATES: Certificate[] = [
     filename: "google-prompting-essentials.pdf",
     title: "Google Prompting Essentials",
     issuer: "Google",
-    category: "AI",
+    category: "Artificial Intelligence",
     color: "from-blue-500/20 to-indigo-600/10",
     isLocal: true,
     credentialId: "HBUVVGMX4TWE",
     label: "Google Certified",
     description:
-      "Training focused on practical prompting techniques and the effective use of generative AI for professional and technical workflows.",
+      "Training focused on practical prompting techniques and the effective use of generative AI.",
     isFeatured: true,
   },
   {
@@ -88,7 +92,7 @@ const CERTIFICATES: Certificate[] = [
     filename: "actai-skillbridge-certified.pdf",
     title: "ActAI SkillBridge Certified Specialist",
     issuer: "ActAI",
-    category: "AI",
+    category: "Artificial Intelligence",
     color: "from-indigo-500/20 to-cyan-600/10",
     isLocal: true,
     credentialId: "ACTAI-SB-2024",
@@ -102,7 +106,7 @@ const CERTIFICATES: Certificate[] = [
     filename: "frontend-developershub.pdf",
     title: "Front End Development Internship",
     issuer: "DevelopersHub Corporation",
-    category: "Frontend",
+    category: "Frontend Development",
     color: "from-yellow-500/20 to-amber-600/10",
     isLocal: true,
     credentialId: "DHC-1725",
@@ -115,7 +119,7 @@ const CERTIFICATES: Certificate[] = [
     filename: "flutter-developershub.pdf",
     title: "Flutter Development Internship",
     issuer: "DevelopersHub Corporation",
-    category: "Mobile",
+    category: "Mobile Development",
     color: "from-sky-500/20 to-cyan-600/10",
     isLocal: true,
     credentialId: "DHC-1726",
@@ -129,7 +133,7 @@ const CERTIFICATES: Certificate[] = [
     filename: "html-university-of-london.pdf",
     title: "HTML: How to Build a Website",
     issuer: "University of London",
-    category: "Frontend",
+    category: "Frontend Development",
     color: "from-orange-500/20 to-amber-600/10",
     isLocal: true,
     credentialId: "S4S99829L1UL",
@@ -140,7 +144,7 @@ const CERTIFICATES: Certificate[] = [
     filename: "web-page-layout-css-usability-and-accessibility.pdf",
     title: "CSS: Web Page Layout - Usability and Accessibility",
     issuer: "University of London",
-    category: "Frontend",
+    category: "Frontend Development",
     color: "from-blue-500/20 to-cyan-600/10",
     isLocal: true,
     credentialId: "QC2EBL9CMYK9",
@@ -152,30 +156,30 @@ const CERTIFICATES: Certificate[] = [
     filename: "build-dynamic-ui-websites.pdf",
     title: "Build Dynamic User Interfaces (UI) for Websites",
     issuer: "Google",
-    category: "Frontend",
+    category: "Frontend Development",
     color: "from-cyan-500/20 to-teal-600/10",
     isLocal: true,
     credentialId: "91F1F6OTSKUK",
     description:
-      "Training focused on designing and building interactive, dynamic web interfaces.",
+      "Training focused on designing and building interactive web interfaces.",
   },
   {
     id: 20,
     filename: "wordpress-digiskills.pdf",
     title: "WordPress",
     issuer: "DigiSkills",
-    category: "Web Dev",
+    category: "Web Development",
     color: "from-indigo-500/20 to-indigo-600/10",
     isLocal: true,
     credentialId: "QDRRNAHMK",
-    description: "Training in content management, WordPress customization, and theme administration.",
+    description: "Training in WordPress, content management, customization, and website administration.",
   },
   {
     id: 15,
     filename: "use-ai-creative-expert-partner.pdf",
     title: "Use AI as a Creative or Expert Partner",
     issuer: "Google",
-    category: "AI",
+    category: "Artificial Intelligence",
     color: "from-indigo-500/20 to-blue-600/10",
     isLocal: true,
     credentialId: "DKGDB5U8OW5D",
@@ -187,19 +191,19 @@ const CERTIFICATES: Certificate[] = [
     filename: "start-writing-prompts-pro.pdf",
     title: "Start Writing Prompts like a Pro",
     issuer: "Google",
-    category: "AI",
+    category: "Artificial Intelligence",
     color: "from-yellow-500/20 to-orange-600/10",
     isLocal: true,
     credentialId: "VMFLZPRYZI8V",
     description:
-      "Training focused on developing effective prompts for different professional use cases.",
+      "Training focused on developing effective prompts for professional use cases.",
   },
   {
     id: 19,
     filename: "design-prompts-everyday-work.pdf",
     title: "Design Prompts for Everyday Work Tasks",
     issuer: "Google",
-    category: "AI",
+    category: "Artificial Intelligence",
     color: "from-rose-500/20 to-pink-600/10",
     isLocal: true,
     credentialId: "S8EZDF6C4E34",
@@ -211,7 +215,7 @@ const CERTIFICATES: Certificate[] = [
     filename: "accelerate-job-search-ai.pdf",
     title: "Accelerate Your Job Search with AI",
     issuer: "Google",
-    category: "AI",
+    category: "Artificial Intelligence",
     color: "from-violet-500/20 to-purple-600/10",
     isLocal: true,
     credentialId: "HUTL4D9X90Z5",
@@ -282,7 +286,7 @@ const CERTIFICATES: Certificate[] = [
     color: "from-red-500/20 to-rose-600/10",
     isLocal: true,
     credentialId: "SWGO7KQY70YV",
-    description: "Professional training covering OSHA-related workplace safety fundamentals.",
+    description: "Professional training covering workplace safety fundamentals.",
   },
   {
     id: 17,
@@ -351,14 +355,14 @@ const ALL_ISSUERS = ["All", ...Array.from(new Set(CERTIFICATES.map((c) => c.issu
 const CATEGORY_COLORS: Record<string, string> = {
   "Project Management":
     "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
-  "Frontend": "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20",
+  "Frontend Development": "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20",
   "Marketing": "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20",
   "Digital Marketing": "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
   "Business": "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20",
-  "AI": "bg-yellow-500/10 text-yellow-600 dark:text-yellow-500 border-yellow-500/20",
+  "Artificial Intelligence": "bg-yellow-500/10 text-yellow-600 dark:text-yellow-500 border-yellow-500/20",
   "SEO": "bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20",
-  "Web Dev": "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
-  "Mobile": "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20",
+  "Web Development": "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20",
+  "Mobile Development": "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20",
   "Writing": "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20",
   "Freelancing":
     "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
@@ -428,7 +432,7 @@ function CertCard({
           {/* Hover Overlay */}
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 bg-black/60 text-white opacity-0 transition-opacity duration-250 group-hover:opacity-100 font-sans">
             <PiCertificate size={24} />
-            <span className="text-xs font-medium">Click to Preview</span>
+            <span className="text-xs font-medium">View Credential</span>
           </div>
         </div>
 
@@ -453,7 +457,7 @@ function CertCard({
               {cert.category}
             </span>
             <div className="flex items-center gap-1 text-xs font-mono text-[#5C655F] group-hover:text-[#C96A3D] transition-colors">
-              <span>View</span>
+              <span>View Credential</span>
               <HiOutlineArrowSmRight size={14} />
             </div>
           </div>
@@ -616,17 +620,21 @@ export default function AchievementsPage() {
   const [openCert, setOpenCert] = useState<Certificate | null>(null);
 
   const featuredCerts = CERTIFICATES.filter((c) => c.isFeatured);
+  
   const webDevCerts = CERTIFICATES.filter((c) =>
-    ["Web Dev", "Frontend", "Mobile"].includes(c.category)
+    ["Web Development", "Frontend Development", "Mobile Development"].includes(c.category)
   );
-  const aiCerts = CERTIFICATES.filter((c) => c.category === "AI");
+
+  const aiCerts = CERTIFICATES.filter((c) => c.category === "Artificial Intelligence");
+  
   const itUxCerts = CERTIFICATES.filter((c) =>
     ["IT Support", "UX Design", "Project Management", "Data Analysis", "Business"].includes(
       c.category
     )
   );
+
   const marketingCerts = CERTIFICATES.filter((c) =>
-    ["Digital Marketing", "Marketing", "Freelancing", "Writing"].includes(c.category)
+    ["Digital Marketing", "Marketing", "Freelancing", "Writing", "SEO"].includes(c.category)
   );
 
   const filtered = CERTIFICATES.filter((c) => {
@@ -643,8 +651,8 @@ export default function AchievementsPage() {
   return (
     <>
       <SEOHead
-        title="Certifications & Achievements | Muhammad Imran"
-        description="Explore Muhammad Imran's professional certifications in web development, AI, frontend development, IT support, UX, digital marketing, and more."
+        title="Muhammad Imran | Certifications & Professional Learning"
+        description="Explore Muhammad Imran's certifications in full-stack development, frontend engineering, AI, SEO, UX, IT support, and digital technologies."
         path="/achievements"
       />
 
@@ -658,23 +666,23 @@ export default function AchievementsPage() {
             </div>
 
             <h1 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-[#17211E] dark:text-[#F5F2EC]">
-              Certifications &amp; Professional Achievements
+              Certifications &amp; Professional Learning
             </h1>
 
             <h2 className="font-heading text-xl sm:text-2xl font-semibold text-[#C96A3D]">
-              Continuous learning behind practical development work
+              Professional Credentials Behind Practical Development Work
             </h2>
           </div>
 
           <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#5C655F] dark:text-[#9DA6A0] max-w-4xl font-sans">
             <p>
-              Professional learning has been an important part of my development journey. Alongside university studies, professional experience, and hands-on projects, I've completed certifications and training across web development, frontend engineering, artificial intelligence, IT support, UX design, digital marketing, freelancing, and related technology fields.
+              My professional learning is an ongoing part of my development journey. Alongside university studies, professional experience, and hands-on software projects, I have completed certifications, courses, and training across full-stack web development, frontend engineering, artificial intelligence, SEO, IT support, UX design, digital marketing, freelancing, and related technology fields.
             </p>
             <p>
-              These credentials represent structured learning from organizations and platforms including Google, Meta, the University of London, Microsoft, DigiSkills, ActAI, DevelopersHub Corporation, and SkillUp.
+              These credentials represent structured learning from organizations and platforms including Google, Meta, the University of London, Microsoft, DigiSkills, ActAI, DevelopersHub Corporation, SkillUp, and Skillshare.
             </p>
             <p>
-              I use this learning together with practical project experience to continuously improve the way I design, develop, optimize, and deliver modern web applications and digital solutions.
+              I combine this structured learning with practical development experience to continuously improve how I design, build, optimize, and deliver modern websites, web applications, software systems, digital tools, and AI-powered solutions.
             </p>
           </div>
         </section>
@@ -687,10 +695,14 @@ export default function AchievementsPage() {
             <SectionHeading title="Featured Credentials" icon={<Award />} />
             <SectionSubHeading>
               <p>
-                The following credentials are particularly relevant to my current work in full-stack web development, frontend development, AI-assisted workflows, and modern digital technologies.
+                Certifications Most Relevant to My Current Development Work
               </p>
             </SectionSubHeading>
           </div>
+
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+            The following credentials are particularly relevant to my work in full-stack web development, frontend engineering, artificial intelligence, AI-assisted workflows, and modern digital technologies.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredCerts.map((cert) => (
@@ -708,13 +720,15 @@ export default function AchievementsPage() {
         {/* ---------------- 3. WEB DEVELOPMENT & FRONTEND CERTIFICATIONS ---------------- */}
         <section className="space-y-6">
           <div className="space-y-2">
-            <SectionHeading title="Web Development &amp; Frontend Certifications" icon={<Code2 />} />
+            <SectionHeading title="Web Development & Frontend Certifications" icon={<Code2 />} />
             <SectionSubHeading>
-              <p>
-                My web development credentials cover frontend fundamentals, full-stack development, HTML, CSS, responsive interfaces, and modern web technologies.
-              </p>
+              <p>Training That Supports My Software Development Work</p>
             </SectionSubHeading>
           </div>
+
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans">
+            My web development credentials cover frontend fundamentals, full-stack development, HTML, CSS, responsive interfaces, user interfaces, WordPress, and modern web development concepts.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {webDevCerts.map((cert) => (
@@ -735,27 +749,46 @@ export default function AchievementsPage() {
                     {cert.credentialId && (
                       <>
                         <span>•</span>
-                        <span>ID: {cert.credentialId}</span>
+                        <span>Credential ID: <strong className="text-[#17211E] dark:text-[#F5F2EC]">{cert.credentialId}</strong></span>
                       </>
                     )}
                   </div>
+                  {cert.description && (
+                    <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] pt-1">
+                      {cert.description}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
           </div>
+
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans pt-2">
+            These credentials complement my hands-on experience building websites, web applications, dashboards, directories, browser-based tools, and full-stack digital products.
+          </p>
         </section>
 
         <Breakline className="my-8" />
 
-        {/* ---------------- 4. ARTIFICIAL INTELLIGENCE & TECHNOLOGY ---------------- */}
+        {/* ---------------- 4. ARTIFICIAL INTELLIGENCE & AI-ASSISTED LEARNING ---------------- */}
         <section className="space-y-6">
           <div className="space-y-2">
-            <SectionHeading title="Artificial Intelligence &amp; Technology" icon={<Sparkles />} />
+            <SectionHeading title="Artificial Intelligence & AI-Assisted Learning" icon={<Sparkles />} />
             <SectionSubHeading>
-              <p>
-                My recent professional learning also includes artificial intelligence and AI-assisted workflows. These skills complement my development work and help me explore practical ways to use AI in software, productivity, research, and digital workflows.
-              </p>
+              <p>Building Practical AI Skills Alongside Full-Stack Development</p>
             </SectionSubHeading>
+          </div>
+
+          <div className="space-y-3 text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans">
+            <p>
+              Artificial intelligence has become an increasingly important part of my development workflow.
+            </p>
+            <p>
+              My AI-related learning includes generative AI, prompt engineering, AI-assisted productivity, and practical applications of AI in professional workflows.
+            </p>
+            <p>
+              I use this knowledge alongside software engineering skills to explore and build practical AI-powered features, assistants, integrations, automation workflows, and digital products.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -777,10 +810,15 @@ export default function AchievementsPage() {
                     {cert.credentialId && (
                       <>
                         <span>•</span>
-                        <span>ID: {cert.credentialId}</span>
+                        <span>Credential ID: <strong className="text-[#17211E] dark:text-[#F5F2EC]">{cert.credentialId}</strong></span>
                       </>
                     )}
                   </div>
+                  {cert.description && (
+                    <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] pt-1">
+                      {cert.description}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
@@ -792,13 +830,15 @@ export default function AchievementsPage() {
         {/* ---------------- 5. IT, UX & PROFESSIONAL DEVELOPMENT ---------------- */}
         <section className="space-y-6">
           <div className="space-y-2">
-            <SectionHeading title="IT, UX &amp; Professional Development" icon={<Cpu />} />
+            <SectionHeading title="IT, UX & Professional Development" icon={<Cpu />} />
             <SectionSubHeading>
-              <p>
-                Not all development work happens inside a code editor. Understanding technical support, user experience, project workflows, and professional communication also contributes to building better digital products.
-              </p>
+              <p>Supporting Skills Beyond Software Development</p>
             </SectionSubHeading>
           </div>
+
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans">
+            Building useful digital products requires more than programming alone. My professional learning also includes technical support, user experience, Agile project practices, data analysis, and business-related technology.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {itUxCerts.map((cert) => (
@@ -819,10 +859,15 @@ export default function AchievementsPage() {
                     {cert.credentialId && (
                       <>
                         <span>•</span>
-                        <span>ID: {cert.credentialId}</span>
+                        <span>Credential ID: <strong className="text-[#17211E] dark:text-[#F5F2EC]">{cert.credentialId}</strong></span>
                       </>
                     )}
                   </div>
+                  {cert.description && (
+                    <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] pt-1">
+                      {cert.description}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
@@ -831,15 +876,22 @@ export default function AchievementsPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- 6. DIGITAL MARKETING, BUSINESS & FREELANCING ---------------- */}
+        {/* ---------------- 6. DIGITAL MARKETING, SEO & FREELANCING ---------------- */}
         <section className="space-y-6">
           <div className="space-y-2">
-            <SectionHeading title="Digital Marketing, Business &amp; Freelancing" icon={<BookOpen />} />
+            <SectionHeading title="Digital Marketing, SEO & Freelancing" icon={<BookOpen />} />
             <SectionSubHeading>
-              <p>
-                My learning also extends beyond programming into digital marketing, freelancing, business, and online services. This broader knowledge helps me understand the business context behind the websites and digital systems I build.
-              </p>
+              <p>Understanding the Business Side of Digital Products</p>
             </SectionSubHeading>
+          </div>
+
+          <div className="space-y-3 text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans">
+            <p>
+              My learning also extends beyond programming into SEO, digital marketing, freelancing, e-commerce, communication, and online services.
+            </p>
+            <p>
+              This broader knowledge helps me understand the business context behind the websites and digital systems I build.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -861,17 +913,22 @@ export default function AchievementsPage() {
                     {cert.credentialId && (
                       <>
                         <span>•</span>
-                        <span>ID: {cert.credentialId}</span>
+                        <span>Credential ID: <strong className="text-[#17211E] dark:text-[#F5F2EC]">{cert.credentialId}</strong></span>
                       </>
                     )}
                   </div>
+                  {cert.description && (
+                    <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] pt-1">
+                      {cert.description}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
           </div>
 
           <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans pt-2">
-            These areas complement my technical development work by giving me a broader understanding of online businesses, digital services, communication, and customer-focused projects.
+            These areas complement my technical development work by helping me understand online businesses, digital services, communication, search visibility, and customer-focused projects.
           </p>
         </section>
 
@@ -882,10 +939,16 @@ export default function AchievementsPage() {
           <div className="space-y-2">
             <SectionHeading title="Complete Certification Library" icon={<PiCertificate />} />
             <SectionSubHeading>
-              <p>
-                Below is the complete collection of my certificates and professional learning credentials. Use the category and issuer filters to explore credentials related to web development, frontend development, AI, IT support, UX design, digital marketing, business, freelancing, project management, and other areas of professional development.
-              </p>
+              <p>Explore All Professional Credentials</p>
             </SectionSubHeading>
+          </div>
+
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans">
+            Below is the complete collection of my certifications, courses, internships, and professional learning credentials. Use the available category and issuer filters to explore credentials related to:
+          </p>
+
+          <div className="p-3.5 rounded-xl bg-[#F5F2EC]/80 dark:bg-[#121917]/80 border border-[#D9D4CA]/80 dark:border-[#2A3632] text-xs font-mono text-[#C96A3D] font-semibold flex flex-wrap gap-2 justify-center text-center">
+            <span>Web Development</span> • <span>Frontend Development</span> • <span>Artificial Intelligence</span> • <span>SEO</span> • <span>IT Support</span> • <span>UX Design</span> • <span>Digital Marketing</span> • <span>Business</span> • <span>Freelancing</span> • <span>Project Management</span> • <span>Data Analysis</span> • <span>Mobile Development</span> • <span>Writing</span>
           </div>
 
           {/* Filters Bar */}
@@ -934,7 +997,7 @@ export default function AchievementsPage() {
             </div>
 
             <p className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
-              Showing <strong className="text-[#17211E] dark:text-[#F5F2EC]">{filtered.length}</strong> of {CERTIFICATES.length} certificates
+              Showing <strong className="text-[#17211E] dark:text-[#F5F2EC]">{filtered.length}</strong> of {CERTIFICATES.length} Credentials
             </p>
           </div>
 
@@ -977,20 +1040,23 @@ export default function AchievementsPage() {
         <Breakline className="my-8" />
 
         {/* ---------------- 8. CONTINUOUS LEARNING ---------------- */}
-        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4">
-          <div className="space-y-2 font-sans">
+        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4 font-sans">
+          <div className="space-y-2">
             <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
               Continuous Learning
             </h2>
-            <div className="space-y-3 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+            <h3 className="font-heading text-lg font-semibold text-[#C96A3D]">
+              Development Doesn't Stop With a Certificate
+            </h3>
+            <div className="space-y-3 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-2">
               <p>
-                Web development and technology continue to evolve, so my learning doesn't stop with a completed course or certificate.
+                Web development, software engineering, SEO, and artificial intelligence continue to evolve, so my learning does not stop after completing a course or earning a certificate.
               </p>
               <p>
-                I continue to expand my skills through practical projects, university studies, professional training, technical documentation, and hands-on experimentation with modern development tools and technologies.
+                I continue to expand my skills through university studies, practical software projects, professional training, technical documentation, experimentation, and hands-on work with modern development and AI tools.
               </p>
-              <p>
-                New credentials and relevant learning achievements will be added to this page as they are completed.
+              <p className="text-sm">
+                New credentials and relevant professional learning achievements will be added to this page as they are completed.
               </p>
             </div>
           </div>
@@ -1002,11 +1068,22 @@ export default function AchievementsPage() {
         <section className="rounded-2xl border border-[#C96A3D]/40 bg-[#FFFEFA] dark:bg-[#1B2421] p-8 sm:p-10 space-y-6 shadow-xs font-sans">
           <div className="max-w-3xl space-y-3">
             <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-              Interested in Working Together?
+              Certifications Are Part of the Story
             </h2>
-            <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-              Certifications are one part of my professional background. My portfolio and project case studies show how I apply that knowledge to real websites, web applications, digital tools, and business systems.
-            </p>
+            <h3 className="font-heading text-xl font-semibold text-[#C96A3D]">
+              See How I Apply This Knowledge
+            </h3>
+            <div className="space-y-3 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
+              <p>
+                Certifications demonstrate structured learning, but practical projects show how that knowledge is applied.
+              </p>
+              <p>
+                My portfolio includes business websites, full-stack applications, SEO tools, directories, browser-based utilities, dashboards, and AI-powered experiences.
+              </p>
+              <p className="text-sm">
+                Explore the projects behind my development work or get in touch if you have a website, software, web application, or AI project you would like to discuss.
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-4 pt-2">

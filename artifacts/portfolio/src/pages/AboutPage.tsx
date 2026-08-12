@@ -32,13 +32,14 @@ import {
   Mail,
   ShieldCheck,
   Clock,
+  Bot,
 } from "lucide-react";
 import { format, differenceInMonths, differenceInYears } from "date-fns";
 import SectionHeading from "@/components/layout/SectionHeading";
 import SectionSubHeading from "@/components/layout/SectionSubHeading";
 import SpotlightCard from "@/components/layout/SpotlightCard";
 import Breakline from "@/components/layout/Breakline";
-import { PERSONAL, CAREERS, EDUCATION, ACHIEVEMENTS } from "@/data/personal";
+import { PERSONAL, CAREERS, EDUCATION } from "@/data/personal";
 
 const CV_PATH = "/cv.pdf";
 const CV_FILENAME = "Muhammad_Imran_CV.pdf";
@@ -304,11 +305,11 @@ export default function AboutPage() {
     {
       id: 11,
       title: "GeoTags Metadata Editor",
-      subtitle: "Photo GPS Tool",
+      subtitle: "Photo GPS & EXIF Metadata Tool",
       description:
         "A privacy-focused browser utility for working with photo GPS coordinates and EXIF metadata directly on the user's device.",
       tags: ["JavaScript", "EXIF.js", "Leaflet", "OpenStreetMap"],
-      liveUrl: "https://geotagseditor.online/",
+      liveUrl: "https://geotags.online/",
     },
     {
       id: 8,
@@ -328,21 +329,69 @@ export default function AboutPage() {
       tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
       liveUrl: "https://mobilepetgroomingtampa.lovable.app/",
     },
+    {
+      id: 99,
+      title: "SmartTalk AI",
+      subtitle: "AI Portfolio Assistant",
+      description:
+        "An AI-powered assistant integrated into the Imran Digitals portfolio to help visitors explore Muhammad Imran's projects, skills, services, experience, and development capabilities through conversational interaction.",
+      tags: ["Gemini AI", "React", "TypeScript", "AI API Integration"],
+      liveUrl: "/smarttalk",
+      isInternal: true,
+    },
   ];
 
   const careerContexts: Record<string, string> = {
     EPR: "My current role has provided experience working within an organizational environment, handling responsibilities that require accuracy, communication, coordination, and consistent execution.",
     "Digital Skills House":
-      "Working as a MERN Stack Developer, with hands-on development involving modern frontend and backend technologies and practical web application development.",
+      "Working as a MERN Stack Developer with hands-on development involving modern frontend and backend technologies and practical web application development.",
     "Alhuda Sols":
       "Worked on Shopify development and e-commerce-related web implementation, gaining practical experience with business websites, online stores, frontend customization, and client-oriented development requirements.",
   };
 
+  const certificationsList = [
+    {
+      title: "Google Prompting Essentials",
+      provider: "Google",
+      description: "Training focused on effective prompt design and practical use of generative AI tools.",
+    },
+    {
+      title: "Google Agile Essentials",
+      provider: "Google",
+      description: "Training focused on Agile principles and modern approaches to working within development environments.",
+    },
+    {
+      title: "Google Technical Support Fundamentals",
+      provider: "Google",
+      description: "Foundational training covering technical support concepts, troubleshooting, operating systems, networking, and practical technology fundamentals.",
+    },
+    {
+      title: "Full-Stack Web Development Specialization",
+      provider: "University of London",
+      description: "Structured learning focused on full-stack web development and modern web technologies.",
+    },
+    {
+      title: "Introduction to Front-End Development",
+      provider: "Meta",
+      description: "Training focused on frontend development fundamentals and modern web interface development.",
+    },
+    {
+      title: "Front End Development Internship",
+      provider: "DevelopersHub Corporation",
+      description: "Practical frontend development experience focused on building and working with modern web interfaces.",
+    },
+    {
+      title: "Flutter Development Internship",
+      provider: "DevelopersHub Corporation",
+      description: "Practical exposure to Flutter development and mobile application concepts.",
+    },
+  ];
+
   return (
     <>
       <SEOHead
-        title="About Muhammad Imran | Web Developer in Multan, Pakistan"
-        description="Meet Muhammad Imran, a full-stack web developer in Multan, Pakistan, specializing in React, Next.js, MERN, TypeScript, web applications, and technical SEO."
+        title="About Muhammad Imran | Full-Stack & AI Developer in Multan, Pakistan"
+        description="Explore the technical background, full-stack software experience, and AI development capabilities of Muhammad Imran, a developer based in Multan, Pakistan."
         path="/about"
       />
 
@@ -352,7 +401,7 @@ export default function AboutPage() {
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 rounded-md bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] px-3.5 py-1.5 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
               <span className="w-2 h-2 rounded-full bg-[#C96A3D] animate-pulse" />
-              <span>Full-Stack Web Developer in Multan, Pakistan</span>
+              <span>Full-Stack &amp; AI Developer in Multan, Pakistan</span>
             </div>
 
             <h1 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-[#17211E] dark:text-[#F5F2EC]">
@@ -360,46 +409,57 @@ export default function AboutPage() {
             </h1>
 
             <h2 className="font-heading text-xl sm:text-2xl font-semibold text-[#C96A3D]">
-              Full-Stack Web Developer in Multan, Pakistan
+              Full-Stack &amp; AI Developer in Multan, Pakistan
             </h2>
           </div>
 
           <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#5C655F] dark:text-[#9DA6A0] max-w-4xl">
             <p>
-              I'm Muhammad Imran, a full-stack web developer based in Multan, Pakistan, and the developer behind Imran Digitals. I build modern business websites, custom web applications, dashboards, digital tools, and data-driven web systems for businesses in Pakistan and remote clients worldwide.
+              I'm Muhammad Imran, a full-stack web developer and AI developer based in Multan, Pakistan, and the developer behind Imran Digitals.
             </p>
             <p>
-              My core development work focuses on React, Next.js, TypeScript, JavaScript, Node.js, MongoDB, Firebase, and modern frontend technologies. I also work with technical SEO and website performance, allowing me to consider both the engineering and search visibility of the products I build.
+              I build business websites, custom web applications, software systems, dashboards, digital tools, and AI-powered solutions for businesses, startups, agencies, and remote clients.
             </p>
             <p>
-              Rather than building websites around unnecessary features or templates, I focus on understanding the problem first and then developing a practical solution that is responsive, maintainable, accessible, and designed around real users.
+              My core development work focuses on React, Next.js, TypeScript, JavaScript, Node.js, MongoDB, Firebase, and modern full-stack technologies. Alongside traditional software development, I work with modern AI technologies and AI-assisted development tools to build practical AI features, intelligent applications, automation workflows, and custom digital solutions.
             </p>
+            <p>
+              I approach development by understanding the problem first, choosing the appropriate technology, and building a solution around the actual needs of its users and business. My focus is on clean development, responsive interfaces, maintainable architecture, performance, accessibility, search visibility, and practical results.
+            </p>
+          </div>
+
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] pt-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C96A3D]" />
+            <span className="font-semibold text-[#17211E] dark:text-[#F5F2EC]">Based in Multan, Pakistan · Available for Remote Projects Worldwide</span>
           </div>
         </section>
 
         <Breakline className="my-8" />
 
-        {/* ---------------- 2. MY APPROACH TO WEB DEVELOPMENT (STORY) ---------------- */}
+        {/* ---------------- 2. MY APPROACH TO WEB & AI DEVELOPMENT (STORY) ---------------- */}
         <section className="space-y-6">
           <div className="space-y-2">
-            <SectionHeading title="My Approach to Web Development" icon={<HiOutlineSparkles />} />
+            <SectionHeading title="My Approach to Web & AI Development" icon={<HiOutlineSparkles />} />
             <SectionSubHeading>
-              <p>How practical experience and real-world projects shape my development work.</p>
+              <p>Building practical technology around real problems</p>
             </SectionSubHeading>
           </div>
 
           <div className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4 text-base leading-relaxed text-[#5C655F] dark:text-[#9DA6A0]">
             <p>
-              My development journey has been built around practical projects, continuous learning, and solving real problems with modern web technologies.
+              My development journey has been shaped by hands-on projects, continuous learning, and solving practical problems with modern technologies.
             </p>
             <p>
-              I started by developing my foundation in web development and gradually expanded into full-stack application development, working with React, Node.js, Express, MongoDB, Next.js, TypeScript, Firebase, and other technologies used to build production-oriented web experiences.
+              I started by developing a strong foundation in web development and gradually expanded into full-stack application development, working with React, Node.js, Express, MongoDB, Next.js, TypeScript, Firebase, and other technologies used to build production-oriented web experiences.
             </p>
             <p>
-              Today, my work covers more than frontend interfaces. I develop complete web solutions that can include responsive user interfaces, backend APIs, database workflows, authentication, dashboards, third-party integrations, dynamic pages, and technical SEO implementations.
+              Today, my work extends beyond traditional frontend development. I build complete digital solutions that can include responsive interfaces, backend APIs, databases, authentication, dashboards, third-party integrations, dynamic pages, technical SEO, and AI-powered functionality.
             </p>
             <p>
-              Working on real projects has taught me that good development is not only about writing code. A successful website or application also needs to be understandable to users, reliable in real-world conditions, easy to maintain, and aligned with the goals of the business using it.
+              I also use modern AI development tools to accelerate research, prototyping, coding, debugging, testing, and experimentation. AI is part of my development workflow, but I use it as an engineering tool rather than treating it as a replacement for software development fundamentals.
+            </p>
+            <p>
+              Working on real projects has taught me that good development is not simply about writing code. A successful digital product needs to be understandable to users, reliable in real-world conditions, maintainable over time, performant, and aligned with the goals of the business using it.
             </p>
           </div>
         </section>
@@ -411,7 +471,7 @@ export default function AboutPage() {
           <div className="space-y-2">
             <SectionHeading title="What I Build" icon={<HiOutlineFolder />} />
             <SectionSubHeading>
-              <p>Connecting developer expertise with practical business and application requirements.</p>
+              <p>Websites, Software, Web Applications &amp; AI Solutions</p>
             </SectionSubHeading>
           </div>
 
@@ -445,10 +505,10 @@ export default function AboutPage() {
                 <Database size={22} />
               </div>
               <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                Full-Stack Applications
+                Full-Stack &amp; MERN Applications
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                I work across both frontend and backend development, connecting user interfaces with APIs, databases, authentication systems, business logic, and third-party services.
+                I work across frontend and backend development, connecting user interfaces with APIs, databases, authentication systems, business logic, and third-party services using technologies such as MongoDB, Express.js, React, and Node.js.
               </p>
             </div>
 
@@ -464,7 +524,31 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 shadow-xs md:col-span-2 lg:col-span-2">
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <Sparkles size={22} />
+              </div>
+              <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                AI-Powered Applications
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                I build and integrate practical AI functionality into websites and software, including AI assistants, conversational interfaces, AI-powered workflows, intelligent features, and integrations with modern AI services.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <Bot size={22} />
+              </div>
+              <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                Custom AI Solutions
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                I can develop AI-powered features around specific business requirements rather than relying only on generic AI tools. This can include custom assistants, AI integrations, automation workflows, and AI functionality within existing applications.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 shadow-xs sm:col-span-2 lg:col-span-3">
               <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
                 <Search size={22} />
               </div>
@@ -472,7 +556,7 @@ export default function AboutPage() {
                 Technical SEO &amp; Performance
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                I also work on development-level SEO and performance, including semantic HTML, metadata, structured data, crawlability, internal linking, responsive implementation, and Core Web Vitals improvements.
+                I also work on development-level SEO and performance, including semantic HTML, metadata, structured data, crawlability, internal linking, responsive implementation, Core Web Vitals, and website performance improvements.
               </p>
             </div>
           </div>
@@ -530,7 +614,7 @@ export default function AboutPage() {
                 ))}
               </div>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                I develop backend services and API workflows that connect frontend applications with databases, authentication systems, and external services.
+                I develop backend services and API workflows that connect frontend applications with databases, authentication systems, business logic, and external services.
               </p>
             </div>
 
@@ -552,8 +636,33 @@ export default function AboutPage() {
                 ))}
               </div>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                I work with both document-based databases and managed backend services for data-driven applications, directories, dashboards, and business workflows.
+                I work with document-based databases and managed backend services for data-driven applications, directories, dashboards, and business workflows.
               </p>
+            </div>
+
+            {/* AI Development & AI-Assisted Workflows */}
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#C96A3D]/40 dark:border-[#C96A3D]/40 space-y-4 shadow-xs">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/15 text-[#C96A3D] flex items-center justify-center">
+                  <Bot size={20} />
+                </div>
+                <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                  AI Development &amp; AI-Assisted Workflows
+                </h3>
+              </div>
+              <div className="flex flex-wrap gap-2 text-xs font-mono">
+                {["AI APIs", "AI Assistants", "Generative AI", "AI Integrations", "AI-Assisted Development"].map((tech) => (
+                  <span key={tech} className="px-2.5 py-1 rounded-md bg-[#F5F2EC] dark:bg-[#121917] text-[#17211E] dark:text-[#F5F2EC] border border-[#D9D4CA]/80 dark:border-[#2A3632]">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                I use modern AI technologies to build practical AI features and applications while also using AI-assisted development tools to accelerate research, prototyping, coding, debugging, and iteration.
+              </p>
+              <div className="p-3.5 rounded-lg bg-[#F5F2EC]/80 dark:bg-[#121917]/80 text-xs text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                My development workflow has included tools such as <strong className="text-[#17211E] dark:text-[#F5F2EC]">Cursor, Claude, Claude Code, Codex, GitHub Copilot, Replit, v0, Google AI Studio, and Antigravity</strong>. These tools complement software engineering fundamentals. I still review, test, understand, and maintain the code and systems I build.
+              </div>
             </div>
 
             {/* SEO */}
@@ -579,24 +688,24 @@ export default function AboutPage() {
             </div>
 
             {/* Tools */}
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4 md:col-span-2">
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
                   <Wrench size={20} />
                 </div>
                 <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
-                  Development Tools
+                  Development &amp; Deployment Tools
                 </h3>
               </div>
               <div className="flex flex-wrap gap-2 text-xs font-mono">
-                {["Git", "GitHub", "npm", "Vercel", "cPanel", "Modern Workflows"].map((tech) => (
+                {["Git", "GitHub", "npm", "Vercel", "cPanel"].map((tech) => (
                   <span key={tech} className="px-2.5 py-1 rounded-md bg-[#F5F2EC] dark:bg-[#121917] text-[#17211E] dark:text-[#F5F2EC] border border-[#D9D4CA]/80 dark:border-[#2A3632]">
                     {tech}
                   </span>
                 ))}
               </div>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                These tools support version control, deployment, project management, and ongoing development across different projects.
+                These tools support version control, deployment, development workflows, and ongoing project maintenance.
               </p>
             </div>
           </div>
@@ -609,11 +718,13 @@ export default function AboutPage() {
           <div className="space-y-2">
             <SectionHeading title="Professional Experience" icon={<HiOutlineBriefcase />} />
             <SectionSubHeading>
-              <p>
-                My professional experience has included web development, Shopify development, digital work, and business operations. Each role has contributed to my understanding of both technology and the practical requirements of working with organizations and clients.
-              </p>
+              <p>Development, Digital Work &amp; Business Experience</p>
             </SectionSubHeading>
           </div>
+
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+            My professional experience includes MERN stack development, Shopify development, digital work, and business operations. These roles have helped me develop both technical capabilities and an understanding of practical requirements within organizations and client projects.
+          </p>
 
           <div className="grid grid-cols-1 gap-6">
             {CAREERS.filter((c) => c.isShow).map((career, i) => (
@@ -634,65 +745,82 @@ export default function AboutPage() {
             <div className="space-y-2">
               <SectionHeading title="Selected Development Experience" icon={<HiOutlineFolder />} />
               <SectionSubHeading>
-                <p>
-                  My portfolio includes projects across SEO tools, business websites, directories, browser-based utilities, and data-driven web applications.
-                </p>
+                <p>Real Projects, Practical Problems &amp; Working Solutions</p>
               </SectionSubHeading>
             </div>
             <Link
               href="/projects"
               className="inline-flex items-center gap-1 text-sm font-mono text-[#C96A3D] hover:underline shrink-0"
             >
-              View all projects <ArrowRight size={14} />
+              View All Projects <ArrowRight size={14} />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3 text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+            <p>
+              My portfolio includes projects across SEO tools, business websites, directories, browser-based utilities, data-driven applications, and AI-powered experiences.
+            </p>
+            <p>
+              Real projects demonstrate more than a list of technologies. They show how I approach requirements, development challenges, architecture, usability, performance, and practical implementation.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {selectedCaseStudies.map((project) => (
               <div
                 key={project.id}
-                className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4 shadow-xs hover:border-[#C96A3D]/60 transition-colors"
+                className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4 shadow-xs hover:border-[#C96A3D]/60 transition-colors flex flex-col justify-between"
               >
-                <div className="space-y-1">
+                <div className="space-y-2">
                   <span className="text-xs font-mono text-[#C96A3D] font-semibold">
                     {project.subtitle}
                   </span>
                   <h3 className="font-heading font-bold text-xl text-[#17211E] dark:text-[#F5F2EC]">
                     {project.title}
                   </h3>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
 
-                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                  {project.description}
-                </p>
+                <div className="space-y-3 pt-2">
+                  <div className="flex flex-wrap gap-2 text-xs font-mono">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-0.5 rounded bg-[#F5F2EC] dark:bg-[#121917] text-[#17211E] dark:text-[#F5F2EC] border border-[#D9D4CA]/70 dark:border-[#2A3632]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
-                <div className="flex flex-wrap gap-2 text-xs font-mono">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-0.5 rounded bg-[#F5F2EC] dark:bg-[#121917] text-[#17211E] dark:text-[#F5F2EC] border border-[#D9D4CA]/70 dark:border-[#2A3632]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="pt-2">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[#C96A3D] hover:underline"
-                  >
-                    Visit Project Live <ExternalLink size={13} />
-                  </a>
+                  <div>
+                    {project.isInternal ? (
+                      <Link
+                        href={project.liveUrl}
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#C96A3D] hover:underline"
+                      >
+                        View Project <ArrowRight size={13} />
+                      </Link>
+                    ) : (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[#C96A3D] hover:underline"
+                      >
+                        View Project <ExternalLink size={13} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="p-5 rounded-xl bg-[#F5F2EC]/80 dark:bg-[#121917]/80 border border-[#D9D4CA]/80 dark:border-[#2A3632] text-sm text-[#5C655F] dark:text-[#9DA6A0] text-center font-sans">
-            These projects reflect the type of work I enjoy most: turning a practical requirement into a working digital product while considering usability, performance, maintainability, and search visibility.
+            These projects represent the type of work I enjoy most: turning practical requirements into working digital products while considering usability, performance, maintainability, search visibility, and the appropriate use of modern technology.
           </div>
         </section>
 
@@ -703,11 +831,13 @@ export default function AboutPage() {
           <div className="space-y-2">
             <SectionHeading title="Education &amp; Continuous Learning" icon={<TbSchool />} />
             <SectionSubHeading>
-              <p>
-                My formal education provides the foundation for my technical work, while online courses, certifications, and practical projects allow me to continuously expand my development skills.
-              </p>
+              <p>Building a Strong Technical Foundation</p>
             </SectionSubHeading>
           </div>
+
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+            My formal education provides the foundation for my technical work, while professional courses, certifications, and practical projects allow me to continuously expand my development skills.
+          </p>
 
           <div className="grid grid-cols-1 gap-4">
             {EDUCATION.map((edu, i) => (
@@ -725,7 +855,7 @@ export default function AboutPage() {
               <SectionHeading title="Certifications &amp; Professional Learning" icon={<HiOutlineBadgeCheck />} />
               <SectionSubHeading>
                 <p>
-                  Alongside my university studies and hands-on development work, I continue to build my skills through structured professional courses and certifications.
+                  Alongside university studies and hands-on development work, I continue to build my skills through structured professional courses and certifications.
                 </p>
               </SectionSubHeading>
             </div>
@@ -733,53 +863,29 @@ export default function AboutPage() {
               href="/achievements"
               className="inline-flex items-center gap-1 text-sm font-mono text-[#C96A3D] hover:underline shrink-0"
             >
-              Explore all credentials <ArrowRight size={14} />
+              Explore All Certifications &amp; Credentials <ArrowRight size={14} />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                <CheckCircle2 size={22} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
+            {certificationsList.map((cert, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+                <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                  <CheckCircle2 size={20} />
+                </div>
+                <span className="text-xs font-mono text-[#C96A3D] font-semibold">{cert.provider}</span>
+                <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                  {cert.title}
+                </h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  {cert.description}
+                </p>
               </div>
-              <span className="text-xs font-mono text-[#C96A3D] font-semibold">Google</span>
-              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
-                Google Agile Essentials
-              </h3>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Training focused on Agile principles and modern approaches to working within development environments.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                <CheckCircle2 size={22} />
-              </div>
-              <span className="text-xs font-mono text-[#C96A3D] font-semibold">Google</span>
-              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
-                Google Technical Support Fundamentals
-              </h3>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Foundational training covering technical support concepts, troubleshooting, operating systems, networking, and practical technology fundamentals.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                <CheckCircle2 size={22} />
-              </div>
-              <span className="text-xs font-mono text-[#C96A3D] font-semibold">Google</span>
-              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
-                Google Prompt Essentials
-              </h3>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Training focused on effective prompt design and practical use of generative AI tools.
-              </p>
-            </div>
+            ))}
           </div>
 
           <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-            I continue to supplement formal education with practical development projects, technical documentation, online courses, and hands-on experimentation with modern web technologies.
+            I continue to supplement formal education with practical development projects, technical documentation, online courses, and hands-on experimentation with modern web and AI technologies.
           </p>
         </section>
 
@@ -790,7 +896,7 @@ export default function AboutPage() {
           <div className="space-y-2">
             <SectionHeading title="How I Approach Development" icon={<Sparkles />} />
             <SectionSubHeading>
-              <p>Core principles that guide code quality, user experience, and technical execution.</p>
+              <p>Principles That Guide My Work</p>
             </SectionSubHeading>
           </div>
 
@@ -803,7 +909,7 @@ export default function AboutPage() {
                 Understand the Problem First
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Technology should support the business objective. I start by understanding what the website or application needs to accomplish before deciding how it should be built.
+                Technology should support the business objective. I start by understanding what the website, application, software, or AI solution needs to accomplish before deciding how it should be built.
               </p>
             </div>
 
@@ -824,6 +930,18 @@ export default function AboutPage() {
                 03
               </div>
               <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                Choose Technology for a Reason
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                I don't add technology simply because it is popular. The stack and architecture should match the project's requirements, users, performance needs, and long-term goals.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center font-heading font-bold text-sm">
+                04
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
                 Keep the Code Maintainable
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
@@ -833,7 +951,19 @@ export default function AboutPage() {
 
             <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
               <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center font-heading font-bold text-sm">
-                04
+                05
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                Use AI Where It Adds Value
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                AI can accelerate development and create new product capabilities, but it should solve a real problem. I use AI technologies and AI-assisted development tools where they provide practical value while maintaining engineering review and control.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center font-heading font-bold text-sm">
+                06
               </div>
               <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
                 Consider Search &amp; Performance
@@ -843,15 +973,15 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 md:col-span-2 lg:col-span-2">
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 sm:col-span-2 lg:col-span-3">
               <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center font-heading font-bold text-sm">
-                05
+                07
               </div>
               <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
                 Keep Learning
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Web development changes continuously. I actively learn new technologies, frameworks, tools, and development practices while applying them through practical projects.
+                Web development and AI development continue to evolve. I actively learn new technologies, frameworks, tools, and development practices while applying them through practical projects.
               </p>
             </div>
           </div>
@@ -866,6 +996,7 @@ export default function AboutPage() {
               <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
                 Resume
               </h2>
+              <p className="text-xs uppercase font-mono text-[#C96A3D] font-semibold">A More Detailed Professional Overview</p>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
                 Want a more detailed overview of my professional experience, education, skills, and development background? You can view my resume online or download a copy for future reference.
               </p>
@@ -882,12 +1013,18 @@ export default function AboutPage() {
             <h2 className="font-heading text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
               Looking for a Developer?
             </h2>
+            <h3 className="font-heading text-xl font-semibold text-[#C96A3D]">
+              Have a Website, Software or AI Project in Mind?
+            </h3>
             <div className="space-y-3 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed font-sans">
               <p>
-                If you have a website, web application, software idea, or existing project that needs development or improvement, I'd be happy to understand what you're trying to build.
+                If you have a business website, web application, software idea, AI project, or existing system that needs development or improvement, I'd be happy to understand what you're trying to build.
               </p>
               <p>
                 I'm based in <strong className="text-[#17211E] dark:text-[#F5F2EC]">Multan, Pakistan</strong>, and available for projects with businesses, startups, agencies, and remote teams in Pakistan and internationally.
+              </p>
+              <p className="text-sm">
+                Tell me what you're trying to build, what problem you want to solve, and any important requirements you already have.
               </p>
             </div>
           </div>

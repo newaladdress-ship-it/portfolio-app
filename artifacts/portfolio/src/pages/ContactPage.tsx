@@ -3,11 +3,9 @@ import { Link } from "wouter";
 import SEOHead from "@/components/SEOHead";
 import { notifyAdmin } from "@/hooks/usePushNotifications";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { BiBook } from "react-icons/bi";
 import { SiGithub } from "react-icons/si";
-import { FaLinkedinIn, FaPhone } from "react-icons/fa6";
-import { HiMail, HiCheckCircle, HiXCircle } from "react-icons/hi";
-import { HiOutlineBriefcase } from "react-icons/hi2";
+import { FaLinkedinIn } from "react-icons/fa6";
+import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 import SectionHeading from "@/components/layout/SectionHeading";
 import SectionSubHeading from "@/components/layout/SectionSubHeading";
 import SpotlightCard from "@/components/layout/SpotlightCard";
@@ -23,7 +21,8 @@ import {
   CheckCircle2,
   Sparkles,
   MessageSquare,
-  HelpCircle,
+  Briefcase,
+  UserCheck,
 } from "lucide-react";
 
 export default function ContactPage() {
@@ -64,7 +63,7 @@ export default function ContactPage() {
 
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Failed to send message:", err);
       setStatus("error");
       setErrorMessage("Failed to send your message. Please try emailing directly.");
@@ -87,8 +86,8 @@ export default function ContactPage() {
   const contactPageJsonLd = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    name: "Contact Muhammad Imran",
-    description: "Contact Muhammad Imran, a full-stack web developer in Multan, Pakistan, for websites, web applications, React, Next.js, MERN, and technical SEO projects.",
+    name: "Contact Muhammad Imran | Web Developer in Multan",
+    description: "Contact Muhammad Imran, a full-stack web developer in Multan, Pakistan, for websites, web apps, software systems, React, Next.js, MERN, and SEO.",
     mainEntity: {
       "@type": "Person",
       name: PERSONAL.name,
@@ -99,7 +98,7 @@ export default function ContactPage() {
         addressCountry: "Pakistan",
       },
       email: PERSONAL.email,
-      telephone: PERSONAL.phone,
+      telephone: "+923019316123",
       url: "https://imrandigitals.com",
     },
   };
@@ -107,8 +106,8 @@ export default function ContactPage() {
   return (
     <>
       <SEOHead
-        title="Contact Muhammad Imran | Full-Stack Web Developer"
-        description="Contact Muhammad Imran, a full-stack web developer in Multan, Pakistan, for websites, web applications, React, Next.js, MERN, and technical SEO projects."
+        title="Contact Muhammad Imran | Web Developer in Multan"
+        description="Contact Muhammad Imran, a full-stack web developer in Multan, Pakistan, for websites, web apps, software systems, React, Next.js, MERN, and SEO."
         path="/contact"
         jsonLd={[breadcrumbJsonLd, contactPageJsonLd]}
       />
@@ -126,12 +125,12 @@ export default function ContactPage() {
           <span className="text-[#17211E] dark:text-[#F5F2EC]">Contact</span>
         </nav>
 
-        {/* ---------------- HERO / HEADER ---------------- */}
+        {/* ---------------- 1. HERO / HEADER ---------------- */}
         <section className="space-y-6">
-          <div className="space-y-4">
+          <div className="space-y-4 max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-md bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] px-3.5 py-1.5 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Open for New Projects &amp; Collaboration</span>
+              <span>Available for New Projects &amp; Remote Work</span>
             </div>
 
             <h1 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-[#17211E] dark:text-[#F5F2EC]">
@@ -139,74 +138,101 @@ export default function ContactPage() {
             </h1>
 
             <h2 className="font-heading text-xl sm:text-2xl font-semibold text-[#C96A3D]">
-              Let's discuss your next website or web application
+              Let's Discuss Your Next Website, Web Application, or Software Project
             </h2>
           </div>
 
-          <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#5C655F] dark:text-[#9DA6A0] max-w-4xl">
+          <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#5C655F] dark:text-[#9DA6A0] max-w-4xl font-sans">
             <p>
-              Have a website to build, an existing project to improve, or an idea for a custom web application?
+              Have a website to build, an existing project to improve, or an idea for a custom web application or digital system?
             </p>
             <p>
-              I'm Muhammad Imran, a full-stack web developer based in Multan, Pakistan. I work with businesses, startups, agencies, and remote clients on business websites, custom web applications, dashboards, full-stack systems, and technical SEO projects.
+              I'm Muhammad Imran, a full-stack web developer based in Multan, Pakistan. I work with businesses, startups, agencies, and remote clients on business websites, custom web applications, dashboards, full-stack systems, digital tools, and technical SEO projects.
             </p>
             <p>
-              Send me a brief description of what you're working on. You don't need to have all the technical details figured out before contacting me.
+              Send me a brief description of what you're working on. You don't need to have every technical detail figured out before contacting me. Tell me what you want to build, improve, or solve, and we can determine the right approach together.
             </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <button
+              onClick={scrollToForm}
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors duration-200 shadow-xs cursor-pointer"
+            >
+              <span>Start a Project</span>
+              <ArrowRight size={16} />
+            </button>
+
+            <a
+              href="tel:+923019316123"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-sm transition-colors duration-200"
+            >
+              <Phone size={16} className="text-[#C96A3D]" />
+              <span>Call Me: +92 301 9316123</span>
+            </a>
           </div>
         </section>
 
         <Breakline className="my-8" />
 
-        {/* ---------------- AVAILABLE FOR PROJECTS ---------------- */}
-        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-6 shadow-xs">
+        {/* ---------------- 2. AVAILABLE FOR NEW PROJECTS & COLLABORATION ---------------- */}
+        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-6 shadow-xs font-sans">
           <div className="space-y-2">
-            <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-              Available for Projects
+            <div className="inline-flex items-center gap-2 rounded-md bg-[#F5F2EC] dark:bg-[#121917] border border-[#D9D4CA] dark:border-[#2A3632] px-3 py-1 text-xs font-mono text-[#C96A3D]">
+              <UserCheck size={14} />
+              <span>Services &amp; Scope</span>
+            </div>
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+              Available for New Projects &amp; Collaboration
             </h2>
-            <p className="text-base text-[#5C655F] dark:text-[#9DA6A0]">
-              I'm currently open to freelance projects, remote development work, and suitable full-time opportunities.
+            <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+              I'm currently open to freelance projects, remote development work, development collaborations, and suitable full-time opportunities.
             </p>
           </div>
 
-          <div className="space-y-3 pt-2 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]/50">
+          <div className="space-y-4 pt-2 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]/50">
             <h3 className="text-xs font-mono font-semibold uppercase text-[#C96A3D] tracking-wider">
-              What you can contact me about
+              What You Can Contact Me About
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base text-[#17211E] dark:text-[#F5F2EC]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-sm sm:text-base text-[#17211E] dark:text-[#F5F2EC]">
               {[
                 "Business website development",
-                "Custom web applications",
+                "Custom web application development",
                 "React and Next.js development",
                 "MERN stack development",
+                "Full-stack web development",
                 "Backend and API development",
                 "Dashboards and admin panels",
+                "Custom software and digital tools",
                 "Website performance improvements",
                 "Technical SEO implementation",
                 "Existing website improvements",
-                "Custom software and digital tools",
+                "Database-driven web applications",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-2.5">
-                  <CheckCircle2 size={16} className="text-[#C96A3D] shrink-0" />
-                  <span>{item}</span>
+                <div
+                  key={item}
+                  className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F5F2EC]/60 dark:bg-[#121917] border border-[#D9D4CA]/50 dark:border-[#2A3632]"
+                >
+                  <CheckCircle2 size={18} className="text-[#C96A3D] shrink-0" />
+                  <span className="text-sm font-medium leading-snug">{item}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-2">
-            If your requirement doesn't fit one of these categories, you can still get in touch. Tell me what you're trying to accomplish and I'll help determine the appropriate approach.
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-2">
+            If your requirement doesn't fit one of these categories, you can still get in touch. Describe what you're trying to accomplish, and I'll help determine the appropriate starting point.
           </p>
         </section>
 
         <Breakline className="my-8" />
 
-        {/* ---------------- SEND ME A MESSAGE (FORM) ---------------- */}
-        <section className="space-y-6">
+        {/* ---------------- 3. SEND ME A MESSAGE (FORM) ---------------- */}
+        <section className="space-y-6 font-sans">
           <div className="space-y-2">
             <SectionHeading title="Send Me a Message" icon={<MessageSquare />} />
             <SectionSubHeading>
-              <p>The easiest way to start is by sending a short project description.</p>
+              <p>The easiest way to start a project is by sending a short description of what you need.</p>
             </SectionSubHeading>
           </div>
 
@@ -270,7 +296,7 @@ export default function ContactPage() {
                   id="contact-message"
                   required
                   rows={5}
-                  placeholder="Tell me about your project, what you need built or improved, and any important requirements or deadlines."
+                  placeholder="Tell me about your project, what you need built or improved, important requirements, existing website or application details, and any relevant deadline."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC]/60 dark:bg-[#121917] px-4 py-3 text-sm text-[#17211E] dark:text-[#F5F2EC] placeholder-[#5C655F]/60 dark:placeholder-[#9DA6A0]/60 focus:outline-none focus:border-[#C96A3D] transition-colors resize-y"
@@ -280,7 +306,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors duration-200 shadow-xs disabled:opacity-50"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors duration-200 shadow-xs disabled:opacity-50 cursor-pointer"
               >
                 {status === "submitting" ? (
                   <>
@@ -304,8 +330,8 @@ export default function ContactPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- DIRECT CONTACT ---------------- */}
-        <section className="space-y-6">
+        {/* ---------------- 4. DIRECT CONTACT ---------------- */}
+        <section className="space-y-6 font-sans">
           <div className="space-y-2">
             <SectionHeading title="Direct Contact" icon={<Mail />} />
             <SectionSubHeading>
@@ -315,135 +341,143 @@ export default function ContactPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Email */}
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                <Mail size={20} />
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                  <Mail size={20} />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    Email
+                  </h3>
+                  <a
+                    href="mailto:mi6062610@gmail.com"
+                    className="text-base font-semibold text-[#C96A3D] hover:underline"
+                  >
+                    mi6062610@gmail.com
+                  </a>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
+                    For project inquiries, collaboration, questions, and professional opportunities.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-1">
-                <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                  Email
-                </h3>
-                <p className="text-base font-semibold text-[#C96A3D]">
-                  {PERSONAL.email}
-                </p>
-                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
-                  For project inquiries, collaboration, questions, and professional opportunities.
-                </p>
+              <div className="pt-2">
+                <a
+                  href="mailto:mi6062610@gmail.com"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-xs transition-colors duration-200"
+                >
+                  Send Email <ArrowRight size={14} />
+                </a>
               </div>
-              <a
-                href={`mailto:${PERSONAL.email}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-xs transition-colors duration-200"
-              >
-                Send Email <ArrowRight size={14} />
-              </a>
             </div>
 
             {/* Phone */}
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                <Phone size={20} />
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="w-10 h-10 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                  <Phone size={20} />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    Phone
+                  </h3>
+                  <a
+                    href="tel:+923019316123"
+                    className="text-base font-semibold text-[#C96A3D] hover:underline"
+                  >
+                    +92 301 9316123
+                  </a>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
+                    Available for project-related calls and professional discussions.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-1">
-                <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                  Phone
-                </h3>
-                <p className="text-base font-semibold text-[#C96A3D]">
-                  {PERSONAL.phone}
-                </p>
-                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
-                  Available for project-related calls and professional discussions.
-                </p>
+              <div className="pt-2">
+                <a
+                  href="tel:+923019316123"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-xs border border-[#D9D4CA] dark:border-[#2A3632] transition-colors duration-200"
+                >
+                  Call Me <ArrowRight size={14} />
+                </a>
               </div>
-              <a
-                href={`tel:${PERSONAL.phone.replace(/\s+/g, "")}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-xs border border-[#D9D4CA] dark:border-[#2A3632] transition-colors duration-200"
-              >
-                Call Me <ArrowRight size={14} />
-              </a>
             </div>
-          </div>
-        </section>
 
-        <Breakline className="my-8" />
-
-        {/* ---------------- CONNECT WITH ME ---------------- */}
-        <section className="space-y-6">
-          <div className="space-y-2">
-            <SectionHeading title="Connect With Me" icon={<Globe />} />
-            <SectionSubHeading>
-              <p>Professional networks and technical profile links.</p>
-            </SectionSubHeading>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* GitHub */}
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-neutral-900/10 dark:bg-white/10 text-[#17211E] dark:text-[#F5F2EC] flex items-center justify-center">
-                <SiGithub size={20} />
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="w-10 h-10 rounded-xl bg-neutral-900/10 dark:bg-white/10 text-[#17211E] dark:text-[#F5F2EC] flex items-center justify-center">
+                  <SiGithub size={20} />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    GitHub
+                  </h3>
+                  <p className="text-base font-semibold text-[#17211E] dark:text-[#F5F2EC]">
+                    @muhammadimran9
+                  </p>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
+                    Explore my repositories, development work, and selected projects.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-1">
-                <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                  GitHub
-                </h3>
-                <p className="text-base font-semibold text-[#17211E] dark:text-[#F5F2EC]">
-                  @muhammadimran9
-                </p>
-                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
-                  Explore my repositories, development work, and open-source projects.
-                </p>
+              <div className="pt-2">
+                <a
+                  href={PERSONAL.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC]/60 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-xs transition-colors duration-200"
+                >
+                  View GitHub Profile <ArrowRight size={14} />
+                </a>
               </div>
-              <a
-                href={PERSONAL.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC]/60 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-xs transition-colors duration-200"
-              >
-                View GitHub Profile <ArrowRight size={14} />
-              </a>
             </div>
 
             {/* LinkedIn */}
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center">
-                <FaLinkedinIn size={20} />
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-4 flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center">
+                  <FaLinkedinIn size={20} />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    LinkedIn
+                  </h3>
+                  <p className="text-base font-semibold text-[#17211E] dark:text-[#F5F2EC]">
+                    Muhammad Imran
+                  </p>
+                  <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
+                    Connect with me for professional networking, development opportunities, and career-related conversations.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-1">
-                <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                  LinkedIn
-                </h3>
-                <p className="text-base font-semibold text-[#17211E] dark:text-[#F5F2EC]">
-                  Muhammad Imran
-                </p>
-                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-1">
-                  Connect with me for professional networking, development opportunities, and career-related conversations.
-                </p>
+              <div className="pt-2">
+                <a
+                  href={PERSONAL.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC]/60 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-xs transition-colors duration-200"
+                >
+                  Connect on LinkedIn <ArrowRight size={14} />
+                </a>
               </div>
-              <a
-                href={PERSONAL.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC]/60 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-xs transition-colors duration-200"
-              >
-                Connect on LinkedIn <ArrowRight size={14} />
-              </a>
             </div>
           </div>
         </section>
 
         <Breakline className="my-8" />
 
-        {/* ---------------- BASED IN MULTAN, WORKING WORLDWIDE ---------------- */}
-        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4">
-          <div className="space-y-3">
+        {/* ---------------- 5. BASED IN MULTAN, WORKING WORLDWIDE ---------------- */}
+        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4 font-sans">
+          <div className="space-y-4 max-w-4xl">
             <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
               Based in Multan, Working Worldwide
             </h2>
             <div className="space-y-3 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
               <p>
-                I'm based in <strong className="text-[#17211E] dark:text-[#F5F2EC]">Multan, Pakistan</strong>, and available to work with clients and teams locally and remotely.
+                I'm based in Multan, Pakistan, and available to work with clients and teams locally and remotely.
               </p>
               <p>
-                For local businesses, I can help with everything from a new business website and technical SEO implementation to custom web applications and internal tools.
+                For businesses in Multan and across Pakistan, I can help with everything from business website development and technical SEO to custom web applications, dashboards, and digital tools.
               </p>
               <p>
                 For remote clients and teams, project communication, development, reviews, and delivery can be handled online.
@@ -454,12 +488,12 @@ export default function ContactPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- WHAT HAPPENS AFTER YOU CONTACT ME? ---------------- */}
-        <section className="space-y-6">
+        {/* ---------------- 6. WHAT HAPPENS AFTER YOU CONTACT ME? ---------------- */}
+        <section className="space-y-6 font-sans">
           <div className="space-y-2">
             <SectionHeading title="What Happens After You Contact Me?" icon={<Sparkles />} />
             <SectionSubHeading>
-              <p>A simple 3-step intake process to get your project moving forward.</p>
+              <p>A simple three-step process helps turn your initial idea into a clear development plan.</p>
             </SectionSubHeading>
           </div>
 
@@ -472,7 +506,7 @@ export default function ContactPage() {
                 I Review Your Message
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                I'll review your requirements, project goals, existing website or application details, and any relevant constraints you've provided.
+                I'll review your requirements, project goals, existing website or application details, and any important constraints you've provided.
               </p>
             </div>
 
@@ -484,7 +518,7 @@ export default function ContactPage() {
                 We Discuss the Requirements
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                If the project is a good fit, we'll discuss the scope, functionality, technology requirements, and expected outcome.
+                If the project is a good fit, we'll discuss the scope, functionality, technology requirements, priorities, and expected outcome.
               </p>
             </div>
 
@@ -508,30 +542,43 @@ export default function ContactPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- HAVE A PROJECT IN MIND? ---------------- */}
-        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-6">
-          <div className="space-y-3 max-w-3xl">
-            <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+        {/* ---------------- 7. HAVE A PROJECT IN MIND? (CTA) ---------------- */}
+        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-8 sm:p-10 space-y-6 font-sans">
+          <div className="max-w-3xl space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-md bg-[#F5F2EC] dark:bg-[#121917] border border-[#D9D4CA] dark:border-[#2A3632] px-3 py-1 text-xs font-mono text-[#C96A3D]">
+              <Briefcase size={14} />
+              <span>Let's Build Together</span>
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
               Have a Project in Mind?
             </h2>
             <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-              Tell me what you're trying to build, improve, or solve. Whether you need a business website, custom web application, full-stack development, or technical help with an existing project, I'm happy to hear about it.
+              Tell me what you're trying to build, improve, or solve. Whether you need a business website, custom web application, full-stack development, custom software, digital tool, or technical help with an existing project, I'm happy to hear about it.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4 pt-2">
+          <div className="flex flex-wrap items-center gap-4 pt-2">
             <button
               onClick={scrollToForm}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors duration-200 shadow-xs cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors duration-200 shadow-xs cursor-pointer"
             >
-              Start a Conversation <ArrowRight size={16} />
+              <span>Start a Conversation</span>
+              <ArrowRight size={16} />
             </button>
+
+            <a
+              href="tel:+923019316123"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-sm transition-colors duration-200"
+            >
+              <Phone size={16} className="text-[#C96A3D]" />
+              <span>Call +92 301 9316123</span>
+            </a>
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-sm border border-[#D9D4CA] dark:border-[#2A3632] transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-sm transition-colors duration-200"
             >
-              View My Services
+              <span>View My Services</span>
             </Link>
           </div>
         </section>

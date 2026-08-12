@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
 
     <!-- Primary Meta -->
-    <title>Muhammad Imran | Full-Stack Web Developer in Multan</title>
-    <meta name="description" content="Full-stack web developer in Multan, Pakistan specializing in React, Next.js, MERN, TypeScript and technical SEO. Building fast websites and custom web apps." />
+    <title>Muhammad Imran | Full-Stack &amp; AI Developer in Multan</title>
+    <meta name="description" content="Full-stack and AI developer in Multan, Pakistan specializing in MERN, React, Next.js, custom web apps, AI solutions, and technical SEO." />
     <meta name="keywords" content="web developer in multan, website development, expert web development services, web developer, software development company, website developer in pakistan, software company in multan, MERN Stack, React Developer, Next.js, Full Stack Developer" />
     <meta name="author" content="Muhammad Imran" />
     <meta name="robots" content="index, follow, agentic" />
@@ -171,9 +171,17 @@
     <script type="module" src="/src/main.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/sw.js');
-        });
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for (let registration of registrations) {
+              registration.unregister();
+            }
+          });
+        } else {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js');
+          });
+        }
       }
     </script>
   </body>

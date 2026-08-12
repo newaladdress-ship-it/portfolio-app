@@ -1,8 +1,25 @@
 import { useState, useRef, useEffect } from "react";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "wouter";
-import { Bot, Send, Loader2, Sparkles, RefreshCw, Copy, Check, Mail, CheckCircle2, HelpCircle, ArrowRight, Code2, Layers, Briefcase, Cpu } from "lucide-react";
-import { INITIAL_MESSAGE, QUICK_ACTIONS, SAMPLE_PROMPTS } from "@/data/portfolioContext";
+import {
+  Bot,
+  Send,
+  Loader2,
+  Sparkles,
+  RefreshCw,
+  Copy,
+  Check,
+  CheckCircle2,
+  HelpCircle,
+  ArrowRight,
+  Code2,
+  Layers,
+  Briefcase,
+  Cpu,
+  BrainCircuit,
+  Wand2,
+} from "lucide-react";
+import { INITIAL_MESSAGE, QUICK_ACTIONS } from "@/data/portfolioContext";
 import SectionHeading from "@/components/layout/SectionHeading";
 import SectionSubHeading from "@/components/layout/SectionSubHeading";
 import SpotlightCard from "@/components/layout/SpotlightCard";
@@ -89,7 +106,7 @@ function CopyButton({ text }: { text: string }) {
 
 function TypingIndicator() {
   return (
-    <div className="flex items-start gap-3">
+    <div className="flex items-start gap-3 font-sans">
       <div className="w-8 h-8 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center shrink-0">
         <Bot size={18} />
       </div>
@@ -199,13 +216,22 @@ export default function SmartTalkPage() {
     ],
   };
 
+  const webPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "SmartTalk AI | Muhammad Imran's AI Portfolio Assistant",
+    description:
+      "Chat with SmartTalk AI to explore Muhammad Imran's web development, AI solutions, projects, services, skills, and experience, or discuss your project.",
+    url: "https://imrandigitals.com/smarttalk",
+  };
+
   return (
     <>
       <SEOHead
-        title="SmartTalk AI | Muhammad Imran's Portfolio Assistant"
-        description="Chat with SmartTalk AI to explore Muhammad Imran's skills, projects, services, experience, and web development capabilities, or discuss your project idea."
+        title="SmartTalk AI | Muhammad Imran's AI Portfolio Assistant"
+        description="Chat with SmartTalk AI to explore Muhammad Imran's web development, AI solutions, projects, services, skills, and experience, or discuss your project."
         path="/smarttalk"
-        jsonLd={[breadcrumbJsonLd]}
+        jsonLd={[breadcrumbJsonLd, webPageJsonLd]}
       />
 
       <div className="space-y-16 py-6 font-sans">
@@ -221,12 +247,12 @@ export default function SmartTalkPage() {
           <span className="text-[#17211E] dark:text-[#F5F2EC]">SmartTalk AI</span>
         </nav>
 
-        {/* ---------------- HERO / HEADER ---------------- */}
+        {/* ---------------- 1. HERO / HEADER ---------------- */}
         <section className="space-y-6">
-          <div className="space-y-4">
+          <div className="space-y-4 max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-md bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] px-3.5 py-1.5 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
               <Sparkles size={14} className="text-[#C96A3D]" />
-              <span>Interactive Portfolio Assistant · Powered by Gemini AI</span>
+              <span>Interactive AI Portfolio Assistant</span>
             </div>
 
             <h1 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-[#17211E] dark:text-[#F5F2EC]">
@@ -234,26 +260,26 @@ export default function SmartTalkPage() {
             </h1>
 
             <h2 className="font-heading text-xl sm:text-2xl font-semibold text-[#C96A3D]">
-              Ask About Muhammad Imran. Explore His Work. Plan Your Project.
+              Ask About Muhammad Imran, His Projects &amp; AI Development Services
             </h2>
           </div>
 
           <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#5C655F] dark:text-[#9DA6A0] max-w-4xl font-sans">
             <p>
-              SmartTalk is an AI assistant built into the Imran Digitals portfolio to help visitors quickly learn about Muhammad Imran's development experience, projects, services, technical skills, and professional background.
+              SmartTalk is an AI-powered assistant built into the Imran Digitals portfolio to help visitors quickly learn about Muhammad Imran's web development experience, software projects, AI development capabilities, technical skills, services, and professional background.
             </p>
             <p>
-              You can ask questions about his work or describe what you want to build, and SmartTalk can help you find relevant information and understand which development service may fit your requirements.
+              You can ask questions about his work, explore his projects and technologies, or describe what you want to build. SmartTalk can help you understand which web development, full-stack development, or custom AI solution may fit your requirements.
             </p>
           </div>
         </section>
 
         <Breakline className="my-8" />
 
-        {/* ---------------- MEET SMARTTALK ---------------- */}
+        {/* ---------------- 2. MEET SMARTTALK ---------------- */}
         <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-6 shadow-xs font-sans">
           <div className="space-y-2">
-            <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
               Meet SmartTalk
             </h2>
             <p className="text-base text-[#5C655F] dark:text-[#9DA6A0]">
@@ -261,39 +287,43 @@ export default function SmartTalkPage() {
             </p>
           </div>
 
-          <div className="space-y-3 pt-2 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]/50">
+          <div className="space-y-4 pt-2 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]/50">
             <h3 className="text-xs font-mono font-semibold uppercase text-[#C96A3D] tracking-wider">
-              I can help you explore his:
+              I Can Help You Explore His:
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base text-[#17211E] dark:text-[#F5F2EC]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-sm sm:text-base text-[#17211E] dark:text-[#F5F2EC]">
               {[
                 "Web development skills",
                 "React and Next.js experience",
                 "MERN stack development",
-                "Full-stack projects",
+                "Full-stack web development",
+                "AI development and AI-assisted software workflows",
+                "Custom AI solutions and AI-powered applications",
                 "Web applications and digital tools",
                 "Technical SEO and performance work",
                 "Professional experience",
-                "Services & engagement options",
-                "Portfolio projects & case studies",
-                "Development capabilities",
+                "Services and development capabilities",
+                "Portfolio projects and case studies",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-2.5">
-                  <CheckCircle2 size={16} className="text-[#C96A3D] shrink-0" />
-                  <span>{item}</span>
+                <div
+                  key={item}
+                  className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F5F2EC]/60 dark:bg-[#121917] border border-[#D9D4CA]/50 dark:border-[#2A3632]"
+                >
+                  <CheckCircle2 size={18} className="text-[#C96A3D] shrink-0" />
+                  <span className="text-sm font-medium leading-snug">{item}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-2 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
-            You can also tell me what you're trying to build and use the conversation as a starting point for planning your project.
+          <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed pt-2 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
+            You can also describe what you're trying to build and use the conversation as a starting point for planning your website, web application, software product, or AI-powered solution.
           </p>
         </section>
 
         <Breakline className="my-8" />
 
-        {/* ---------------- WHAT WOULD YOU LIKE TO KNOW? ---------------- */}
+        {/* ---------------- 3. WHAT WOULD YOU LIKE TO KNOW? ---------------- */}
         <section className="space-y-6 font-sans">
           <div className="space-y-2">
             <SectionHeading title="What Would You Like to Know?" icon={<HelpCircle />} />
@@ -304,18 +334,20 @@ export default function SmartTalkPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Explore My Projects */}
-            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                  <Layers size={20} />
+            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                    <Layers size={20} />
+                  </div>
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    Explore My Projects
+                  </h3>
                 </div>
-                <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                  Explore My Projects
-                </h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  Ask SmartTalk about Muhammad Imran's projects, the problems they solve, the technologies used, and the development work involved.
+                </p>
               </div>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Ask SmartTalk about Muhammad Imran's projects, the problems they solve, the technologies used, and the development work involved.
-              </p>
               <button
                 onClick={() => handleSend("Tell me about Muhammad Imran's recent projects.")}
                 className="w-full text-left p-3 rounded-xl bg-[#F5F2EC]/80 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] border border-[#D9D4CA]/60 dark:border-[#2A3632] transition-colors text-xs font-mono text-[#C96A3D] flex items-center justify-between"
@@ -326,18 +358,20 @@ export default function SmartTalkPage() {
             </SpotlightCard>
 
             {/* Ask About Development Skills */}
-            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                  <Code2 size={20} />
+            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                    <Code2 size={20} />
+                  </div>
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    Ask About Development Skills
+                  </h3>
                 </div>
-                <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                  Ask About Development Skills
-                </h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  Learn about the technologies and development areas Muhammad Imran works with, including React, Next.js, TypeScript, Node.js, MongoDB, Firebase, and full-stack development. You can also ask about his experience building AI-powered applications, integrating AI services, and using modern AI-assisted development workflows.
+                </p>
               </div>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Learn about the technologies and development areas Muhammad Imran works with, including React, Next.js, TypeScript, Node.js, MongoDB, Firebase, and full-stack development.
-              </p>
               <button
                 onClick={() => handleSend("What technologies does Muhammad Imran specialize in?")}
                 className="w-full text-left p-3 rounded-xl bg-[#F5F2EC]/80 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] border border-[#D9D4CA]/60 dark:border-[#2A3632] transition-colors text-xs font-mono text-[#C96A3D] flex items-center justify-between"
@@ -347,46 +381,74 @@ export default function SmartTalkPage() {
               </button>
             </SpotlightCard>
 
-            {/* Find the Right Service */}
-            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                  <Briefcase size={20} />
+            {/* Explore AI Development */}
+            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                    <BrainCircuit size={20} />
+                  </div>
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    Explore AI Development
+                  </h3>
                 </div>
-                <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                  Find the Right Service
-                </h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  Ask SmartTalk about AI development, AI-powered web applications, custom AI solutions, AI integrations, and software products that use generative AI. You can describe an idea for an AI website, AI application, custom AI assistant, or AI-powered business tool and use SmartTalk to explore how it could be approached.
+                </p>
               </div>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Describe the website, application, dashboard, or digital system you want to build and SmartTalk can help you understand which service may be relevant.
-              </p>
               <button
-                onClick={() => handleSend("I need a website for my business.")}
+                onClick={() => handleSend("What AI solutions can Muhammad Imran build?")}
                 className="w-full text-left p-3 rounded-xl bg-[#F5F2EC]/80 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] border border-[#D9D4CA]/60 dark:border-[#2A3632] transition-colors text-xs font-mono text-[#C96A3D] flex items-center justify-between"
               >
-                <span>“I need a website for my business.”</span>
+                <span>“What AI solutions can Muhammad Imran build?”</span>
+                <ArrowRight size={13} />
+              </button>
+            </SpotlightCard>
+
+            {/* Find the Right Service */}
+            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                    <Briefcase size={20} />
+                  </div>
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    Find the Right Service
+                  </h3>
+                </div>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  Describe the website, application, software system, dashboard, or AI-powered product you want to build and SmartTalk can help you understand which development service may be relevant.
+                </p>
+              </div>
+              <button
+                onClick={() => handleSend("I need an AI-powered web application for my business.")}
+                className="w-full text-left p-3 rounded-xl bg-[#F5F2EC]/80 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] border border-[#D9D4CA]/60 dark:border-[#2A3632] transition-colors text-xs font-mono text-[#C96A3D] flex items-center justify-between"
+              >
+                <span>“I need an AI-powered web application for my business.”</span>
                 <ArrowRight size={13} />
               </button>
             </SpotlightCard>
 
             {/* Discuss a Project */}
-            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
-                  <Cpu size={20} />
+            <SpotlightCard className="p-6 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4 md:col-span-2 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                    <Cpu size={20} />
+                  </div>
+                  <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
+                    Discuss a Project
+                  </h3>
                 </div>
-                <h3 className="font-heading font-bold text-lg text-[#17211E] dark:text-[#F5F2EC]">
-                  Discuss a Project
-                </h3>
+                <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                  Have an idea but don't know exactly how it should be built? Describe the problem, features, business requirements, or outcome you're looking for. SmartTalk can help you explore the type of website, software, web application, or custom AI solution that may fit your idea.
+                </p>
               </div>
-              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Have an idea but don't know exactly how it should be built? Describe the problem, features, or outcome you're looking for.
-              </p>
               <button
-                onClick={() => handleSend("I want to build a web application for managing customers.")}
+                onClick={() => handleSend("I want to build an AI-powered web application for managing customers.")}
                 className="w-full text-left p-3 rounded-xl bg-[#F5F2EC]/80 dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] border border-[#D9D4CA]/60 dark:border-[#2A3632] transition-colors text-xs font-mono text-[#C96A3D] flex items-center justify-between"
               >
-                <span>“I want to build a web application for managing customers.”</span>
+                <span>“I want to build an AI-powered web application for managing customers.”</span>
                 <ArrowRight size={13} />
               </button>
             </SpotlightCard>
@@ -395,7 +457,7 @@ export default function SmartTalkPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- INTERACTIVE SMARTTALK CHAT INTERFACE ---------------- */}
+        {/* ---------------- 4. INTERACTIVE SMARTTALK CHAT INTERFACE ---------------- */}
         <section className="space-y-6 font-sans">
           <div className="flex items-center justify-between">
             <SectionHeading title="Start a Conversation" icon={<Bot />} />
@@ -498,12 +560,12 @@ export default function SmartTalkPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- WHAT SMARTTALK CAN HELP WITH ---------------- */}
+        {/* ---------------- 5. WHAT SMARTTALK CAN HELP WITH ---------------- */}
         <section className="space-y-6 font-sans">
           <div className="space-y-2">
             <SectionHeading title="What SmartTalk Can Help With" icon={<Sparkles />} />
             <SectionSubHeading>
-              <p>SmartTalk makes the portfolio easier to explore without requiring you to search through multiple pages.</p>
+              <p>SmartTalk makes the portfolio easier to explore without requiring visitors to search through multiple pages.</p>
             </SectionSubHeading>
           </div>
 
@@ -516,7 +578,7 @@ export default function SmartTalkPage() {
                 Projects
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Explore development projects and understand what was built and why.
+                Explore development projects and understand what was built, why it was built, and which technologies were used.
               </p>
             </div>
 
@@ -525,10 +587,22 @@ export default function SmartTalkPage() {
                 <Briefcase size={20} />
               </div>
               <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
-                Services
+                Web Development Services
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Learn about website development, web applications, full-stack development, React, Next.js, dashboards, and technical SEO.
+                Learn about business website development, custom web applications, full-stack development, React, Next.js, dashboards, backend development, and technical SEO.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <Wand2 size={20} />
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                AI Development
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Learn about AI-powered applications, custom AI solutions, AI integrations, and the use of generative AI in modern software development.
               </p>
             </div>
 
@@ -540,7 +614,7 @@ export default function SmartTalkPage() {
                 Experience
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Ask about his professional background, development experience, education, and certifications.
+                Ask about Muhammad Imran's professional background, development experience, education, certifications, and practical projects.
               </p>
             </div>
 
@@ -552,11 +626,11 @@ export default function SmartTalkPage() {
                 Technology
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Explore the technologies and tools used across his projects.
+                Explore the technologies and development tools used across his projects, including modern frontend, backend, database, cloud, and AI development technologies.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 md:col-span-2 lg:col-span-2">
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
               <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
                 <Bot size={20} />
               </div>
@@ -564,7 +638,7 @@ export default function SmartTalkPage() {
                 Project Requirements
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Describe what you want to build and start a conversation about the type of solution you may need.
+                Describe what you want to build and start a conversation about the type of website, web application, software system, or AI-powered solution that may be appropriate.
               </p>
             </div>
           </div>
@@ -572,28 +646,31 @@ export default function SmartTalkPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- NEED A REAL PROJECT BUILT? ---------------- */}
+        {/* ---------------- 6. NEED A REAL PROJECT BUILT? ---------------- */}
         <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-6 font-sans">
           <div className="space-y-3 max-w-3xl">
             <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
               Need a Real Project Built?
             </h2>
             <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-              SmartTalk can help you explore the portfolio, but project discussions can also be taken directly to Muhammad Imran. If you already know what you want to build, send a project inquiry with your requirements and goals.
+              SmartTalk can help you explore the portfolio, but project discussions can also be taken directly to Muhammad Imran.
+            </p>
+            <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+              If you already know what you want to build, you can send a project inquiry with your requirements and goals. This can include a business website, custom web application, full-stack software, dashboard, digital tool, or custom AI solution.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-4 pt-2">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors duration-200 shadow-xs"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#C96A3D] hover:bg-[#A9512A] text-white font-heading font-medium text-sm transition-colors duration-200 shadow-xs"
             >
               Start a Project <ArrowRight size={16} />
             </Link>
 
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-sm border border-[#D9D4CA] dark:border-[#2A3632] transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] text-[#17211E] dark:text-[#F5F2EC] font-heading font-medium text-sm border border-[#D9D4CA] dark:border-[#2A3632] transition-colors duration-200"
             >
               Contact Muhammad Imran
             </Link>
@@ -602,7 +679,7 @@ export default function SmartTalkPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- ABOUT SMARTTALK ---------------- */}
+        {/* ---------------- 7. ABOUT SMARTTALK ---------------- */}
         <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4 font-sans">
           <div className="space-y-3">
             <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
@@ -610,7 +687,7 @@ export default function SmartTalkPage() {
             </h2>
             <div className="space-y-3 text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
               <p>
-                SmartTalk is an AI-powered portfolio assistant developed for Imran Digitals. It is designed to provide a conversational way for visitors to explore information about Muhammad Imran and his development work.
+                SmartTalk is an AI-powered portfolio assistant developed for Imran Digitals. It provides a conversational way for visitors to explore information about Muhammad Imran, his web development work, software projects, AI development capabilities, services, and technical background.
               </p>
               <p>
                 The assistant is intended to complement the portfolio—not replace direct communication. For project proposals, pricing, contracts, or important business decisions, contact Muhammad Imran directly.

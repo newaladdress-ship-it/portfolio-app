@@ -137,6 +137,108 @@ export default function ServicePage() {
         )}
       </div>
 
+      {/* Types Section (e.g. Business Websites I Build) */}
+      {service.typesSection && (
+        <>
+          <Breakline />
+          <div className="space-y-4">
+            <SectionHeading title={service.typesSection.heading} icon={<HiOutlineBriefcase />} />
+            {service.typesSection.subheading && (
+              <SectionSubHeading><p>{service.typesSection.subheading}</p></SectionSubHeading>
+            )}
+            {service.typesSection.cards && (
+              <div className="grid sm:grid-cols-2 gap-3.5 mt-2">
+                {service.typesSection.cards.map((c) => (
+                  <SpotlightCard key={c.title} className="p-4 flex flex-col justify-between">
+                    <div>
+                      <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                        {c.title}
+                      </h3>
+                      <p className="mt-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                        {c.description}
+                      </p>
+                    </div>
+                    {c.suitableFor && (
+                      <div className="mt-3 pt-3 border-t border-neutral-100 dark:border-neutral-800">
+                        <span className="text-[11px] font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1.5">
+                          Suitable for:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {c.suitableFor.map((item) => (
+                            <span
+                              key={item}
+                              className="inline-block rounded-md bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 text-xs text-neutral-700 dark:text-neutral-300"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </SpotlightCard>
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* Includes Section (e.g. What I Include) */}
+      {service.includesSection && (
+        <>
+          <Breakline />
+          <div className="space-y-4">
+            <SectionHeading title={service.includesSection.heading} icon={<HiOutlineSparkles />} />
+            {service.includesSection.subheading && (
+              <SectionSubHeading><p>{service.includesSection.subheading}</p></SectionSubHeading>
+            )}
+            {service.includesSection.cards && (
+              <div className="grid sm:grid-cols-2 gap-3.5 mt-2">
+                {service.includesSection.cards.map((c) => (
+                  <SpotlightCard key={c.title} className="p-4">
+                    <h3 className="text-sm sm:text-base font-semibold text-neutral-900 dark:text-neutral-100">
+                      {c.title}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                      {c.description}
+                    </p>
+                  </SpotlightCard>
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* Local Section (e.g. Multan & Local Businesses) */}
+      {service.localSection && (
+        <>
+          <Breakline />
+          <div className="space-y-3">
+            <SectionHeading title={service.localSection.heading} icon={<HiOutlineSparkles />} />
+            {service.localSection.body && (
+              <SectionSubHeading><p>{service.localSection.body}</p></SectionSubHeading>
+            )}
+            {service.localSection.bullets && (
+              <ul className="grid sm:grid-cols-2 gap-2.5 mt-2">
+                {service.localSection.bullets.map((b) => (
+                  <li
+                    key={b}
+                    className="flex gap-2 text-sm text-neutral-700 dark:text-neutral-400 leading-relaxed"
+                  >
+                    <HiOutlineCheckCircle
+                      className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-500"
+                      size={18}
+                    />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </>
+      )}
+
       <Breakline />
 
       {/* Process */}
@@ -200,6 +302,35 @@ export default function ServicePage() {
           </ul>
         )}
       </div>
+
+      {/* Audience Section */}
+      {service.audienceSection && (
+        <>
+          <Breakline />
+          <div className="space-y-3">
+            <SectionHeading title={service.audienceSection.heading} icon={<HiOutlineBriefcase />} />
+            {service.audienceSection.body && (
+              <SectionSubHeading><p>{service.audienceSection.body}</p></SectionSubHeading>
+            )}
+            {service.audienceSection.bullets && (
+              <ul className="grid sm:grid-cols-2 gap-2.5 mt-2">
+                {service.audienceSection.bullets.map((b) => (
+                  <li
+                    key={b}
+                    className="flex gap-2 text-sm text-neutral-700 dark:text-neutral-400 leading-relaxed"
+                  >
+                    <HiOutlineCheckCircle
+                      className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-500"
+                      size={18}
+                    />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </>
+      )}
 
       <Breakline />
 

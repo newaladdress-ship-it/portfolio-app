@@ -14,7 +14,6 @@ import {
   limit,
   Timestamp,
 } from "firebase/firestore";
-import { HiOutlineChatAlt2, HiPaperAirplane, HiX } from "react-icons/hi";
 import { SiGithub, SiGoogle } from "react-icons/si";
 import SectionHeading from "@/components/layout/SectionHeading";
 import SectionSubHeading from "@/components/layout/SectionSubHeading";
@@ -30,10 +29,14 @@ import {
   Network,
   ShieldCheck,
   CheckCircle2,
-  Lock,
-  ArrowRight,
+  ChevronDown,
+  ChevronUp,
   LogOut,
   Send,
+  UserPlus,
+  FolderKanban,
+  Mail,
+  X,
 } from "lucide-react";
 
 type AuthProvider = "google" | "github";
@@ -75,12 +78,37 @@ const INITIAL_MESSAGES: Message[] = [
     id: "init-3",
     sender: "other",
     name: "Dev_Mo",
-    text: "Anybody working with Next.js 14 and Tailwind? Let's connect!",
+    text: "Anybody working with Next.js and Tailwind? Let's connect!",
     time: "10:19 AM",
   },
 ];
 
-const ONLINE_USERS = ["Alex R.", "Sara K.", "Dev_Mo", "code_girl", "Tariq_Dev", "Hassan_Frontend", "Ayesha_UI"];
+const FAQ_ITEMS = [
+  {
+    q: "What is the Imran Digitals Community Chat Room?",
+    a: "The Imran Digitals Community Chat Room is a shared online space where registered members can communicate, exchange ideas, ask questions, discuss projects, and collaborate in real time.",
+  },
+  {
+    q: "Who can join the community?",
+    a: "Users can join the community by signing in with a supported Google or GitHub account.",
+  },
+  {
+    q: "What can I discuss in the chat room?",
+    a: "You can discuss technology, development, websites, applications, software ideas, digital products, projects, learning, and other relevant topics.",
+  },
+  {
+    q: "Is the chat room a private support channel?",
+    a: "No. The chat room is a shared community space for member-to-member communication. Private project discussions should be handled through the appropriate contact or project communication channels.",
+  },
+  {
+    q: "Can community members collaborate on projects?",
+    a: "Yes. Members can use the community to exchange ideas, meet other users with similar interests, and discuss potential collaboration opportunities.",
+  },
+  {
+    q: "Are there community rules?",
+    a: "Yes. Members are expected to communicate respectfully, avoid spam, protect private information, and contribute constructively to the community.",
+  },
+];
 
 function Avatar({ name, size = 8, photoURL }: { name: string; size?: number; photoURL?: string }) {
   const initials = name
@@ -90,12 +118,12 @@ function Avatar({ name, size = 8, photoURL }: { name: string; size?: number; pho
     .toUpperCase()
     .slice(0, 2);
   const colors = [
-    "bg-blue-500",
-    "bg-purple-500",
-    "bg-pink-500",
-    "bg-green-500",
-    "bg-yellow-500",
-    "bg-orange-500",
+    "bg-[#C96A3D]",
+    "bg-[#3B82F6]",
+    "bg-[#8B5CF6]",
+    "bg-[#10B981]",
+    "bg-[#F59E0B]",
+    "bg-[#EC4899]",
   ];
   const color = colors[name.charCodeAt(0) % colors.length];
   const px = size * 4;
@@ -154,7 +182,7 @@ function AuthGate({ onLogin }: { onLogin: (user: ChatUser) => void }) {
     e.preventDefault();
     if (!name.trim()) return;
     setLoading("github");
-    await new Promise((r) => setTimeout(r, 600));
+    await new Promise((r) => setTimeout(r, 400));
     onLogin({ name: name.trim(), provider: "github", avatar: name.trim()[0].toUpperCase() });
     setLoading(null);
   };
@@ -173,23 +201,22 @@ function AuthGate({ onLogin }: { onLogin: (user: ChatUser) => void }) {
             <div className="space-y-3 text-left">
               <div className="inline-flex items-center gap-2 rounded-md bg-[#F5F2EC] dark:bg-[#121917] border border-[#D9D4CA] dark:border-[#2A3632] px-3 py-1 text-xs font-mono text-[#C96A3D]">
                 <Users size={14} />
-                <span>Join 18+ Active Members</span>
+                <span>Join Active Community Members</span>
               </div>
               <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                Join the Community
+                Join the Imran Digitals Community
               </h2>
               <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Sign in to enter the chat room and start communicating with other members. You can securely continue with your existing <strong className="text-[#17211E] dark:text-[#F5F2EC]">Google</strong> or <strong className="text-[#17211E] dark:text-[#F5F2EC]">GitHub</strong> account.
+                Sign in to enter the community chat room and communicate with other members. You can securely continue using your existing <strong className="text-[#17211E] dark:text-[#F5F2EC]">Google</strong> or <strong className="text-[#17211E] dark:text-[#F5F2EC]">GitHub</strong> account.
               </p>
             </div>
 
             <div className="space-y-3 pt-2">
-              <p className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">Continue With</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   onClick={handleGoogle}
                   disabled={loading !== null}
-                  className="flex items-center justify-center gap-3 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] px-4 py-3 text-sm font-heading font-medium text-[#17211E] dark:text-[#F5F2EC] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] disabled:opacity-60 transition-colors shadow-xs"
+                  className="flex items-center justify-center gap-3 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] px-4 py-3.5 text-sm font-heading font-medium text-[#17211E] dark:text-[#F5F2EC] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] disabled:opacity-60 transition-colors shadow-xs"
                 >
                   <SiGoogle size={18} className="text-red-500 shrink-0" />
                   <span>{loading === "google" ? "Signing in…" : "Continue with Google"}</span>
@@ -197,7 +224,7 @@ function AuthGate({ onLogin }: { onLogin: (user: ChatUser) => void }) {
                 <button
                   onClick={() => setStep("github-name")}
                   disabled={loading !== null}
-                  className="flex items-center justify-center gap-3 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] px-4 py-3 text-sm font-heading font-medium text-[#17211E] dark:text-[#F5F2EC] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] disabled:opacity-60 transition-colors shadow-xs"
+                  className="flex items-center justify-center gap-3 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] px-4 py-3.5 text-sm font-heading font-medium text-[#17211E] dark:text-[#F5F2EC] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] disabled:opacity-60 transition-colors shadow-xs"
                 >
                   <SiGithub size={18} className="shrink-0" />
                   <span>Continue with GitHub</span>
@@ -215,22 +242,23 @@ function AuthGate({ onLogin }: { onLogin: (user: ChatUser) => void }) {
             exit={{ opacity: 0, y: -10 }}
             className="space-y-5"
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-sm font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC]">
+                <SiGithub size={18} />
+                <span>Signing in with GitHub</span>
+              </div>
               <button
                 onClick={() => setStep("choose")}
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#D9D4CA] dark:border-[#2A3632] text-[#5C655F] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] transition-colors"
+                className="p-1 rounded-lg border border-[#D9D4CA] dark:border-[#2A3632] text-[#5C655F] hover:bg-[#F5F2EC] dark:hover:bg-[#2A3632] transition-colors"
+                aria-label="Close GitHub sign-in"
               >
-                <HiX size={14} />
+                <X size={16} />
               </button>
-              <div className="flex items-center gap-2 text-sm font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC]">
-                <SiGithub size={16} />
-                Signing in with GitHub
-              </div>
             </div>
 
             <div className="space-y-1">
               <h2 className="text-lg font-heading font-bold text-[#17211E] dark:text-[#F5F2EC]">
-                What's your display name?
+                What is your display name?
               </h2>
               <p className="text-xs text-[#5C655F] dark:text-[#9DA6A0]">
                 This is how other members will see you in the community chat room.
@@ -324,7 +352,7 @@ function ChatRoom({ user, onLeave }: { user: ChatUser; onLeave: () => void }) {
         "chat-message"
       );
     } catch {
-      // Keep optimistic message state or handle error
+      // Keep message sending smooth even if fallback
     } finally {
       setSending(false);
     }
@@ -332,7 +360,7 @@ function ChatRoom({ user, onLeave }: { user: ChatUser; onLeave: () => void }) {
 
   return (
     <div className="space-y-4 font-sans">
-      {/* Top Active Session Bar */}
+      {/* Active Session Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421]">
         <div className="flex items-center gap-3">
           <Avatar name={user.name} size={9} photoURL={user.photoURL} />
@@ -342,7 +370,7 @@ function ChatRoom({ user, onLeave }: { user: ChatUser; onLeave: () => void }) {
             </h2>
             <div className="flex items-center gap-2 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>18 members online in community chat</span>
+              <span>Active member in community chat room</span>
             </div>
           </div>
         </div>
@@ -427,6 +455,18 @@ function ChatRoom({ user, onLeave }: { user: ChatUser; onLeave: () => void }) {
 
 export default function ChatRoomPage() {
   const [user, setUser] = useState<ChatUser | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const scrollToChat = () => {
+    const el = document.getElementById("community-chat-section");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -437,13 +477,35 @@ export default function ChatRoomPage() {
     ],
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
+  const webPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Community Chat Room | Imran Digitals",
+    description:
+      "Join the Imran Digitals community chat room to connect, share ideas, ask questions, and collaborate with other members in real time.",
+    url: "https://imrandigitals.com/chat",
+  };
+
   return (
     <>
       <SEOHead
         title="Community Chat Room | Imran Digitals"
-        description="Join the Imran Digitals community chat room to connect, communicate, share ideas, and collaborate with other members. Sign in with Google or GitHub."
+        description="Join the Imran Digitals community chat room to connect, share ideas, ask questions, and collaborate with other members in real time."
         path="/chat"
-        jsonLd={[breadcrumbJsonLd]}
+        jsonLd={[breadcrumbJsonLd, faqJsonLd, webPageJsonLd]}
       />
 
       <div className="space-y-16 py-6 font-sans">
@@ -459,12 +521,12 @@ export default function ChatRoomPage() {
           <span className="text-[#17211E] dark:text-[#F5F2EC]">Community Chat</span>
         </nav>
 
-        {/* ---------------- HERO / HEADER ---------------- */}
+        {/* ---------------- 1. HERO / HEADER ---------------- */}
         <section className="space-y-6">
-          <div className="space-y-4">
+          <div className="space-y-4 max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-md bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] px-3.5 py-1.5 text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0]">
               <Users size={14} className="text-[#C96A3D]" />
-              <span>Real-Time Community Collaboration</span>
+              <span>Real-Time Community Space</span>
             </div>
 
             <h1 className="font-heading text-4xl sm:text-5xl font-bold tracking-tight text-[#17211E] dark:text-[#F5F2EC]">
@@ -476,20 +538,23 @@ export default function ChatRoomPage() {
             </h2>
           </div>
 
-          <div className="space-y-3 text-base sm:text-lg leading-relaxed text-[#5C655F] dark:text-[#9DA6A0] max-w-4xl font-sans">
+          <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#5C655F] dark:text-[#9DA6A0] max-w-4xl font-sans">
             <p>
-              Welcome to the Imran Digitals community chat room—a shared space where members can connect with each other, exchange ideas, ask questions, discuss projects, and collaborate.
+              Welcome to the Imran Digitals Community Chat Room — a shared space where community members can connect, communicate, exchange ideas, ask questions, and collaborate in real time.
             </p>
             <p>
-              Whether you want to start a conversation, share something you're working on, or simply connect with other members of the community, the chat room provides a place to communicate in real time.
+              Whether you're discussing a development project, sharing an idea, asking a technical question, learning something new, or looking for people interested in similar digital projects, the community provides a place for open conversation and collaboration.
+            </p>
+            <p className="font-semibold text-[#17211E] dark:text-[#F5F2EC] pt-1">
+              Join the community and start a conversation.
             </p>
           </div>
         </section>
 
         <Breakline className="my-8" />
 
-        {/* ---------------- INTERACTIVE AUTH / CHAT ROOM ---------------- */}
-        <section className="space-y-6">
+        {/* ---------------- 2. INTERACTIVE AUTH / CHAT ROOM ---------------- */}
+        <section id="community-chat-section" className="space-y-6 scroll-mt-24">
           <AnimatePresence mode="wait">
             {!user ? (
               <motion.div
@@ -517,12 +582,12 @@ export default function ChatRoomPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- WHAT CAN YOU DO HERE? ---------------- */}
+        {/* ---------------- 3. WHAT CAN YOU DO IN THE COMMUNITY? ---------------- */}
         <section className="space-y-6 font-sans">
           <div className="space-y-2">
-            <SectionHeading title="What Can You Do Here?" icon={<Lightbulb />} />
+            <SectionHeading title="What Can You Do in the Community?" icon={<Lightbulb />} />
             <SectionSubHeading>
-              <p>Explore how community members use the chat room for real-time collaboration.</p>
+              <p>The chat room is designed for conversations, knowledge sharing, and collaboration between community members.</p>
             </SectionSubHeading>
           </div>
 
@@ -535,7 +600,7 @@ export default function ChatRoomPage() {
                 Chat With Other Members
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Join conversations and communicate with people who are part of the community.
+                Join ongoing conversations and communicate directly with people who are part of the Imran Digitals community.
               </p>
             </div>
 
@@ -547,7 +612,7 @@ export default function ChatRoomPage() {
                 Share Ideas
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Discuss technology, projects, development, digital products, or other topics relevant to the community.
+                Share ideas, discuss projects, talk about technology, exchange experiences, or introduce something you're currently working on.
               </p>
             </div>
 
@@ -559,7 +624,19 @@ export default function ChatRoomPage() {
                 Ask Questions
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Ask questions, exchange knowledge, and learn from other members.
+                Ask questions, exchange knowledge, and learn from other members through community conversations.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
+              <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
+                <FolderKanban size={20} />
+              </div>
+              <h3 className="font-heading font-bold text-base text-[#17211E] dark:text-[#F5F2EC]">
+                Discuss Projects
+              </h3>
+              <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+                Talk about websites, applications, software ideas, digital products, development projects, or other technology-related topics.
               </p>
             </div>
 
@@ -571,11 +648,11 @@ export default function ChatRoomPage() {
                 Collaborate
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                Connect with other users who may be interested in working together on ideas, projects, or digital initiatives.
+                Connect with members who may have similar interests, skills, ideas, or projects and explore opportunities to work together.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3 md:col-span-2 lg:col-span-2">
+            <div className="p-6 rounded-2xl bg-[#FFFEFA] dark:bg-[#1B2421] border border-[#D9D4CA] dark:border-[#2A3632] space-y-3">
               <div className="w-9 h-9 rounded-lg bg-[#C96A3D]/10 text-[#C96A3D] flex items-center justify-center">
                 <Network size={20} />
               </div>
@@ -583,7 +660,7 @@ export default function ChatRoomPage() {
                 Build Connections
               </h3>
               <p className="text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
-                The chat room is designed to make it easier for members to discover and communicate with people who share similar interests.
+                Discover and communicate with people who share an interest in technology, development, digital products, and online projects.
               </p>
             </div>
           </div>
@@ -591,21 +668,21 @@ export default function ChatRoomPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- A COMMUNITY BUILT AROUND CONVERSATION ---------------- */}
+        {/* ---------------- 4. A COMMUNITY BUILT AROUND CONVERSATION ---------------- */}
         <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4 font-sans">
-          <div className="space-y-3 max-w-3xl">
-            <h2 className="font-heading text-2xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+          <div className="space-y-4 max-w-4xl">
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
               A Community Built Around Conversation
             </h2>
             <div className="space-y-3 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
               <p>
-                The chat room is a shared community space rather than a direct support channel.
+                The Imran Digitals chat room is a community space created for member-to-member communication and collaboration.
               </p>
               <p>
-                Please be respectful of other members, contribute constructively, and avoid spam or inappropriate content.
+                It is not intended to replace direct project support or private client communication. Instead, it provides an open environment where members can exchange ideas, ask questions, share experiences, and participate in conversations with other users.
               </p>
               <p>
-                By joining the chat room, you agree to follow the community guidelines.
+                Please contribute constructively and help maintain a respectful environment for everyone.
               </p>
             </div>
           </div>
@@ -613,35 +690,144 @@ export default function ChatRoomPage() {
 
         <Breakline className="my-8" />
 
-        {/* ---------------- COMMUNITY GUIDELINES ---------------- */}
+        {/* ---------------- 5. COMMUNITY GUIDELINES ---------------- */}
         <section className="space-y-6 font-sans">
           <div className="space-y-2">
             <SectionHeading title="Community Guidelines" icon={<ShieldCheck />} />
             <SectionSubHeading>
-              <p>To keep the chat room useful and welcoming for everyone:</p>
+              <p>To keep the chat room useful, welcoming, and productive:</p>
             </SectionSubHeading>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base text-[#17211E] dark:text-[#F5F2EC]">
+          <div className="p-6 sm:p-8 rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base text-[#17211E] dark:text-[#F5F2EC]">
               {[
-                "Treat other members with respect.",
-                "Avoid spam and repeated promotional messages.",
-                "Don't share private or sensitive information.",
+                "Treat other community members with respect.",
                 "Keep conversations constructive and relevant.",
-                "Don't impersonate other users.",
+                "Avoid spam, flooding, and repeated promotional messages.",
+                "Do not share private, confidential, or sensitive information.",
+                "Do not impersonate another person or organization.",
+                "Avoid abusive, threatening, or inappropriate content.",
+                "Respect the privacy of other community members.",
                 "Report inappropriate behavior when necessary.",
               ].map((rule) => (
-                <div key={rule} className="flex items-center gap-2.5">
-                  <CheckCircle2 size={16} className="text-[#C96A3D] shrink-0" />
-                  <span>{rule}</span>
+                <div key={rule} className="flex items-start gap-3 p-3 rounded-xl bg-[#F5F2EC]/60 dark:bg-[#121917] border border-[#D9D4CA]/50 dark:border-[#2A3632]">
+                  <CheckCircle2 size={18} className="text-[#C96A3D] shrink-0 mt-0.5" />
+                  <span className="leading-snug">{rule}</span>
                 </div>
               ))}
             </div>
 
-            <p className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] pt-2 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
-              Community access may be moderated to maintain a safe and useful environment for members.
+            <p className="text-xs font-mono text-[#5C655F] dark:text-[#9DA6A0] pt-3 border-t border-[#D9D4CA]/50 dark:border-[#2A3632]">
+              Community access may be moderated when necessary to maintain a safe and useful environment.
             </p>
+          </div>
+        </section>
+
+        <Breakline className="my-8" />
+
+        {/* ---------------- 6. WHY JOIN THE COMMUNITY? ---------------- */}
+        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-6 sm:p-8 space-y-4 font-sans">
+          <div className="space-y-4 max-w-4xl">
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+              Why Join the Community?
+            </h2>
+            <div className="space-y-3 text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+              <p>
+                The community gives users a place to do more than simply browse the Imran Digitals portfolio.
+              </p>
+              <p>
+                You can participate in conversations, exchange knowledge, discuss development ideas, share projects, ask questions, and connect with other people interested in technology and digital products.
+              </p>
+              <p>
+                As the community grows, new conversations and collaboration opportunities can develop between members with different interests and experiences.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <Breakline className="my-8" />
+
+        {/* ---------------- 7. FREQUENTLY ASKED QUESTIONS ---------------- */}
+        <section className="space-y-6 font-sans">
+          <div className="space-y-2 max-w-3xl">
+            <SectionHeading title="Frequently Asked Questions" icon={<HelpCircle />} />
+            <SectionSubHeading>
+              <p>Find answers to common questions about the Imran Digitals Community Chat Room.</p>
+            </SectionSubHeading>
+          </div>
+
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] overflow-hidden transition-colors"
+                >
+                  <button
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full p-5 text-left font-heading font-semibold text-[#17211E] dark:text-[#F5F2EC] flex items-center justify-between gap-4 text-base"
+                  >
+                    <span>{item.q}</span>
+                    {isOpen ? (
+                      <ChevronUp size={18} className="text-[#C96A3D] shrink-0" />
+                    ) : (
+                      <ChevronDown size={18} className="text-[#5C655F] shrink-0" />
+                    )}
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-5 text-sm text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed border-t border-[#D9D4CA]/40 dark:border-[#2A3632]/40 pt-3">
+                      {item.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <Breakline className="my-8" />
+
+        {/* ---------------- 8. JOIN THE CONVERSATION (CTA) ---------------- */}
+        <section className="rounded-2xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#FFFEFA] dark:bg-[#1B2421] p-8 sm:p-10 space-y-6 font-sans">
+          <div className="max-w-3xl space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-md bg-[#F5F2EC] dark:bg-[#121917] border border-[#D9D4CA] dark:border-[#2A3632] px-3 py-1 text-xs font-mono text-[#C96A3D]">
+              <UserPlus size={14} />
+              <span>Get Started Today</span>
+            </div>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-[#17211E] dark:text-[#F5F2EC]">
+              Join the Conversation
+            </h2>
+            <p className="text-base text-[#5C655F] dark:text-[#9DA6A0] leading-relaxed">
+              Have an idea to share, a question to ask, or something you're building? Join the Imran Digitals community and connect with other members.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <button
+              onClick={scrollToChat}
+              className="inline-flex items-center gap-2 rounded-xl bg-[#C96A3D] hover:bg-[#A9512A] px-6 py-3.5 text-sm font-heading font-medium text-white transition-colors shadow-xs"
+            >
+              <UserPlus size={16} />
+              <span>Join the Community</span>
+            </button>
+
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] px-6 py-3.5 text-sm font-heading font-medium text-[#17211E] dark:text-[#F5F2EC] transition-colors"
+            >
+              <FolderKanban size={16} />
+              <span>Explore Projects</span>
+            </Link>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#D9D4CA] dark:border-[#2A3632] bg-[#F5F2EC] dark:bg-[#121917] hover:bg-[#D9D4CA]/50 dark:hover:bg-[#2A3632] px-6 py-3.5 text-sm font-heading font-medium text-[#17211E] dark:text-[#F5F2EC] transition-colors"
+            >
+              <Mail size={16} />
+              <span>Contact Muhammad Imran</span>
+            </Link>
           </div>
         </section>
       </div>
