@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = resolve(__dirname, "..", "dist");
 const PUBLIC_DIR = resolve(__dirname, "..", "public");
-const BASE_URL = "https://www.imrandigitals.online";
+const BASE_URL = "https://www.imrandigitals.com";
 
 // Inline main CSS bundle for instantaneous FCP < 0.6s
 let criticalCss = "";

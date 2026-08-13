@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.imrandigitals.online/sitemap.xml
+Sitemap: https://www.imrandigitals.com/sitemap.xml
 
 Disallow: /admin
 Disallow: /admin/

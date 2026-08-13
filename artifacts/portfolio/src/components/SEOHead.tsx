@@ -9,7 +9,7 @@ interface SEOHeadProps {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const BASE_URL = "https://www.imrandigitals.online";
+const BASE_URL = "https://www.imrandigitals.com";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/opengraph.jpg`;
 
 function upsertMeta(selector: string, attribute: "name" | "property", value: string, content: string) {
